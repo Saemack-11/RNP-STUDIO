@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#f5f3ee">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="RNP Studio">
-<link rel="manifest" href="manifest.webmanifest">
-<title>RNP Studio — Real Ninja Poetics</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+<meta name="theme-color" content="#09090b" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="RNP Studio" />
+<title>RNP Studio — Culture Engine</title>
 
 <style>
 :root {
-  --paper: #f5f3ee;
-  --ink: #0b0b0d;
-  --red: #a60016;
-  --red2: #d10b27;
-  --soft: #e9e5dd;
-  --muted: #716d68;
-  --line: #171719;
-  --card: #fffefa;
+  --ink: #f6f0e8;
+  --bg: #09090b;
+  --panel: rgba(15, 15, 18, 0.88);
+  --line: #e6ded1;
+  --red: #b20c23;
+  --gold: #b99b58;
+  --muted: #aaa29a;
   --safe: env(safe-area-inset-bottom);
 }
 
@@ -27,108 +25,479 @@
   box-sizing: border-box;
 }
 
-html {
-  background: var(--paper);
-}
-
+html,
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  -webkit-tap-highlight-color: transparent;
 }
 
 button,
 input,
-textarea,
-select {
+textarea {
   font: inherit;
 }
 
-button {
-  cursor: pointer;
-}
-
 .app {
-  max-width: 560px;
+  max-width: 620px;
   margin: auto;
   min-height: 100vh;
-  padding-bottom: calc(86px + var(--safe));
+  padding-bottom: calc(88px + var(--safe));
+  position: relative;
+  overflow: hidden;
+}
+
+.wall {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(178, 12, 35, 0.2),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      rgba(45, 70, 120, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(180deg, #0c0c10, #08080a);
+}
+
+.wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.78)
+    );
+  backdrop-filter: blur(1px);
+}
+
+.wall span {
+  position: absolute;
+  font-family: Impact, "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.08);
+  transform: rotate(var(--r));
+  font-size: clamp(24px, 8vw, 62px);
+  white-space: nowrap;
+}
+
+.app > *:not(.wall) {
+  position: relative;
+  z-index: 1;
 }
 
 .hero {
-  padding: calc(20px + env(safe-area-inset-top)) 18px 18px;
-  border-bottom: 3px solid var(--ink);
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  right: -45px;
-  top: -28px;
-  width: 170px;
-  height: 170px;
-  border: 18px solid var(--red);
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  transform: rotate(18deg);
-  opacity: 0.96;
+  padding:
+    calc(22px + env(safe-area-inset-top))
+    18px
+    18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.05)
+    );
 }
 
 .kicker,
 .eyebrow,
 .label {
-  font-family: "Courier New", monospace;
+  font: 800 10px "Courier New", monospace;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.19em;
-  font-size: 10px;
-  font-weight: 800;
 }
 
 .logo {
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 1000;
   letter-spacing: -0.07em;
   line-height: 0.9;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .logo span {
   color: var(--red);
 }
 
-.hero h1 {
-  font-size: 12px;
-  letter-spacing: 0.28em;
-  margin: 7px 0 0;
-  font-family: "Courier New", monospace;
+.tag {
+  font: 12px "Courier New", monospace;
+  letter-spacing: 0.12em;
+  margin-top: 7px;
+  color: #ddd4c8;
 }
 
 .quote {
-  margin: 14px 0 0;
-  max-width: 330px;
   font-family: Georgia, serif;
-  font-size: 15px;
   font-style: italic;
+  color: #ddd4c8;
+  max-width: 450px;
 }
 
 .status {
   display: inline-flex;
-  margin-top: 12px;
-  border: 1.5px solid var(--ink);
+  margin-top: 10px;
+  border: 1px solid var(--line);
   padding: 7px 9px;
   font: 700 10px "Courier New";
-  letter-spacing: 0.08em;
-  background: var(--paper);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 main {
   padding: 14px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  margin: 0 0 16px;
+  padding: 15px;
+  backdrop-filter: blur(14px);
+}
+
+.cardH {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.cardH h2 {
+  font: 900 18px/1 "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.badge {
+  border: 1px solid currentColor;
+  padding: 5px 7px;
+  font: 800 9px "Courier New";
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--ink);
+  padding: 12px;
+  outline: none;
+}
+
+textarea {
+  min-height: 145px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.btn {
+  border: 1px solid var(--line);
+  background: #f4eee5;
+  color: #111;
+  padding: 12px 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.btn.primary {
+  background: var(--red);
+  color: white;
+}
+
+.btn.dark {
+  background: #0a0a0c;
+  color: white;
+}
+
+.btn.small {
+  padding: 9px 10px;
+  font-size: 11px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.meta > div {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px;
+}
+
+.meta b {
+  display: block;
+  margin-top: 5px;
+}
+
+.upload {
+  display: block;
+  border: 1px dashed var(--line);
+  padding: 17px;
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.upload input {
+  display: none;
+}
+
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.turntableWrap {
+  display: grid;
+  place-items: center;
+  padding: 8px 0 14px;
+}
+
+.turntable {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(
+      circle at center,
+      #111 0 14%,
+      #b20c23 15% 25%,
+      #111 26% 100%
+    );
+  box-shadow:
+    0 0 0 12px #1b1b20,
+    0 18px 40px rgba(0, 0, 0, 0.5);
+  touch-action: none;
+  user-select: none;
+}
+
+.turntable::before {
+  content: "";
+  position: absolute;
+  inset: 30px;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(
+      circle,
+      #141414 0 2px,
+      #242424 3px 4px
+    );
+}
+
+.turntable::after {
+  content: "RNP";
+  position: absolute;
+  inset: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--red);
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.needle {
+  position: absolute;
+  width: 9px;
+  height: 128px;
+  background: #c8c1b8;
+  right: 18px;
+  top: 25px;
+  transform: rotate(24deg);
+  transform-origin: top center;
+  border-radius: 5px;
+  box-shadow: 0 0 0 3px #2a2a2f;
+}
+
+.vibeDisplay {
+  text-align: center;
+  margin-top: 13px;
+}
+
+.vibeDisplay strong {
+  display: block;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.vibeDisplay span {
+  font: 11px "Courier New";
+  color: var(--muted);
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 9px 11px;
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.chip.on {
+  background: var(--red);
+}
+
+.arc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: auto;
+  padding: 7px 0;
+}
+
+.arc .node {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.arc .node.on {
+  background: var(--gold);
+  color: #111;
+}
+
+.arrow {
+  color: var(--muted);
+}
+
+.influenceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.influence {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 12px 6px;
+  min-height: 64px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  text-align: center;
+  font-weight: 900;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.influence.on {
+  border-color: var(--gold);
+  box-shadow: inset 0 0 0 2px var(--gold);
+  color: #f5d98f;
+}
+
+.feed {
+  background: #060607;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 14px;
+  min-height: 180px;
+  font: 12px/1.6 "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.resultSection {
+  margin: 0 0 18px;
+}
+
+.resultSection h3 {
+  margin: 0 0 7px;
+  color: #f2c86d;
+  text-transform: uppercase;
+  font: 900 13px "Courier New";
+}
+
+.resultSection p,
+.resultSection li {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.record {
+  min-height: 380px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(8, 8, 10, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 7px 8px calc(7px + var(--safe));
+  backdrop-filter: blur(16px);
+}
+
+.navInner {
+  max-width: 620px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.nav button {
+  background: transparent;
+  color: #bfb7ad;
+  border: 0;
+  padding: 9px 4px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nav button.on {
+  color: white;
+  border-bottom: 2px solid var(--red);
 }
 
 .page {
@@ -139,432 +508,86 @@ main {
   display: block;
 }
 
-.card {
-  background: var(--card);
-  border: 2px solid var(--ink);
-  box-shadow: 5px 5px 0 var(--ink);
-  margin: 0 0 16px;
-  padding: 15px;
-  position: relative;
-}
-
-.card.red {
-  background: var(--red);
-  color: white;
-}
-
-.card.red button {
-  border-color: white;
-}
-
-.cardH {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.cardH h2 {
-  font: 1000 18px/1 "Arial Narrow", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0;
-}
-
-.badge {
-  border: 1.5px solid currentColor;
-  padding: 5px 7px;
-  font: 800 9px "Courier New";
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.btn {
-  border: 2px solid var(--ink);
-  background: var(--card);
-  color: var(--ink);
-  padding: 12px 14px;
-  font-weight: 950;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  box-shadow: 3px 3px 0 var(--ink);
-}
-
-.btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--ink);
-}
-
-.btn.primary {
-  background: var(--red);
-  color: white;
-}
-
-.btn.dark {
-  background: var(--ink);
-  color: white;
-}
-
-.btn.small {
-  padding: 8px 10px;
-  font-size: 11px;
-  box-shadow: 2px 2px 0 var(--ink);
-}
-
-.grid2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.grid3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-}
-
-textarea,
-input,
-select {
-  width: 100%;
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  background: #fff;
-  color: var(--ink);
-  padding: 12px;
-  outline: none;
-}
-
-textarea {
-  min-height: 126px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-textarea:focus,
-input:focus,
-select:focus {
-  box-shadow: 0 0 0 3px rgba(166, 0, 22, 0.18);
-}
-
-.chips {
-  display: flex;
-  gap: 8px;
-  overflow: auto;
-  padding-bottom: 3px;
-  scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar {
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 102px;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: #f4eee5;
+  color: #111;
+  padding: 10px 13px;
+  font-weight: 800;
   display: none;
-}
-
-.chip {
-  flex: 0 0 auto;
-  border: 1.5px solid var(--ink);
-  padding: 9px 11px;
-  background: white;
-  font-weight: 850;
-  font-size: 12px;
-}
-
-.chip.on {
-  background: var(--red);
-  color: white;
-}
-
-.sessionTitle {
-  font: 1000 28px/1 "Arial Narrow", sans-serif;
-  text-transform: uppercase;
-  margin: 4px 0 9px;
-}
-
-.sub {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.progress {
-  height: 10px;
-  border: 1.5px solid var(--ink);
-  background: white;
-  margin: 11px 0;
-}
-
-.progress i {
-  display: block;
-  height: 100%;
-  background: var(--red);
-  width: 20%;
-}
-
-.stepRow {
-  display: flex;
-  justify-content: space-between;
-  font: 800 9px "Courier New";
-  gap: 4px;
-}
-
-.stepRow span.on {
-  color: var(--red);
-}
-
-.upload {
-  display: block;
-  border: 2px dashed var(--ink);
-  padding: 20px;
+  max-width: 85%;
   text-align: center;
-  background: var(--soft);
-  font-weight: 950;
-  text-transform: uppercase;
 }
 
-.upload input {
-  display: none;
-}
-
-audio {
-  width: 100%;
-  margin-top: 12px;
-}
-
-.meta {
+.truthFlags {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-  margin-top: 12px;
+  gap: 7px;
 }
 
-.meta div {
-  border: 1.5px solid var(--ink);
-  padding: 10px;
-}
-
-.meta b {
-  display: block;
-  margin-top: 5px;
+.truthFlags div {
+  border-left: 4px solid var(--gold);
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 12px;
 }
 
 .sectionMap {
   display: flex;
-  height: 38px;
-  border: 2px solid var(--ink);
-  margin-top: 11px;
-  overflow: hidden;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  overflow: auto;
+  margin-top: 10px;
 }
 
 .sectionMap span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid var(--ink);
+  min-width: 70px;
+  display: grid;
+  place-items: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
   font: 800 9px "Courier New";
-  min-width: 48px;
-}
-
-.sectionMap span:last-child {
-  border: 0;
 }
 
 .sectionMap .hook {
   background: var(--red);
-  color: white;
-}
-
-.agentGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-}
-
-.agent {
-  border: 1.5px solid var(--ink);
-  padding: 11px;
-  min-height: 84px;
-  background: white;
-}
-
-.agent strong {
-  display: block;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.agent span {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.agent.on {
-  border-left: 8px solid var(--red);
-}
-
-.feed {
-  background: var(--ink);
-  color: #f7f3eb;
-  padding: 13px;
-  min-height: 140px;
-  font: 12px/1.55 "Courier New";
-  white-space: pre-wrap;
-}
-
-.record {
-  min-height: 360px;
-  font-family: Georgia, serif;
-  font-size: 16px;
-}
-
-.list {
-  display: grid;
-  gap: 9px;
-}
-
-.item {
-  border: 1.5px solid var(--ink);
-  padding: 11px;
-  background: white;
-}
-
-.item h3 {
-  margin: 0 0 4px;
-  font-size: 14px;
-}
-
-.item p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.row > * {
-  flex: 1;
-}
-
-.check {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  border-bottom: 1px solid #cac5bc;
-  padding: 9px 0;
-}
-
-.check input {
-  width: auto;
-  margin-top: 3px;
-}
-
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background: #fff;
-  border-top: 3px solid var(--ink);
-  padding: 7px 8px calc(7px + var(--safe));
-  display: flex;
-  justify-content: center;
-}
-
-.navInner {
-  max-width: 560px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.nav button {
-  border: 0;
-  background: transparent;
-  padding: 7px 2px;
-  font-size: 9px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.nav button b {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 2px;
-}
-
-.nav button.on {
-  color: var(--red);
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 30;
-  display: none;
-  align-items: flex-end;
-}
-
-.modal.on {
-  display: flex;
-}
-
-.sheet {
-  background: var(--paper);
-  border-top: 4px solid var(--red);
-  padding: 18px 16px calc(18px + var(--safe));
-  width: 100%;
-  max-height: 88vh;
-  overflow: auto;
-}
-
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: 100px;
-  transform: translateX(-50%);
-  background: var(--ink);
-  color: white;
-  padding: 10px 13px;
-  font-weight: 800;
-  z-index: 50;
-  display: none;
-}
-
-.empty {
-  text-align: center;
-  padding: 24px;
-  color: var(--muted);
-}
-
-@media (min-width: 650px) {
-  .app {
-    border-left: 2px solid var(--ink);
-    border-right: 2px solid var(--ink);
-  }
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
+<div class="wall" aria-hidden="true">
+  <span style="left:-4%;top:6%;--r:-12deg">BLADE</span>
+  <span style="right:-8%;top:12%;--r:9deg">SPAWN</span>
+  <span style="left:8%;top:25%;--r:4deg">GOKU</span>
+  <span style="right:2%;top:31%;--r:-8deg">BRUCE LEE</span>
+  <span style="left:-5%;top:44%;--r:7deg">WU-TANG</span>
+  <span style="right:4%;top:53%;--r:-5deg">DMX</span>
+  <span style="left:6%;top:65%;--r:-7deg">BIGGIE</span>
+  <span style="right:-3%;top:73%;--r:10deg">N.W.A.</span>
+  <span style="left:13%;top:84%;--r:3deg">JORDAN</span>
+  <span style="right:6%;top:91%;--r:-6deg">BELLY</span>
+</div>
+
 <header class="hero">
-  <div class="kicker">Dedication to the craft</div>
+  <div class="kicker">
+    Culture first // truth always
+  </div>
 
   <div class="logo">
     R<span>N</span>P.
   </div>
 
-  <h1>REAL NINJA POETICS</h1>
+  <div class="tag">
+    REAL NINJA POETICS // CULTURE ENGINE
+  </div>
 
   <p class="quote">
-    Every L became language. Every mile became a line.
+    The smoothest truth is still truth. Every emotion gets motion.
   </p>
 
   <div class="status">
@@ -574,132 +597,30 @@ audio {
 
 <main>
 
-<section id="home" class="page on">
-
-  <div class="card red">
-
-    <div class="eyebrow">Current session</div>
-
-    <div class="sessionTitle" id="homeTitle">
-      Untitled Chapter
-    </div>
-
-    <div id="homeBeat">
-      No instrumental loaded
-    </div>
-
-    <div class="progress">
-      <i id="homeProgress"></i>
-    </div>
-
-    <div class="stepRow">
-      <span class="on">IDEA</span>
-      <span>BEAT</span>
-      <span>COUNCIL</span>
-      <span>WRITE</span>
-      <span>RECORD</span>
-    </div>
-
-    <div class="grid2" style="margin-top:15px">
-      <button class="btn" onclick="go('studio')">
-        Continue Cook Up
-      </button>
-
-      <button class="btn" onclick="newSession()">
-        New Session
-      </button>
-    </div>
-
-  </div>
+<section id="studio" class="page on">
 
   <div class="card">
-
     <div class="cardH">
-      <h2>What's today's story?</h2>
-      <span class="badge">Truth first</span>
-    </div>
-
-    <textarea
-      id="quickTruth"
-      placeholder="Talk naturally. What happened? What did it teach you? What are you carrying tonight?"
-    ></textarea>
-
-    <div
-      class="chips"
-      style="margin:10px 0"
-      id="chapterChips"
-    ></div>
-
-    <button
-      class="btn primary"
-      onclick="captureTruth()"
-    >
-      Capture the Chapter
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <div class="cardH">
-      <h2>Creative compass</h2>
-      <span class="badge">Sae DNA</span>
-    </div>
-
-    <p class="sub">
-      Wu-style philosophy and layered imagery. Modern trap atmosphere
-      and pocket. Wayne-level love for wordplay. Your own life, morals,
-      fatherhood, route miles, rebuilding, loyalty, spirituality, and
-      lessons at the center.
-    </p>
-
-    <div class="grid2">
-
-      <button
-        class="btn small"
-        onclick="go('vault')"
-      >
-        Open Memory Vault
-      </button>
-
-      <button
-        class="btn small"
-        onclick="openDojo()"
-      >
-        Enter the Dojo
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section id="studio" class="page">
-
-  <div class="card">
-
-    <div class="cardH">
-      <h2>The Cook Up</h2>
-      <span class="badge" id="sessionState">
-        Local session
-      </span>
+      <h2>Beat + Session</h2>
+      <span class="badge">Full-song map</span>
     </div>
 
     <input
-      id="songTitle"
+      id="title"
       placeholder="Song / session title"
-      oninput="syncSession()"
-    >
+    />
 
-    <label class="upload" style="margin-top:10px">
-      ♬ Upload Instrumental — MP3 / WAV / M4A
+    <label
+      class="upload"
+      style="margin-top:10px"
+    >
+      ♬ Upload Instrumental
 
       <input
         id="beatInput"
         type="file"
-        accept="audio/*"
-      >
+        accept="audio/*,video/mp4"
+      />
     </label>
 
     <audio
@@ -727,9 +648,8 @@ audio {
         <input
           id="bpm"
           type="number"
-          value="92"
-          oninput="syncSession()"
-        >
+          placeholder="Enter or verify"
+        />
       </div>
 
       <div>
@@ -737,64 +657,150 @@ audio {
 
         <input
           id="key"
-          value="A minor"
-          oninput="syncSession()"
-        >
+          placeholder="Enter or verify"
+        />
       </div>
 
     </div>
 
-    <div class="sectionMap">
-      <span>INTRO</span>
-      <span class="hook">HOOK</span>
-      <span style="flex:2">VERSE 1</span>
-      <span class="hook">HOOK</span>
-      <span style="flex:2">VERSE 2</span>
-      <span>OUTRO</span>
+    <p class="sub">
+      Length is read from the upload. BPM and key remain
+      user-entered until real audio analysis is connected.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Analog Vibe Deck</h2>
+      <span class="badge">Spin to explore</span>
     </div>
 
+    <div class="turntableWrap">
+
+      <div
+        id="turntable"
+        class="turntable"
+      >
+        <div class="needle"></div>
+      </div>
+
+    </div>
+
+    <div class="vibeDisplay">
+
+      <strong id="vibeName">
+        Street Gospel
+      </strong>
+
+      <span id="vibeFamily">
+        TRUTH / CONSEQUENCE / REDEMPTION
+      </span>
+
+    </div>
+
+    <div
+      class="eyebrow"
+      style="margin:14px 0 8px"
+    >
+      Layer a second energy
+    </div>
+
+    <div
+      id="vibeLayers"
+      class="chips"
+    ></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Emotional Momentum</h2>
+      <span class="badge">Not one flat mood</span>
+    </div>
+
+    <div
+      id="arc"
+      class="arc"
+    ></div>
+
+    <div
+      class="chips"
+      id="arcPresets"
+      style="margin-top:8px"
+    ></div>
+
     <p class="sub">
-      Beat playback works locally. Automatic BPM, key, mood, stem, and
-      section detection require the real analysis backend and are not
-      fabricated in this build.
+      Tap a preset, then tap emotion nodes to activate or remove
+      them. The Council will map where the tone rises, softens,
+      gets intimate, turns dangerous, becomes funny, or resolves.
     </p>
 
   </div>
 
   <div class="card">
 
-    <div class="eyebrow">
-      Life chapter
+    <div class="cardH">
+      <h2>Nostalgia Wall</h2>
+      <span class="badge">Influence, not imitation</span>
     </div>
 
     <div
-      class="chips"
-      id="studioChapters"
-      style="margin:9px 0 14px"
+      id="influences"
+      class="influenceGrid"
     ></div>
 
-    <div class="eyebrow">
-      Sound direction
+    <p class="sub">
+      Choose only what belongs in this record. RNP uses symbolic
+      meaning—discipline, flight, transformation, loyalty,
+      darkness, precision—not copied style.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Raw Truth</h2>
+      <span class="badge">Sae voice</span>
     </div>
 
-    <div
-      class="chips"
-      id="vibeChips"
-      style="margin:9px 0 14px"
-    ></div>
+    <input
+      id="chapter"
+      placeholder="Chapter or world: brotherhood, toxic love, hunger, temptation, victory..."
+    />
 
     <textarea
       id="truth"
-      placeholder="Drop the raw truth here. Details, images, names you choose to use, feelings, lessons, contradictions..."
-      oninput="syncSession()"
+      placeholder="Talk naturally. What happened? What did it mean? What changed inside you? Include slang exactly how you use it."
     ></textarea>
+
+    <div
+      class="truthFlags"
+      style="margin-top:10px"
+    >
+
+      <div>
+        “Snaps” = dope fiends / street customers.
+      </div>
+
+      <div>
+        RNP separates verified truth from interpretation and questions.
+      </div>
+
+      <div>
+        Culture references must strengthen meaning—not just rhyme.
+      </div>
+
+    </div>
 
     <button
       class="btn primary"
-      style="width:100%;margin-top:10px"
+      style="width:100%;margin-top:11px"
       onclick="runCouncil()"
     >
-      Wake the Council
+      Wake the Full Council
     </button>
 
   </div>
@@ -803,22 +809,25 @@ audio {
 
     <div class="cardH">
       <h2>Producer's Table</h2>
-      <span class="badge">Council</span>
+
+      <span
+        id="engineBadge"
+        class="badge"
+      >
+        Standing by
+      </span>
     </div>
 
     <div
-      class="agentGrid"
-      id="agentGrid"
-    ></div>
-
-    <div
-      class="feed"
       id="feed"
-      style="margin-top:12px"
-    >STANDING BY.
-Load a beat, choose a chapter, and tell the truth.</div>
+      class="feed"
+    >Load the beat, choose the emotional journey, tell the truth, then wake the Council.</div>
 
   </div>
+
+</section>
+
+<section id="write" class="page">
 
   <div class="card">
 
@@ -828,11 +837,9 @@ Load a beat, choose a chapter, and tell the truth.</div>
     </div>
 
     <textarea
-      class="record"
       id="lyrics"
+      class="record"
       placeholder="[INTRO]
-
-[HOOK]
 
 [VERSE 1]
 
@@ -840,8 +847,11 @@ Load a beat, choose a chapter, and tell the truth.</div>
 
 [VERSE 2]
 
-[OUTRO]"
-      oninput="syncSession()"
+[BRIDGE]
+
+[VERSE 3]
+
+[FINAL HOOK / OUTRO]"
     ></textarea>
 
     <div
@@ -851,23 +861,9 @@ Load a beat, choose a chapter, and tell the truth.</div>
 
       <button
         class="btn small"
-        onclick="saveSession()"
+        onclick="saveProject()"
       >
         Save Project
-      </button>
-
-      <button
-        class="btn small"
-        onclick="saveBar()"
-      >
-        Save Selected Bar
-      </button>
-
-      <button
-        class="btn small"
-        onclick="exportLyrics()"
-      >
-        Export Lyrics
       </button>
 
       <button
@@ -881,88 +877,45 @@ Load a beat, choose a chapter, and tell the truth.</div>
 
   </div>
 
-  <div class="card">
-
-    <div class="cardH">
-      <h2>Recording Assistant</h2>
-      <span class="badge">BandLab</span>
-    </div>
-
-    <div id="checklist"></div>
-
-    <textarea
-      id="recordNotes"
-      placeholder="Vocal preset, cadence notes, ad-libs, punch-ins, harmonies..."
-      oninput="syncSession()"
-    ></textarea>
-
-  </div>
-
 </section>
 
-<section id="vault" class="page">
+<section id="culture" class="page">
 
   <div class="card">
 
     <div class="cardH">
-      <h2>Memory Vault</h2>
-      <span class="badge">Autobiography</span>
+      <h2>Culture Glossary</h2>
+      <span class="badge">Living language</span>
     </div>
 
     <input
-      id="memoryTitle"
-      placeholder="Memory title"
-    >
-
-    <select
-      id="memoryCategory"
-      style="margin-top:9px"
-    ></select>
+      id="term"
+      placeholder="Term"
+    />
 
     <textarea
-      id="memoryBody"
-      style="margin-top:9px"
-      placeholder="What happened? How did it feel? What lesson came from it?"
+      id="meaning"
+      style="min-height:90px;margin-top:8px"
+      placeholder="What it means in your world"
     ></textarea>
 
     <input
-      id="memoryLesson"
-      style="margin-top:9px"
-      placeholder="Lesson learned"
-    >
+      id="context"
+      style="margin-top:8px"
+      placeholder="Context or what RNP must never confuse it with"
+    />
 
     <button
       class="btn primary"
-      style="margin-top:10px;width:100%"
-      onclick="addMemory()"
+      style="width:100%;margin-top:9px"
+      onclick="addGlossary()"
     >
-      Save Memory
+      Add to RNP Language
     </button>
 
-  </div>
-
-  <div class="card">
-
-    <div class="row">
-
-      <input
-        id="memorySearch"
-        placeholder="Search your life..."
-        oninput="renderMemories()"
-      >
-
-      <button
-        class="btn small"
-        onclick="renderMemories()"
-      >
-        Search
-      </button>
-
-    </div>
-
     <div
-      class="list"
-      id="memoryList"
+      id="glossaryList"
+      class="truthFlags"
       style="margin-top:12px"
     ></div>
 
@@ -975,125 +928,14 @@ Load a beat, choose a chapter, and tell the truth.</div>
   <div class="card">
 
     <div class="cardH">
-      <h2>Song Archive</h2>
-      <span class="badge" id="archiveCount">
-        0 projects
-      </span>
+      <h2>Archive</h2>
+      <span class="badge">Local first</span>
     </div>
 
     <div
-      class="list"
       id="archiveList"
+      class="truthFlags"
     ></div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="cardH">
-      <h2>Quote Vault</h2>
-      <span class="badge">Loose bars</span>
-    </div>
-
-    <div
-      class="list"
-      id="barList"
-    ></div>
-
-  </div>
-
-</section>
-
-<section id="more" class="page">
-
-  <div class="card">
-
-    <div class="cardH">
-      <h2>Music DNA</h2>
-      <span class="badge">Locked</span>
-    </div>
-
-    <p class="sub">
-      Authentic storytelling. Emotional honesty. Rugged imagery. Layered
-      wordplay. Memorable pockets and hooks. Old-soul morals inside a
-      modern trap atmosphere. Never invent a life you did not live.
-    </p>
-
-    <textarea
-      id="dnaNotes"
-      placeholder="Add words, themes, ad-libs, flows, or rules that feel like you..."
-      oninput="saveDNA()"
-    ></textarea>
-
-  </div>
-
-  <div class="card">
-
-    <div class="cardH">
-      <h2>Local Data</h2>
-      <span class="badge">Private on device</span>
-    </div>
-
-    <p class="sub">
-      Projects, memories, bars, and preferences are saved in this browser
-      using local storage. The uploaded audio itself is played locally
-      and is not permanently stored after the page closes.
-    </p>
-
-    <div class="grid2">
-
-      <button
-        class="btn small"
-        onclick="exportBackup()"
-      >
-        Export Backup
-      </button>
-
-      <label
-        class="btn small"
-        style="text-align:center"
-      >
-        Import Backup
-
-        <input
-          hidden
-          type="file"
-          accept=".json"
-          onchange="importBackup(event)"
-        >
-      </label>
-
-      <button
-        class="btn small"
-        onclick="installHelp()"
-      >
-        Install on iPhone
-      </button>
-
-      <button
-        class="btn small"
-        onclick="resetApp()"
-      >
-        Reset App
-      </button>
-
-    </div>
-
-  </div>
-
-  <div
-    class="card dark"
-    style="background:#0b0b0d;color:white"
-  >
-
-    <div class="eyebrow">
-      RNP Studio v1.0
-    </div>
-
-    <h2 style="font-size:26px;margin:8px 0">
-      DISCIPLINE CREATES FREEDOM.<br>
-      CREATIVITY CREATES LEGACY.
-    </h2>
 
   </div>
 
@@ -1101,91 +943,33 @@ Load a beat, choose a chapter, and tell the truth.</div>
 
 </main>
 
-</div>
-
-<nav class="nav">
+<div class="nav">
 
   <div class="navInner">
 
     <button
       class="on"
-      data-page="home"
-      onclick="go('home')"
+      onclick="go('studio', this)"
     >
-      <b>⌂</b>
-      Home
-    </button>
-
-    <button
-      data-page="studio"
-      onclick="go('studio')"
-    >
-      <b>♬</b>
       Studio
     </button>
 
     <button
-      data-page="vault"
-      onclick="go('vault')"
+      onclick="go('write', this)"
     >
-      <b>◆</b>
-      Vault
+      Write
     </button>
 
     <button
-      data-page="archive"
-      onclick="go('archive')"
+      onclick="go('culture', this)"
     >
-      <b>▤</b>
+      Culture
+    </button>
+
+    <button
+      onclick="go('archive', this)"
+    >
       Archive
-    </button>
-
-    <button
-      data-page="more"
-      onclick="go('more')"
-    >
-      <b>•••</b>
-      More
-    </button>
-
-  </div>
-
-</nav>
-
-<div
-  class="modal"
-  id="dojoModal"
-  onclick="if(event.target===this)this.classList.remove('on')"
->
-
-  <div class="sheet">
-
-    <div class="cardH">
-
-      <h2 style="margin:0">
-        RNP Dojo
-      </h2>
-
-      <button
-        class="btn small"
-        onclick="dojoModal.classList.remove('on')"
-      >
-        Close
-      </button>
-
-    </div>
-
-    <div
-      id="dojoPrompt"
-      class="card red"
-    ></div>
-
-    <button
-      class="btn dark"
-      style="width:100%"
-      onclick="newDojo()"
-    >
-      New Drill
     </button>
 
   </div>
@@ -1193,1561 +977,1003 @@ Load a beat, choose a chapter, and tell the truth.</div>
 </div>
 
 <div
-  class="toast"
   id="toast"
+  class="toast"
 ></div>
 
+</div>
+
 <script>
-const chapters = [
-  "Foundation",
-  "Fatherhood",
-  "Route Life",
-  "Survival Mode",
-  "Living in the Car",
-  "Rebuilding",
-  "Relationships",
-  "Robyn",
-  "Past Lessons",
-  "Faith",
-  "Spiritual Signs",
-  "Money",
-  "SaeWay",
-  "Building SHIN",
-  "Wins",
-  "Lessons",
-  "Legacy"
-];
+const $ = (id) => document.getElementById(id);
 
 const vibes = [
-  "Wu Philosophy",
-  "Trap Atmosphere",
-  "Soulful Raw",
-  "Grit / Cinematic",
-  "Melodic Pain",
-  "Late-Night Route",
-  "Victory Lap",
-  "No-Hook Bars"
-];
-
-const agents = [
   [
-    "Story Architect",
-    "Protects the timeline and truth."
+    "Street Gospel",
+    "TRUTH / CONSEQUENCE / REDEMPTION"
   ],
   [
-    "Wordplay Smith",
-    "Finds doubles, flips, and punchlines."
+    "Midnight Confession",
+    "INTIMACY / REGRET / HONESTY"
   ],
   [
-    "Philosopher",
-    "Turns adversity into layered wisdom."
+    "Victory Lap",
+    "PROOF / ELEVATION / CALM POWER"
   ],
   [
-    "Pocket Finder",
-    "Suggests cadence lanes and pauses."
+    "Dark Romance",
+    "DESIRE / DANGER / DEVOTION"
   ],
   [
-    "Hook Architect",
-    "Finds the simple emotional center."
+    "Toxic Gravity",
+    "ATTRACTION / CHAOS / SELF-AWARENESS"
   ],
   [
-    "Rhyme Engineer",
-    "Tracks multis, internals, and structure."
+    "Brother's Keeper",
+    "LOYALTY / TIME / PROMISE"
   ],
   [
-    "Ad-Lib Director",
-    "Adds energy without crowding the record."
+    "Anime Ascension",
+    "TRAINING / TRANSFORMATION / LIMITS"
   ],
   [
-    "Studio Engineer",
-    "Plans doubles, punches, harmonies, and space."
+    "Martial Discipline",
+    "PRECISION / RESTRAINT / ADAPTABILITY"
+  ],
+  [
+    "Cinematic Street",
+    "CHARACTER / CONSEQUENCE / ATMOSPHERE"
+  ],
+  [
+    "Pain into Purpose",
+    "LOSS / ACCOUNTABILITY / BUILDING"
+  ],
+  [
+    "Playful Mackin",
+    "CHARM / HUMOR / CONFIDENCE"
+  ],
+  [
+    "Spiritual Warfare",
+    "FAITH / TEMPTATION / PROTECTION"
+  ],
+  [
+    "Cold Ambition",
+    "FOCUS / ISOLATION / EXECUTION"
+  ],
+  [
+    "Family Legacy",
+    "ROOTS / FATHERHOOD / BLUEPRINT"
+  ],
+  [
+    "Raw Hunger",
+    "SURVIVAL / DRIVE / NO EXCUSES"
+  ],
+  [
+    "Late-Night Route",
+    "MILES / SOLITUDE / REFLECTION"
   ]
 ];
 
-const seedMemories = [
-  {
-    title: "Builder Mission",
-    category: "Legacy",
-    body:
-      "Build technology, music, and businesses that create something lasting for the children.",
-    lesson:
-      "Build more than you consume.",
-    date: "Seed"
-  },
-  {
-    title: "Route Life",
-    category: "Route Life",
-    body:
-      "Long delivery routes, late-night highways, gas receipts, exhaustion, ideas born in isolation, and still finding a way to create.",
-    lesson:
-      "The road can become the writing room.",
-    date: "Seed"
-  },
-  {
-    title: "Every L Is a Lesson",
-    category: "Lessons",
-    body:
-      "Financial setbacks, relationship pain, uncertainty, and rebuilding are material for growth—not a permanent identity.",
-    lesson:
-      "Loss only wins when the lesson is ignored.",
-    date: "Seed"
-  },
-  {
-    title: "Fatherhood",
-    category: "Fatherhood",
-    body:
-      "Three children remain the deepest motivation behind discipline, legacy, protection, and becoming better.",
-    lesson:
-      "Purpose gets a face when you become a father.",
-    date: "Seed"
-  }
+const layerOptions = [
+  "Soulful",
+  "Gritty",
+  "Melodic",
+  "Boom Bap",
+  "Trap Soul",
+  "Cinematic",
+  "Spiritual",
+  "Dangerous",
+  "Romantic",
+  "Humorous",
+  "Reflective",
+  "Aggressive",
+  "Nostalgic",
+  "Luxury",
+  "Minimal",
+  "Haunted"
 ];
 
-const Store = {
-  get(key, defaultValue) {
-    try {
-      return JSON.parse(
-        localStorage.getItem("rnp_" + key)
-      ) ?? defaultValue;
-    } catch (error) {
-      return defaultValue;
-    }
-  },
+const influenceOptions = [
+  "Blade",
+  "Spawn",
+  "Goku",
+  "Bruce Lee",
+  "Wu-Tang",
+  "DMX",
+  "Biggie",
+  "N.W.A.",
+  "Jordan",
+  "Kobe",
+  "Iverson",
+  "Tyson",
+  "Ali",
+  "Paid in Full",
+  "Belly",
+  "The Matrix",
+  "Tony Stark",
+  "Nipsey"
+];
 
-  set(key, value) {
-    localStorage.setItem(
-      "rnp_" + key,
-      JSON.stringify(value)
-    );
-  }
+const arcPresets = {
+  "Sae Smooth": [
+    "Observation",
+    "Appreciation",
+    "Trust",
+    "Commitment",
+    "Confidence",
+    "Desire",
+    "Intensity",
+    "Humor",
+    "Resolution"
+  ],
+
+  "Pain to Purpose": [
+    "Pain",
+    "Reflection",
+    "Accountability",
+    "Discipline",
+    "Hope"
+  ],
+
+  "Street Mirror": [
+    "Survival",
+    "Confidence",
+    "Consequence",
+    "Reflection",
+    "Transformation",
+    "Vow"
+  ],
+
+  "Dark Love": [
+    "Admiration",
+    "Safety",
+    "Obsession",
+    "Passion",
+    "Vulnerability",
+    "Reassurance"
+  ],
+
+  "Victory": [
+    "Hunger",
+    "Pressure",
+    "Adaptation",
+    "Execution",
+    "Proof",
+    "Elevation"
+  ]
 };
 
-let current = Store.get("current", {
-  id: Date.now(),
-  title: "Untitled Chapter",
-  chapter: "Rebuilding",
-  vibe: "Soulful Raw",
-  truth: "",
-  lyrics: "",
-  bpm: 92,
-  key: "A minor",
-  beatName: "",
-  recordNotes: ""
-});
+let state = JSON.parse(
+  localStorage.getItem("rnp2_state") || "{}"
+);
 
-let selectedChapter = current.chapter;
-let selectedVibe = current.vibe;
-let beatURL = null;
+state.vibeIndex ??= 0;
+state.layers ??= [];
+state.influences ??= [];
+state.arc ??= arcPresets["Sae Smooth"];
+state.glossary ??= [];
+state.durationSeconds ??= null;
 
-function $(id) {
-  return document.getElementById(id);
+function persist() {
+  localStorage.setItem(
+    "rnp2_state",
+    JSON.stringify(state)
+  );
 }
 
 function toast(message) {
-  const toastElement = $("toast");
-
-  toastElement.textContent = message;
-  toastElement.style.display = "block";
+  $("toast").textContent = message;
+  $("toast").style.display = "block";
 
   setTimeout(() => {
-    toastElement.style.display = "none";
-  }, 1700);
+    $("toast").style.display = "none";
+  }, 2200);
 }
 
-function go(page) {
+function go(id, button) {
   document
     .querySelectorAll(".page")
-    .forEach((element) => {
-      element.classList.toggle(
+    .forEach((page) => {
+      page.classList.toggle(
         "on",
-        element.id === page
+        page.id === id
       );
     });
 
   document
     .querySelectorAll(".nav button")
-    .forEach((element) => {
-      element.classList.toggle(
-        "on",
-        element.dataset.page === page
-      );
+    .forEach((navButton) => {
+      navButton.classList.remove("on");
     });
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  button?.classList.add("on");
 
-  if (page === "archive") {
+  if (id === "archive") {
     renderArchive();
   }
-
-  if (page === "vault") {
-    renderMemories();
-  }
 }
 
-function chips(
-  target,
-  items,
-  selected,
-  handler
-) {
-  $(target).innerHTML = items
-    .map((item) => {
-      const safeItem = item.replaceAll(
-        "'",
-        "\\'"
-      );
+function renderVibe() {
+  const vibe =
+    vibes[state.vibeIndex % vibes.length];
 
-      return `
-        <button
-          class="chip ${item === selected ? "on" : ""}"
-          onclick="${handler}('${safeItem}')"
-        >
-          ${item}
-        </button>
-      `;
-    })
-    .join("");
+  $("vibeName").textContent = vibe[0];
+  $("vibeFamily").textContent = vibe[1];
+
+  $("turntable").style.transform =
+    `rotate(${state.vibeIndex * 22.5}deg)`;
+
+  renderLayers();
+  persist();
 }
 
-function chooseChapter(value) {
-  selectedChapter = value;
-  current.chapter = value;
+function renderLayers() {
+  $("vibeLayers").innerHTML =
+    layerOptions
+      .map((layer) => {
+        const active =
+          state.layers.includes(layer)
+            ? "on"
+            : "";
 
-  chips(
-    "chapterChips",
-    chapters,
-    value,
-    "chooseChapter"
-  );
-
-  chips(
-    "studioChapters",
-    chapters,
-    value,
-    "chooseChapter"
-  );
-
-  syncSession();
+        return `
+          <button
+            class="chip ${active}"
+            onclick="toggleLayer('${layer}')"
+          >
+            ${layer}
+          </button>
+        `;
+      })
+      .join("");
 }
 
-function chooseVibe(value) {
-  selectedVibe = value;
-  current.vibe = value;
+function toggleLayer(layer) {
+  state.layers =
+    state.layers.includes(layer)
+      ? state.layers.filter(
+          (current) => current !== layer
+        )
+      : [...state.layers, layer].slice(-2);
 
-  chips(
-    "vibeChips",
-    vibes,
-    value,
-    "chooseVibe"
-  );
-
-  syncSession();
+  renderLayers();
+  persist();
 }
 
-function renderAgents() {
-  $("agentGrid").innerHTML = agents
-    .map((agent, index) => {
-      return `
-        <div class="agent ${index < 5 ? "on" : ""}">
-          <strong>
-            ${String(index + 1).padStart(2, "0")}
-            ${agent[0]}
-          </strong>
+function renderInfluences() {
+  $("influences").innerHTML =
+    influenceOptions
+      .map((influence) => {
+        const active =
+          state.influences.includes(influence)
+            ? "on"
+            : "";
 
-          <span>
-            ${agent[1]}
-          </span>
-        </div>
-      `;
-    })
-    .join("");
+        return `
+          <button
+            class="influence ${active}"
+            onclick="toggleInfluence('${influence}')"
+          >
+            ${influence}
+          </button>
+        `;
+      })
+      .join("");
 }
 
-function loadCurrent() {
-  $("songTitle").value =
-    current.title || "";
+function toggleInfluence(influence) {
+  state.influences =
+    state.influences.includes(influence)
+      ? state.influences.filter(
+          (current) => current !== influence
+        )
+      : [...state.influences, influence].slice(-8);
 
-  $("truth").value =
-    current.truth || "";
-
-  $("lyrics").value =
-    current.lyrics || "";
-
-  $("bpm").value =
-    current.bpm || 92;
-
-  $("key").value =
-    current.key || "A minor";
-
-  $("recordNotes").value =
-    current.recordNotes || "";
-
-  $("beatName").textContent =
-    current.beatName ||
-    "Awaiting instrumental";
-
-  $("homeBeat").textContent =
-    current.beatName ||
-    "No instrumental loaded";
-
-  $("homeTitle").textContent =
-    current.title ||
-    "Untitled Chapter";
-
-  $("dnaNotes").value =
-    Store.get("dna", "");
-
-  selectedChapter =
-    current.chapter ||
-    "Rebuilding";
-
-  selectedVibe =
-    current.vibe ||
-    "Soulful Raw";
-
-  chips(
-    "chapterChips",
-    chapters,
-    selectedChapter,
-    "chooseChapter"
-  );
-
-  chips(
-    "studioChapters",
-    chapters,
-    selectedChapter,
-    "chooseChapter"
-  );
-
-  chips(
-    "vibeChips",
-    vibes,
-    selectedVibe,
-    "chooseVibe"
-  );
-
-  updateProgress();
+  renderInfluences();
+  persist();
 }
 
-function syncSession() {
-  current.title =
-    $("songTitle").value ||
-    "Untitled Chapter";
+function renderArc() {
+  $("arc").innerHTML =
+    state.arc
+      .map((emotion, index) => {
+        const arrow =
+          index
+            ? '<span class="arrow">→</span>'
+            : "";
 
-  current.truth =
-    $("truth").value;
+        return `
+          ${arrow}
 
-  current.lyrics =
-    $("lyrics").value;
+          <button
+            class="node on"
+            onclick="removeArc(${index})"
+          >
+            ${emotion}
+          </button>
+        `;
+      })
+      .join("");
 
-  current.bpm =
-    Number($("bpm").value) || 0;
-
-  current.key =
-    $("key").value;
-
-  current.recordNotes =
-    $("recordNotes").value;
-
-  current.chapter =
-    selectedChapter;
-
-  current.vibe =
-    selectedVibe;
-
-  Store.set(
-    "current",
-    current
-  );
-
-  $("homeTitle").textContent =
-    current.title;
-
-  updateProgress();
+  $("arcPresets").innerHTML =
+    Object
+      .keys(arcPresets)
+      .map((preset) => {
+        return `
+          <button
+            class="chip"
+            onclick="setArc('${preset}')"
+          >
+            ${preset}
+          </button>
+        `;
+      })
+      .join("");
 }
 
-function updateProgress() {
-  let progress = 1;
+function setArc(preset) {
+  state.arc = [...arcPresets[preset]];
 
-  if (current.truth) {
-    progress++;
+  renderArc();
+  persist();
+}
+
+function removeArc(index) {
+  if (state.arc.length > 3) {
+    state.arc.splice(index, 1);
   }
 
-  if (current.beatName) {
-    progress++;
-  }
-
-  if (current.councilRan) {
-    progress++;
-  }
-
-  if (current.lyrics) {
-    progress++;
-  }
-
-  if (current.recordNotes) {
-    progress++;
-  }
-
-  $("homeProgress").style.width =
-    Math.min(
-      100,
-      progress / 6 * 100
-    ) + "%";
-
-  document
-    .querySelectorAll(".stepRow span")
-    .forEach((element, index) => {
-      element.classList.toggle(
-        "on",
-        index < Math.ceil(progress / 1.2)
-      );
-    });
+  renderArc();
+  persist();
 }
 
-function captureTruth() {
-  const value =
-    $("quickTruth").value.trim();
+let drag = false;
+let startX = 0;
+let startIndex = 0;
 
-  if (!value) {
-    toast("Drop the truth first.");
-    return;
+$("turntable").addEventListener(
+  "pointerdown",
+  (event) => {
+    drag = true;
+    startX = event.clientX;
+    startIndex = state.vibeIndex;
+
+    $("turntable").setPointerCapture(
+      event.pointerId
+    );
   }
+);
 
-  current.truth = value;
-  current.chapter = selectedChapter;
+$("turntable").addEventListener(
+  "pointermove",
+  (event) => {
+    if (!drag) {
+      return;
+    }
 
-  $("truth").value = value;
+    const steps = Math.round(
+      (event.clientX - startX) / 28
+    );
 
-  syncSession();
-  go("studio");
+    state.vibeIndex =
+      (
+        startIndex +
+        steps +
+        vibes.length * 20
+      ) % vibes.length;
 
-  toast("Chapter captured.");
-}
-
-function newSession() {
-  const approved = confirm(
-    "Start a fresh cook up? Your current session stays saved only if you saved it to the archive."
-  );
-
-  if (!approved) {
-    return;
+    renderVibe();
   }
+);
 
-  current = {
-    id: Date.now(),
-    title: "Untitled Chapter",
-    chapter: "Rebuilding",
-    vibe: "Soulful Raw",
-    truth: "",
-    lyrics: "",
-    bpm: 92,
-    key: "A minor",
-    beatName: "",
-    recordNotes: ""
-  };
-
-  Store.set(
-    "current",
-    current
-  );
-
-  loadCurrent();
-  go("studio");
-}
+$("turntable").addEventListener(
+  "pointerup",
+  () => {
+    drag = false;
+  }
+);
 
 $("beatInput").addEventListener(
   "change",
   (event) => {
-    const file =
-      event.target.files[0];
+    const file = event.target.files[0];
 
     if (!file) {
       return;
     }
 
-    if (beatURL) {
-      URL.revokeObjectURL(beatURL);
-    }
-
-    beatURL =
-      URL.createObjectURL(file);
-
     $("player").src =
-      beatURL;
-
-    current.beatName =
-      file.name;
+      URL.createObjectURL(file);
 
     $("beatName").textContent =
       file.name;
 
-    $("homeBeat").textContent =
-      file.name;
-
     $("player").onloadedmetadata = () => {
-      const minutes =
-        Math.floor(
-          $("player").duration / 60
+      state.durationSeconds =
+        Math.round(
+          $("player").duration
         );
 
-      const seconds =
-        String(
-          Math.floor(
-            $("player").duration % 60
-          )
-        ).padStart(2, "0");
-
       $("beatLength").textContent =
-        minutes + ":" + seconds;
+        formatTime(
+          state.durationSeconds
+        );
+
+      persist();
     };
-
-    syncSession();
-
-    toast(
-      "Instrumental loaded locally."
-    );
   }
 );
 
-function findRelevantMemories({
-  truth,
-  chapter,
-  maximum = 8
-}) {
-  const memories = Store.get(
-    "memories",
-    seedMemories
-  );
+function formatTime(seconds) {
+  if (!seconds) {
+    return "—";
+  }
 
-  const searchWords = new Set(
-    `${truth} ${chapter}`
-      .toLowerCase()
-      .split(/[^a-z0-9']+/)
-      .filter((word) => word.length >= 4)
-  );
+  const minutes =
+    Math.floor(seconds / 60);
 
-  return memories
-    .map((memory) => {
-      const searchable = [
-        memory.title,
-        memory.category,
-        memory.body,
-        memory.lesson
-      ]
-        .join(" ")
-        .toLowerCase();
+  const remainingSeconds =
+    String(
+      Math.floor(seconds % 60)
+    ).padStart(2, "0");
 
-      let score = 0;
-
-      searchWords.forEach((word) => {
-        if (searchable.includes(word)) {
-          score += 1;
-        }
-      });
-
-      if (
-        String(memory.category)
-          .toLowerCase() ===
-        String(chapter).toLowerCase()
-      ) {
-        score += 5;
-      }
-
-      return {
-        ...memory,
-        score
-      };
-    })
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maximum)
-    .map(({ score, ...memory }) => memory);
+  return `${minutes}:${remainingSeconds}`;
 }
 
-function setCouncilLoading(isLoading) {
-  const button = document.querySelector(
-    'button[onclick="runCouncil()"]'
-  );
+function addGlossary() {
+  const term =
+    $("term").value.trim();
 
-  if (!button) {
-    return;
-  }
+  const meaning =
+    $("meaning").value.trim();
 
-  button.disabled = isLoading;
+  const context =
+    $("context").value.trim();
 
-  button.textContent = isLoading
-    ? "Council Is Listening..."
-    : "Wake the Council";
-
-  button.style.opacity = isLoading
-    ? "0.65"
-    : "1";
-}
-
-function renderCouncilResult(result) {
-  const sections = [];
-
-  sections.push(
-    `CREATIVE CENTER\n${result.creative_center}`
-  );
-
-  if (
-    Array.isArray(result.council) &&
-    result.council.length
-  ) {
-    sections.push(
-      result.council
-        .map(
-          (entry) =>
-            `${String(entry.agent).toUpperCase()}: ${entry.direction}`
-        )
-        .join("\n\n")
-    );
-  }
-
-  if (
-    Array.isArray(result.hook_directions) &&
-    result.hook_directions.length
-  ) {
-    sections.push(
-      "HOOK DIRECTIONS\n" +
-        result.hook_directions
-          .map(
-            (direction, index) =>
-              `${index + 1}. ${direction}`
-          )
-          .join("\n")
-    );
-  }
-
-  if (result.pocket_plan) {
-    sections.push(
-      `POCKET FINDER\n${result.pocket_plan}`
-    );
-  }
-
-  if (
-    Array.isArray(result.imagery) &&
-    result.imagery.length
-  ) {
-    sections.push(
-      "IMAGE BANK\n" +
-        result.imagery
-          .map((image) => `• ${image}`)
-          .join("\n")
-    );
-  }
-
-  if (
-    Array.isArray(result.starter_material) &&
-    result.starter_material.length
-  ) {
-    sections.push(
-      "STARTER MATERIAL\n" +
-        result.starter_material
-          .map((line) => `• ${line}`)
-          .join("\n")
-    );
-  }
-
-  if (
-    Array.isArray(result.recording_notes) &&
-    result.recording_notes.length
-  ) {
-    sections.push(
-      "STUDIO ENGINEER\n" +
-        result.recording_notes
-          .map((note) => `• ${note}`)
-          .join("\n")
-    );
-  }
-
-  if (
-    Array.isArray(result.authenticity_checks) &&
-    result.authenticity_checks.length
-  ) {
-    sections.push(
-      "TRUTH CHECK\n" +
-        result.authenticity_checks
-          .map((check) => `• ${check}`)
-          .join("\n")
-    );
-  }
-
-  $("feed").textContent =
-    sections.join("\n\n──────────────\n\n");
-}
-
-async function runCouncil() {
-  syncSession();
-
-  const truth = current.truth.trim();
-  const lyrics = current.lyrics.trim();
-
-  if (!truth && !lyrics) {
+  if (!term || !meaning) {
     toast(
-      "Tell the story before waking the council."
+      "Add the term and its meaning."
     );
 
     return;
   }
 
-  setCouncilLoading(true);
-
-  $("feed").textContent =
-    "THE PRODUCER'S TABLE IS LISTENING...\n\n" +
-    "Searching the Memory Vault.\n" +
-    "Protecting the truth.\n" +
-    "Mapping the pocket.\n" +
-    "Finding the emotional center.";
-
-  try {
-    const relevantMemories =
-      findRelevantMemories({
-        truth,
-        chapter: selectedChapter
-      });
-
-    const response = await fetch(
-      "/api/rnp",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body: JSON.stringify({
-          mode: "council",
-
-          title:
-            current.title,
-
-          chapter:
-            selectedChapter,
-
-          vibe:
-            selectedVibe,
-
-          bpm:
-            current.bpm,
-
-          key:
-            current.key,
-
-          beatName:
-            current.beatName,
-
-          truth:
-            current.truth,
-
-          lyrics:
-            current.lyrics,
-
-          memories:
-            relevantMemories
-        })
-      }
-    );
-
-    const raw = await response.text();
-
-let payload;
-
-try {
-  payload = JSON.parse(raw);
-} catch {
-  console.error("RNP raw response:", raw);
-
-  throw new Error(
-    `Server ${response.status}\n\n${raw.substring(0, 300)}`
-  );
-}
-if (
-  !response.ok ||
-  !payload.ok
-) {
-  throw new Error(
-    payload.error ||
-    `The Council request failed with status ${response.status}.`
-  );
-}
-    renderCouncilResult(
-      payload.result
-    );
-
-    current.councilRan = true;
-    current.lastCouncilResult =
-      payload.result;
-    current.lastCouncilAt =
-      new Date().toISOString();
-
-    syncSession();
-
-    toast(
-      "The Council finished its session."
-    );
-  } catch (error) {
-    console.error(
-      "RNP Council error:",
-      error
-    );
-
-    $("feed").textContent =
-      "COUNCIL CONNECTION FAILED.\n\n" +
-      error.message +
-      "\n\nYour lyrics and session were not lost.";
-
-    toast(
-      "Council connection failed."
-    );
-  } finally {
-    setCouncilLoading(false);
-  }
-}
-
-function saveSession() {
-  syncSession();
-
-  const sessions =
-    Store.get("sessions", []);
-
-  const existingIndex =
-    sessions.findIndex(
-      (session) =>
-        session.id === current.id
-    );
-
-  const copy = {
-    ...current,
-    updated:
-      new Date().toISOString()
-  };
-
-  if (existingIndex >= 0) {
-    sessions[existingIndex] = copy;
-  } else {
-    sessions.unshift(copy);
-  }
-
-  Store.set(
-    "sessions",
-    sessions
-  );
-
-  toast(
-    "Project archived."
-  );
-}
-
-function openSession(id) {
-  const session =
-    Store
-      .get("sessions", [])
-      .find(
-        (item) =>
-          item.id === id
-      );
-
-  if (!session) {
-    return;
-  }
-
-  current = {
-    ...session
-  };
-
-  Store.set(
-    "current",
-    current
-  );
-
-  loadCurrent();
-  go("studio");
-
-  toast(
-    "Session opened."
-  );
-}
-
-function deleteSession(id) {
-  const approved = confirm(
-    "Delete this archived session?"
-  );
-
-  if (!approved) {
-    return;
-  }
-
-  const sessions =
-    Store
-      .get("sessions", [])
-      .filter(
-        (session) =>
-          session.id !== id
-      );
-
-  Store.set(
-    "sessions",
-    sessions
-  );
-
-  renderArchive();
-}
-
-function renderArchive() {
-  const sessions =
-    Store.get("sessions", []);
-
-  $("archiveCount").textContent =
-    sessions.length +
-    " projects";
-
-  $("archiveList").innerHTML =
-    sessions.length
-      ? sessions
-          .map((session) => {
-            return `
-              <div class="item">
-
-                <h3>
-                  ${esc(
-                    session.title ||
-                    "Untitled"
-                  )}
-                </h3>
-
-                <p>
-                  ${esc(
-                    session.chapter ||
-                    ""
-                  )}
-                  ·
-                  ${esc(
-                    session.vibe ||
-                    ""
-                  )}
-                  ·
-                  ${new Date(
-                    session.updated ||
-                    session.id
-                  ).toLocaleDateString()}
-                </p>
-
-                <div
-                  class="grid2"
-                  style="margin-top:8px"
-                >
-
-                  <button
-                    class="btn small"
-                    onclick="openSession(${session.id})"
-                  >
-                    Open
-                  </button>
-
-                  <button
-                    class="btn small"
-                    onclick="deleteSession(${session.id})"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </div>
-            `;
-          })
-          .join("")
-      : `
-        <div class="empty">
-          No archived songs yet.
-        </div>
-      `;
-
-  const bars =
-    Store.get("bars", []);
-
-  $("barList").innerHTML =
-    bars.length
-      ? bars
-          .map((bar, index) => {
-            return `
-              <div class="item">
-
-                <h3>
-                  ${esc(bar.text)}
-                </h3>
-
-                <p>
-                  ${esc(bar.song)}
-                  ·
-                  ${new Date(
-                    bar.date
-                  ).toLocaleDateString()}
-                </p>
-
-                <button
-                  class="btn small"
-                  style="margin-top:8px"
-                  onclick="deleteBar(${index})"
-                >
-                  Delete
-                </button>
-
-              </div>
-            `;
-          })
-          .join("")
-      : `
-        <div class="empty">
-          No loose bars saved yet.
-        </div>
-      `;
-}
-
-function saveBar() {
-  const lyricsElement =
-    $("lyrics");
-
-  const text =
-    lyricsElement.value
-      .substring(
-        lyricsElement.selectionStart,
-        lyricsElement.selectionEnd
-      )
-      .trim();
-
-  if (!text) {
-    toast(
-      "Highlight a bar first."
-    );
-
-    return;
-  }
-
-  const bars =
-    Store.get("bars", []);
-
-  bars.unshift({
-    text,
-    song: current.title,
-    date:
-      new Date().toISOString()
+  state.glossary.push({
+    term,
+    meaning,
+    context
   });
 
-  Store.set(
-    "bars",
-    bars
-  );
+  $("term").value = "";
+  $("meaning").value = "";
+  $("context").value = "";
 
-  toast(
-    "Bar saved to Quote Vault."
-  );
+  renderGlossary();
+  persist();
 }
 
-function deleteBar(index) {
-  const bars =
-    Store.get("bars", []);
+function renderGlossary() {
+  const entries = [
+    {
+      term: "snaps",
+      meaning:
+        "Dope fiends / street customers",
+      context:
+        "Not Snapchat or messages."
+    },
+    ...state.glossary
+  ];
+
+  $("glossaryList").innerHTML =
+    entries
+      .map((entry, index) => {
+        const context =
+          entry.context
+            ? `
+              <br>
+              <small>
+                ${entry.context}
+              </small>
+            `
+            : "";
+
+        const removeButton =
+          index
+            ? `
+              <button
+                class="btn small"
+                style="float:right"
+                onclick="removeGlossary(${index - 1})"
+              >
+                Remove
+              </button>
+            `
+            : "";
 
-  bars.splice(index, 1);
-
-  Store.set(
-    "bars",
-    bars
-  );
-
-  renderArchive();
-}
-
-function addMemory() {
-  const title =
-    $("memoryTitle").value.trim();
-
-  const body =
-    $("memoryBody").value.trim();
-
-  if (!title || !body) {
-    toast(
-      "Memory needs a title and truth."
-    );
-
-    return;
-  }
-
-  const memories =
-    Store.get(
-      "memories",
-      seedMemories
-    );
-
-  memories.unshift({
-    title,
-    category:
-      $("memoryCategory").value,
-    body,
-    lesson:
-      $("memoryLesson").value,
-    date:
-      new Date().toISOString()
-  });
-
-  Store.set(
-    "memories",
-    memories
-  );
-
-  [
-    "memoryTitle",
-    "memoryBody",
-    "memoryLesson"
-  ].forEach((id) => {
-    $(id).value = "";
-  });
-
-  renderMemories();
-
-  toast(
-    "Memory secured."
-  );
-}
-
-function renderMemories() {
-  let memories =
-    Store.get(
-      "memories",
-      seedMemories
-    );
-
-  const query =
-    (
-      $("memorySearch")?.value ||
-      ""
-    ).toLowerCase();
-
-  if (query) {
-    memories =
-      memories.filter(
-        (memory) =>
-          JSON.stringify(memory)
-            .toLowerCase()
-            .includes(query)
-      );
-  }
-
-  $("memoryList").innerHTML =
-    memories.length
-      ? memories
-          .map((memory) => {
-            return `
-              <div class="item">
-
-                <h3>
-                  ${esc(memory.title)}
-
-                  <span class="badge">
-                    ${esc(
-                      memory.category
-                    )}
-                  </span>
-                </h3>
-
-                <p>
-                  ${esc(memory.body)}
-                </p>
-
-                ${
-                  memory.lesson
-                    ? `
-                      <p style="margin-top:7px">
-                        <b>Lesson:</b>
-                        ${esc(
-                          memory.lesson
-                        )}
-                      </p>
-                    `
-                    : ""
-                }
-
-              </div>
-            `;
-          })
-          .join("")
-      : `
-        <div class="empty">
-          No matching memories.
-        </div>
-      `;
-}
-
-function exportLyrics() {
-  syncSession();
-
-  const safeName =
-    (
-      current.title ||
-      "RNP_Lyrics"
-    ).replace(
-      /[^a-z0-9]+/gi,
-      "_"
-    );
-
-  const content =
-`${current.title}
-${current.chapter} · ${current.vibe}
-BPM ${current.bpm} · ${current.key}
-
-${current.lyrics}
-
-RECORDING NOTES
-${current.recordNotes}`;
-
-  download(
-    safeName + ".txt",
-    content,
-    "text/plain"
-  );
-}
-
-async function copyLyrics() {
-  try {
-    await navigator.clipboard.writeText(
-      current.lyrics
-    );
-
-    toast(
-      "Lyrics copied for BandLab."
-    );
-  } catch (error) {
-    toast(
-      "Copy was blocked. Use Export Lyrics."
-    );
-  }
-}
-
-function exportBackup() {
-  const backup = {
-    sessions:
-      Store.get("sessions", []),
-
-    memories:
-      Store.get(
-        "memories",
-        seedMemories
-      ),
-
-    bars:
-      Store.get("bars", []),
-
-    dna:
-      Store.get("dna", ""),
-
-    current
-  };
-
-  download(
-    "RNP_Studio_Backup.json",
-    JSON.stringify(
-      backup,
-      null,
-      2
-    ),
-    "application/json"
-  );
-}
-
-function importBackup(event) {
-  const file =
-    event.target.files[0];
-
-  if (!file) {
-    return;
-  }
-
-  const reader =
-    new FileReader();
-
-  reader.onload = () => {
-    try {
-      const data =
-        JSON.parse(
-          reader.result
-        );
-
-      [
-        "sessions",
-        "memories",
-        "bars",
-        "dna",
-        "current"
-      ].forEach((key) => {
-        if (data[key] != null) {
-          Store.set(
-            key,
-            data[key]
-          );
-        }
-      });
-
-      current =
-        Store.get(
-          "current",
-          current
-        );
-
-      loadCurrent();
-
-      toast(
-        "RNP backup restored."
-      );
-    } catch (error) {
-      alert(
-        "That backup file could not be read."
-      );
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-function download(
-  name,
-  text,
-  type
-) {
-  const anchor =
-    document.createElement("a");
-
-  const blob =
-    new Blob(
-      [text],
-      { type }
-    );
-
-  anchor.href =
-    URL.createObjectURL(blob);
-
-  anchor.download =
-    name;
-
-  anchor.click();
-
-  setTimeout(() => {
-    URL.revokeObjectURL(
-      anchor.href
-    );
-  }, 1000);
-}
-
-function saveDNA() {
-  Store.set(
-    "dna",
-    $("dnaNotes").value
-  );
-}
-
-function esc(value = "") {
-  return String(value)
-    .replace(
-      /[&<>"']/g,
-      (character) => {
-        const replacements = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        };
-
-        return replacements[
-          character
-        ];
-      }
-    );
-}
-
-function resetApp() {
-  const approved = confirm(
-    "Erase all RNP data stored in this browser?"
-  );
-
-  if (!approved) {
-    return;
-  }
-
-  Object.keys(
-    localStorage
-  )
-    .filter(
-      (key) =>
-        key.startsWith("rnp_")
-    )
-    .forEach(
-      (key) =>
-        localStorage.removeItem(key)
-    );
-
-  location.reload();
-}
-
-function installHelp() {
-  alert(
-    "On iPhone: open this app in Safari, tap Share, then tap Add to Home Screen. For full offline installation, host the included folder over HTTPS first."
-  );
-}
-
-const drills = [
-  "Tell one true story in eight bars. Every bar must move the timeline forward.",
-
-  "Choose one object from tonight—receipt, key, tire, phone, windshield—and give it three meanings.",
-
-  "Freestyle for two minutes without mentioning money, cars, jewelry, or enemies.",
-
-  "Write four setup bars, then make bar five reinterpret all four.",
-
-  "Create a hook using only one sentence and one emotional contrast.",
-
-  "Rap the same four lines in three pockets: conversational, double-time, and half-time.",
-
-  "Write about a loss without sounding defeated. The lesson must arrive naturally, not as a lecture."
-];
-
-function openDojo() {
-  dojoModal.classList.add("on");
-  newDojo();
-}
-
-function newDojo() {
-  const prompt =
-    drills[
-      Math.floor(
-        Math.random() *
-        drills.length
-      )
-    ];
-
-  $("dojoPrompt").innerHTML = `
-    <div class="eyebrow">
-      Today's drill
-    </div>
-
-    <h2 style="font-size:25px">
-      ${prompt}
-    </h2>
-
-    <p>
-      Set a 15-minute timer.
-      Do not chase perfection.
-    </p>
-  `;
-}
-
-const checklistItems = [
-  "Main vocal captured with emotion",
-
-  "Punch-ins only where needed",
-
-  "Selective doubles on impact words",
-
-  "Hook stacks / harmonies tested",
-
-  "Ad-libs support—not crowd—the lead",
-
-  "Breaths and pauses feel intentional",
-
-  "Lyrics exported and session archived"
-];
-
-function renderChecklist() {
-  $("checklist").innerHTML =
-    checklistItems
-      .map((item, index) => {
         return `
-          <label class="check">
+          <div>
+            <b>${entry.term}</b>
 
-            <input
-              type="checkbox"
-              onchange="saveChecks()"
-              data-i="${index}"
-            >
+            <br>
 
-            <span>
-              ${item}
-            </span>
+            ${entry.meaning}
 
-          </label>
+            ${context}
+
+            ${removeButton}
+          </div>
         `;
       })
       .join("");
+}
 
-  const checks =
-    Store.get("checks", []);
+function removeGlossary(index) {
+  state.glossary.splice(index, 1);
 
-  document
-    .querySelectorAll(
-      ".check input"
-    )
-    .forEach(
-      (element, index) => {
-        element.checked =
-          Boolean(checks[index]);
+  renderGlossary();
+  persist();
+}
+
+function escapeHtml(value = "") {
+  return value.replace(
+    /[&<>'"]/g,
+    (character) => {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+      }[character];
+    }
+  );
+}
+
+function list(items) {
+  return `
+    <ul>
+      ${
+        (items || [])
+          .map((item) => {
+            const text =
+              typeof item === "string"
+                ? item
+                : JSON.stringify(item);
+
+            return `
+              <li>
+                ${escapeHtml(text)}
+              </li>
+            `;
+          })
+          .join("")
       }
+    </ul>
+  `;
+}
+
+function renderResult(result) {
+  let html = "";
+
+  html += `
+    <div class="resultSection">
+      <h3>Creative Center</h3>
+
+      <p>
+        ${escapeHtml(
+          result.creative_center || ""
+        )}
+      </p>
+    </div>
+  `;
+
+  if (result.emotional_momentum) {
+    html += `
+      <div class="resultSection">
+        <h3>Emotional Momentum</h3>
+
+        <p>
+          ${
+            (
+              result
+                .emotional_momentum
+                .arc || []
+            )
+              .map(escapeHtml)
+              .join(" → ")
+          }
+        </p>
+
+        <p>
+          ${escapeHtml(
+            result
+              .emotional_momentum
+              .transition_notes || ""
+          )}
+        </p>
+
+        <p>
+          <b>Pressure release:</b>
+
+          ${escapeHtml(
+            result
+              .emotional_momentum
+              .pressure_release || ""
+          )}
+        </p>
+      </div>
+    `;
+  }
+
+  html += `
+    <div class="resultSection">
+      <h3>Culture Lanes</h3>
+
+      ${
+        (result.culture_lanes || [])
+          .map((lane) => {
+            return `
+              <p>
+                <b>
+                  ${escapeHtml(
+                    lane.reference_lane
+                  )}
+                </b>
+
+                —
+
+                ${escapeHtml(
+                  lane.symbolic_value
+                )}
+
+                <br>
+
+                <small>
+                  ${escapeHtml(
+                    lane.usage_rule
+                  )}
+                </small>
+              </p>
+            `;
+          })
+          .join("")
+      }
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Producer's Table</h3>
+
+      ${
+        (result.council || [])
+          .map((agent) => {
+            return `
+              <p>
+                <b>
+                  ${escapeHtml(
+                    agent.agent
+                  )}:
+                </b>
+
+                ${escapeHtml(
+                  agent.direction
+                )}
+              </p>
+            `;
+          })
+          .join("")
+      }
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Hook Directions</h3>
+
+      ${list(
+        result.hook_directions
+      )}
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Full-Song Pocket Plan</h3>
+
+      <p>
+        ${escapeHtml(
+          result.pocket_plan || ""
+        )}
+      </p>
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Image Bank</h3>
+
+      ${list(result.imagery)}
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Starter Material</h3>
+
+      ${list(
+        result.starter_material
+      )}
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Recording Notes</h3>
+
+      ${list(
+        result.recording_notes
+      )}
+    </div>
+  `;
+
+  html += `
+    <div class="resultSection">
+      <h3>Truth Check</h3>
+
+      ${list(
+        result.authenticity_checks
+      )}
+    </div>
+  `;
+
+  $("feed").innerHTML = html;
+}
+
+async function runCouncil() {
+  const truth =
+    $("truth").value.trim();
+
+  if (!truth) {
+    toast("Tell the truth first.");
+    return;
+  }
+
+  $("feed").textContent =
+`CULTURE ENGINE READING THE ROOM...
+EMOTIONAL MOMENTUM MAPPING...
+ARRANGEMENT DIRECTOR CALCULATING THE FULL SONG...`;
+
+  $("engineBadge").textContent =
+    "Thinking";
+
+  const payload = {
+    title:
+      $("title").value,
+
+    chapter:
+      $("chapter").value,
+
+    vibe:
+      vibes[state.vibeIndex][0],
+
+    vibeLayers:
+      state.layers,
+
+    emotionalArc:
+      state.arc,
+
+    selectedInfluences:
+      state.influences,
+
+    bpm:
+      $("bpm").value
+        ? Number($("bpm").value)
+        : null,
+
+    durationSeconds:
+      state.durationSeconds,
+
+    key:
+      $("key").value,
+
+    beatName:
+      $("beatName").textContent,
+
+    truth,
+
+    lyrics:
+      $("lyrics").value,
+
+    memories: [],
+
+    glossary:
+      state.glossary
+  };
+
+  try {
+    const response =
+      await fetch(
+        "/api/rnp",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+      throw new Error(
+        data.error ||
+        `Council failed (${response.status})`
+      );
+    }
+
+    renderResult(
+      data.result
     );
+
+    $("engineBadge").textContent =
+      "RNP 2.0";
+
+    state.lastResult =
+      data.result;
+
+    persist();
+    saveProject(true);
+  } catch (error) {
+    $("feed").textContent =
+`COUNCIL CONNECTION FAILED.
+
+${error.message}
+
+Your lyrics and session were not lost.`;
+
+    $("engineBadge").textContent =
+      "Offline";
+  }
 }
 
-function saveChecks() {
-  const checks = [
-    ...document.querySelectorAll(
-      ".check input"
+function saveProject(silent = false) {
+  const projects =
+    JSON.parse(
+      localStorage.getItem(
+        "rnp2_projects"
+      ) || "[]"
+    );
+
+  const project = {
+    id: Date.now(),
+
+    title:
+      $("title").value ||
+      "Untitled Chapter",
+
+    chapter:
+      $("chapter").value,
+
+    vibe:
+      vibes[state.vibeIndex][0],
+
+    truth:
+      $("truth").value,
+
+    lyrics:
+      $("lyrics").value,
+
+    result:
+      state.lastResult,
+
+    created:
+      new Date().toISOString()
+  };
+
+  projects.unshift(project);
+
+  localStorage.setItem(
+    "rnp2_projects",
+    JSON.stringify(
+      projects.slice(0, 40)
     )
-  ].map(
-    (element) =>
-      element.checked
   );
 
-  Store.set(
-    "checks",
-    checks
+  if (!silent) {
+    toast(
+      "Project saved locally."
+    );
+  }
+}
+
+function renderArchive() {
+  const projects =
+    JSON.parse(
+      localStorage.getItem(
+        "rnp2_projects"
+      ) || "[]"
+    );
+
+  $("archiveList").innerHTML =
+    projects.length
+      ? projects
+          .map((project) => {
+            return `
+              <div>
+                <b>
+                  ${escapeHtml(
+                    project.title
+                  )}
+                </b>
+
+                <br>
+
+                <small>
+                  ${
+                    new Date(
+                      project.created
+                    ).toLocaleString()
+                  }
+
+                  //
+
+                  ${escapeHtml(
+                    project.vibe || ""
+                  )}
+                </small>
+
+                <br>
+
+                ${escapeHtml(
+                  (
+                    project.truth || ""
+                  ).slice(0, 150)
+                )}
+              </div>
+            `;
+          })
+          .join("")
+      : `
+        <div>
+          No saved projects yet.
+        </div>
+      `;
+}
+
+async function copyLyrics() {
+  await navigator.clipboard.writeText(
+    $("lyrics").value
+  );
+
+  toast(
+    "Lyrics copied for BandLab."
   );
 }
 
-$("memoryCategory").innerHTML =
-  chapters
-    .map(
-      (chapter) =>
-        `<option>${chapter}</option>`
-    )
-    .join("");
+function restore() {
+  renderVibe();
+  renderInfluences();
+  renderArc();
+  renderGlossary();
 
-if (
-  !localStorage.getItem(
-    "rnp_memories"
-  )
-) {
-  Store.set(
-    "memories",
-    seedMemories
-  );
+  if (state.durationSeconds) {
+    $("beatLength").textContent =
+      formatTime(
+        state.durationSeconds
+      );
+  }
 }
 
-renderAgents();
-renderChecklist();
-loadCurrent();
-renderMemories();
-renderArchive();
-
-if (
-  "serviceWorker" in navigator
-) {
-  navigator.serviceWorker
-    .register("sw.js")
-    .catch(() => {});
-}
+restore();
 </script>
-
 </body>
 </html>
