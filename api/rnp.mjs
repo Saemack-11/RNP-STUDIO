@@ -375,74 +375,74 @@ export async function POST(request) {
     let message =
       "The RNP Council could not complete this session.";
 
-    } catch (error) {
-  console.error("RNP Council error:", {
-    name: error?.name,
-    message: error?.message,
-    status: error?.status,
-    code: error?.code,
-    requestId: error?.request_id
-  });
+      } catch (error) {
+    console.error("RNP Council error:", {
+      name: error?.name,
+      message: error?.message,
+      status: error?.status,
+      code: error?.code,
+      requestId: error?.request_id
+    });
 
-  const status =
-    Number.isInteger(error?.status) &&
-    error.status >= 400 &&
-    error.status < 600
-      ? error.status
-      : 500;
+    const status =
+      Number.isInteger(error?.status) &&
+      error.status >= 400 &&
+      error.status < 600
+        ? error.status
+        : 500;
 
-  let message =
-    "The RNP Council could not complete this session.";
+    let message =
+      "The RNP Council could not complete this session.";
 
-  const errorCode = String(
-    error?.code ||
-    error?.error?.code ||
-    error?.cause?.code ||
-    ""
-  ).toLowerCase();
+    const errorCode = String(
+      error?.code ||
+      error?.error?.code ||
+      error?.cause?.code ||
+      ""
+    ).toLowerCase();
 
-  const errorMessage = String(
-    error?.message || ""
-  ).toLowerCase();
+    const errorMessage = String(
+      error?.message || ""
+    ).toLowerCase();
 
-  if (status === 401) {
-    message =
-      "The OpenAI API key was rejected. Check the key saved in Vercel.";
-  } else if (
-    status === 429 &&
-    (
-      errorCode === "insufficient_quota" ||
-      errorMessage.includes("insufficient_quota") ||
-      errorMessage.includes("exceeded your current quota") ||
-      errorMessage.includes("billing")
-    )
-  ) {
-    message =
-      "The RNP API balance is empty or the spending limit has been reached. Add API credits or increase the project budget.";
-  } else if (status === 429) {
-    message =
-      "The Council is temporarily rate-limited. Wait briefly, then try again once.";
-  } else if (
-    status === 403 &&
-    (
-      errorMessage.includes("budget") ||
-      errorMessage.includes("quota")
-    )
-  ) {
-    message =
-      "The RNP project budget or usage limit is blocking model requests.";
-  } else if (
-    errorMessage.includes("model")
-  ) {
-    message =
-      error.message;
+    if (status === 401) {
+      message =
+        "The OpenAI API key was rejected. Check the key saved in Vercel.";
+    } else if (
+      status === 429 &&
+      (
+        errorCode === "insufficient_quota" ||
+        errorMessage.includes("insufficient_quota") ||
+        errorMessage.includes("exceeded your current quota") ||
+        errorMessage.includes("billing")
+      )
+    ) {
+      message =
+        "The RNP API balance is empty or the spending limit has been reached. Add API credits or increase the project budget.";
+    } else if (status === 429) {
+      message =
+        "The Council is temporarily rate-limited. Wait briefly, then try again once.";
+    } else if (
+      status === 403 &&
+      (
+        errorMessage.includes("budget") ||
+        errorMessage.includes("quota")
+      )
+    ) {
+      message =
+        "The RNP project budget or usage limit is blocking model requests.";
+    } else if (
+      errorMessage.includes("model")
+    ) {
+      message = error.message;
+    }
+
+    return json(
+      {
+        ok: false,
+        error: message
+      },
+      status
+    );
   }
-
-  return json(
-    {
-      ok: false,
-      error: message
-    },
-    status
-  );
 }
