@@ -1,0 +1,17 @@
+{
+  "name": "RNP Studio \u2014 Real Ninja Poetics",
+  "short_name": "RNP Studio",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#f5f3ee",
+  "description": "A private, local-first songwriting and recording workflow for Real Ninja Poetics.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
