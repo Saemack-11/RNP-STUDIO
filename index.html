@@ -1713,10 +1713,181 @@ $("beatInput").addEventListener(
   }
 );
 
-function runCouncil() {
+function findRelevantMemories({
+  truth,
+  chapter,
+  maximum = 8
+}) {
+  const memories = Store.get(
+    "memories",
+    seedMemories
+  );
+
+  const searchWords = new Set(
+    `${truth} ${chapter}`
+      .toLowerCase()
+      .split(/[^a-z0-9']+/)
+      .filter((word) => word.length >= 4)
+  );
+
+  return memories
+    .map((memory) => {
+      const searchable = [
+        memory.title,
+        memory.category,
+        memory.body,
+        memory.lesson
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      let score = 0;
+
+      searchWords.forEach((word) => {
+        if (searchable.includes(word)) {
+          score += 1;
+        }
+      });
+
+      if (
+        String(memory.category)
+          .toLowerCase() ===
+        String(chapter).toLowerCase()
+      ) {
+        score += 5;
+      }
+
+      return {
+        ...memory,
+        score
+      };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maximum)
+    .map(({ score, ...memory }) => memory);
+}
+
+function setCouncilLoading(isLoading) {
+  const button = document.querySelector(
+    'button[onclick="runCouncil()"]'
+  );
+
+  if (!button) {
+    return;
+  }
+
+  button.disabled = isLoading;
+
+  button.textContent = isLoading
+    ? "Council Is Listening..."
+    : "Wake the Council";
+
+  button.style.opacity = isLoading
+    ? "0.65"
+    : "1";
+}
+
+function renderCouncilResult(result) {
+  const sections = [];
+
+  sections.push(
+    `CREATIVE CENTER\n${result.creative_center}`
+  );
+
+  if (
+    Array.isArray(result.council) &&
+    result.council.length
+  ) {
+    sections.push(
+      result.council
+        .map(
+          (entry) =>
+            `${String(entry.agent).toUpperCase()}: ${entry.direction}`
+        )
+        .join("\n\n")
+    );
+  }
+
+  if (
+    Array.isArray(result.hook_directions) &&
+    result.hook_directions.length
+  ) {
+    sections.push(
+      "HOOK DIRECTIONS\n" +
+        result.hook_directions
+          .map(
+            (direction, index) =>
+              `${index + 1}. ${direction}`
+          )
+          .join("\n")
+    );
+  }
+
+  if (result.pocket_plan) {
+    sections.push(
+      `POCKET FINDER\n${result.pocket_plan}`
+    );
+  }
+
+  if (
+    Array.isArray(result.imagery) &&
+    result.imagery.length
+  ) {
+    sections.push(
+      "IMAGE BANK\n" +
+        result.imagery
+          .map((image) => `• ${image}`)
+          .join("\n")
+    );
+  }
+
+  if (
+    Array.isArray(result.starter_material) &&
+    result.starter_material.length
+  ) {
+    sections.push(
+      "STARTER MATERIAL\n" +
+        result.starter_material
+          .map((line) => `• ${line}`)
+          .join("\n")
+    );
+  }
+
+  if (
+    Array.isArray(result.recording_notes) &&
+    result.recording_notes.length
+  ) {
+    sections.push(
+      "STUDIO ENGINEER\n" +
+        result.recording_notes
+          .map((note) => `• ${note}`)
+          .join("\n")
+    );
+  }
+
+  if (
+    Array.isArray(result.authenticity_checks) &&
+    result.authenticity_checks.length
+  ) {
+    sections.push(
+      "TRUTH CHECK\n" +
+        result.authenticity_checks
+          .map((check) => `• ${check}`)
+          .join("\n")
+    );
+  }
+
+  $("feed").textContent =
+    sections.join("\n\n──────────────\n\n");
+}
+
+async function runCouncil() {
   syncSession();
 
-  if (!current.truth.trim()) {
+  const truth = current.truth.trim();
+  const lyrics = current.lyrics.trim();
+
+  if (!truth && !lyrics) {
     toast(
       "Tell the story before waking the council."
     );
@@ -1724,36 +1895,117 @@ function runCouncil() {
     return;
   }
 
-  current.councilRan = true;
-
-  const lines = [
-    `STORY ARCHITECT: ${selectedChapter} is the chapter. Keep the real event, the consequence, and the lesson visible.`,
-
-    `PHILOSOPHER: The heart of this record is not the setback—it is how Sae moved after it.`,
-
-    `POCKET FINDER: ${
-      selectedVibe === "Wu Philosophy"
-        ? "Leave space after the heavy lines. Let each image land."
-        : "Start conversational, tighten the internals after four bars, then open the vowels into the hook."
-    }`,
-
-    `WORDPLAY SMITH: Build around one physical image from the truth—road, receipt, windshield, room, phone call, or scar—and let it carry two meanings.`,
-
-    `HOOK ARCHITECT: Reduce the whole story to one sentence Sae would actually say. Repeat the emotional phrase, not the explanation.`,
-
-    `STUDIO ENGINEER: Record the main take first. Add selective doubles to the last words, then ad-libs only where the energy changes.`,
-
-    `HONEST BUILD NOTE: This council is a structured writing guide using your selected chapter and vibe. Original AI lyric generation will activate only after the secure model backend is connected.`
-  ];
+  setCouncilLoading(true);
 
   $("feed").textContent =
-    lines.join("\n\n");
+    "THE PRODUCER'S TABLE IS LISTENING...\n\n" +
+    "Searching the Memory Vault.\n" +
+    "Protecting the truth.\n" +
+    "Mapping the pocket.\n" +
+    "Finding the emotional center.";
 
-  syncSession();
+  try {
+    const relevantMemories =
+      findRelevantMemories({
+        truth,
+        chapter: selectedChapter
+      });
 
-  toast(
-    "Council session mapped."
-  );
+    const response = await fetch(
+      "/api/rnp",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          mode: "council",
+
+          title:
+            current.title,
+
+          chapter:
+            selectedChapter,
+
+          vibe:
+            selectedVibe,
+
+          bpm:
+            current.bpm,
+
+          key:
+            current.key,
+
+          beatName:
+            current.beatName,
+
+          truth:
+            current.truth,
+
+          lyrics:
+            current.lyrics,
+
+          memories:
+            relevantMemories
+        })
+      }
+    );
+
+    let payload;
+
+    try {
+      payload = await response.json();
+    } catch {
+      throw new Error(
+        "RNP received an unreadable server response."
+      );
+    }
+
+    if (
+      !response.ok ||
+      !payload.ok
+    ) {
+      throw new Error(
+        payload.error ||
+        "The Council could not complete this session."
+      );
+    }
+
+    renderCouncilResult(
+      payload.result
+    );
+
+    current.councilRan = true;
+    current.lastCouncilResult =
+      payload.result;
+    current.lastCouncilAt =
+      new Date().toISOString();
+
+    syncSession();
+
+    toast(
+      "The Council finished its session."
+    );
+  } catch (error) {
+    console.error(
+      "RNP Council error:",
+      error
+    );
+
+    $("feed").textContent =
+      "COUNCIL CONNECTION FAILED.\n\n" +
+      error.message +
+      "\n\nYour lyrics and session were not lost.";
+
+    toast(
+      "Council connection failed."
+    );
+  } finally {
+    setCouncilLoading(false);
+  }
 }
 
 function saveSession() {
