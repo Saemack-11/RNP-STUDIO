@@ -1967,7 +1967,15 @@ try {
     `Server ${response.status}\n\n${raw.substring(0, 300)}`
   );
 }
-
+if (
+  !response.ok ||
+  !payload.ok
+) {
+  throw new Error(
+    payload.error ||
+    `The Council request failed with status ${response.status}.`
+  );
+}
     renderCouncilResult(
       payload.result
     );
