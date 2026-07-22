@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="RNP Studio">
+<link rel="manifest" href="manifest.webmanifest">
+<title>RNP Studio — Real Ninja Poetics</title>
+
+<style>
+:root {
+  --paper: #f5f3ee;
+  --ink: #0b0b0d;
+  --red: #a60016;
+  --red2: #d10b27;
+  --soft: #e9e5dd;
+  --muted: #716d68;
+  --line: #171719;
+  --card: #fffefa;
+  --safe: env(safe-area-inset-bottom);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  max-width: 560px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: calc(86px + var(--safe));
+}
+
+.hero {
+  padding: calc(20px + env(safe-area-inset-top)) 18px 18px;
+  border-bottom: 3px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -45px;
+  top: -28px;
+  width: 170px;
+  height: 170px;
+  border: 18px solid var(--red);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(18deg);
+  opacity: 0.96;
+}
+
+.kicker,
+.eyebrow,
+.label {
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.19em;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.logo {
+  font-size: 42px;
+  font-weight: 1000;
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+  margin-top: 10px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+.hero h1 {
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  margin: 7px 0 0;
+  font-family: "Courier New", monospace;
+}
+
+.quote {
+  margin: 14px 0 0;
+  max-width: 330px;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.status {
+  display: inline-flex;
+  margin-top: 12px;
+  border: 1.5px solid var(--ink);
+  padding: 7px 9px;
+  font: 700 10px "Courier New";
+  letter-spacing: 0.08em;
+  background: var(--paper);
+}
+
+main {
+  padding: 14px;
+}
+
+.page {
+  display: none;
+}
+
+.page.on {
+  display: block;
+}
+
+.card {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  margin: 0 0 16px;
+  padding: 15px;
+  position: relative;
+}
+
+.card.red {
+  background: var(--red);
+  color: white;
+}
+
+.card.red button {
+  border-color: white;
+}
+
+.cardH {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cardH h2 {
+  font: 1000 18px/1 "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.badge {
+  border: 1.5px solid currentColor;
+  padding: 5px 7px;
+  font: 800 9px "Courier New";
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.btn {
+  border: 2px solid var(--ink);
+  background: var(--card);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn.primary {
+  background: var(--red);
+  color: white;
+}
+
+.btn.dark {
+  background: var(--ink);
+  color: white;
+}
+
+.btn.small {
+  padding: 8px 10px;
+  font-size: 11px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  padding: 12px;
+  outline: none;
+}
+
+textarea {
+  min-height: 126px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(166, 0, 22, 0.18);
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding-bottom: 3px;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  border: 1.5px solid var(--ink);
+  padding: 9px 11px;
+  background: white;
+  font-weight: 850;
+  font-size: 12px;
+}
+
+.chip.on {
+  background: var(--red);
+  color: white;
+}
+
+.sessionTitle {
+  font: 1000 28px/1 "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  margin: 4px 0 9px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.progress {
+  height: 10px;
+  border: 1.5px solid var(--ink);
+  background: white;
+  margin: 11px 0;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  width: 20%;
+}
+
+.stepRow {
+  display: flex;
+  justify-content: space-between;
+  font: 800 9px "Courier New";
+  gap: 4px;
+}
+
+.stepRow span.on {
+  color: var(--red);
+}
+
+.upload {
+  display: block;
+  border: 2px dashed var(--ink);
+  padding: 20px;
+  text-align: center;
+  background: var(--soft);
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.upload input {
+  display: none;
+}
+
+audio {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.meta div {
+  border: 1.5px solid var(--ink);
+  padding: 10px;
+}
+
+.meta b {
+  display: block;
+  margin-top: 5px;
+}
+
+.sectionMap {
+  display: flex;
+  height: 38px;
+  border: 2px solid var(--ink);
+  margin-top: 11px;
+  overflow: hidden;
+}
+
+.sectionMap span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--ink);
+  font: 800 9px "Courier New";
+  min-width: 48px;
+}
+
+.sectionMap span:last-child {
+  border: 0;
+}
+
+.sectionMap .hook {
+  background: var(--red);
+  color: white;
+}
+
+.agentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.agent {
+  border: 1.5px solid var(--ink);
+  padding: 11px;
+  min-height: 84px;
+  background: white;
+}
+
+.agent strong {
+  display: block;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.agent span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.agent.on {
+  border-left: 8px solid var(--red);
+}
+
+.feed {
+  background: var(--ink);
+  color: #f7f3eb;
+  padding: 13px;
+  min-height: 140px;
+  font: 12px/1.55 "Courier New";
+  white-space: pre-wrap;
+}
+
+.record {
+  min-height: 360px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+.list {
+  display: grid;
+  gap: 9px;
+}
+
+.item {
+  border: 1.5px solid var(--ink);
+  padding: 11px;
+  background: white;
+}
+
+.item h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row > * {
+  flex: 1;
+}
+
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-bottom: 1px solid #cac5bc;
+  padding: 9px 0;
+}
+
+.check input {
+  width: auto;
+  margin-top: 3px;
+}
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border-top: 3px solid var(--ink);
+  padding: 7px 8px calc(7px + var(--safe));
+  display: flex;
+  justify-content: center;
+}
+
+.navInner {
+  max-width: 560px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.nav button {
+  border: 0;
+  background: transparent;
+  padding: 7px 2px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nav button b {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.nav button.on {
+  color: var(--red);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 30;
+  display: none;
+  align-items: flex-end;
+}
+
+.modal.on {
+  display: flex;
+}
+
+.sheet {
+  background: var(--paper);
+  border-top: 4px solid var(--red);
+  padding: 18px 16px calc(18px + var(--safe));
+  width: 100%;
+  max-height: 88vh;
+  overflow: auto;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  padding: 10px 13px;
+  font-weight: 800;
+  z-index: 50;
+  display: none;
+}
+
+.empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+}
+
+@media (min-width: 650px) {
+  .app {
+    border-left: 2px solid var(--ink);
+    border-right: 2px solid var(--ink);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="hero">
+  <div class="kicker">Dedication to the craft</div>
+
+  <div class="logo">
+    R<span>N</span>P.
+  </div>
+
+  <h1>REAL NINJA POETICS</h1>
+
+  <p class="quote">
+    Every L became language. Every mile became a line.
+  </p>
+
+  <div class="status">
+    SOUL ABOVE EVERYTHING // DIFFERENT BY DESIGN
+  </div>
+</header>
+
+<main>
+
+<section id="home" class="page on">
+
+  <div class="card red">
+
+    <div class="eyebrow">Current session</div>
+
+    <div class="sessionTitle" id="homeTitle">
+      Untitled Chapter
+    </div>
+
+    <div id="homeBeat">
+      No instrumental loaded
+    </div>
+
+    <div class="progress">
+      <i id="homeProgress"></i>
+    </div>
+
+    <div class="stepRow">
+      <span class="on">IDEA</span>
+      <span>BEAT</span>
+      <span>COUNCIL</span>
+      <span>WRITE</span>
+      <span>RECORD</span>
+    </div>
+
+    <div class="grid2" style="margin-top:15px">
+      <button class="btn" onclick="go('studio')">
+        Continue Cook Up
+      </button>
+
+      <button class="btn" onclick="newSession()">
+        New Session
+      </button>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>What's today's story?</h2>
+      <span class="badge">Truth first</span>
+    </div>
+
+    <textarea
+      id="quickTruth"
+      placeholder="Talk naturally. What happened? What did it teach you? What are you carrying tonight?"
+    ></textarea>
+
+    <div
+      class="chips"
+      style="margin:10px 0"
+      id="chapterChips"
+    ></div>
+
+    <button
+      class="btn primary"
+      onclick="captureTruth()"
+    >
+      Capture the Chapter
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Creative compass</h2>
+      <span class="badge">Sae DNA</span>
+    </div>
+
+    <p class="sub">
+      Wu-style philosophy and layered imagery. Modern trap atmosphere
+      and pocket. Wayne-level love for wordplay. Your own life, morals,
+      fatherhood, route miles, rebuilding, loyalty, spirituality, and
+      lessons at the center.
+    </p>
+
+    <div class="grid2">
+
+      <button
+        class="btn small"
+        onclick="go('vault')"
+      >
+        Open Memory Vault
+      </button>
+
+      <button
+        class="btn small"
+        onclick="openDojo()"
+      >
+        Enter the Dojo
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="studio" class="page">
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>The Cook Up</h2>
+      <span class="badge" id="sessionState">
+        Local session
+      </span>
+    </div>
+
+    <input
+      id="songTitle"
+      placeholder="Song / session title"
+      oninput="syncSession()"
+    >
+
+    <label class="upload" style="margin-top:10px">
+      ♬ Upload Instrumental — MP3 / WAV / M4A
+
+      <input
+        id="beatInput"
+        type="file"
+        accept="audio/*"
+      >
+    </label>
+
+    <audio
+      id="player"
+      controls
+    ></audio>
+
+    <div class="meta">
+
+      <div>
+        <span class="label">Beat</span>
+        <b id="beatName">
+          Awaiting instrumental
+        </b>
+      </div>
+
+      <div>
+        <span class="label">Length</span>
+        <b id="beatLength">—</b>
+      </div>
+
+      <div>
+        <span class="label">BPM</span>
+
+        <input
+          id="bpm"
+          type="number"
+          value="92"
+          oninput="syncSession()"
+        >
+      </div>
+
+      <div>
+        <span class="label">Key</span>
+
+        <input
+          id="key"
+          value="A minor"
+          oninput="syncSession()"
+        >
+      </div>
+
+    </div>
+
+    <div class="sectionMap">
+      <span>INTRO</span>
+      <span class="hook">HOOK</span>
+      <span style="flex:2">VERSE 1</span>
+      <span class="hook">HOOK</span>
+      <span style="flex:2">VERSE 2</span>
+      <span>OUTRO</span>
+    </div>
+
+    <p class="sub">
+      Beat playback works locally. Automatic BPM, key, mood, stem, and
+      section detection require the real analysis backend and are not
+      fabricated in this build.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <div class="eyebrow">
+      Life chapter
+    </div>
+
+    <div
+      class="chips"
+      id="studioChapters"
+      style="margin:9px 0 14px"
+    ></div>
+
+    <div class="eyebrow">
+      Sound direction
+    </div>
+
+    <div
+      class="chips"
+      id="vibeChips"
+      style="margin:9px 0 14px"
+    ></div>
+
+    <textarea
+      id="truth"
+      placeholder="Drop the raw truth here. Details, images, names you choose to use, feelings, lessons, contradictions..."
+      oninput="syncSession()"
+    ></textarea>
+
+    <button
+      class="btn primary"
+      style="width:100%;margin-top:10px"
+      onclick="runCouncil()"
+    >
+      Wake the Council
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Producer's Table</h2>
+      <span class="badge">Council</span>
+    </div>
+
+    <div
+      class="agentGrid"
+      id="agentGrid"
+    ></div>
+
+    <div
+      class="feed"
+      id="feed"
+      style="margin-top:12px"
+    >STANDING BY.
+Load a beat, choose a chapter, and tell the truth.</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>The Record</h2>
+      <span class="badge">Your pen</span>
+    </div>
+
+    <textarea
+      class="record"
+      id="lyrics"
+      placeholder="[INTRO]
+
+[HOOK]
+
+[VERSE 1]
+
+[HOOK]
+
+[VERSE 2]
+
+[OUTRO]"
+      oninput="syncSession()"
+    ></textarea>
+
+    <div
+      class="grid2"
+      style="margin-top:10px"
+    >
+
+      <button
+        class="btn small"
+        onclick="saveSession()"
+      >
+        Save Project
+      </button>
+
+      <button
+        class="btn small"
+        onclick="saveBar()"
+      >
+        Save Selected Bar
+      </button>
+
+      <button
+        class="btn small"
+        onclick="exportLyrics()"
+      >
+        Export Lyrics
+      </button>
+
+      <button
+        class="btn small"
+        onclick="copyLyrics()"
+      >
+        Copy for BandLab
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Recording Assistant</h2>
+      <span class="badge">BandLab</span>
+    </div>
+
+    <div id="checklist"></div>
+
+    <textarea
+      id="recordNotes"
+      placeholder="Vocal preset, cadence notes, ad-libs, punch-ins, harmonies..."
+      oninput="syncSession()"
+    ></textarea>
+
+  </div>
+
+</section>
+
+<section id="vault" class="page">
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Memory Vault</h2>
+      <span class="badge">Autobiography</span>
+    </div>
+
+    <input
+      id="memoryTitle"
+      placeholder="Memory title"
+    >
+
+    <select
+      id="memoryCategory"
+      style="margin-top:9px"
+    ></select>
+
+    <textarea
+      id="memoryBody"
+      style="margin-top:9px"
+      placeholder="What happened? How did it feel? What lesson came from it?"
+    ></textarea>
+
+    <input
+      id="memoryLesson"
+      style="margin-top:9px"
+      placeholder="Lesson learned"
+    >
+
+    <button
+      class="btn primary"
+      style="margin-top:10px;width:100%"
+      onclick="addMemory()"
+    >
+      Save Memory
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <div class="row">
+
+      <input
+        id="memorySearch"
+        placeholder="Search your life..."
+        oninput="renderMemories()"
+      >
+
+      <button
+        class="btn small"
+        onclick="renderMemories()"
+      >
+        Search
+      </button>
+
+    </div>
+
+    <div
+      class="list"
+      id="memoryList"
+      style="margin-top:12px"
+    ></div>
+
+  </div>
+
+</section>
+
+<section id="archive" class="page">
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Song Archive</h2>
+      <span class="badge" id="archiveCount">
+        0 projects
+      </span>
+    </div>
+
+    <div
+      class="list"
+      id="archiveList"
+    ></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Quote Vault</h2>
+      <span class="badge">Loose bars</span>
+    </div>
+
+    <div
+      class="list"
+      id="barList"
+    ></div>
+
+  </div>
+
+</section>
+
+<section id="more" class="page">
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Music DNA</h2>
+      <span class="badge">Locked</span>
+    </div>
+
+    <p class="sub">
+      Authentic storytelling. Emotional honesty. Rugged imagery. Layered
+      wordplay. Memorable pockets and hooks. Old-soul morals inside a
+      modern trap atmosphere. Never invent a life you did not live.
+    </p>
+
+    <textarea
+      id="dnaNotes"
+      placeholder="Add words, themes, ad-libs, flows, or rules that feel like you..."
+      oninput="saveDNA()"
+    ></textarea>
+
+  </div>
+
+  <div class="card">
+
+    <div class="cardH">
+      <h2>Local Data</h2>
+      <span class="badge">Private on device</span>
+    </div>
+
+    <p class="sub">
+      Projects, memories, bars, and preferences are saved in this browser
+      using local storage. The uploaded audio itself is played locally
+      and is not permanently stored after the page closes.
+    </p>
+
+    <div class="grid2">
+
+      <button
+        class="btn small"
+        onclick="exportBackup()"
+      >
+        Export Backup
+      </button>
+
+      <label
+        class="btn small"
+        style="text-align:center"
+      >
+        Import Backup
+
+        <input
+          hidden
+          type="file"
+          accept=".json"
+          onchange="importBackup(event)"
+        >
+      </label>
+
+      <button
+        class="btn small"
+        onclick="installHelp()"
+      >
+        Install on iPhone
+      </button>
+
+      <button
+        class="btn small"
+        onclick="resetApp()"
+      >
+        Reset App
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    class="card dark"
+    style="background:#0b0b0d;color:white"
+  >
+
+    <div class="eyebrow">
+      RNP Studio v1.0
+    </div>
+
+    <h2 style="font-size:26px;margin:8px 0">
+      DISCIPLINE CREATES FREEDOM.<br>
+      CREATIVITY CREATES LEGACY.
+    </h2>
+
+  </div>
+
+</section>
+
+</main>
+
+</div>
+
+<nav class="nav">
+
+  <div class="navInner">
+
+    <button
+      class="on"
+      data-page="home"
+      onclick="go('home')"
+    >
+      <b>⌂</b>
+      Home
+    </button>
+
+    <button
+      data-page="studio"
+      onclick="go('studio')"
+    >
+      <b>♬</b>
+      Studio
+    </button>
+
+    <button
+      data-page="vault"
+      onclick="go('vault')"
+    >
+      <b>◆</b>
+      Vault
+    </button>
+
+    <button
+      data-page="archive"
+      onclick="go('archive')"
+    >
+      <b>▤</b>
+      Archive
+    </button>
+
+    <button
+      data-page="more"
+      onclick="go('more')"
+    >
+      <b>•••</b>
+      More
+    </button>
+
+  </div>
+
+</nav>
+
+<div
+  class="modal"
+  id="dojoModal"
+  onclick="if(event.target===this)this.classList.remove('on')"
+>
+
+  <div class="sheet">
+
+    <div class="cardH">
+
+      <h2 style="margin:0">
+        RNP Dojo
+      </h2>
+
+      <button
+        class="btn small"
+        onclick="dojoModal.classList.remove('on')"
+      >
+        Close
+      </button>
+
+    </div>
+
+    <div
+      id="dojoPrompt"
+      class="card red"
+    ></div>
+
+    <button
+      class="btn dark"
+      style="width:100%"
+      onclick="newDojo()"
+    >
+      New Drill
+    </button>
+
+  </div>
+
+</div>
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+<script>
+const chapters = [
+  "Foundation",
+  "Fatherhood",
+  "Route Life",
+  "Survival Mode",
+  "Living in the Car",
+  "Rebuilding",
+  "Relationships",
+  "Robyn",
+  "Past Lessons",
+  "Faith",
+  "Spiritual Signs",
+  "Money",
+  "SaeWay",
+  "Building SHIN",
+  "Wins",
+  "Lessons",
+  "Legacy"
+];
+
+const vibes = [
+  "Wu Philosophy",
+  "Trap Atmosphere",
+  "Soulful Raw",
+  "Grit / Cinematic",
+  "Melodic Pain",
+  "Late-Night Route",
+  "Victory Lap",
+  "No-Hook Bars"
+];
+
+const agents = [
+  [
+    "Story Architect",
+    "Protects the timeline and truth."
+  ],
+  [
+    "Wordplay Smith",
+    "Finds doubles, flips, and punchlines."
+  ],
+  [
+    "Philosopher",
+    "Turns adversity into layered wisdom."
+  ],
+  [
+    "Pocket Finder",
+    "Suggests cadence lanes and pauses."
+  ],
+  [
+    "Hook Architect",
+    "Finds the simple emotional center."
+  ],
+  [
+    "Rhyme Engineer",
+    "Tracks multis, internals, and structure."
+  ],
+  [
+    "Ad-Lib Director",
+    "Adds energy without crowding the record."
+  ],
+  [
+    "Studio Engineer",
+    "Plans doubles, punches, harmonies, and space."
+  ]
+];
+
+const seedMemories = [
+  {
+    title: "Builder Mission",
+    category: "Legacy",
+    body:
+      "Build technology, music, and businesses that create something lasting for the children.",
+    lesson:
+      "Build more than you consume.",
+    date: "Seed"
+  },
+  {
+    title: "Route Life",
+    category: "Route Life",
+    body:
+      "Long delivery routes, late-night highways, gas receipts, exhaustion, ideas born in isolation, and still finding a way to create.",
+    lesson:
+      "The road can become the writing room.",
+    date: "Seed"
+  },
+  {
+    title: "Every L Is a Lesson",
+    category: "Lessons",
+    body:
+      "Financial setbacks, relationship pain, uncertainty, and rebuilding are material for growth—not a permanent identity.",
+    lesson:
+      "Loss only wins when the lesson is ignored.",
+    date: "Seed"
+  },
+  {
+    title: "Fatherhood",
+    category: "Fatherhood",
+    body:
+      "Three children remain the deepest motivation behind discipline, legacy, protection, and becoming better.",
+    lesson:
+      "Purpose gets a face when you become a father.",
+    date: "Seed"
+  }
+];
+
+const Store = {
+  get(key, defaultValue) {
+    try {
+      return JSON.parse(
+        localStorage.getItem("rnp_" + key)
+      ) ?? defaultValue;
+    } catch (error) {
+      return defaultValue;
+    }
+  },
+
+  set(key, value) {
+    localStorage.setItem(
+      "rnp_" + key,
+      JSON.stringify(value)
+    );
+  }
+};
+
+let current = Store.get("current", {
+  id: Date.now(),
+  title: "Untitled Chapter",
+  chapter: "Rebuilding",
+  vibe: "Soulful Raw",
+  truth: "",
+  lyrics: "",
+  bpm: 92,
+  key: "A minor",
+  beatName: "",
+  recordNotes: ""
+});
+
+let selectedChapter = current.chapter;
+let selectedVibe = current.vibe;
+let beatURL = null;
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+function toast(message) {
+  const toastElement = $("toast");
+
+  toastElement.textContent = message;
+  toastElement.style.display = "block";
+
+  setTimeout(() => {
+    toastElement.style.display = "none";
+  }, 1700);
+}
+
+function go(page) {
+  document
+    .querySelectorAll(".page")
+    .forEach((element) => {
+      element.classList.toggle(
+        "on",
+        element.id === page
+      );
+    });
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach((element) => {
+      element.classList.toggle(
+        "on",
+        element.dataset.page === page
+      );
+    });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  if (page === "archive") {
+    renderArchive();
+  }
+
+  if (page === "vault") {
+    renderMemories();
+  }
+}
+
+function chips(
+  target,
+  items,
+  selected,
+  handler
+) {
+  $(target).innerHTML = items
+    .map((item) => {
+      const safeItem = item.replaceAll(
+        "'",
+        "\\'"
+      );
+
+      return `
+        <button
+          class="chip ${item === selected ? "on" : ""}"
+          onclick="${handler}('${safeItem}')"
+        >
+          ${item}
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function chooseChapter(value) {
+  selectedChapter = value;
+  current.chapter = value;
+
+  chips(
+    "chapterChips",
+    chapters,
+    value,
+    "chooseChapter"
+  );
+
+  chips(
+    "studioChapters",
+    chapters,
+    value,
+    "chooseChapter"
+  );
+
+  syncSession();
+}
+
+function chooseVibe(value) {
+  selectedVibe = value;
+  current.vibe = value;
+
+  chips(
+    "vibeChips",
+    vibes,
+    value,
+    "chooseVibe"
+  );
+
+  syncSession();
+}
+
+function renderAgents() {
+  $("agentGrid").innerHTML = agents
+    .map((agent, index) => {
+      return `
+        <div class="agent ${index < 5 ? "on" : ""}">
+          <strong>
+            ${String(index + 1).padStart(2, "0")}
+            ${agent[0]}
+          </strong>
+
+          <span>
+            ${agent[1]}
+          </span>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function loadCurrent() {
+  $("songTitle").value =
+    current.title || "";
+
+  $("truth").value =
+    current.truth || "";
+
+  $("lyrics").value =
+    current.lyrics || "";
+
+  $("bpm").value =
+    current.bpm || 92;
+
+  $("key").value =
+    current.key || "A minor";
+
+  $("recordNotes").value =
+    current.recordNotes || "";
+
+  $("beatName").textContent =
+    current.beatName ||
+    "Awaiting instrumental";
+
+  $("homeBeat").textContent =
+    current.beatName ||
+    "No instrumental loaded";
+
+  $("homeTitle").textContent =
+    current.title ||
+    "Untitled Chapter";
+
+  $("dnaNotes").value =
+    Store.get("dna", "");
+
+  selectedChapter =
+    current.chapter ||
+    "Rebuilding";
+
+  selectedVibe =
+    current.vibe ||
+    "Soulful Raw";
+
+  chips(
+    "chapterChips",
+    chapters,
+    selectedChapter,
+    "chooseChapter"
+  );
+
+  chips(
+    "studioChapters",
+    chapters,
+    selectedChapter,
+    "chooseChapter"
+  );
+
+  chips(
+    "vibeChips",
+    vibes,
+    selectedVibe,
+    "chooseVibe"
+  );
+
+  updateProgress();
+}
+
+function syncSession() {
+  current.title =
+    $("songTitle").value ||
+    "Untitled Chapter";
+
+  current.truth =
+    $("truth").value;
+
+  current.lyrics =
+    $("lyrics").value;
+
+  current.bpm =
+    Number($("bpm").value) || 0;
+
+  current.key =
+    $("key").value;
+
+  current.recordNotes =
+    $("recordNotes").value;
+
+  current.chapter =
+    selectedChapter;
+
+  current.vibe =
+    selectedVibe;
+
+  Store.set(
+    "current",
+    current
+  );
+
+  $("homeTitle").textContent =
+    current.title;
+
+  updateProgress();
+}
+
+function updateProgress() {
+  let progress = 1;
+
+  if (current.truth) {
+    progress++;
+  }
+
+  if (current.beatName) {
+    progress++;
+  }
+
+  if (current.councilRan) {
+    progress++;
+  }
+
+  if (current.lyrics) {
+    progress++;
+  }
+
+  if (current.recordNotes) {
+    progress++;
+  }
+
+  $("homeProgress").style.width =
+    Math.min(
+      100,
+      progress / 6 * 100
+    ) + "%";
+
+  document
+    .querySelectorAll(".stepRow span")
+    .forEach((element, index) => {
+      element.classList.toggle(
+        "on",
+        index < Math.ceil(progress / 1.2)
+      );
+    });
+}
+
+function captureTruth() {
+  const value =
+    $("quickTruth").value.trim();
+
+  if (!value) {
+    toast("Drop the truth first.");
+    return;
+  }
+
+  current.truth = value;
+  current.chapter = selectedChapter;
+
+  $("truth").value = value;
+
+  syncSession();
+  go("studio");
+
+  toast("Chapter captured.");
+}
+
+function newSession() {
+  const approved = confirm(
+    "Start a fresh cook up? Your current session stays saved only if you saved it to the archive."
+  );
+
+  if (!approved) {
+    return;
+  }
+
+  current = {
+    id: Date.now(),
+    title: "Untitled Chapter",
+    chapter: "Rebuilding",
+    vibe: "Soulful Raw",
+    truth: "",
+    lyrics: "",
+    bpm: 92,
+    key: "A minor",
+    beatName: "",
+    recordNotes: ""
+  };
+
+  Store.set(
+    "current",
+    current
+  );
+
+  loadCurrent();
+  go("studio");
+}
+
+$("beatInput").addEventListener(
+  "change",
+  (event) => {
+    const file =
+      event.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (beatURL) {
+      URL.revokeObjectURL(beatURL);
+    }
+
+    beatURL =
+      URL.createObjectURL(file);
+
+    $("player").src =
+      beatURL;
+
+    current.beatName =
+      file.name;
+
+    $("beatName").textContent =
+      file.name;
+
+    $("homeBeat").textContent =
+      file.name;
+
+    $("player").onloadedmetadata = () => {
+      const minutes =
+        Math.floor(
+          $("player").duration / 60
+        );
+
+      const seconds =
+        String(
+          Math.floor(
+            $("player").duration % 60
+          )
+        ).padStart(2, "0");
+
+      $("beatLength").textContent =
+        minutes + ":" + seconds;
+    };
+
+    syncSession();
+
+    toast(
+      "Instrumental loaded locally."
+    );
+  }
+);
+
+function runCouncil() {
+  syncSession();
+
+  if (!current.truth.trim()) {
+    toast(
+      "Tell the story before waking the council."
+    );
+
+    return;
+  }
+
+  current.councilRan = true;
+
+  const lines = [
+    `STORY ARCHITECT: ${selectedChapter} is the chapter. Keep the real event, the consequence, and the lesson visible.`,
+
+    `PHILOSOPHER: The heart of this record is not the setback—it is how Sae moved after it.`,
+
+    `POCKET FINDER: ${
+      selectedVibe === "Wu Philosophy"
+        ? "Leave space after the heavy lines. Let each image land."
+        : "Start conversational, tighten the internals after four bars, then open the vowels into the hook."
+    }`,
+
+    `WORDPLAY SMITH: Build around one physical image from the truth—road, receipt, windshield, room, phone call, or scar—and let it carry two meanings.`,
+
+    `HOOK ARCHITECT: Reduce the whole story to one sentence Sae would actually say. Repeat the emotional phrase, not the explanation.`,
+
+    `STUDIO ENGINEER: Record the main take first. Add selective doubles to the last words, then ad-libs only where the energy changes.`,
+
+    `HONEST BUILD NOTE: This council is a structured writing guide using your selected chapter and vibe. Original AI lyric generation will activate only after the secure model backend is connected.`
+  ];
+
+  $("feed").textContent =
+    lines.join("\n\n");
+
+  syncSession();
+
+  toast(
+    "Council session mapped."
+  );
+}
+
+function saveSession() {
+  syncSession();
+
+  const sessions =
+    Store.get("sessions", []);
+
+  const existingIndex =
+    sessions.findIndex(
+      (session) =>
+        session.id === current.id
+    );
+
+  const copy = {
+    ...current,
+    updated:
+      new Date().toISOString()
+  };
+
+  if (existingIndex >= 0) {
+    sessions[existingIndex] = copy;
+  } else {
+    sessions.unshift(copy);
+  }
+
+  Store.set(
+    "sessions",
+    sessions
+  );
+
+  toast(
+    "Project archived."
+  );
+}
+
+function openSession(id) {
+  const session =
+    Store
+      .get("sessions", [])
+      .find(
+        (item) =>
+          item.id === id
+      );
+
+  if (!session) {
+    return;
+  }
+
+  current = {
+    ...session
+  };
+
+  Store.set(
+    "current",
+    current
+  );
+
+  loadCurrent();
+  go("studio");
+
+  toast(
+    "Session opened."
+  );
+}
+
+function deleteSession(id) {
+  const approved = confirm(
+    "Delete this archived session?"
+  );
+
+  if (!approved) {
+    return;
+  }
+
+  const sessions =
+    Store
+      .get("sessions", [])
+      .filter(
+        (session) =>
+          session.id !== id
+      );
+
+  Store.set(
+    "sessions",
+    sessions
+  );
+
+  renderArchive();
+}
+
+function renderArchive() {
+  const sessions =
+    Store.get("sessions", []);
+
+  $("archiveCount").textContent =
+    sessions.length +
+    " projects";
+
+  $("archiveList").innerHTML =
+    sessions.length
+      ? sessions
+          .map((session) => {
+            return `
+              <div class="item">
+
+                <h3>
+                  ${esc(
+                    session.title ||
+                    "Untitled"
+                  )}
+                </h3>
+
+                <p>
+                  ${esc(
+                    session.chapter ||
+                    ""
+                  )}
+                  ·
+                  ${esc(
+                    session.vibe ||
+                    ""
+                  )}
+                  ·
+                  ${new Date(
+                    session.updated ||
+                    session.id
+                  ).toLocaleDateString()}
+                </p>
+
+                <div
+                  class="grid2"
+                  style="margin-top:8px"
+                >
+
+                  <button
+                    class="btn small"
+                    onclick="openSession(${session.id})"
+                  >
+                    Open
+                  </button>
+
+                  <button
+                    class="btn small"
+                    onclick="deleteSession(${session.id})"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+          })
+          .join("")
+      : `
+        <div class="empty">
+          No archived songs yet.
+        </div>
+      `;
+
+  const bars =
+    Store.get("bars", []);
+
+  $("barList").innerHTML =
+    bars.length
+      ? bars
+          .map((bar, index) => {
+            return `
+              <div class="item">
+
+                <h3>
+                  ${esc(bar.text)}
+                </h3>
+
+                <p>
+                  ${esc(bar.song)}
+                  ·
+                  ${new Date(
+                    bar.date
+                  ).toLocaleDateString()}
+                </p>
+
+                <button
+                  class="btn small"
+                  style="margin-top:8px"
+                  onclick="deleteBar(${index})"
+                >
+                  Delete
+                </button>
+
+              </div>
+            `;
+          })
+          .join("")
+      : `
+        <div class="empty">
+          No loose bars saved yet.
+        </div>
+      `;
+}
+
+function saveBar() {
+  const lyricsElement =
+    $("lyrics");
+
+  const text =
+    lyricsElement.value
+      .substring(
+        lyricsElement.selectionStart,
+        lyricsElement.selectionEnd
+      )
+      .trim();
+
+  if (!text) {
+    toast(
+      "Highlight a bar first."
+    );
+
+    return;
+  }
+
+  const bars =
+    Store.get("bars", []);
+
+  bars.unshift({
+    text,
+    song: current.title,
+    date:
+      new Date().toISOString()
+  });
+
+  Store.set(
+    "bars",
+    bars
+  );
+
+  toast(
+    "Bar saved to Quote Vault."
+  );
+}
+
+function deleteBar(index) {
+  const bars =
+    Store.get("bars", []);
+
+  bars.splice(index, 1);
+
+  Store.set(
+    "bars",
+    bars
+  );
+
+  renderArchive();
+}
+
+function addMemory() {
+  const title =
+    $("memoryTitle").value.trim();
+
+  const body =
+    $("memoryBody").value.trim();
+
+  if (!title || !body) {
+    toast(
+      "Memory needs a title and truth."
+    );
+
+    return;
+  }
+
+  const memories =
+    Store.get(
+      "memories",
+      seedMemories
+    );
+
+  memories.unshift({
+    title,
+    category:
+      $("memoryCategory").value,
+    body,
+    lesson:
+      $("memoryLesson").value,
+    date:
+      new Date().toISOString()
+  });
+
+  Store.set(
+    "memories",
+    memories
+  );
+
+  [
+    "memoryTitle",
+    "memoryBody",
+    "memoryLesson"
+  ].forEach((id) => {
+    $(id).value = "";
+  });
+
+  renderMemories();
+
+  toast(
+    "Memory secured."
+  );
+}
+
+function renderMemories() {
+  let memories =
+    Store.get(
+      "memories",
+      seedMemories
+    );
+
+  const query =
+    (
+      $("memorySearch")?.value ||
+      ""
+    ).toLowerCase();
+
+  if (query) {
+    memories =
+      memories.filter(
+        (memory) =>
+          JSON.stringify(memory)
+            .toLowerCase()
+            .includes(query)
+      );
+  }
+
+  $("memoryList").innerHTML =
+    memories.length
+      ? memories
+          .map((memory) => {
+            return `
+              <div class="item">
+
+                <h3>
+                  ${esc(memory.title)}
+
+                  <span class="badge">
+                    ${esc(
+                      memory.category
+                    )}
+                  </span>
+                </h3>
+
+                <p>
+                  ${esc(memory.body)}
+                </p>
+
+                ${
+                  memory.lesson
+                    ? `
+                      <p style="margin-top:7px">
+                        <b>Lesson:</b>
+                        ${esc(
+                          memory.lesson
+                        )}
+                      </p>
+                    `
+                    : ""
+                }
+
+              </div>
+            `;
+          })
+          .join("")
+      : `
+        <div class="empty">
+          No matching memories.
+        </div>
+      `;
+}
+
+function exportLyrics() {
+  syncSession();
+
+  const safeName =
+    (
+      current.title ||
+      "RNP_Lyrics"
+    ).replace(
+      /[^a-z0-9]+/gi,
+      "_"
+    );
+
+  const content =
+`${current.title}
+${current.chapter} · ${current.vibe}
+BPM ${current.bpm} · ${current.key}
+
+${current.lyrics}
+
+RECORDING NOTES
+${current.recordNotes}`;
+
+  download(
+    safeName + ".txt",
+    content,
+    "text/plain"
+  );
+}
+
+async function copyLyrics() {
+  try {
+    await navigator.clipboard.writeText(
+      current.lyrics
+    );
+
+    toast(
+      "Lyrics copied for BandLab."
+    );
+  } catch (error) {
+    toast(
+      "Copy was blocked. Use Export Lyrics."
+    );
+  }
+}
+
+function exportBackup() {
+  const backup = {
+    sessions:
+      Store.get("sessions", []),
+
+    memories:
+      Store.get(
+        "memories",
+        seedMemories
+      ),
+
+    bars:
+      Store.get("bars", []),
+
+    dna:
+      Store.get("dna", ""),
+
+    current
+  };
+
+  download(
+    "RNP_Studio_Backup.json",
+    JSON.stringify(
+      backup,
+      null,
+      2
+    ),
+    "application/json"
+  );
+}
+
+function importBackup(event) {
+  const file =
+    event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  const reader =
+    new FileReader();
+
+  reader.onload = () => {
+    try {
+      const data =
+        JSON.parse(
+          reader.result
+        );
+
+      [
+        "sessions",
+        "memories",
+        "bars",
+        "dna",
+        "current"
+      ].forEach((key) => {
+        if (data[key] != null) {
+          Store.set(
+            key,
+            data[key]
+          );
+        }
+      });
+
+      current =
+        Store.get(
+          "current",
+          current
+        );
+
+      loadCurrent();
+
+      toast(
+        "RNP backup restored."
+      );
+    } catch (error) {
+      alert(
+        "That backup file could not be read."
+      );
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function download(
+  name,
+  text,
+  type
+) {
+  const anchor =
+    document.createElement("a");
+
+  const blob =
+    new Blob(
+      [text],
+      { type }
+    );
+
+  anchor.href =
+    URL.createObjectURL(blob);
+
+  anchor.download =
+    name;
+
+  anchor.click();
+
+  setTimeout(() => {
+    URL.revokeObjectURL(
+      anchor.href
+    );
+  }, 1000);
+}
+
+function saveDNA() {
+  Store.set(
+    "dna",
+    $("dnaNotes").value
+  );
+}
+
+function esc(value = "") {
+  return String(value)
+    .replace(
+      /[&<>"']/g,
+      (character) => {
+        const replacements = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        };
+
+        return replacements[
+          character
+        ];
+      }
+    );
+}
+
+function resetApp() {
+  const approved = confirm(
+    "Erase all RNP data stored in this browser?"
+  );
+
+  if (!approved) {
+    return;
+  }
+
+  Object.keys(
+    localStorage
+  )
+    .filter(
+      (key) =>
+        key.startsWith("rnp_")
+    )
+    .forEach(
+      (key) =>
+        localStorage.removeItem(key)
+    );
+
+  location.reload();
+}
+
+function installHelp() {
+  alert(
+    "On iPhone: open this app in Safari, tap Share, then tap Add to Home Screen. For full offline installation, host the included folder over HTTPS first."
+  );
+}
+
+const drills = [
+  "Tell one true story in eight bars. Every bar must move the timeline forward.",
+
+  "Choose one object from tonight—receipt, key, tire, phone, windshield—and give it three meanings.",
+
+  "Freestyle for two minutes without mentioning money, cars, jewelry, or enemies.",
+
+  "Write four setup bars, then make bar five reinterpret all four.",
+
+  "Create a hook using only one sentence and one emotional contrast.",
+
+  "Rap the same four lines in three pockets: conversational, double-time, and half-time.",
+
+  "Write about a loss without sounding defeated. The lesson must arrive naturally, not as a lecture."
+];
+
+function openDojo() {
+  dojoModal.classList.add("on");
+  newDojo();
+}
+
+function newDojo() {
+  const prompt =
+    drills[
+      Math.floor(
+        Math.random() *
+        drills.length
+      )
+    ];
+
+  $("dojoPrompt").innerHTML = `
+    <div class="eyebrow">
+      Today's drill
+    </div>
+
+    <h2 style="font-size:25px">
+      ${prompt}
+    </h2>
+
+    <p>
+      Set a 15-minute timer.
+      Do not chase perfection.
+    </p>
+  `;
+}
+
+const checklistItems = [
+  "Main vocal captured with emotion",
+
+  "Punch-ins only where needed",
+
+  "Selective doubles on impact words",
+
+  "Hook stacks / harmonies tested",
+
+  "Ad-libs support—not crowd—the lead",
+
+  "Breaths and pauses feel intentional",
+
+  "Lyrics exported and session archived"
+];
+
+function renderChecklist() {
+  $("checklist").innerHTML =
+    checklistItems
+      .map((item, index) => {
+        return `
+          <label class="check">
+
+            <input
+              type="checkbox"
+              onchange="saveChecks()"
+              data-i="${index}"
+            >
+
+            <span>
+              ${item}
+            </span>
+
+          </label>
+        `;
+      })
+      .join("");
+
+  const checks =
+    Store.get("checks", []);
+
+  document
+    .querySelectorAll(
+      ".check input"
+    )
+    .forEach(
+      (element, index) => {
+        element.checked =
+          Boolean(checks[index]);
+      }
+    );
+}
+
+function saveChecks() {
+  const checks = [
+    ...document.querySelectorAll(
+      ".check input"
+    )
+  ].map(
+    (element) =>
+      element.checked
+  );
+
+  Store.set(
+    "checks",
+    checks
+  );
+}
+
+$("memoryCategory").innerHTML =
+  chapters
+    .map(
+      (chapter) =>
+        `<option>${chapter}</option>`
+    )
+    .join("");
+
+if (
+  !localStorage.getItem(
+    "rnp_memories"
+  )
+) {
+  Store.set(
+    "memories",
+    seedMemories
+  );
+}
+
+renderAgents();
+renderChecklist();
+loadCurrent();
+renderMemories();
+renderArchive();
+
+if (
+  "serviceWorker" in navigator
+) {
+  navigator.serviceWorker
+    .register("sw.js")
+    .catch(() => {});
+}
+</script>
+
+</body>
+</html>
