@@ -319,6 +319,8 @@ export async function POST(request) {
 
       max_output_tokens: 6000,
       store: false
+      });
+
 if (response.status === "incomplete") {
   const reason =
     response.incomplete_details?.reason ||
