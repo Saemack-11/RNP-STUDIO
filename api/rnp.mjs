@@ -357,25 +357,8 @@ export async function POST(request) {
       model: response.model,
       result
     });
-  } catch (error) {
-    console.error("RNP Council error:", {
-      name: error?.name,
-      message: error?.message,
-      status: error?.status,
-      requestId: error?.request_id
-    });
-
-    const status =
-      Number.isInteger(error?.status) &&
-      error.status >= 400 &&
-      error.status < 600
-        ? error.status
-        : 500;
-
-    let message =
-      "The RNP Council could not complete this session.";
-
-      } catch (error) {
+  
+        } catch (error) {
     console.error("RNP Council error:", {
       name: error?.name,
       message: error?.message,
