@@ -1954,25 +1954,19 @@ async function runCouncil() {
       }
     );
 
-    let payload;
+    const raw = await response.text();
 
-    try {
-      payload = await response.json();
-    } catch {
-      throw new Error(
-        "RNP received an unreadable server response."
-      );
-    }
+let payload;
 
-    if (
-      !response.ok ||
-      !payload.ok
-    ) {
-      throw new Error(
-        payload.error ||
-        "The Council could not complete this session."
-      );
-    }
+try {
+  payload = JSON.parse(raw);
+} catch {
+  console.error("RNP raw response:", raw);
+
+  throw new Error(
+    `Server ${response.status}\n\n${raw.substring(0, 300)}`
+  );
+}
 
     renderCouncilResult(
       payload.result
