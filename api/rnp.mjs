@@ -317,10 +317,33 @@ export async function POST(request) {
         }
       },
 
-      max_output_tokens: 2400,
+      max_output_tokens: 6000,
       store: false
-    });
+if (response.status === "incomplete") {
+  const reason =
+    response.incomplete_details?.reason ||
+    "unknown";
 
+  console.error(
+    "RNP response incomplete:",
+    {
+      reason,
+      usage: response.usage
+    }
+  );
+
+  return json(
+    {
+      ok: false,
+      error:
+        reason === "max_output_tokens" ||
+        reason === "max_tokens"
+          ? "The Council developed a response that was too long. Run it again or shorten the story slightly."
+          : "The Council response stopped before completion."
+    },
+    502
+  );
+}
     if (!response.output_text) {
       return json(
         {
