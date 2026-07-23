@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<title>RNP Writing Engine</title>
+<style>
+:root{--bg:#09090b;--panel:rgba(12,14,18,.94);--ink:#f6f0e8;--muted:#aaa29a;--gold:#d3b46d;--red:#b20c23;--cyan:#68d8ff;--green:#70ffb1;--line:rgba(104,216,255,.28);--safe:env(safe-area-inset-bottom)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#18202a 0,#09090b 42%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1100px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 14px calc(30px + var(--safe))}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.brand small,.eyebrow{font:800 10px "Courier New",monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan)}.brand h1{font-size:27px;margin:5px 0 0}.status{border:1px solid rgba(112,255,177,.45);padding:7px 9px;font:800 9px "Courier New";color:#baffd6}.grid{display:grid;gap:14px}.card{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),rgba(20,17,18,.91));border-radius:13px;padding:15px;box-shadow:0 18px 45px rgba(0,0,0,.42)}.card h2{font-size:17px;text-transform:uppercase;margin:0}.cardH{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.badge{font:800 9px "Courier New";text-transform:uppercase;border:1px solid rgba(211,180,109,.55);padding:5px 7px;color:#f1d38d}input,textarea,select{width:100%;background:#050608;color:var(--ink);border:1px solid rgba(255,255,255,.28);padding:12px;border-radius:7px;font:inherit}textarea{min-height:190px;resize:vertical;line-height:1.55}.seed{font-size:17px;min-height:220px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mode{background:#080a0d;color:white;border:1px solid rgba(255,255,255,.25);padding:12px;text-align:left;border-radius:8px}.mode.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);color:#f5d98f}.mode b{display:block}.mode small{display:block;color:var(--muted);margin-top:3px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.btn{border:1px solid rgba(255,255,255,.4);background:#f4eee5;color:#111;padding:12px 14px;font-weight:900;text-transform:uppercase;border-radius:8px}.btn.primary{background:var(--red);color:#fff}.btn.dark{background:#07080a;color:#fff}.btn:disabled{opacity:.5}.beat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric{border:1px solid rgba(255,255,255,.18);padding:10px;background:#06070a}.metric span{display:block;font:800 9px "Courier New";text-transform:uppercase;color:var(--muted)}.metric b{display:block;margin-top:5px;color:#f5d98f}.output{white-space:pre-wrap;font:16px/1.65 Georgia,serif;min-height:250px}.info{border-left:3px solid var(--cyan);padding:9px 10px;background:rgba(0,0,0,.28);font-size:13px;line-height:1.45}.pockets{display:grid;gap:8px}.pocket{border:1px solid rgba(255,255,255,.18);padding:10px;background:#06070a}.pocket b{color:#f5d98f}.pocket pre{white-space:pre-wrap;font:14px/1.5 Georgia,serif;margin-bottom:0}.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#f4eee5;color:#111;padding:10px 13px;font-weight:800;display:none;z-index:10}.list{margin:8px 0 0;padding-left:20px}.list li{margin-bottom:6px}.listen{color:#baffd6}.back{color:var(--gold);text-decoration:none;font-weight:800}@media(min-width:850px){.grid{grid-template-columns:.9fr 1.1fr}.full{grid-column:1/-1}}@media(max-width:650px){.beat{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}.top{align-items:flex-start}.status{max-width:135px}}
+</style>
+</head>
+<body><main class="app">
+<div class="top"><div class="brand"><small>REAL NINJA POETICS // WRITING DESK</small><h1>VOICE SEED → TRACK</h1></div><div id="status" class="status">SEED ENGINE READY</div></div>
+<div class="grid">
+<section class="card">
+  <div class="cardH"><h2>1. Drop Your Seed</h2><span class="badge">Your bars stay yours</span></div>
+  <input id="title" placeholder="Song title / session name">
+  <textarea id="seed" class="seed" placeholder="Voice-text the hook, first bars, or loose lines exactly how they came to you..."></textarea>
+  <div class="actions"><button id="mic" class="btn dark">🎙 Voice Text</button><button id="stopMic" class="btn dark" disabled>Stop</button><button id="clear" class="btn dark">Clear</button></div>
+  <p id="speechNote" class="info">On supported browsers, Voice Text writes directly into the seed box. On iPhone, the keyboard microphone also works and keeps your natural wording.</p>
+</section>
+
+<section class="card">
+  <div class="cardH"><h2>2. Choose the Job</h2><span class="badge">No generic song button</span></div>
+  <div id="modes" class="modes">
+    <button class="mode" data-mode="continue_hook"><b>Continue Hook</b><small>Finish the refrain in the same pocket.</small></button>
+    <button class="mode" data-mode="continue_verse"><b>Continue Verse</b><small>Stay in your cadence and continue the thought.</small></button>
+    <button class="mode on" data-mode="build_full_track"><b>Build Full Track</b><small>Use the seed as the record's DNA.</small></button>
+    <button class="mode" data-mode="fill_empty_bars"><b>Fill Empty Bars</b><small>Keep your written parts and fill only gaps.</small></button>
+  </div>
+  <div class="eyebrow" style="margin:14px 0 7px">Truth / direction</div>
+  <textarea id="truth" style="min-height:115px" placeholder="Optional: what is true, what the song means, names or details RNP may use, and anything it must not invent."></textarea>
+</section>
+
+<section class="card full">
+  <div class="cardH"><h2>Beat Context</h2><span id="beatBadge" class="badge">Reading RNP session</span></div>
+  <div class="beat">
+    <div class="metric"><span>Beat</span><b id="beatName">—</b></div>
+    <div class="metric"><span>BPM</span><b id="beatBpm">—</b></div>
+    <div class="metric"><span>Key</span><b id="beatKey">—</b></div>
+    <div class="metric"><span>Length</span><b id="beatLength">—</b></div>
+  </div>
+  <p id="beatNote" class="info" style="margin-bottom:0">This page reads the latest Beat Intelligence map saved in your browser. Beat audio stays on your device.</p>
+</section>
+
+<section class="card full">
+  <div class="cardH"><h2>3. Generate</h2><span class="badge">Seed-preserving</span></div>
+  <button id="generate" class="btn primary" style="width:100%">Generate Track</button>
+  <p class="info">RNP will reject its own response if any non-empty seed line gets dropped or changed.</p>
+</section>
+
+<section id="resultCard" class="card full" hidden>
+  <div class="cardH"><h2>The Record</h2><span id="preserved" class="badge listen">Seed preserved</span></div>
+  <div id="reads" class="info"></div>
+  <div id="output" class="output"></div>
+  <div class="actions"><button id="copy" class="btn">Copy Track</button><button id="sendToRnp" class="btn dark">Send to RNP Writing Desk</button></div>
+  <div class="eyebrow" style="margin-top:18px">Alternate pockets</div><div id="pockets" class="pockets"></div>
+  <div class="eyebrow" style="margin-top:18px">Rewind lines</div><ul id="rewinds" class="list"></ul>
+  <div class="eyebrow" style="margin-top:18px">Recording notes</div><ul id="notes" class="list"></ul>
+</section>
+</div>
+<p style="text-align:center"><a class="back" href="/">← Back to RNP Studio</a></p>
+<div id="toast" class="toast"></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);let mode='build_full_track',lastTrack='';
+function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
+function fmt(s){if(!Number.isFinite(Number(s)))return'—';s=Number(s);return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`}
+function getState(){try{return JSON.parse(localStorage.getItem('rnp2_state')||'{}')}catch{return{}}}
+function restore(){const state=getState(),a=state.beatAnalysis||{};$('beatName').textContent=a.name||state.beatName||'Latest local beat';$('beatBpm').textContent=a.bpm||'—';$('beatKey').textContent=a.key||'—';$('beatLength').textContent=fmt(a.durationSeconds||state.durationSeconds);$('beatBadge').textContent=a.bpm?'Beat map loaded':'Manual context';$('title').value=localStorage.getItem('rnp_writer_title')||'';$('seed').value=localStorage.getItem('rnp_writer_seed')||'';$('truth').value=localStorage.getItem('rnp_writer_truth')||''}
+$('modes').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;mode=b.dataset.mode;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('on',x===b))});
+['title','seed','truth'].forEach(id=>$(id).addEventListener('input',()=>localStorage.setItem('rnp_writer_'+id,$(id).value)));
+$('clear').onclick=()=>{$('seed').value='';localStorage.removeItem('rnp_writer_seed')};
+let recognition=null;
+$('mic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Use the iPhone keyboard microphone for voice text.');recognition=new SR();recognition.continuous=true;recognition.interimResults=true;recognition.lang='en-US';let base=$('seed').value.trim();recognition.onresult=e=>{let final='',interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;e.results[i].isFinal?final+=t:interim+=t}$('seed').value=[base,final,interim].filter(Boolean).join(base?'\n':'');if(final)base=[base,final].filter(Boolean).join(base?'\n':'');$('speechNote').textContent='Listening… speak the bars naturally. Tap Stop when the pocket is down.'};recognition.onend=()=>{$('mic').disabled=false;$('stopMic').disabled=true;$('speechNote').textContent='Voice capture stopped. Your seed is ready.'};recognition.start();$('mic').disabled=true;$('stopMic').disabled=false};
+$('stopMic').onclick=()=>recognition?.stop();
+$('generate').onclick=async()=>{const seed=$('seed').value.trim();if(!seed)return toast('Drop at least one seed line first.');const state=getState(),a=state.beatAnalysis||{};$('generate').disabled=true;$('generate').textContent='RNP READING YOUR POCKET…';$('status').textContent='WRITING ENGINE COOKING';try{const res=await fetch('/api/generate-track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,seed,title:$('title').value,truth:$('truth').value,existingLyrics:localStorage.getItem('rnp_writer_existing')||'',vibe:'Sae smooth / mysterious calm danger',emotionalArc:state.arc||[],slangNotes:(state.glossary||[]).map(x=>`${x.term}: ${x.meaning}`),beat:{name:$('beatName').textContent,bpm:a.bpm||null,key:a.key||'',durationSeconds:a.durationSeconds||state.durationSeconds||null,arrangement:a.arrangement||[]}})});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Generation failed');render(data.result);$('status').textContent='TRACK READY'}catch(err){toast(err.message);$('status').textContent='SEED ENGINE READY'}finally{$('generate').disabled=false;$('generate').textContent='Generate Track'}};
+function esc(s=''){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(r){lastTrack=r.generated_track||'';$('resultCard').hidden=false;$('preserved').textContent=r.seed_preserved?'Seed preserved':'Check seed';$('reads').innerHTML=`<b>Pocket read:</b> ${esc(r.pocket_read)}<br><b>Rhyme read:</b> ${esc(r.rhyme_read)}`;$('output').textContent=lastTrack;$('pockets').innerHTML=(r.alternate_pockets||[]).map(x=>`<div class="pocket"><b>${esc(x.name)}</b><p>${esc(x.direction)}</p><pre>${esc(x.sample)}</pre></div>`).join('');$('rewinds').innerHTML=(r.rewind_lines||[]).map(x=>`<li>${esc(x)}</li>`).join('');$('notes').innerHTML=(r.recording_notes||[]).map(x=>`<li>${esc(x)}</li>`).join('');$('resultCard').scrollIntoView({behavior:'smooth'})}
+$('copy').onclick=async()=>{await navigator.clipboard.writeText(lastTrack);toast('Track copied.')};
+$('sendToRnp').onclick=()=>{localStorage.setItem('rnp_generated_track',lastTrack);localStorage.setItem('rnp_writer_existing',lastTrack);toast('Saved for the main RNP Writing Desk.')};restore();
+</script></body></html>
