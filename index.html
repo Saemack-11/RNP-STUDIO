@@ -1,49 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="assets/rnp-app-icon.png">
-<link rel="apple-touch-icon" href="assets/rnp-app-icon.png">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
 <meta name="theme-color" content="#09090b" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="RNP Studio" />
-<title>RNP Studio — Culture Engine</title>
+<title>RNP Studio 3.0 — Beat Intelligence</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
 <style>
 :root{--ink:#f6f0e8;--bg:#09090b;--panel:rgba(15,15,18,.88);--line:#e6ded1;--red:#b20c23;--gold:#b99b58;--muted:#aaa29a;--safe:env(safe-area-inset-bottom)}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea{font:inherit}.app{max-width:620px;margin:auto;min-height:100vh;padding-bottom:calc(88px + var(--safe));position:relative;overflow:hidden}.wall{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(circle at 20% 10%,rgba(178,12,35,.2),transparent 30%),radial-gradient(circle at 80% 40%,rgba(45,70,120,.18),transparent 35%),linear-gradient(180deg,#0c0c10,#08080a)}.wall:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.78));backdrop-filter:blur(1px)}.wall span{position:absolute;font-family:Impact,"Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.08);transform:rotate(var(--r));font-size:clamp(24px,8vw,62px);white-space:nowrap}.app>*:not(.wall){position:relative;z-index:1}.hero{padding:calc(22px + env(safe-area-inset-top)) 18px 18px;border-bottom:1px solid rgba(255,255,255,.3);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05))}.kicker,.eyebrow,.label{font:800 10px "Courier New",monospace;letter-spacing:.18em;text-transform:uppercase}.logo{font-size:44px;font-weight:1000;letter-spacing:-.07em;line-height:.9;margin-top:8px}.logo span{color:var(--red)}.tag{font:12px "Courier New",monospace;letter-spacing:.12em;margin-top:7px;color:#ddd4c8}.quote{font-family:Georgia,serif;font-style:italic;color:#ddd4c8;max-width:450px}.status{display:inline-flex;margin-top:10px;border:1px solid var(--line);padding:7px 9px;font:700 10px "Courier New";background:rgba(0,0,0,.35)}main{padding:14px}.card{background:var(--panel);border:1px solid rgba(255,255,255,.55);box-shadow:0 12px 35px rgba(0,0,0,.35);margin:0 0 16px;padding:15px;backdrop-filter:blur(14px)}.cardH{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.cardH h2{font:900 18px/1 "Arial Narrow",sans-serif;text-transform:uppercase;margin:0;letter-spacing:.04em}.badge{border:1px solid currentColor;padding:5px 7px;font:800 9px "Courier New";letter-spacing:.1em;text-transform:uppercase}.sub{font-size:13px;line-height:1.5;color:var(--muted)}input,textarea{width:100%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.45);color:var(--ink);padding:12px;outline:none}textarea{min-height:145px;resize:vertical;line-height:1.5}.btn{border:1px solid var(--line);background:#f4eee5;color:#111;padding:12px 14px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.btn.primary{background:var(--red);color:white}.btn.dark{background:#0a0a0c;color:white}.btn.small{padding:9px 10px;font-size:11px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.meta>div{border:1px solid rgba(255,255,255,.25);padding:10px}.meta b{display:block;margin-top:5px}.upload{display:block;border:1px dashed var(--line);padding:17px;text-align:center;font-weight:900;text-transform:uppercase;background:rgba(0,0,0,.3)}.upload input{display:none}audio{width:100%;margin-top:10px}.turntableWrap{display:grid;place-items:center;padding:8px 0 14px}.turntable{width:250px;height:250px;border-radius:50%;position:relative;background:radial-gradient(circle at center,#111 0 14%,#b20c23 15% 25%,#111 26% 100%);box-shadow:0 0 0 12px #1b1b20,0 18px 40px rgba(0,0,0,.5);touch-action:none;user-select:none}.turntable:before{content:"";position:absolute;inset:30px;border-radius:50%;background:repeating-radial-gradient(circle,#141414 0 2px,#242424 3px 4px)}.turntable:after{content:"RNP";position:absolute;inset:92px;border-radius:50%;display:grid;place-items:center;background:var(--red);font-weight:1000;letter-spacing:.08em}.needle{position:absolute;width:9px;height:128px;background:#c8c1b8;right:18px;top:25px;transform:rotate(24deg);transform-origin:top center;border-radius:5px;box-shadow:0 0 0 3px #2a2a2f}.vibeDisplay{text-align:center;margin-top:13px}.vibeDisplay strong{display:block;font-size:24px;text-transform:uppercase}.vibeDisplay span{font:11px "Courier New";color:var(--muted)}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid rgba(255,255,255,.45);padding:9px 11px;background:rgba(0,0,0,.35);color:white;font-weight:800;font-size:12px}.chip.on{background:var(--red)}.arc{display:flex;align-items:center;gap:6px;overflow:auto;padding:7px 0}.arc .node{flex:0 0 auto;border:1px solid rgba(255,255,255,.45);padding:8px 10px;background:rgba(0,0,0,.4);font-weight:800;font-size:12px}.arc .node.on{background:var(--gold);color:#111}.arrow{color:var(--muted)}.influenceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.influence{border:1px solid rgba(255,255,255,.35);padding:12px 6px;min-height:64px;background:rgba(0,0,0,.4);color:white;text-align:center;font-weight:900;font-size:11px;text-transform:uppercase}.influence.on{border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold);color:#f5d98f}.feed{background:#060607;border:1px solid rgba(255,255,255,.25);padding:14px;min-height:180px;font:12px/1.6 "Courier New",monospace;white-space:pre-wrap}.resultSection{margin:0 0 18px}.resultSection h3{margin:0 0 7px;color:#f2c86d;text-transform:uppercase;font:900 13px "Courier New"}.resultSection p,.resultSection li{font-size:13px;line-height:1.55}.record{min-height:380px;font-family:Georgia,serif;font-size:16px}.nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(8,8,10,.96);border-top:1px solid rgba(255,255,255,.35);padding:7px 8px calc(7px + var(--safe));backdrop-filter:blur(16px)}.navInner{max-width:620px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{background:transparent;color:#bfb7ad;border:0;padding:9px 4px;font-size:10px;font-weight:900;text-transform:uppercase}.nav button.on{color:white;border-bottom:2px solid var(--red)}.page{display:none}.page.on{display:block}.toast{position:fixed;left:50%;bottom:102px;transform:translateX(-50%);z-index:50;background:#f4eee5;color:#111;padding:10px 13px;font-weight:800;display:none;max-width:85%;text-align:center}.truthFlags{display:grid;gap:7px}.truthFlags div{border-left:4px solid var(--gold);padding:8px 10px;background:rgba(0,0,0,.3);font-size:12px}.sectionMap{display:flex;height:40px;border:1px solid rgba(255,255,255,.45);overflow:auto;margin-top:10px}.sectionMap span{min-width:70px;display:grid;place-items:center;border-right:1px solid rgba(255,255,255,.25);font:800 9px "Courier New"}.sectionMap .hook{background:var(--red)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea{font:inherit}.app{max-width:1380px;margin:auto;min-height:100vh;padding-bottom:calc(88px + var(--safe));position:relative;overflow:hidden}.wall{position:fixed;inset:0;z-index:0;overflow:hidden;background:#050506 url("assets/rnp-studio-final.png") center top/cover no-repeat}.wall:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.52) 45%,rgba(0,0,0,.82));}.wall:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 22%,transparent 0 24%,rgba(0,0,0,.28) 62%,rgba(0,0,0,.58) 100%)}.app>*:not(.wall){position:relative;z-index:1}.hero{padding:calc(18px + env(safe-area-inset-top)) 18px 16px;border-bottom:1px solid rgba(185,155,88,.55);background:linear-gradient(180deg,rgba(5,5,6,.88),rgba(5,5,6,.55));backdrop-filter:blur(12px)}.kicker,.eyebrow,.label{font:800 10px "Courier New",monospace;letter-spacing:.18em;text-transform:uppercase}.logo{font-size:44px;font-weight:1000;letter-spacing:-.07em;line-height:.9;margin-top:8px}.logo span{color:var(--red)}.tag{font:12px "Courier New",monospace;letter-spacing:.12em;margin-top:7px;color:#ddd4c8}.quote{font-family:Georgia,serif;font-style:italic;color:#ddd4c8;max-width:450px}.status{display:inline-flex;margin-top:10px;border:1px solid var(--line);padding:7px 9px;font:700 10px "Courier New";background:rgba(0,0,0,.35)}main{padding:16px}.card{background:linear-gradient(180deg,rgba(10,10,12,.94),rgba(12,12,15,.88));border:1px solid rgba(185,155,88,.55);box-shadow:0 14px 38px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.025);margin:0 0 16px;padding:15px;backdrop-filter:blur(16px);border-radius:6px}.cardH{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.cardH h2{font:900 18px/1 "Arial Narrow",sans-serif;text-transform:uppercase;margin:0;letter-spacing:.04em}.badge{border:1px solid currentColor;padding:5px 7px;font:800 9px "Courier New";letter-spacing:.1em;text-transform:uppercase}.sub{font-size:13px;line-height:1.5;color:var(--muted)}input,textarea{width:100%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.45);color:var(--ink);padding:12px;outline:none}textarea{min-height:145px;resize:vertical;line-height:1.5}.btn{border:1px solid var(--line);background:#f4eee5;color:#111;padding:12px 14px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.btn.primary{background:var(--red);color:white}.btn.dark{background:#0a0a0c;color:white}.btn.small{padding:9px 10px;font-size:11px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.meta>div{border:1px solid rgba(255,255,255,.25);padding:10px}.meta b{display:block;margin-top:5px}.upload{display:block;border:1px dashed var(--line);padding:17px;text-align:center;font-weight:900;text-transform:uppercase;background:rgba(0,0,0,.3)}.upload input{display:none}audio{width:100%;margin-top:10px}.turntableWrap{display:grid;place-items:center;padding:8px 0 14px}.turntable{width:250px;height:250px;border-radius:50%;position:relative;background:radial-gradient(circle at center,#111 0 14%,#b20c23 15% 25%,#111 26% 100%);box-shadow:0 0 0 12px #1b1b20,0 18px 40px rgba(0,0,0,.5);touch-action:none;user-select:none}.turntable:before{content:"";position:absolute;inset:30px;border-radius:50%;background:repeating-radial-gradient(circle,#141414 0 2px,#242424 3px 4px)}.turntable:after{content:"RNP";position:absolute;inset:92px;border-radius:50%;display:grid;place-items:center;background:var(--red);font-weight:1000;letter-spacing:.08em}.needle{position:absolute;width:9px;height:128px;background:#c8c1b8;right:18px;top:25px;transform:rotate(24deg);transform-origin:top center;border-radius:5px;box-shadow:0 0 0 3px #2a2a2f}.vibeDisplay{text-align:center;margin-top:13px}.vibeDisplay strong{display:block;font-size:24px;text-transform:uppercase}.vibeDisplay span{font:11px "Courier New";color:var(--muted)}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid rgba(255,255,255,.45);padding:9px 11px;background:rgba(0,0,0,.35);color:white;font-weight:800;font-size:12px}.chip.on{background:var(--red)}.arc{display:flex;align-items:center;gap:6px;overflow:auto;padding:7px 0}.arc .node{flex:0 0 auto;border:1px solid rgba(255,255,255,.45);padding:8px 10px;background:rgba(0,0,0,.4);font-weight:800;font-size:12px}.arc .node.on{background:var(--gold);color:#111}.arrow{color:var(--muted)}.influenceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.influence{border:1px solid rgba(255,255,255,.35);padding:12px 6px;min-height:64px;background:rgba(0,0,0,.4);color:white;text-align:center;font-weight:900;font-size:11px;text-transform:uppercase}.influence.on{border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold);color:#f5d98f}.feed{background:#060607;border:1px solid rgba(255,255,255,.25);padding:14px;min-height:180px;font:12px/1.6 "Courier New",monospace;white-space:pre-wrap}.resultSection{margin:0 0 18px}.resultSection h3{margin:0 0 7px;color:#f2c86d;text-transform:uppercase;font:900 13px "Courier New"}.resultSection p,.resultSection li{font-size:13px;line-height:1.55}.record{min-height:380px;font-family:Georgia,serif;font-size:16px}.nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(8,8,10,.96);border-top:1px solid rgba(255,255,255,.35);padding:7px 8px calc(7px + var(--safe));backdrop-filter:blur(16px)}.navInner{max-width:620px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{background:transparent;color:#bfb7ad;border:0;padding:9px 4px;font-size:10px;font-weight:900;text-transform:uppercase}.nav button.on{color:white;border-bottom:2px solid var(--red)}.page{display:none}.page.on{display:block}.toast{position:fixed;left:50%;bottom:102px;transform:translateX(-50%);z-index:50;background:#f4eee5;color:#111;padding:10px 13px;font-weight:800;display:none;max-width:85%;text-align:center}.truthFlags{display:grid;gap:7px}.truthFlags div{border-left:4px solid var(--gold);padding:8px 10px;background:rgba(0,0,0,.3);font-size:12px}.sectionMap{display:flex;height:40px;border:1px solid rgba(255,255,255,.45);overflow:auto;margin-top:10px}.sectionMap span{min-width:70px;display:grid;place-items:center;border-right:1px solid rgba(255,255,255,.25);font:800 9px "Courier New"}.sectionMap .hook{background:var(--red)}
+
+.inspirationStrip{margin:0 16px 4px;padding:10px 12px;border:1px solid rgba(185,155,88,.45);background:rgba(6,6,8,.72);backdrop-filter:blur(12px);font:800 10px "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:#d8c9aa;display:flex;gap:14px;overflow:auto;white-space:nowrap}.inspirationStrip span{color:#f0d07c}.card:nth-child(6){grid-column:1/-1}.navInner{max-width:1380px}
+@media (min-width:900px){body{background:#050506}.hero{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:18px}.hero .kicker,.hero .tag,.hero .quote{grid-column:2}.hero .logo{grid-row:1/5;grid-column:1;margin:0}.hero .status{grid-column:3;grid-row:1/5;margin:0}.page.on#producer{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(360px,1fr) minmax(360px,1fr);gap:14px;align-items:start}.page.on#producer>.card{margin:0}.page.on#producer>.card:nth-child(1){grid-column:1}.page.on#producer>.card:nth-child(2){grid-column:2}.page.on#producer>.card:nth-child(3){grid-column:3}.page.on#producer>.card:nth-child(4){grid-column:1/3}.page.on#producer>.card:nth-child(5){grid-column:3}.page.on#producer>.card:nth-child(6){grid-column:1/-1}.turntable{width:220px;height:220px}.turntable:after{inset:80px}.nav{left:50%;transform:translateX(-50%);max-width:1380px;border:1px solid rgba(185,155,88,.45);border-bottom:0;border-radius:10px 10px 0 0}.navInner{grid-template-columns:repeat(4,minmax(120px,1fr))}}
+@media (max-width:899px){.wall{background-position:center top;background-size:auto 42vh;background-repeat:no-repeat;background-color:#08080a}.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.22) 22vh,rgba(0,0,0,.92) 43vh,#08080a 64vh)}.hero{margin-top:28vh}.inspirationStrip{margin-top:-1px}.app{max-width:620px}.turntable{width:235px;height:235px}.turntable:after{inset:86px}}
+
+/* BRICK 1 — THE SANCTUARY */
+:root{--cyan:#68d8ff;--green:#70ffb1;--glass:rgba(8,10,14,.82);--rack:#171a20}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.08;background:repeating-linear-gradient(180deg,transparent 0 3px,rgba(255,255,255,.12) 4px);mix-blend-mode:screen}
+.hero{min-height:116px}.brandMark{width:78px;height:78px;object-fit:contain;border-radius:16px;border:1px solid rgba(240,205,115,.5);background:#030303;box-shadow:inset 0 0 22px rgba(255,198,55,.12)}
+.logo{display:none}.heroBrand{display:flex;align-items:center;gap:14px}.heroCopy strong{display:block;font-size:24px;letter-spacing:.04em}.heroCopy small{font:10px "Courier New";letter-spacing:.15em;color:#d5c697}.studioRail{display:flex;gap:8px;overflow:auto;padding:10px 16px 4px;scrollbar-width:none}.studioRail::-webkit-scrollbar{display:none}.roomChip{flex:0 0 auto;padding:8px 11px;border:1px solid rgba(104,216,255,.35);background:rgba(3,7,12,.72);font:800 9px "Courier New";letter-spacing:.12em;text-transform:uppercase;color:#bfefff}.rack{position:relative;overflow:hidden}.rack:before{content:"";position:absolute;left:8px;right:8px;top:7px;height:3px;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(0,0,0,.8)}.rack:after{content:"●  ●";position:absolute;right:10px;top:5px;color:#555;font-size:8px;letter-spacing:10px}.card{border-radius:12px;border-color:rgba(104,216,255,.25);background:linear-gradient(145deg,rgba(9,11,15,.95),rgba(20,18,18,.9));box-shadow:0 18px 50px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.03)}.cardH{padding-top:8px}.badge{border-color:rgba(112,255,177,.55);color:#baffd6;background:rgba(12,35,25,.35)}.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:#70ffb1;box-shadow:0 0 12px #70ffb1;margin-right:7px}.screen{border:1px solid rgba(104,216,255,.35);background:radial-gradient(circle at 50% 0,rgba(28,77,95,.25),rgba(0,0,0,.8));font-family:"Courier New",monospace}.lobbyGrid{display:grid;gap:14px}.welcome{padding:24px;min-height:270px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.88)),url("assets/rnp-studio-final.png") center/cover}.welcome h1{font-size:42px;margin:0;letter-spacing:-.05em}.welcome p{max-width:560px}.startSession{display:flex;gap:10px;flex-wrap:wrap}.roomGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.roomTile{border:1px solid rgba(185,155,88,.38);background:rgba(0,0,0,.48);padding:16px;min-height:100px;color:white;text-align:left}.roomTile b{display:block;text-transform:uppercase}.roomTile small{color:var(--muted);line-height:1.4}.placeholder{min-height:240px;display:grid;place-items:center;text-align:center}.placeholder .core{max-width:520px}.meterRow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.meter{border:1px solid rgba(255,255,255,.18);padding:12px;background:#07090c}.meter b{display:block;color:#f5d98f;margin-top:5px}.nav{overflow-x:auto}.navInner{display:flex;min-width:max-content;max-width:none}.nav button{min-width:94px;padding:10px 9px}.nav button.on{color:#f2d27c;border-bottom-color:#f2d27c}.page.on{animation:roomIn .24s ease}@keyframes roomIn{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(min-width:900px){.hero{grid-template-columns:1fr auto}.heroBrand{grid-column:1}.hero .status{grid-column:2}.hero .kicker,.hero .tag,.hero .quote{display:none}.page.on#lobby{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}.page.on#producer{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(360px,1fr) minmax(360px,1fr);gap:14px;align-items:start}.page.on#producer>.card{margin:0}.page.on#producer>.card:nth-child(4){grid-column:1/3}.page.on#producer>.card:nth-child(6){grid-column:1/-1}.roomGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:899px){.hero{margin-top:28vh}.heroBrand{align-items:flex-start}.brandMark{width:68px;height:68px}.heroCopy strong{font-size:20px}.roomGrid{grid-template-columns:1fr}.meterRow{grid-template-columns:1fr}}
+
+
+/* BRICK 2 — BEAT INTELLIGENCE */
+.analysisConsole{margin-top:12px;border:1px solid rgba(104,216,255,.38);background:rgba(2,7,11,.72);padding:12px}
+.analysisTop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.analysisState{font:800 10px "Courier New",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.analysisProgress{height:7px;border:1px solid rgba(255,255,255,.22);background:#050608;overflow:hidden}
+.analysisProgress>span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .22s ease}
+.waveShell{margin-top:11px;border:1px solid rgba(255,255,255,.22);background:#030406;padding:8px;position:relative}
+#waveform{display:block;width:100%;height:150px}
+.waveTime{display:flex;justify-content:space-between;color:var(--muted);font:9px "Courier New",monospace;margin-top:5px}
+.intelGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.intelMetric{border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.28);padding:10px;min-height:69px}
+.intelMetric span{display:block;font:800 9px "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.intelMetric strong{display:block;margin-top:5px;font-size:19px;color:#f5d98f}
+.intelMetric small{display:block;margin-top:4px;color:var(--muted)}
+.confidence{display:inline-flex;align-items:center;gap:6px}
+.confidence i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 9px currentColor}
+.energyMap{display:flex;align-items:end;gap:2px;height:68px;margin-top:10px;padding:7px;border:1px solid rgba(255,255,255,.22);background:#030406}
+.energyMap span{flex:1;min-width:2px;background:linear-gradient(180deg,var(--cyan),var(--red));opacity:.86}
+.arrangementMap{display:flex;min-height:52px;margin-top:10px;border:1px solid rgba(255,255,255,.28);overflow:hidden}
+.arrangementMap button{border:0;border-right:1px solid rgba(255,255,255,.25);background:rgba(8,10,14,.86);color:white;padding:8px 5px;font:800 9px "Courier New",monospace;text-transform:uppercase;min-width:54px}
+.arrangementMap button[data-section="Hook"]{background:rgba(178,12,35,.86)}
+.arrangementMap button[data-section="Intro"],.arrangementMap button[data-section="Outro"]{background:rgba(185,155,88,.3)}
+.analysisNotes{margin-top:10px;border-left:3px solid var(--cyan);padding:9px 10px;background:rgba(0,0,0,.32);font-size:12px;line-height:1.5}
+.overrideNote{margin-top:8px;font:10px/1.5 "Courier New",monospace;color:var(--muted)}
+@media (min-width:700px){.intelGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<div class="wall" aria-hidden="true">
-<span style="left:-4%;top:6%;--r:-12deg">BLADE</span><span style="right:-8%;top:12%;--r:9deg">SPAWN</span><span style="left:8%;top:25%;--r:4deg">GOKU</span><span style="right:2%;top:31%;--r:-8deg">BRUCE LEE</span><span style="left:-5%;top:44%;--r:7deg">WU-TANG</span><span style="right:4%;top:53%;--r:-5deg">DMX</span><span style="left:6%;top:65%;--r:-7deg">BIGGIE</span><span style="right:-3%;top:73%;--r:10deg">N.W.A.</span><span style="left:13%;top:84%;--r:3deg">JORDAN</span><span style="right:6%;top:91%;--r:-6deg">BELLY</span>
-</div>
+<div class="wall" aria-hidden="true"></div>
 <header class="hero">
-<div class="kicker">Culture first // truth always</div>
-<div class="logo">R<span>N</span>P.</div>
-<div class="tag">REAL NINJA POETICS // CULTURE ENGINE</div>
-<p class="quote">The smoothest truth is still truth. Every emotion gets motion.</p>
-<div class="status">SOUL ABOVE EVERYTHING // DIFFERENT BY DESIGN</div>
+<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 3.0</strong><div class="tag">BANDLAB RECORDS. RNP CREATES.</div></div></div>
+<div class="status"><span class="led"></span>BEAT INTELLIGENCE ONLINE // BRICK 2</div>
 </header>
+<div class="studioRail" aria-label="Studio rooms">
+<span class="roomChip">Lobby</span><span class="roomChip">Producer Room</span><span class="roomChip">Vocal Lab</span><span class="roomChip">Writing Desk</span><span class="roomChip">Cover Studio</span><span class="roomChip">Culture Vault</span><span class="roomChip">Memory Vault</span><span class="roomChip">Settings</span>
+</div>
 <main>
-<section id="studio" class="page on">
-<div class="card">
-<div class="cardH"><h2>Beat + Session</h2><span class="badge">Full-song map</span></div>
+<section id="lobby" class="page on">
+<div class="card rack welcome"><span class="badge" style="width:max-content">Private creative sanctuary</span><h1>ENTER THE STUDIO.</h1><p class="sub">Load the world, wake the room, and move from raw truth to beat intelligence, writing, vocals, cover art, and archive without breaking the creative flow.</p><div class="startSession"><button class="btn primary" onclick="go('producer',document.querySelector('[data-room=producer]'))">Start New Session</button><button class="btn dark" onclick="go('archive',document.querySelector('[data-room=archive]'))">Open Recent Work</button></div></div>
+<div class="card rack"><div class="cardH"><h2>Studio Rooms</h2><span class="badge">Foundation live</span></div><div class="roomGrid">
+<button class="roomTile" onclick="go('producer',document.querySelector('[data-room=producer]'))"><b>🎛 Producer Room</b><small>Beat upload, arrangement, emotional motion, Council.</small></button>
+<button class="roomTile" onclick="go('vocal',document.querySelector('[data-room=vocal]'))"><b>🎤 Vocal Lab</b><small>Voice Locker, EQ, tuning, harmonies, ad-libs.</small></button>
+<button class="roomTile" onclick="go('write',document.querySelector('[data-room=write]'))"><b>✍️ Writing Desk</b><small>Lyrics, hooks, verses, structure, pocket plan.</small></button>
+<button class="roomTile" onclick="go('cover',document.querySelector('[data-room=cover]'))"><b>🖼 Cover Studio</b><small>Single, album and mixtape visual direction.</small></button>
+<button class="roomTile" onclick="go('culture',document.querySelector('[data-room=culture]'))"><b>🧠 Culture Vault</b><small>Language, symbolism, references, nostalgia.</small></button>
+<button class="roomTile" onclick="go('memory',document.querySelector('[data-room=memory]'))"><b>📼 Memory Vault</b><small>Sessions, hooks, themes, voice notes and growth.</small></button>
+</div></div>
+</section>
+<section id="producer" class="page">
+<div class="card rack">
+<div class="cardH"><h2>Beat Intelligence Console</h2><span id="signalBadge" class="badge"><span class="led"></span>Awaiting signal</span></div>
 <input id="title" placeholder="Song / session title" />
 <label class="upload" style="margin-top:10px">♬ Upload Instrumental<input id="beatInput" type="file" accept="audio/*,video/mp4" /></label>
 <audio id="player" controls></audio>
-<div class="meta">
-<div><span class="label">Beat</span><b id="beatName">Awaiting instrumental</b></div>
-<div><span class="label">Length</span><b id="beatLength">—</b></div>
-<div><span class="label">BPM</span><input id="bpm" type="number" placeholder="Enter or verify" /></div>
-<div><span class="label">Key</span><input id="key" placeholder="Enter or verify" /></div>
-</div>
-<p class="sub">Length is read from the upload. BPM and key remain user-entered until real audio analysis is connected.</p>
+
+<div class="analysisConsole">
+  <div class="analysisTop">
+    <span id="analysisState" class="analysisState">Load an instrumental to begin</span>
+    <button id="reanalyzeBeat" class="btn small dark" type="button" disabled>Analyze Again</button>
+  </div>
+  <div class="analysisProgress" aria-label="Beat analysis progress"><span id="analysisBar"></span></div>
+  <div class="waveShell">
+    <canvas id="waveform" width="900" height="180" aria-label="Instrumental waveform"></canvas>
+    <div class="waveTime"><span>0:00</span><span id="waveDuration">—</span></div>
+  </div>
+  <div class="intelGrid">
+    <div class="intelMetric"><span>Beat</span><strong id="beatName">Awaiting instrumental</strong><small id="fileSize">No local file</small></div>
+    <div class="intelMetric"><span>Length</span><strong id="beatLength">—</strong><small>Decoded locally</small></div>
+    <div class="intelMetric"><span>Detected BPM</span><strong id="detectedBpm">—</strong><small id="bpmConfidence">Awaiting analysis</small></div>
+    <div class="intelMetric"><span>Tonal Center</span><strong id="detectedKey">—</strong><small id="keyConfidence">Estimate, verify by ear</small></div>
+  </div>
+  <div class="eyebrow" style="margin-top:12px">Energy movement</div>
+  <div id="energyMap" class="energyMap" aria-label="Beat energy map"></div>
+  <div class="eyebrow" style="margin-top:12px">Suggested arrangement</div>
+  <div id="arrangementMap" class="arrangementMap" aria-label="Suggested song sections"></div>
+  <div id="analysisNotes" class="analysisNotes">RNP analyzes the file on this device. Nothing is uploaded during beat detection.</div>
 </div>
 
-<div class="card">
+<div class="meta">
+<div><span class="label">Working BPM</span><input id="bpm" type="number" min="40" max="240" step="0.1" placeholder="Auto-filled; tap to override" /></div>
+<div><span class="label">Working Key</span><input id="key" placeholder="Auto-filled; tap to override" /></div>
+</div>
+<p class="overrideNote">BPM and tonal-center detection are estimates. Your manual override remains the final truth sent to the Producer's Table.</p>
+</div>
+
+<div class="card rack">
 <div class="cardH"><h2>Analog Vibe Deck</h2><span class="badge">Spin to explore</span></div>
 <div class="turntableWrap"><div id="turntable" class="turntable"><div class="needle"></div></div></div>
 <div class="vibeDisplay"><strong id="vibeName">Street Gospel</strong><span id="vibeFamily">TRUTH / CONSEQUENCE / REDEMPTION</span></div>
@@ -51,20 +124,20 @@
 <div id="vibeLayers" class="chips"></div>
 </div>
 
-<div class="card">
+<div class="card rack">
 <div class="cardH"><h2>Emotional Momentum</h2><span class="badge">Not one flat mood</span></div>
 <div id="arc" class="arc"></div>
 <div class="chips" id="arcPresets" style="margin-top:8px"></div>
 <p class="sub">Tap a preset, then tap emotion nodes to activate or remove them. The Council will map where the tone rises, softens, gets intimate, turns dangerous, becomes funny, or resolves.</p>
 </div>
 
-<div class="card">
+<div class="card rack">
 <div class="cardH"><h2>Nostalgia Wall</h2><span class="badge">Influence, not imitation</span></div>
 <div id="influences" class="influenceGrid"></div>
 <p class="sub">Choose only what belongs in this record. RNP uses symbolic meaning—discipline, flight, transformation, loyalty, darkness, precision—not copied style.</p>
 </div>
 
-<div class="card">
+<div class="card rack">
 <div class="cardH"><h2>Raw Truth</h2><span class="badge">Sae voice</span></div>
 <input id="chapter" placeholder="Chapter or world: brotherhood, toxic love, hunger, temptation, victory..." />
 <textarea id="truth" placeholder="Talk naturally. What happened? What did it mean? What changed inside you? Include slang exactly how you use it."></textarea>
@@ -76,27 +149,31 @@
 <button class="btn primary" style="width:100%;margin-top:11px" onclick="runCouncil()">Wake the Full Council</button>
 </div>
 
-<div class="card">
+<div class="card rack">
 <div class="cardH"><h2>Producer's Table</h2><span id="engineBadge" class="badge">Standing by</span></div>
-<div id="feed" class="feed">Load the beat, choose the emotional journey, tell the truth, then wake the Council.</div>
+<div id="feed" class="feed screen">Load the beat, choose the emotional journey, tell the truth, then wake the Council.</div>
 </div>
 </section>
 
 <section id="write" class="page">
-<div class="card"><div class="cardH"><h2>The Record</h2><span class="badge">Your pen</span></div>
+<div class="card rack"><div class="cardH"><h2>The Record</h2><span class="badge">Your pen</span></div>
 <textarea id="lyrics" class="record" placeholder="[INTRO]\n\n[VERSE 1]\n\n[HOOK]\n\n[VERSE 2]\n\n[BRIDGE]\n\n[VERSE 3]\n\n[FINAL HOOK / OUTRO]"></textarea>
 <div class="grid2" style="margin-top:10px"><button class="btn small" onclick="saveProject()">Save Project</button><button class="btn small" onclick="copyLyrics()">Copy for BandLab</button></div></div>
 </section>
 
+<section id="vocal" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Room wired</span><h2>Vocal Lab</h2><p class="sub">The room shell is now part of the app. Voice Locker, live EQ, tuning intensity, harmonies, ad-lib creation and hook saving will plug into this rack without changing navigation.</p><div class="meterRow"><div class="meter"><span class="label">Voice DNA</span><b>Awaiting references</b></div><div class="meter"><span class="label">Vocal Chain</span><b>Natural</b></div><div class="meter"><span class="label">Locker</span><b>0 takes</b></div></div></div></div></section>
+<section id="cover" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Art direction bay</span><h2>Cover Art Studio</h2><p class="sub">Single, album and mixtape covers will be built from the song theme, your description and optional photos from your library. The official RNP mark stays available as optional branding.</p><div class="meterRow"><div class="meter"><span class="label">Format</span><b>Single / Album / Mixtape</b></div><div class="meter"><span class="label">References</span><b>Photo + mood board</b></div><div class="meter"><span class="label">Output</span><b>Square cover master</b></div></div></div></div></section>
+<section id="memory" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Archive bus</span><h2>Memory Vault</h2><p class="sub">This room will connect songs, hooks, voice notes, recurring imagery and emotional themes so RNP can help you evolve without copying yourself.</p></div></div></section>
+<section id="settings" class="page"><div class="card rack"><div class="cardH"><h2>Studio Settings</h2><span class="badge">Local first</span></div><div class="truthFlags"><div>Visual mode: Futuristic sanctuary</div><div>Brand identity: Official metallic-gold RNP icon</div><div>Recording workflow: BandLab remains the final recorder</div><div>Creative rule: Influence without imitation</div></div></div></section>
 <section id="culture" class="page">
-<div class="card"><div class="cardH"><h2>Culture Glossary</h2><span class="badge">Living language</span></div>
+<div class="card rack"><div class="cardH"><h2>Culture Glossary</h2><span class="badge">Living language</span></div>
 <input id="term" placeholder="Term" /><textarea id="meaning" style="min-height:90px;margin-top:8px" placeholder="What it means in your world"></textarea><input id="context" style="margin-top:8px" placeholder="Context or what RNP must never confuse it with" /><button class="btn primary" style="width:100%;margin-top:9px" onclick="addGlossary()">Add to RNP Language</button><div id="glossaryList" class="truthFlags" style="margin-top:12px"></div></div>
 </section>
 
-<section id="archive" class="page"><div class="card"><div class="cardH"><h2>Archive</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
+<section id="archive" class="page"><div class="card rack"><div class="cardH"><h2>Archive</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
 </main>
 
-<div class="nav"><div class="navInner"><button class="on" onclick="go('studio',this)">Studio</button><button onclick="go('write',this)">Write</button><button onclick="go('culture',this)">Culture</button><button onclick="go('archive',this)">Archive</button></div></div>
+<div class="nav"><div class="navInner"><button class="on" data-room="lobby" onclick="go('lobby',this)">Lobby</button><button data-room="producer" onclick="go('producer',this)">Producer</button><button data-room="vocal" onclick="go('vocal',this)">Vocal Lab</button><button data-room="write" onclick="go('write',this)">Writing</button><button data-room="cover" onclick="go('cover',this)">Cover</button><button data-room="culture" onclick="go('culture',this)">Culture</button><button data-room="memory" onclick="go('memory',this)">Memory</button><button data-room="archive" onclick="go('archive',this)">Archive</button><button data-room="settings" onclick="go('settings',this)">Settings</button></div></div>
 <div id="toast" class="toast"></div>
 </div>
 <script>
@@ -114,10 +191,10 @@ const arcPresets={
 "Victory":["Hunger","Pressure","Adaptation","Execution","Proof","Elevation"]
 };
 let state=JSON.parse(localStorage.getItem('rnp2_state')||'{}');
-state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;
+state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;state.beatAnalysis??=null;
 function persist(){localStorage.setItem('rnp2_state',JSON.stringify(state))}
 function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
-function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn?.classList.add('on');if(id==='archive')renderArchive()}
+function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn?.classList.add('on');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();window.scrollTo({top:0,behavior:'smooth'})}
 function renderVibe(){const v=vibes[state.vibeIndex%vibes.length];$('vibeName').textContent=v[0];$('vibeFamily').textContent=v[1];$('turntable').style.transform=`rotate(${state.vibeIndex*22.5}deg)`;renderLayers();persist()}
 function renderLayers(){$('vibeLayers').innerHTML=layerOptions.map(x=>`<button class="chip ${state.layers.includes(x)?'on':''}" onclick="toggleLayer('${x}')">${x}</button>`).join('')}
 function toggleLayer(x){state.layers=state.layers.includes(x)?state.layers.filter(v=>v!==x):[...state.layers,x].slice(-2);renderLayers();persist()}
@@ -129,8 +206,225 @@ let drag=false,startX=0,startIndex=0;
 $('turntable').addEventListener('pointerdown',e=>{drag=true;startX=e.clientX;startIndex=state.vibeIndex;$('turntable').setPointerCapture(e.pointerId)});
 $('turntable').addEventListener('pointermove',e=>{if(!drag)return;const steps=Math.round((e.clientX-startX)/28);state.vibeIndex=(startIndex+steps+vibes.length*20)%vibes.length;renderVibe()});
 $('turntable').addEventListener('pointerup',()=>drag=false);
-$('beatInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;$('player').src=URL.createObjectURL(f);$('beatName').textContent=f.name;$('player').onloadedmetadata=()=>{state.durationSeconds=Math.round($('player').duration);$('beatLength').textContent=formatTime(state.durationSeconds);persist()}});
-function formatTime(s){if(!s)return'—';return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`}
+
+let currentBeatFile=null,currentAudioBuffer=null,currentObjectUrl=null;
+const noteNames=["C","C♯","D","D♯","E","F","F♯","G","G♯","A","A♯","B"];
+const majorProfile=[6.35,2.23,3.48,2.33,4.38,4.09,2.52,5.19,2.39,3.66,2.29,2.88];
+const minorProfile=[6.33,2.68,3.52,5.38,2.60,3.53,2.54,4.75,3.98,2.69,3.34,3.17];
+
+$('beatInput').addEventListener('change',async e=>{
+  const f=e.target.files[0];
+  if(!f)return;
+  currentBeatFile=f;
+  if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);
+  currentObjectUrl=URL.createObjectURL(f);
+  $('player').src=currentObjectUrl;
+  $('beatName').textContent=f.name;
+  $('fileSize').textContent=formatBytes(f.size);
+  $('signalBadge').innerHTML='<span class="led"></span>Signal loaded';
+  $('reanalyzeBeat').disabled=false;
+  try{await analyzeBeatFile(f)}catch(err){analysisFail(err)}
+});
+$('reanalyzeBeat').addEventListener('click',()=>{if(currentBeatFile)analyzeBeatFile(currentBeatFile).catch(analysisFail)});
+$('player').addEventListener('timeupdate',drawPlayhead);
+
+function setAnalysisProgress(percent,label){
+  $('analysisBar').style.width=Math.max(0,Math.min(100,percent))+'%';
+  $('analysisState').textContent=label;
+}
+function nextPaint(){return new Promise(resolve=>requestAnimationFrame(()=>resolve()))}
+async function analyzeBeatFile(file){
+  setAnalysisProgress(4,'Reading audio file');
+  $('analysisNotes').textContent='Decoding the instrumental locally…';
+  await nextPaint();
+  const bytes=await file.arrayBuffer();
+  setAnalysisProgress(15,'Decoding audio');
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  try{
+    currentAudioBuffer=await ctx.decodeAudioData(bytes.slice(0));
+  }finally{
+    await ctx.close();
+  }
+  state.durationSeconds=Math.round(currentAudioBuffer.duration);
+  $('beatLength').textContent=formatTime(state.durationSeconds);
+  $('waveDuration').textContent=formatTime(state.durationSeconds);
+  setAnalysisProgress(35,'Drawing waveform');
+  await nextPaint();
+  const mono=downmix(currentAudioBuffer);
+  const peaks=buildWavePeaks(mono,720);
+  drawWaveform(peaks);
+
+  setAnalysisProgress(52,'Detecting pulse');
+  await nextPaint();
+  const tempo=detectTempo(mono,currentAudioBuffer.sampleRate);
+
+  setAnalysisProgress(69,'Reading tonal center');
+  await nextPaint();
+  const keyData=estimateTonalCenter(mono,currentAudioBuffer.sampleRate);
+
+  setAnalysisProgress(83,'Mapping energy and sections');
+  await nextPaint();
+  const energy=buildEnergyMap(mono,32);
+  const arrangement=buildArrangement(energy,currentAudioBuffer.duration,tempo.bpm);
+
+  const analysis={
+    bpm:tempo.bpm,
+    bpmConfidence:tempo.confidence,
+    key:keyData.key,
+    keyConfidence:keyData.confidence,
+    energy,
+    arrangement,
+    durationSeconds:state.durationSeconds,
+    analyzedAt:new Date().toISOString()
+  };
+  state.beatAnalysis=analysis;
+  $('detectedBpm').textContent=tempo.bpm?tempo.bpm.toFixed(tempo.bpm%1?1:0):'—';
+  $('bpmConfidence').textContent=confidenceLabel(tempo.confidence)+' pulse confidence';
+  $('detectedKey').textContent=keyData.key||'Unclear';
+  $('keyConfidence').textContent=confidenceLabel(keyData.confidence)+' tonal confidence · verify by ear';
+  $('bpm').value=tempo.bpm||'';
+  $('key').value=keyData.key||'';
+  renderEnergy(energy);
+  renderArrangement(arrangement);
+  $('analysisNotes').textContent=buildProducerNote(tempo,keyData,energy,arrangement);
+  setAnalysisProgress(100,'Beat intelligence ready');
+  $('signalBadge').innerHTML='<span class="led"></span>Analysis ready';
+  persist();
+}
+function analysisFail(err){
+  console.error(err);
+  setAnalysisProgress(0,'Analysis could not complete');
+  $('analysisNotes').textContent='RNP could not decode this file in the browser. Try MP3, WAV, M4A or AAC, then enter BPM and key manually. Your file was not uploaded.';
+  $('signalBadge').textContent='Manual mode';
+}
+function downmix(buffer){
+  const length=buffer.length,channels=buffer.numberOfChannels,out=new Float32Array(length);
+  for(let c=0;c<channels;c++){const data=buffer.getChannelData(c);for(let i=0;i<length;i++)out[i]+=data[i]/channels}
+  return out;
+}
+function buildWavePeaks(samples,buckets){
+  const block=Math.max(1,Math.floor(samples.length/buckets)),peaks=[];
+  for(let b=0;b<buckets;b++){
+    const start=b*block,end=Math.min(samples.length,start+block);let lo=0,hi=0;
+    for(let i=start;i<end;i++){const v=samples[i];if(v<lo)lo=v;if(v>hi)hi=v}
+    peaks.push([lo,hi]);
+  }
+  return peaks;
+}
+function drawWaveform(peaks){
+  const canvas=$('waveform'),dpr=Math.min(window.devicePixelRatio||1,2),rect=canvas.getBoundingClientRect();
+  canvas.width=Math.max(320,Math.round(rect.width*dpr));canvas.height=Math.round(150*dpr);
+  const g=canvas.getContext('2d'),w=canvas.width,h=canvas.height,mid=h/2;
+  g.clearRect(0,0,w,h);g.fillStyle='#030406';g.fillRect(0,0,w,h);
+  g.strokeStyle='rgba(104,216,255,.18)';g.beginPath();g.moveTo(0,mid);g.lineTo(w,mid);g.stroke();
+  g.strokeStyle='#68d8ff';g.lineWidth=Math.max(1,dpr);
+  g.beginPath();
+  peaks.forEach((p,i)=>{const x=i/(peaks.length-1)*w;g.moveTo(x,mid+p[0]*mid*.92);g.lineTo(x,mid+p[1]*mid*.92)});
+  g.stroke();
+}
+function drawPlayhead(){
+  if(!currentAudioBuffer||!$('player').duration)return;
+  const canvas=$('waveform'),g=canvas.getContext('2d');
+  if(!state.beatAnalysis)return;
+  drawWaveform(buildWavePeaks(downmix(currentAudioBuffer),720));
+  const x=($('player').currentTime/$('player').duration)*canvas.width;
+  g.strokeStyle='#f5d98f';g.lineWidth=2;g.beginPath();g.moveTo(x,0);g.lineTo(x,canvas.height);g.stroke();
+}
+function detectTempo(samples,sampleRate){
+  const targetRate=200,step=Math.max(1,Math.floor(sampleRate/targetRate)),env=[];
+  let prev=0;
+  for(let i=0;i<samples.length;i+=step){
+    let sum=0,end=Math.min(samples.length,i+step);
+    for(let j=i;j<end;j++)sum+=Math.abs(samples[j]);
+    const e=sum/(end-i||1),onset=Math.max(0,e-prev*.92);env.push(onset);prev=e;
+  }
+  const mean=env.reduce((a,b)=>a+b,0)/(env.length||1);
+  for(let i=0;i<env.length;i++)env[i]=Math.max(0,env[i]-mean*.55);
+  let best={score:-1,bpm:0},second=0;
+  for(let bpm=60;bpm<=190;bpm+=.5){
+    const lag=Math.round(targetRate*60/bpm);let score=0,n=0;
+    for(let i=lag;i<env.length;i++){score+=env[i]*env[i-lag];n++}
+    score/=n||1;
+    if(score>best.score){second=best.score;best={score,bpm}}else if(score>second)second=score;
+  }
+  let bpm=best.bpm;
+  if(bpm<78)bpm*=2;
+  if(bpm>170)bpm/=2;
+  const contrast=best.score>0?(best.score-second)/best.score:0;
+  const activity=Math.min(1,Math.sqrt(Math.max(0,best.score))*18);
+  const confidence=Math.max(.12,Math.min(.96,.30+contrast*2.4+activity*.5));
+  return {bpm:Math.round(bpm*10)/10,confidence};
+}
+function estimateTonalCenter(samples,sampleRate){
+  const maxSeconds=Math.min(90,samples.length/sampleRate),windows=24,size=4096,chroma=new Float64Array(12);
+  for(let w=0;w<windows;w++){
+    const center=Math.floor((w+.5)/windows*maxSeconds*sampleRate),start=Math.max(0,Math.min(samples.length-size,center-size/2));
+    for(let midi=36;midi<=83;midi++){
+      const freq=440*Math.pow(2,(midi-69)/12),omega=2*Math.PI*freq/sampleRate,coeff=2*Math.cos(omega);
+      let s0=0,s1=0,s2=0;
+      for(let i=0;i<size;i++){const win=.5-.5*Math.cos(2*Math.PI*i/(size-1));s0=samples[start+i]*win+coeff*s1-s2;s2=s1;s1=s0}
+      const power=Math.max(0,s1*s1+s2*s2-coeff*s1*s2);
+      chroma[midi%12]+=Math.sqrt(power);
+    }
+  }
+  const norm=Math.sqrt(chroma.reduce((a,v)=>a+v*v,0))||1;
+  for(let i=0;i<12;i++)chroma[i]/=norm;
+  const candidates=[];
+  for(let root=0;root<12;root++){
+    candidates.push({root,mode:'major',score:profileScore(chroma,majorProfile,root)});
+    candidates.push({root,mode:'minor',score:profileScore(chroma,minorProfile,root)});
+  }
+  candidates.sort((a,b)=>b.score-a.score);
+  const best=candidates[0],next=candidates[1],separation=Math.max(0,best.score-next.score);
+  const confidence=Math.max(.12,Math.min(.88,.25+separation*4));
+  return {key:`${noteNames[best.root]} ${best.mode}`,confidence};
+}
+function profileScore(chroma,profile,root){
+  let dot=0,a=0,b=0;
+  for(let i=0;i<12;i++){const p=profile[(i-root+12)%12];dot+=chroma[i]*p;a+=chroma[i]*chroma[i];b+=p*p}
+  return dot/(Math.sqrt(a*b)||1);
+}
+function buildEnergyMap(samples,buckets){
+  const block=Math.max(1,Math.floor(samples.length/buckets)),raw=[];
+  for(let b=0;b<buckets;b++){
+    const start=b*block,end=Math.min(samples.length,start+block);let sum=0;
+    for(let i=start;i<end;i++)sum+=samples[i]*samples[i];
+    raw.push(Math.sqrt(sum/(end-start||1)));
+  }
+  const max=Math.max(...raw,.0001),min=Math.min(...raw);
+  return raw.map(v=>Math.max(.04,(v-min)/(max-min||1)));
+}
+function buildArrangement(energy,duration,bpm){
+  const barsPerBlock=8,secondsPerBar=bpm?240/bpm:2,ideal=secondsPerBar*barsPerBlock;
+  const count=Math.max(4,Math.min(10,Math.round(duration/ideal)));
+  const blockDuration=duration/count,sections=[];
+  for(let i=0;i<count;i++){
+    const a=Math.floor(i/count*energy.length),b=Math.max(a+1,Math.floor((i+1)/count*energy.length));
+    const avg=energy.slice(a,b).reduce((x,y)=>x+y,0)/(b-a);
+    let name;
+    if(i===0)name='Intro';else if(i===count-1)name='Outro';
+    else if(avg>.66)name='Hook';else if(i===Math.floor(count*.62)&&avg<.52)name='Bridge';else name='Verse';
+    sections.push({name,start:i*blockDuration,end:(i+1)*blockDuration,energy:avg});
+  }
+  return sections;
+}
+function renderEnergy(values){
+  $('energyMap').innerHTML=values.map(v=>`<span style="height:${Math.round(10+v*48)}px" title="${Math.round(v*100)}% energy"></span>`).join('');
+}
+function renderArrangement(items){
+  const total=items.reduce((a,x)=>a+(x.end-x.start),0)||1;
+  $('arrangementMap').innerHTML=items.map(x=>`<button type="button" data-section="${x.name}" style="flex:${(x.end-x.start)/total}" title="${formatTime(x.start)}–${formatTime(x.end)}">${x.name}<br>${formatTime(x.start)}</button>`).join('');
+}
+function buildProducerNote(tempo,keyData,energy,arrangement){
+  const avg=energy.reduce((a,b)=>a+b,0)/(energy.length||1),peak=energy.indexOf(Math.max(...energy));
+  const peakTime=state.durationSeconds?peak/energy.length*state.durationSeconds:0;
+  const hooks=arrangement.filter(x=>x.name==='Hook').length;
+  return `Pulse reads near ${tempo.bpm} BPM (${confidenceLabel(tempo.confidence).toLowerCase()} confidence). Tonal center leans ${keyData.key}; verify it by ear before tuning vocals. Energy is ${avg>.58?'high and forward':avg>.38?'balanced with room to build':'restrained and atmospheric'}, with the strongest movement around ${formatTime(peakTime)}. The map suggests ${hooks||1} hook zone${hooks===1?'':'s'}; section labels are arrangement guidance, not claimed ground truth.`;
+}
+function confidenceLabel(v){return v>=.74?'High':v>=.48?'Medium':'Low'}
+function formatBytes(bytes){if(!Number.isFinite(bytes))return'—';const units=['B','KB','MB','GB'];let n=bytes,u=0;while(n>=1024&&u<units.length-1){n/=1024;u++}return `${n.toFixed(u?1:0)} ${units[u]}`}
+function formatTime(s){if(s===null||s===undefined||!Number.isFinite(Number(s)))return'—';s=Math.max(0,Number(s));return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`}
+
 function addGlossary(){const term=$('term').value.trim(),meaning=$('meaning').value.trim(),context=$('context').value.trim();if(!term||!meaning)return toast('Add the term and its meaning.');state.glossary.push({term,meaning,context});$('term').value=$('meaning').value=$('context').value='';renderGlossary();persist()}
 function renderGlossary(){$('glossaryList').innerHTML=[{term:'snaps',meaning:'Dope fiends / street customers',context:'Not Snapchat or messages.'},...state.glossary].map((g,i)=>`<div><b>${g.term}</b><br>${g.meaning}${g.context?`<br><small>${g.context}</small>`:''}${i?`<button class="btn small" style="float:right" onclick="removeGlossary(${i-1})">Remove</button>`:''}</div>`).join('')}
 function removeGlossary(i){state.glossary.splice(i,1);renderGlossary();persist()}
@@ -141,7 +435,7 @@ async function runCouncil(){const truth=$('truth').value.trim();if(!truth)return
 function saveProject(silent=false){const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');const p={id:Date.now(),title:$('title').value||'Untitled Chapter',chapter:$('chapter').value,vibe:vibes[state.vibeIndex][0],truth:$('truth').value,lyrics:$('lyrics').value,result:state.lastResult,created:new Date().toISOString()};projects.unshift(p);localStorage.setItem('rnp2_projects',JSON.stringify(projects.slice(0,40)));if(!silent)toast('Project saved locally.')}
 function renderArchive(){const p=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');$('archiveList').innerHTML=p.length?p.map(x=>`<div><b>${escapeHtml(x.title)}</b><br><small>${new Date(x.created).toLocaleString()} // ${escapeHtml(x.vibe||'')}</small><br>${escapeHtml((x.truth||'').slice(0,150))}</div>`).join(''):'<div>No saved projects yet.</div>'}
 async function copyLyrics(){await navigator.clipboard.writeText($('lyrics').value);toast('Lyrics copied for BandLab.')}
-function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds)$('beatLength').textContent=formatTime(state.durationSeconds)}
+function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds){$('beatLength').textContent=formatTime(state.durationSeconds);$('waveDuration').textContent=formatTime(state.durationSeconds)}if(state.beatAnalysis){const a=state.beatAnalysis;$('detectedBpm').textContent=a.bpm||'—';$('detectedKey').textContent=a.key||'—';$('bpmConfidence').textContent=confidenceLabel(a.bpmConfidence||0)+' pulse confidence';$('keyConfidence').textContent=confidenceLabel(a.keyConfidence||0)+' tonal confidence · verify by ear';$('bpm').value=a.bpm||'';$('key').value=a.key||'';renderEnergy(a.energy||[]);renderArrangement(a.arrangement||[]);$('analysisState').textContent='Previous analysis restored';$('analysisBar').style.width='100%'}}
 restore();
 </script>
 </body>
