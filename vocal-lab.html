@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#07080b">
+<title>RNP Vocal Lab</title>
+<style>
+:root{
+  --bg:#07080b;--panel:rgba(13,16,21,.94);--line:rgba(104,216,255,.34);
+  --cyan:#68d8ff;--green:#70ffb1;--gold:#e3c267;--red:#b20c23;--ink:#f6f0e8;
+  --muted:#a9a39b;--safe:env(safe-area-inset-bottom)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#151b24 0,#08090c 42%,#050506 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}
+.app{max-width:920px;margin:auto;padding:calc(16px + env(safe-area-inset-top)) 14px calc(28px + var(--safe))}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand small{display:block;color:var(--gold);font:800 9px "Courier New";letter-spacing:.16em}
+.brand h1{font-size:27px;margin:4px 0 0;letter-spacing:-.04em}
+.badge{border:1px solid var(--line);padding:7px 9px;font:800 9px "Courier New";letter-spacing:.08em;text-transform:uppercase;color:#c8f1ff;background:rgba(0,0,0,.32)}
+.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);margin-right:6px}
+.grid{display:grid;gap:12px}.card{background:linear-gradient(145deg,rgba(11,14,19,.97),rgba(21,18,20,.92));border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 16px 48px rgba(0,0,0,.45)}
+.card h2{font-size:15px;text-transform:uppercase;margin:0 0 4px}.sub{color:var(--muted);font-size:12px;line-height:1.45;margin:0 0 12px}
+.upload{display:block;border:1px dashed rgba(255,255,255,.38);padding:14px;text-align:center;font-weight:900;text-transform:uppercase;background:rgba(0,0,0,.27);border-radius:9px}.upload input{display:none}
+audio{width:100%;margin-top:10px}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.btn{border:1px solid rgba(255,255,255,.4);background:#f4eee5;color:#111;padding:12px;border-radius:9px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.btn.primary{background:var(--red);color:white}.btn.dark{background:#08090b;color:white}.btn:disabled{opacity:.45}
+.recordOrb{width:154px;height:154px;border-radius:50%;margin:14px auto;display:grid;place-items:center;border:9px solid #1c2027;background:radial-gradient(circle,#c91934 0 30%,#7d091b 31% 52%,#1d070c 53%);box-shadow:0 0 0 1px rgba(255,255,255,.25),0 0 34px rgba(178,12,35,.34);color:#fff;font-weight:1000;letter-spacing:.08em}
+.recordOrb.recording{animation:pulse 1.15s infinite}@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(178,12,35,.12),0 0 48px rgba(178,12,35,.7)}}
+.timer{text-align:center;font:900 28px "Courier New";letter-spacing:.05em}
+.state{text-align:center;color:var(--cyan);font:800 10px "Courier New";text-transform:uppercase;letter-spacing:.12em}
+canvas{width:100%;height:80px;display:block;border:1px solid rgba(255,255,255,.18);background:#030406;border-radius:8px;margin:10px 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field{border:1px solid rgba(255,255,255,.2);padding:10px;border-radius:9px;background:rgba(0,0,0,.22)}.field label{display:block;color:var(--muted);font:800 9px "Courier New";text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}.field input,.field select{width:100%;background:#090b0e;color:white;border:1px solid rgba(255,255,255,.28);padding:9px;border-radius:7px}
+.take{border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.26);border-radius:10px;padding:11px;margin-top:9px}
+.takeTop{display:flex;justify-content:space-between;gap:8px;align-items:center}.takeTitle{font-weight:900}.takeMeta{font:10px "Courier New";color:var(--muted);margin-top:3px}.takeBtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.takeBtns button{padding:8px 4px;font-size:10px}.empty{text-align:center;padding:24px;color:var(--muted);border:1px dashed rgba(255,255,255,.2);border-radius:9px}
+.truth{border-left:3px solid var(--gold);padding:9px 10px;background:rgba(0,0,0,.25);font-size:12px;line-height:1.45}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}.controls{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><small>REAL NINJA POETICS // VOICE LOCKER</small><h1>VOCAL LAB</h1></div>
+  <div class="badge" id="micBadge"><span class="led"></span>Local-first</div>
+</header>
+
+<div class="grid">
+<section class="card">
+  <h2>Session Playback</h2>
+  <p class="sub">Load the same beat you used in Producer Room. It stays on this device.</p>
+  <label class="upload">♬ Load Beat<input id="beatFile" type="file" accept="audio/*,video/mp4"></label>
+  <audio id="beatPlayer" controls></audio>
+  <div class="row" style="margin-top:9px">
+    <div class="field"><label>Beat volume</label><input id="beatVolume" type="range" min="0" max="1" value=".82" step=".01"></div>
+    <div class="field"><label>Count-in</label><select id="countIn"><option value="0">Off</option><option value="2">2 seconds</option><option value="4" selected>4 seconds</option></select></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Mic Booth</h2>
+  <p class="sub">Use headphones to prevent the beat from bleeding into the vocal take.</p>
+  <div id="recState" class="state">Tap arm mic to begin</div>
+  <div id="timer" class="timer">00:00.0</div>
+  <canvas id="meter" width="700" height="120"></canvas>
+  <button id="recordOrb" class="recordOrb" type="button">ARM MIC</button>
+  <div class="controls">
+    <button id="startBtn" class="btn primary" disabled>Record</button>
+    <button id="pauseBtn" class="btn dark" disabled>Pause</button>
+    <button id="stopBtn" class="btn dark" disabled>Stop</button>
+    <button id="markBtn" class="btn dark" disabled>Mark</button>
+  </div>
+</section>
+
+<section class="card full">
+  <h2>Vocal Chain</h2>
+  <p class="sub">These are monitoring/playback choices. The original recording remains untouched for BandLab.</p>
+  <div class="row">
+    <div class="field"><label>Take name</label><input id="takeName" placeholder="Verse 1 — Take 1"></div>
+    <div class="field"><label>Preset</label><select id="preset"><option value="natural">Natural</option><option value="warm">Warm & close</option><option value="crisp">Crisp rap</option><option value="dark">Dark intimate</option><option value="hook">Wide hook</option></select></div>
+    <div class="field"><label>Playback gain</label><input id="vocalGain" type="range" min=".2" max="1.8" value="1" step=".05"></div>
+    <div class="field"><label>Reverb feel</label><input id="reverbFeel" type="range" min="0" max="1" value=".12" step=".01"></div>
+  </div>
+  <div class="truth" style="margin-top:10px">RNP preserves the dry master. Presets only change how a take sounds inside the lab; export stays clean for final mixing.</div>
+</section>
+
+<section class="card full">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+    <div><h2>Voice Locker</h2><p class="sub" style="margin-bottom:0">Saved locally in this browser.</p></div>
+    <button id="clearAll" class="btn dark" style="padding:9px 10px;font-size:10px">Clear All</button>
+  </div>
+  <div id="takes"></div>
+</section>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let stream=null,recorder=null,chunks=[],timerStart=0,timerRAF=null,audioCtx=null,analyser=null,sourceNode=null,meterRAF=null,marks=[];
+const DB_NAME='rnp_vocal_lab',STORE='takes';
+
+function fmt(ms){const total=ms/1000,m=Math.floor(total/60),s=Math.floor(total%60),d=Math.floor((total%1)*10);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${d}`}
+function toastState(t){$('recState').textContent=t}
+function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE,{keyPath:'id'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+async function dbPut(v){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(v);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function dbAll(){const db=await openDB();return new Promise((res,rej)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>res(r.result.sort((a,b)=>b.created-a.created));r.onerror=()=>rej(r.error)})}
+async function dbDelete(id){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function dbClear(){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+
+$('beatFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;$('beatPlayer').src=URL.createObjectURL(f);localStorage.setItem('rnp_vocal_last_beat',f.name)});
+$('beatVolume').addEventListener('input',e=>$('beatPlayer').volume=Number(e.target.value));
+
+$('recordOrb').onclick=armMic;
+async function armMic(){
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    $('micBadge').innerHTML='<span class="led"></span>Mic ready';
+    $('startBtn').disabled=false;$('recordOrb').textContent='MIC READY';toastState('Headphones on — ready to record');
+    setupMeter();
+  }catch(e){toastState('Microphone access was blocked');$('micBadge').textContent='Mic blocked';console.error(e)}
+}
+function setupMeter(){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  analyser=audioCtx.createAnalyser();analyser.fftSize=512;
+  sourceNode=audioCtx.createMediaStreamSource(stream);sourceNode.connect(analyser);
+  const data=new Uint8Array(analyser.frequencyBinCount),c=$('meter'),g=c.getContext('2d');
+  const draw=()=>{meterRAF=requestAnimationFrame(draw);analyser.getByteTimeDomainData(data);g.fillStyle='#030406';g.fillRect(0,0,c.width,c.height);g.strokeStyle='#68d8ff';g.lineWidth=3;g.beginPath();for(let i=0;i<data.length;i++){const x=i/(data.length-1)*c.width,y=(data[i]/255)*c.height;i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke()};draw()
+}
+function bestMime(){return ['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(x=>MediaRecorder.isTypeSupported(x))||''}
+$('startBtn').onclick=async()=>{
+  if(!stream)return;
+  const delay=Number($('countIn').value);
+  $('startBtn').disabled=true;toastState(delay?`Count in… ${delay}`:'Recording');
+  if(delay){$('beatPlayer').currentTime=Math.max(0,$('beatPlayer').currentTime);setTimeout(()=>{$('beatPlayer').play().catch(()=>{})},delay*1000)}
+  setTimeout(startRecording,delay*1000);
+};
+function startRecording(){
+  chunks=[];marks=[];const mime=bestMime();recorder=new MediaRecorder(stream,mime?{mimeType:mime}:undefined);
+  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  recorder.onstop=saveTake;
+  recorder.start(250);timerStart=performance.now();tick();
+  $('recordOrb').classList.add('recording');$('recordOrb').textContent='RECORDING';
+  $('pauseBtn').disabled=false;$('stopBtn').disabled=false;$('markBtn').disabled=false;toastState('Recording dry vocal');
+}
+function tick(){const run=()=>{$('timer').textContent=fmt(performance.now()-timerStart);timerRAF=requestAnimationFrame(run)};run()}
+$('pauseBtn').onclick=()=>{if(!recorder)return;if(recorder.state==='recording'){recorder.pause();$('pauseBtn').textContent='Resume';toastState('Take paused')}else{recorder.resume();$('pauseBtn').textContent='Pause';toastState('Recording resumed')}};
+$('markBtn').onclick=()=>{if(recorder?.state==='recording'){marks.push(performance.now()-timerStart);toastState(`Marker ${marks.length} saved`)}};
+$('stopBtn').onclick=()=>{if(recorder&&recorder.state!=='inactive')recorder.stop();$('beatPlayer').pause();cancelAnimationFrame(timerRAF);$('recordOrb').classList.remove('recording');$('recordOrb').textContent='MIC READY';$('pauseBtn').disabled=true;$('stopBtn').disabled=true;$('markBtn').disabled=true;$('startBtn').disabled=false;toastState('Saving take locally')};
+async function saveTake(){
+  const duration=performance.now()-timerStart,blob=new Blob(chunks,{type:recorder.mimeType||'audio/webm'}),name=$('takeName').value.trim()||`Take ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;
+  await dbPut({id:Date.now(),name,created:Date.now(),duration,mime:blob.type,blob,marks,favorite:false,preset:$('preset').value});
+  $('takeName').value='';$('timer').textContent='00:00.0';toastState('Take saved in Voice Locker');renderTakes()
+}
+async function renderTakes(){
+  const takes=await dbAll(),box=$('takes');if(!takes.length){box.innerHTML='<div class="empty">No takes yet. Arm the mic and record your first one.</div>';return}
+  box.innerHTML='';
+  for(const t of takes){
+    const url=URL.createObjectURL(t.blob),el=document.createElement('div');el.className='take';
+    el.innerHTML=`<div class="takeTop"><div><div class="takeTitle">${t.favorite?'★ ':''}${escapeHtml(t.name)}</div><div class="takeMeta">${new Date(t.created).toLocaleString()} · ${fmt(t.duration)} · ${(t.blob.size/1024/1024).toFixed(2)} MB</div></div><span class="badge">${escapeHtml(t.preset||'natural')}</span></div><audio controls src="${url}"></audio><div class="takeBtns"><button class="btn dark fav">Favorite</button><button class="btn dark rename">Rename</button><button class="btn dark export">Export</button><button class="btn dark delete">Delete</button></div>`;
+    el.querySelector('.fav').onclick=async()=>{t.favorite=!t.favorite;await dbPut(t);renderTakes()};
+    el.querySelector('.rename').onclick=async()=>{const n=prompt('Take name',t.name);if(n?.trim()){t.name=n.trim();await dbPut(t);renderTakes()}};
+    el.querySelector('.export').onclick=()=>{const a=document.createElement('a');a.href=url;a.download=`${safeName(t.name)}.${t.mime.includes('mp4')?'m4a':'webm'}`;a.click()};
+    el.querySelector('.delete').onclick=async()=>{if(confirm(`Delete "${t.name}"?`)){await dbDelete(t.id);URL.revokeObjectURL(url);renderTakes()}};
+    box.appendChild(el)
+  }
+}
+function escapeHtml(s=''){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function safeName(s){return s.replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'')||'rnp_take'}
+$('clearAll').onclick=async()=>{if(confirm('Delete every saved vocal take from this browser?')){await dbClear();renderTakes()}};
+window.addEventListener('beforeunload',()=>{stream?.getTracks().forEach(t=>t.stop());if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl)});
+let currentObjectUrl=null;
+renderTakes();
+</script>
+</body>
+</html>
