@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="RNP Studio" />
-<title>RNP Studio 3.0 — Beat Intelligence</title>
+<title>RNP Studio 3.0 — Beat Intelligence 2B</title>
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
@@ -55,6 +55,19 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 .overrideNote{margin-top:8px;font:10px/1.5 "Courier New",monospace;color:var(--muted)}
 @media (min-width:700px){.intelGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
+
+/* BRICK 2B */
+.gridControls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.timelineShell{margin-top:12px;border:1px solid rgba(255,255,255,.22);background:#020305;padding:8px}
+#timelineCanvas{display:block;width:100%;height:92px;cursor:pointer}
+.timelineLegend{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px;font:9px "Courier New",monospace;color:var(--muted)}
+.timelineLegend span{display:inline-flex;align-items:center;gap:5px}.timelineLegend i{width:9px;height:9px;border-radius:2px;background:var(--cyan)}
+.timelineLegend span:nth-child(2) i{background:var(--gold)}.timelineLegend span:nth-child(3) i{background:var(--red)}
+.markerList{display:grid;gap:7px;margin-top:10px}.markerItem{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.25);padding:8px}
+.markerTime{font:800 10px "Courier New",monospace;color:var(--gold)}.markerText strong{display:block;font-size:12px}.markerText small{display:block;margin-top:2px;color:var(--muted);line-height:1.35}
+.markerJump{border:1px solid rgba(104,216,255,.45);background:rgba(104,216,255,.08);color:var(--cyan);padding:6px 8px;font:800 9px "Courier New",monospace;text-transform:uppercase}
+.analysisActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.analysisActions button{flex:1 1 140px}
+@media (min-width:700px){.gridControls{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -62,7 +75,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 <div class="wall" aria-hidden="true"></div>
 <header class="hero">
 <div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 3.0</strong><div class="tag">BANDLAB RECORDS. RNP CREATES.</div></div></div>
-<div class="status"><span class="led"></span>BEAT INTELLIGENCE ONLINE // BRICK 2</div>
+<div class="status"><span class="led"></span>BEAT INTELLIGENCE ONLINE // BRICK 2B</div>
 </header>
 <div class="studioRail" aria-label="Studio rooms">
 <span class="roomChip">Lobby</span><span class="roomChip">Producer Room</span><span class="roomChip">Vocal Lab</span><span class="roomChip">Writing Desk</span><span class="roomChip">Cover Studio</span><span class="roomChip">Culture Vault</span><span class="roomChip">Memory Vault</span><span class="roomChip">Settings</span>
@@ -106,6 +119,23 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
   <div id="energyMap" class="energyMap" aria-label="Beat energy map"></div>
   <div class="eyebrow" style="margin-top:12px">Suggested arrangement</div>
   <div id="arrangementMap" class="arrangementMap" aria-label="Suggested song sections"></div>
+  <div class="gridControls">
+    <div class="intelMetric"><span>Tempo interpretation</span><strong id="tempoMode">—</strong><small id="tempoAlternates">Half/double-time check pending</small></div>
+    <div class="intelMetric"><span>Estimated bars</span><strong id="barCount">—</strong><small id="barCountNote">Based on working BPM</small></div>
+    <div class="intelMetric"><span>Grid size</span><strong id="gridSize">—</strong><small>4/4 bar estimate</small></div>
+    <div class="intelMetric"><span>Detected events</span><strong id="eventCount">—</strong><small>Drops, transitions, silence</small></div>
+  </div>
+  <div class="eyebrow" style="margin-top:12px">Beat grid and event timeline</div>
+  <div class="timelineShell">
+    <canvas id="timelineCanvas" width="900" height="110" aria-label="Beat grid, bars and transition markers"></canvas>
+    <div class="timelineLegend"><span><i></i>Beat grid</span><span><i></i>Bar line</span><span><i></i>Drop / transition</span></div>
+  </div>
+  <div class="eyebrow" style="margin-top:12px">Timestamped producer markers</div>
+  <div id="markerList" class="markerList"><div class="analysisNotes">Markers appear after analysis.</div></div>
+  <div class="analysisActions">
+    <button id="exportBeatReport" class="btn small dark" type="button" disabled>Export Beat Report</button>
+    <button id="snapSections" class="btn small dark" type="button" disabled>Snap Sections to Bars</button>
+  </div>
   <div id="analysisNotes" class="analysisNotes">RNP analyzes the file on this device. Nothing is uploaded during beat detection.</div>
 </div>
 
@@ -191,7 +221,7 @@ const arcPresets={
 "Victory":["Hunger","Pressure","Adaptation","Execution","Proof","Elevation"]
 };
 let state=JSON.parse(localStorage.getItem('rnp2_state')||'{}');
-state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;state.beatAnalysis??=null;
+state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;state.beatAnalysis??=null;state.beatReports??=[];
 function persist(){localStorage.setItem('rnp2_state',JSON.stringify(state))}
 function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
 function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn?.classList.add('on');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();window.scrollTo({top:0,behavior:'smooth'})}
@@ -226,6 +256,9 @@ $('beatInput').addEventListener('change',async e=>{
   try{await analyzeBeatFile(f)}catch(err){analysisFail(err)}
 });
 $('reanalyzeBeat').addEventListener('click',()=>{if(currentBeatFile)analyzeBeatFile(currentBeatFile).catch(analysisFail)});
+$('exportBeatReport').addEventListener('click',exportBeatReport);
+$('snapSections').addEventListener('click',snapSectionsToBars);
+$('timelineCanvas').addEventListener('click',seekTimeline);
 $('player').addEventListener('timeupdate',drawPlayhead);
 
 function setAnalysisProgress(percent,label){
@@ -256,7 +289,7 @@ async function analyzeBeatFile(file){
 
   setAnalysisProgress(52,'Detecting pulse');
   await nextPaint();
-  const tempo=detectTempo(mono,currentAudioBuffer.sampleRate);
+  const tempo=detectTempoMultiPass(mono,currentAudioBuffer.sampleRate);
 
   setAnalysisProgress(69,'Reading tonal center');
   await nextPaint();
@@ -264,18 +297,15 @@ async function analyzeBeatFile(file){
 
   setAnalysisProgress(83,'Mapping energy and sections');
   await nextPaint();
-  const energy=buildEnergyMap(mono,32);
-  const arrangement=buildArrangement(energy,currentAudioBuffer.duration,tempo.bpm);
+  const energy=buildEnergyMap(mono,64);
+  const events=detectEvents(energy,currentAudioBuffer.duration);
+  const grid=buildBeatGrid(currentAudioBuffer.duration,tempo.bpm);
+  const arrangement=buildArrangement2B(energy,currentAudioBuffer.duration,tempo.bpm,grid);
 
   const analysis={
-    bpm:tempo.bpm,
-    bpmConfidence:tempo.confidence,
-    key:keyData.key,
-    keyConfidence:keyData.confidence,
-    energy,
-    arrangement,
-    durationSeconds:state.durationSeconds,
-    analyzedAt:new Date().toISOString()
+    bpm:tempo.bpm,rawBpm:tempo.rawBpm,tempoAlternates:tempo.alternates,tempoMode:tempo.mode,
+    bpmConfidence:tempo.confidence,key:keyData.key,keyConfidence:keyData.confidence,
+    energy,events,grid,arrangement,durationSeconds:state.durationSeconds,analyzedAt:new Date().toISOString()
   };
   state.beatAnalysis=analysis;
   $('detectedBpm').textContent=tempo.bpm?tempo.bpm.toFixed(tempo.bpm%1?1:0):'—';
@@ -284,10 +314,10 @@ async function analyzeBeatFile(file){
   $('keyConfidence').textContent=confidenceLabel(keyData.confidence)+' tonal confidence · verify by ear';
   $('bpm').value=tempo.bpm||'';
   $('key').value=keyData.key||'';
-  renderEnergy(energy);
-  renderArrangement(arrangement);
-  $('analysisNotes').textContent=buildProducerNote(tempo,keyData,energy,arrangement);
-  setAnalysisProgress(100,'Beat intelligence ready');
+  renderEnergy(energy);renderArrangement(arrangement);renderGridMetrics(analysis);renderTimeline(analysis);renderMarkers(analysis);
+  $('exportBeatReport').disabled=false;$('snapSections').disabled=false;
+  $('analysisNotes').textContent=buildProducerNote2B(tempo,keyData,energy,arrangement,events,grid);
+  setAnalysisProgress(100,'Beat intelligence 2B ready');
   $('signalBadge').innerHTML='<span class="led"></span>Analysis ready';
   persist();
 }
@@ -355,6 +385,72 @@ function detectTempo(samples,sampleRate){
   const confidence=Math.max(.12,Math.min(.96,.30+contrast*2.4+activity*.5));
   return {bpm:Math.round(bpm*10)/10,confidence};
 }
+
+function detectTempoMultiPass(samples,sampleRate){
+  const full=detectTempo(samples,sampleRate),q=Math.floor(samples.length/4);
+  const mid=detectTempo(samples.slice(q,Math.min(samples.length,q*3)),sampleRate);
+  const candidates=[full.bpm,mid.bpm,full.bpm/2,full.bpm*2,mid.bpm/2,mid.bpm*2].filter(v=>v>=55&&v<=190);
+  let best=candidates[0]||full.bpm,score=-1;
+  for(const c of candidates){const s=1-Math.min(1,Math.abs(normalizeTempo(c)-normalizeTempo(mid.bpm))/20)+((c>=65&&c<=165)?.15:0);if(s>score){score=s;best=c}}
+  best=Math.round(best*10)/10;
+  const alternates=[Math.round(best/2*10)/10,Math.round(best*2*10)/10].filter(v=>v>=55&&v<=190);
+  let mode='Straight-time';if(Math.abs(best-full.bpm/2)<2)mode='Half-time interpretation';if(Math.abs(best-full.bpm*2)<2)mode='Double-time interpretation';
+  return {bpm:best,rawBpm:full.bpm,alternates,mode,confidence:Math.max(full.confidence*.65+mid.confidence*.35,Math.min(full.confidence,mid.confidence))};
+}
+function normalizeTempo(v){while(v<70)v*=2;while(v>170)v/=2;return v}
+function detectEvents(energy,duration){
+  const events=[],bd=duration/energy.length,avg=energy.reduce((a,b)=>a+b,0)/(energy.length||1);
+  for(let i=1;i<energy.length-1;i++){const p=energy[i-1],c=energy[i],n=energy[i+1],rise=c-p;
+    if(c<Math.max(.08,avg*.22)&&n>c+.22)events.push({type:'silence',time:i*bd,label:'Breath / silence pocket',detail:'Low-energy pocket before the next movement.'});
+    if(rise>.28&&c>avg+.12)events.push({type:'drop',time:i*bd,label:'Possible drop',detail:'Sharp energy increase; consider hook entry or vocal lift.'});
+    else if(Math.abs(c-p)>.20)events.push({type:'transition',time:i*bd,label:'Possible transition',detail:'Meaningful energy change; check drums, bass or arrangement shift.'});
+  }
+  const out=[];for(const e of events.sort((a,b)=>a.time-b.time)){const last=out[out.length-1];if(!last||e.time-last.time>4)out.push(e);else if(e.type==='drop'&&last.type!=='drop')out[out.length-1]=e}return out.slice(0,14);
+}
+function buildBeatGrid(duration,bpm){
+  if(!bpm||!duration)return {beats:[],bars:[],beatSeconds:0,barSeconds:0,estimatedBars:0};
+  const beatSeconds=60/bpm,barSeconds=beatSeconds*4,beats=[],bars=[];
+  for(let t=0;t<=duration;t+=beatSeconds)beats.push(t);for(let t=0;t<=duration;t+=barSeconds)bars.push(t);
+  return {beats,bars,beatSeconds,barSeconds,estimatedBars:Math.max(1,Math.round(duration/barSeconds))};
+}
+function snapTimeToBar(time,grid){return grid?.barSeconds?Math.max(0,Math.round(time/grid.barSeconds)*grid.barSeconds):time}
+function buildArrangement2B(energy,duration,bpm,grid){
+  const bars=grid.estimatedBars||Math.max(4,Math.round(duration/(240/(bpm||120)))),phraseBars=bars>=64?16:8,count=Math.max(4,Math.ceil(bars/phraseBars)),block=duration/count,sections=[];
+  for(let i=0;i<count;i++){const a=Math.floor(i/count*energy.length),b=Math.max(a+1,Math.floor((i+1)/count*energy.length)),avg=energy.slice(a,b).reduce((x,y)=>x+y,0)/(b-a);
+    let name=i===0?'Intro':i===count-1?'Outro':avg>.62?'Hook':(i>1&&i<count-2&&avg<.36?'Bridge':'Verse');
+    let start=snapTimeToBar(i*block,grid),end=snapTimeToBar((i+1)*block,grid);end=Math.max(start+(grid.barSeconds||1),end);
+    sections.push({name,start,end,energy:avg,bars:Math.max(1,Math.round((end-start)/(grid.barSeconds||1)))});
+  }return sections;
+}
+function renderGridMetrics(a){
+  $('tempoMode').textContent=a.tempoMode||'Straight-time';$('tempoAlternates').textContent=a.tempoAlternates?.length?`Also test ${a.tempoAlternates.join(' / ')} BPM`:'No normal-range alternate';
+  $('barCount').textContent=a.grid?.estimatedBars||'—';$('barCountNote').textContent=a.grid?.barSeconds?`${a.grid.barSeconds.toFixed(2)} sec per bar`:'Based on working BPM';
+  $('gridSize').textContent=a.grid?.beats?.length?`${a.grid.beats.length} beats`:'—';$('eventCount').textContent=a.events?.length??0;
+}
+function renderTimeline(a){
+  const c=$('timelineCanvas'),dpr=Math.min(window.devicePixelRatio||1,2),r=c.getBoundingClientRect();c.width=Math.max(320,Math.round(r.width*dpr));c.height=Math.round(92*dpr);
+  const g=c.getContext('2d'),w=c.width,h=c.height,d=a.durationSeconds||1;g.fillStyle='#020305';g.fillRect(0,0,w,h);
+  for(const t of a.grid?.beats||[]){const x=t/d*w,isBar=(Math.round(t/(a.grid.beatSeconds||1))%4===0);g.strokeStyle=isBar?'rgba(245,217,143,.62)':'rgba(104,216,255,.22)';g.lineWidth=isBar?1.5*dpr:.7*dpr;g.beginPath();g.moveTo(x,isBar?8*dpr:27*dpr);g.lineTo(x,h);g.stroke()}
+  for(const e of a.events||[]){const x=e.time/d*w;g.strokeStyle='#ff405f';g.lineWidth=2*dpr;g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.stroke();g.fillStyle='#ff405f';g.fillRect(Math.max(0,x-3*dpr),2*dpr,6*dpr,6*dpr)}
+}
+function renderMarkers(a){
+  if(!a.events?.length){$('markerList').innerHTML='<div class="analysisNotes">No strong drops or transitions detected. Use your ear as final truth.</div>';return}
+  $('markerList').innerHTML=a.events.map(e=>`<div class="markerItem"><div class="markerTime">${formatTime(e.time)}</div><div class="markerText"><strong>${e.label}</strong><small>${e.detail}</small></div><button class="markerJump" type="button" data-time="${e.time}">Jump</button></div>`).join('');
+  $('markerList').querySelectorAll('[data-time]').forEach(b=>b.addEventListener('click',()=>{$('player').currentTime=Number(b.dataset.time)||0;$('player').play().catch(()=>{})}));
+}
+function seekTimeline(ev){if(!state.beatAnalysis?.durationSeconds)return;const r=ev.currentTarget.getBoundingClientRect();$('player').currentTime=Math.max(0,Math.min(1,(ev.clientX-r.left)/r.width))*state.beatAnalysis.durationSeconds}
+function snapSectionsToBars(){const a=state.beatAnalysis;if(!a?.arrangement||!a.grid)return;a.arrangement=a.arrangement.map(s=>({...s,start:snapTimeToBar(s.start,a.grid),end:Math.max(snapTimeToBar(s.start,a.grid)+a.grid.barSeconds,snapTimeToBar(s.end,a.grid))}));renderArrangement(a.arrangement);renderTimeline(a);persist();$('analysisNotes').textContent='Sections snapped to nearest estimated bar. Verify by listening.'}
+function exportBeatReport(){
+  const a=state.beatAnalysis;if(!a)return;const title=($('title').value||$('beatName').textContent||'RNP Beat').replace(/[^\w\- ]+/g,'').trim();
+  const report={title,beat:$('beatName').textContent,duration:formatTime(a.durationSeconds),bpm:a.bpm,tempoMode:a.tempoMode,tempoAlternates:a.tempoAlternates,bpmConfidence:confidenceLabel(a.bpmConfidence),tonalCenter:a.key,keyConfidence:confidenceLabel(a.keyConfidence),estimatedBars:a.grid?.estimatedBars,sections:a.arrangement,events:a.events,notes:$('analysisNotes').textContent,disclaimer:'Beat analysis is heuristic and must be verified by ear.'};
+  state.beatReports.unshift({...report,exportedAt:new Date().toISOString()});state.beatReports=state.beatReports.slice(0,20);persist();
+  const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),aTag=document.createElement('a');aTag.href=url;aTag.download=(title||'rnp-beat-report').replace(/\s+/g,'-').toLowerCase()+'.json';document.body.appendChild(aTag);aTag.click();aTag.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);
+}
+function buildProducerNote2B(tempo,keyData,energy,arrangement,events,grid){
+  const peak=energy.indexOf(Math.max(...energy)),peakTime=state.durationSeconds?peak/energy.length*state.durationSeconds:0,hooks=arrangement.filter(x=>x.name==='Hook').length,drops=events.filter(x=>x.type==='drop').length;
+  return `Working pulse reads ${tempo.bpm} BPM with ${tempo.mode.toLowerCase()}; also test ${tempo.alternates.length?tempo.alternates.join(' or '):'the displayed tempo'} by ear. Tonal center leans ${keyData.key}. RNP estimates about ${grid.estimatedBars} bars, ${events.length} event${events.length===1?'':'s'}, and ${drops} possible drop${drops===1?'':'s'}. Peak energy appears near ${formatTime(peakTime)}. The map suggests ${hooks||1} hook zone${hooks===1?'':'s'}, but every marker remains guidance—not ground truth.`;
+}
+
 function estimateTonalCenter(samples,sampleRate){
   const maxSeconds=Math.min(90,samples.length/sampleRate),windows=24,size=4096,chroma=new Float64Array(12);
   for(let w=0;w<windows;w++){
@@ -415,12 +511,7 @@ function renderArrangement(items){
   const total=items.reduce((a,x)=>a+(x.end-x.start),0)||1;
   $('arrangementMap').innerHTML=items.map(x=>`<button type="button" data-section="${x.name}" style="flex:${(x.end-x.start)/total}" title="${formatTime(x.start)}–${formatTime(x.end)}">${x.name}<br>${formatTime(x.start)}</button>`).join('');
 }
-function buildProducerNote(tempo,keyData,energy,arrangement){
-  const avg=energy.reduce((a,b)=>a+b,0)/(energy.length||1),peak=energy.indexOf(Math.max(...energy));
-  const peakTime=state.durationSeconds?peak/energy.length*state.durationSeconds:0;
-  const hooks=arrangement.filter(x=>x.name==='Hook').length;
-  return `Pulse reads near ${tempo.bpm} BPM (${confidenceLabel(tempo.confidence).toLowerCase()} confidence). Tonal center leans ${keyData.key}; verify it by ear before tuning vocals. Energy is ${avg>.58?'high and forward':avg>.38?'balanced with room to build':'restrained and atmospheric'}, with the strongest movement around ${formatTime(peakTime)}. The map suggests ${hooks||1} hook zone${hooks===1?'':'s'}; section labels are arrangement guidance, not claimed ground truth.`;
-}
+
 function confidenceLabel(v){return v>=.74?'High':v>=.48?'Medium':'Low'}
 function formatBytes(bytes){if(!Number.isFinite(bytes))return'—';const units=['B','KB','MB','GB'];let n=bytes,u=0;while(n>=1024&&u<units.length-1){n/=1024;u++}return `${n.toFixed(u?1:0)} ${units[u]}`}
 function formatTime(s){if(s===null||s===undefined||!Number.isFinite(Number(s)))return'—';s=Math.max(0,Number(s));return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`}
@@ -435,7 +526,7 @@ async function runCouncil(){const truth=$('truth').value.trim();if(!truth)return
 function saveProject(silent=false){const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');const p={id:Date.now(),title:$('title').value||'Untitled Chapter',chapter:$('chapter').value,vibe:vibes[state.vibeIndex][0],truth:$('truth').value,lyrics:$('lyrics').value,result:state.lastResult,created:new Date().toISOString()};projects.unshift(p);localStorage.setItem('rnp2_projects',JSON.stringify(projects.slice(0,40)));if(!silent)toast('Project saved locally.')}
 function renderArchive(){const p=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');$('archiveList').innerHTML=p.length?p.map(x=>`<div><b>${escapeHtml(x.title)}</b><br><small>${new Date(x.created).toLocaleString()} // ${escapeHtml(x.vibe||'')}</small><br>${escapeHtml((x.truth||'').slice(0,150))}</div>`).join(''):'<div>No saved projects yet.</div>'}
 async function copyLyrics(){await navigator.clipboard.writeText($('lyrics').value);toast('Lyrics copied for BandLab.')}
-function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds){$('beatLength').textContent=formatTime(state.durationSeconds);$('waveDuration').textContent=formatTime(state.durationSeconds)}if(state.beatAnalysis){const a=state.beatAnalysis;$('detectedBpm').textContent=a.bpm||'—';$('detectedKey').textContent=a.key||'—';$('bpmConfidence').textContent=confidenceLabel(a.bpmConfidence||0)+' pulse confidence';$('keyConfidence').textContent=confidenceLabel(a.keyConfidence||0)+' tonal confidence · verify by ear';$('bpm').value=a.bpm||'';$('key').value=a.key||'';renderEnergy(a.energy||[]);renderArrangement(a.arrangement||[]);$('analysisState').textContent='Previous analysis restored';$('analysisBar').style.width='100%'}}
+function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds){$('beatLength').textContent=formatTime(state.durationSeconds);$('waveDuration').textContent=formatTime(state.durationSeconds)}if(state.beatAnalysis){const a=state.beatAnalysis;$('detectedBpm').textContent=a.bpm||'—';$('detectedKey').textContent=a.key||'—';$('bpmConfidence').textContent=confidenceLabel(a.bpmConfidence||0)+' pulse confidence';$('keyConfidence').textContent=confidenceLabel(a.keyConfidence||0)+' tonal confidence · verify by ear';$('bpm').value=a.bpm||'';$('key').value=a.key||'';renderEnergy(a.energy||[]);renderArrangement(a.arrangement||[]);renderGridMetrics(a);renderTimeline(a);renderMarkers(a);$('analysisState').textContent='Previous analysis restored';$('analysisBar').style.width='100%';$('exportBeatReport').disabled=false;$('snapSections').disabled=false}}
 restore();
 </script>
 </body>
