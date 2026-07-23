@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="92" fill="#f5f3ee"/>
-<path d="M420 32c-94 11-164 53-207 127-30 52-38 108-21 168 15 52 57 103 119 153-50-18-94-46-130-83-51-53-76-115-72-187 4-70 34-126 88-168C250 1 326-2 420 32Z" fill="#a60016"/>
-<text x="52" y="330" font-family="Arial Black,Arial" font-size="176" font-weight="900" letter-spacing="-18" fill="#0b0b0d">RNP</text>
-<rect x="55" y="355" width="398" height="18" fill="#a60016"/>
-<text x="58" y="410" font-family="monospace" font-size="24" font-weight="700" letter-spacing="5" fill="#0b0b0d">REAL NINJA POETICS</text>
-</svg>
