@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="RNP Studio" />
-<title>RNP Studio 3.2.1 — Creative Dashboard</title>
+<title>RNP Studio 4.0 — The Sanctuary Interface</title>
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
@@ -182,22 +182,122 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 .vocalConsole .recordOrbMini{width:112px;height:112px;border-radius:50%;margin:4px auto;display:grid;place-items:center;border:7px solid #1c2027;background:radial-gradient(circle,#c91934 0 30%,#7d091b 31% 52%,#1d070c 53%);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 28px rgba(178,12,35,.25);font:900 10px "Courier New",monospace;letter-spacing:.08em;color:white}
 .vocalConsole.recordingNow .recordOrbMini{animation:recPulse 1s infinite}
 
+
+.archiveProject{cursor:pointer;transition:.18s ease;border:1px solid rgba(255,255,255,.18)!important}
+.archiveProject:active{transform:scale(.99)}
+.archiveProject:focus{outline:2px solid var(--cyan);outline-offset:2px}
+
+
+/* RNP 4.0 — THE SANCTUARY INTERFACE */
+:root{
+  --sanctuary-gold:#d2a94f;
+  --sanctuary-amber:#b96f28;
+  --sanctuary-cyan:#68d8ff;
+  --sanctuary-green:#70ffb1;
+  --sanctuary-red:#b20c23;
+  --workspace:rgba(8,9,12,.88);
+  --workspace-strong:rgba(7,8,11,.96);
+}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:#050506}
+.app{max-width:none;overflow:visible;padding-bottom:calc(88px + var(--safe))}
+.wall{background-image:url("assets/rnp-sanctuary-masterpiece.jpg");background-position:center top;background-size:cover;filter:saturate(.92) contrast(1.06)}
+.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.5) 38%,rgba(0,0,0,.9) 86%)}
+.wall:after{background:radial-gradient(circle at 50% 18%,transparent 0 20%,rgba(0,0,0,.28) 48%,rgba(0,0,0,.76) 100%)}
+body[data-room="producer"] .wall{background-image:url("assets/rnp-studio-final.jpg")}
+body[data-room="vocal"] .wall{background-image:url("assets/rnp-vocal-lab.jpg")}
+body[data-room="write"] .wall{background-image:url("assets/rnp-dojo.jpg")}
+body[data-room="cover"] .wall{background-image:url("assets/rnp-futuristic-studio-master.jpg")}
+body[data-room="culture"] .wall{background-image:url("assets/rnp-sanctuary.jpg")}
+body[data-room="memory"] .wall,body[data-room="archive"] .wall{background-image:url("assets/rnp-galaxy-mind.jpg")}
+
+.hero{position:sticky;top:0;z-index:18;min-height:auto;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(180deg,rgba(4,4,5,.96),rgba(4,4,5,.74));border-bottom:1px solid rgba(210,169,79,.38)}
+.brandMark{width:54px;height:54px;border-radius:12px}.heroCopy strong{font-size:19px}.heroCopy small{font-size:8px}.heroCopy .tag{font-size:9px;margin-top:3px}.status{font-size:8px;padding:6px 8px;white-space:nowrap}
+
+.studioRail{position:sticky;top:75px;z-index:17;margin:0;padding:8px 12px;background:rgba(5,5,7,.86);border-bottom:1px solid rgba(210,169,79,.32);backdrop-filter:blur(18px);display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.studioRail::-webkit-scrollbar{display:none}.roomChip{border-radius:999px;padding:8px 11px;font-size:10px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);white-space:nowrap}.roomChip.on{background:rgba(178,12,35,.9);border-color:#f2c86d;box-shadow:0 0 24px rgba(178,12,35,.28)}
+.ambienceDock{position:sticky;top:119px;z-index:16;margin:0;padding:6px 12px;background:rgba(5,5,7,.72);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px)}
+.ambienceDock button{border-radius:999px;padding:7px 9px}.ambienceDock span{font-size:9px}
+
+.sanctuaryHalo{position:relative;z-index:3;margin:12px auto 0;max-width:1180px;padding:0 12px;display:grid;grid-template-columns:repeat(8,minmax(110px,1fr));gap:8px;overflow-x:auto;scrollbar-width:none}
+.sanctuaryHalo::-webkit-scrollbar{display:none}
+.memoryTile{min-height:86px;border:1px solid rgba(210,169,79,.35);background:linear-gradient(180deg,rgba(7,8,11,.88),rgba(7,8,11,.68));color:var(--ink);padding:10px;text-align:left;border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 12px 30px rgba(0,0,0,.24)}
+.memoryTile .icon{display:block;font-size:22px;margin-bottom:5px}.memoryTile b{display:block;font:900 11px "Courier New",monospace;letter-spacing:.06em;text-transform:uppercase;color:#f2c86d}.memoryTile small{display:block;color:#b9b0a7;font-size:10px;line-height:1.3;margin-top:4px}.memoryTile:active{transform:scale(.98)}.memoryTile.on{border-color:var(--sanctuary-green);box-shadow:0 0 0 1px rgba(112,255,177,.18),0 12px 30px rgba(0,0,0,.28)}
+
+main{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:14px 14px 40px}
+.page.on{animation:roomEnter .35s ease both}@keyframes roomEnter{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{border-radius:18px;border:1px solid rgba(210,169,79,.38);background:linear-gradient(180deg,rgba(7,8,11,.96),rgba(11,12,16,.9));box-shadow:0 24px 60px rgba(0,0,0,.42);padding:17px;margin-bottom:14px;backdrop-filter:blur(18px)}
+.card.rack{background:linear-gradient(180deg,rgba(7,8,11,.97),rgba(13,14,18,.91))}
+.cardH h2{font-size:17px;letter-spacing:.07em}.sub{color:#c0b7ad}.feed{border-radius:12px;background:rgba(1,2,4,.72)}
+input,textarea,select{border-radius:11px;background:rgba(0,0,0,.5)}
+.btn{border-radius:11px}.btn.primary{box-shadow:0 12px 30px rgba(178,12,35,.24)}
+
+/* One clear workspace instead of a dashboard wall. */
+.page.on#producer,.page.on#vocal,.page.on#write,.page.on#cover,.page.on#culture,.page.on#memory,.page.on#archive,.page.on#settings{display:block!important;max-width:980px;margin:0 auto}
+.page.on#producer>.card,.page.on#vocal>.card,.page.on#write>.card,.page.on#cover>.card,.page.on#culture>.card,.page.on#memory>.card,.page.on#archive>.card,.page.on#settings>.card{width:100%;margin:0 0 14px!important}
+
+.roomBanner{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;padding:12px 14px;border:1px solid rgba(210,169,79,.3);border-radius:14px;background:rgba(4,5,8,.7)}
+.roomBanner strong{font:900 13px "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:#f2c86d}.roomBanner span{color:#bdb4aa;font-size:11px;text-align:right}
+
+.utilityOrb{position:fixed;right:14px;bottom:calc(18px + var(--safe));z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid rgba(242,200,109,.6);background:#0b0c10;color:#f2c86d;font-size:22px;box-shadow:0 16px 36px rgba(0,0,0,.55)}
+.utilityDrawer{position:fixed;right:14px;bottom:calc(82px + var(--safe));z-index:39;width:min(290px,calc(100vw - 28px));padding:12px;border-radius:16px;border:1px solid rgba(210,169,79,.4);background:rgba(7,8,11,.96);box-shadow:0 24px 60px rgba(0,0,0,.58);display:none}.utilityDrawer.open{display:grid;grid-template-columns:1fr 1fr;gap:8px}.utilityDrawer .btn{font-size:10px;padding:10px}
+
+body.focusMode .hero,body.focusMode .studioRail,body.focusMode .ambienceDock,body.focusMode .sanctuaryHalo{display:none!important}
+body.focusMode main{padding-top:calc(16px + env(safe-area-inset-top));max-width:900px}
+body.focusMode .wall:before{background:linear-gradient(180deg,rgba(0,0,0,.38),rgba(0,0,0,.84))}
+body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
+
+.wallWhisper{position:fixed;left:12px;bottom:calc(22px + var(--safe));z-index:5;writing-mode:vertical-rl;transform:rotate(180deg);font:800 8px "Courier New",monospace;letter-spacing:.18em;color:rgba(242,200,109,.55);text-transform:uppercase;pointer-events:none}
+
+@media(max-width:899px){
+  .wall{background-size:auto 38vh;background-position:center top}.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.18) 17vh,rgba(0,0,0,.9) 39vh,#08080a 67vh)}
+  .hero{margin-top:25vh}.studioRail{top:calc(25vh + 75px)}.ambienceDock{top:calc(25vh + 119px)}
+  .sanctuaryHalo{grid-template-columns:repeat(8,132px);margin-top:8px}
+  .memoryTile{min-height:78px;padding:9px}.memoryTile small{font-size:9px}
+  main{padding-left:10px;padding-right:10px}.card{border-radius:15px;padding:14px}
+  .wallWhisper{display:none}
+}
+@media(min-width:900px){
+  .hero{grid-template-columns:1fr auto}.heroBrand{grid-column:1}.status{grid-column:2}.studioRail{top:75px}.ambienceDock{top:119px}
+  .sanctuaryHalo{padding:0 18px}.memoryTile:hover{border-color:#f2c86d;transform:translateY(-2px)}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
 <div class="wall" aria-hidden="true"></div>
 <header class="hero">
-<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 3.2</strong><div class="tag">BANDLAB RECORDS. RNP CREATES.</div></div></div>
+<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 4.0</strong><div class="tag">BANDLAB RECORDS. RNP CREATES.</div></div></div>
 <div class="status"><span class="led"></span>THE SANCTUARY ONLINE // MAN CAVE MODE</div>
 </header>
 <div class="studioRail" aria-label="Studio rooms">
 <button class="roomChip on" type="button" data-rail-room="lobby">Lobby</button><button class="roomChip" type="button" data-rail-room="producer">Producer Room</button><button class="roomChip" type="button" data-rail-room="vocal">Vocal Lab</button><button class="roomChip" type="button" data-rail-room="write">Writing Desk</button><button class="roomChip" type="button" data-rail-room="cover">Cover Studio</button><button class="roomChip" type="button" data-rail-room="culture">Culture Vault</button><button class="roomChip" type="button" data-rail-room="memory">Memory Vault</button><button class="roomChip" type="button" data-rail-room="archive">Archive</button><button class="roomChip" type="button" data-rail-room="settings">Settings</button>
 </div>
 <div class="ambienceDock" aria-label="Sanctuary ambience controls"><button id="ambienceToggle" type="button">☁ Atmosphere: On</button><button id="nightModeToggle" type="button">🌙 Late Night</button><span id="roomWhisper">Lobby · come home and create</span></div>
+
+<div class="sanctuaryHalo" aria-label="Interactive nostalgia wall">
+  <button class="memoryTile" type="button" data-wall-ref="Ultra Evolution"><span class="icon">⚡</span><b>Ultra Evolution</b><small>Discipline · training · earned transformation</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Mixtape Smoke Era"><span class="icon">💨</span><b>Mixtape Smoke</b><small>Late-night booth energy · fearless punchlines</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="PlayStation"><span class="icon">🎮</span><b>PlayStation</b><small>Boss levels · memory cards · respawn mentality</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Old Soul Records"><span class="icon">💿</span><b>Old Soul</b><small>Motown pain · harmony · family legacy</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Dark Hero Comics"><span class="icon">🦇</span><b>Dark Heroes</b><small>Blade · Spawn energy · protector in the shadows</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Divine Timing"><span class="icon">♏</span><b>11:11</b><small>Scorpio · Saturn · divine timing · rebirth</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Smoke and Psychedelic Reflection"><span class="icon">🍄</span><b>High Mind</b><small>Weed · shrooms · nature · altered perspective</small></button>
+  <button class="memoryTile" type="button" data-wall-ref="Route Life and Fatherhood"><span class="icon">🛣️</span><b>Real Life</b><small>Routes · fatherhood · pressure · legacy</small></button>
+</div>
+<div class="wallWhisper">Every wall holds a memory. Every memory can become a bar.</div>
+<button id="utilityOrb" class="utilityOrb" type="button" aria-label="Open sanctuary controls">☰</button>
+<div id="utilityDrawer" class="utilityDrawer" aria-label="Sanctuary controls">
+  <button id="focusModeBtn" class="btn dark" type="button">Focus Mode</button>
+  <button class="btn dark" type="button" onclick="saveProject()">Save Project</button>
+  <button class="btn dark" type="button" onclick="go('archive',document.querySelector('[data-rail-room=archive]'))">Recent Work</button>
+  <button class="btn dark" type="button" onclick="go('culture',document.querySelector('[data-rail-room=culture]'))">Culture Vault</button>
+</div>
+
 <main>
 <section id="lobby" class="page on">
-<div class="card rack welcome"><span class="badge" style="width:max-content">Private creative sanctuary</span><h1>ENTER THE STUDIO.</h1><p class="sub">Load the world, wake the room, and move from raw truth to beat intelligence, writing, vocals, cover art, and archive without breaking the creative flow.</p><div class="startSession"><button class="btn primary" onclick="go('producer',document.querySelector('[data-room=producer]'))">Start New Session</button><button class="btn dark" onclick="go('archive',document.querySelector('[data-room=archive]'))">Open Recent Work</button></div></div>
+<div class="card rack welcome"><span class="badge" style="width:max-content">Private creative sanctuary</span><h1>ENTER THE STUDIO.</h1><p class="sub">Load the world, wake the room, and move from raw truth to beat intelligence, writing, vocals, cover art, and archive without breaking the creative flow.</p><div class="startSession"><button class="btn primary" onclick="delete state.activeProjectId;persist();go('producer',document.querySelector('[data-rail-room=producer]'))">Start New Session</button><button class="btn dark" onclick="go('archive',document.querySelector('[data-rail-room=archive]'))">Open Recent Work</button></div></div>
 <div class="card rack"><div class="cardH"><h2>Creative Dashboard</h2><span class="badge">Session intelligence</span></div><div class="creativeDashboard">
 <div class="sessionStrip">
 <div class="sessionCell"><span>Current Track</span><strong id="dashTrack">Untitled Chapter</strong></div>
@@ -214,7 +314,7 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 <label>Target<select id="dashTarget"><option>Streaming Single</option><option>Mixtape Cut</option><option>Album Record</option><option>Freestyle</option><option>Demo</option></select></label>
 <label>Deadline<input id="dashDeadline" type="date" /></label>
 </div>
-<div class="quickDoors"><button class="btn small dark" onclick="go('producer',document.querySelector('[data-room=producer]'))">Load Beat</button><button class="btn small dark" onclick="go('write',document.querySelector('[data-room=write]'))">Continue Writing</button><button class="btn small dark" onclick="go('vocal',document.querySelector('[data-room=vocal]'))">Record Take</button><button class="btn small dark" onclick="go('cover',document.querySelector('[data-room=cover]'))">Direct Cover</button></div>
+<div class="quickDoors"><button class="btn small dark" onclick="go('producer',document.querySelector('[data-rail-room=producer]'))">Load Beat</button><button class="btn small dark" onclick="go('write',document.querySelector('[data-room=write]'))">Continue Writing</button><button class="btn small dark" onclick="go('vocal',document.querySelector('[data-room=vocal]'))">Record Take</button><button class="btn small dark" onclick="go('cover',document.querySelector('[data-room=cover]'))">Direct Cover</button></div>
 </div></div>
 </section>
 <section id="producer" class="page">
@@ -506,7 +606,7 @@ function getCoverStyles(){return [...document.querySelectorAll('.styleChip.on')]
 function updateCoverStyleSummary(){const styles=getCoverStyles();$('coverStyleSummary').textContent='Selected direction: '+(styles.length?styles.join(' + '):'Choose at least one art direction')}
 document.querySelectorAll('.styleChip').forEach(b=>b.addEventListener('click',()=>{const group=b.closest('[data-style-group]');if(group?.dataset.styleGroup==='primary')group.querySelectorAll('.styleChip').forEach(x=>x.classList.toggle('on',x===b));else b.classList.toggle('on');updateCoverStyleSummary()}));
 
-function go(id,btn){const page=document.getElementById(id);if(!page)return toast('That room is not available yet.');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x===page));document.querySelectorAll('[data-rail-room]').forEach(x=>x.classList.toggle('on',(x.dataset.room||x.dataset.railRoom)===id));const dock=document.getElementById('roomWhisper');if(dock)dock.textContent=id.replace(/(^|-)\w/g,m=>m.toUpperCase())+' · '+(ROOM_COPY[id]||'room online');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();if(id==='memory')renderMemoryVault();if(id==='write')syncWriterContext();if(id==='cover')renderCover();if(id==='lobby')refreshCreativeDashboard();history.replaceState(null,'','#'+id);window.scrollTo({top:document.querySelector('.studioRail').offsetTop,behavior:'smooth'})}
+function go(id,btn){const page=document.getElementById(id);if(!page)return toast('That room is not available yet.');document.body.dataset.room=id;document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x===page));document.querySelectorAll('[data-rail-room]').forEach(x=>x.classList.toggle('on',(x.dataset.room||x.dataset.railRoom)===id));const dock=document.getElementById('roomWhisper');if(dock)dock.textContent=id.replace(/(^|-)\w/g,m=>m.toUpperCase())+' · '+(ROOM_COPY[id]||'room online');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();if(id==='memory')renderMemoryVault();if(id==='write')syncWriterContext();if(id==='cover')renderCover();if(id==='lobby')refreshCreativeDashboard();history.replaceState(null,'','#'+id);window.scrollTo({top:document.querySelector('.studioRail').offsetTop,behavior:'smooth'})}
 window.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-rail-room]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.railRoom,b)));const hash=location.hash.slice(1);if(hash&&document.getElementById(hash))go(hash,document.querySelector(`[data-room="${hash}"]`));});
 function renderVibe(){const v=vibes[state.vibeIndex%vibes.length];$('vibeName').textContent=v[0];$('vibeFamily').textContent=v[1];$('turntable').style.transform=`rotate(${state.vibeIndex*22.5}deg)`;renderLayers();persist()}
 function renderLayers(){$('vibeLayers').innerHTML=layerOptions.map(x=>`<button class="chip ${state.layers.includes(x)?'on':''}" onclick="toggleLayer('${x}')">${x}</button>`).join('')}
@@ -895,8 +995,119 @@ async function runCouncil(){
     $('engineBadge').textContent='Offline';
   }
 }
-function saveProject(silent=false){const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');const p={id:Date.now(),title:$('title').value||'Untitled Chapter',chapter:$('chapter').value,vibe:vibes[state.vibeIndex][0],truth:$('truth').value,lyrics:$('lyrics').value,result:state.lastResult,created:new Date().toISOString()};projects.unshift(p);localStorage.setItem('rnp2_projects',JSON.stringify(projects.slice(0,40)));refreshCreativeDashboard();if(!silent)toast('Project saved locally.')}
-function renderArchive(){const p=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');$('archiveList').innerHTML=p.length?p.map(x=>`<div><b>${escapeHtml(x.title)}</b><br><small>${new Date(x.created).toLocaleString()} // ${escapeHtml(x.vibe||'')}</small><br>${escapeHtml((x.truth||'').slice(0,150))}</div>`).join(''):'<div>No saved projects yet.</div>'}
+function saveProject(silent=false){
+  const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');
+  const projectId=state.activeProjectId||Date.now();
+  const p={
+    id:projectId,
+    title:$('title').value||'Untitled Chapter',
+    chapter:$('chapter').value,
+    vibe:vibes[state.vibeIndex][0],
+    vibeIndex:state.vibeIndex,
+    truth:$('truth').value,
+    lyrics:$('lyrics').value,
+    result:state.lastResult,
+    arc:state.arc,
+    layers:state.layers,
+    influences:state.influences,
+    nostalgiaEnabled:state.nostalgiaEnabled,
+    nostalgiaCategory:state.nostalgiaCategory,
+    nostalgiaWeight:state.nostalgiaWeight,
+    nostalgiaMode:state.nostalgiaMode,
+    nostalgiaNote:state.nostalgiaNote,
+    pulseRefs:state.pulseRefs,
+    dashboard:state.dashboard||{},
+    updated:new Date().toISOString(),
+    created:projects.find(x=>x.id===projectId)?.created||new Date().toISOString()
+  };
+  const existingIndex=projects.findIndex(x=>x.id===projectId);
+  if(existingIndex>=0)projects.splice(existingIndex,1);
+  projects.unshift(p);
+  state.activeProjectId=projectId;
+  persist();
+  localStorage.setItem('rnp2_projects',JSON.stringify(projects.slice(0,40)));
+  refreshCreativeDashboard();
+  if(!silent)toast('Project saved locally.');
+}
+
+function loadProject(id){
+  const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');
+  const p=projects.find(x=>String(x.id)===String(id));
+  if(!p)return toast('That project could not be found.');
+
+  state.activeProjectId=p.id;
+  state.vibeIndex=Number.isInteger(p.vibeIndex)
+    ? p.vibeIndex
+    : Math.max(0,vibes.findIndex(v=>v[0]===p.vibe));
+  state.lastResult=p.result||null;
+  state.arc=Array.isArray(p.arc)&&p.arc.length?p.arc:state.arc;
+  state.layers=Array.isArray(p.layers)?p.layers:[];
+  state.influences=Array.isArray(p.influences)?p.influences:[];
+  state.nostalgiaEnabled=Boolean(p.nostalgiaEnabled);
+  state.nostalgiaCategory=p.nostalgiaCategory||'All';
+  state.nostalgiaWeight=p.nostalgiaWeight||'light';
+  state.nostalgiaMode=p.nostalgiaMode||'meaning';
+  state.nostalgiaNote=p.nostalgiaNote||'';
+  state.pulseRefs=Array.isArray(p.pulseRefs)?p.pulseRefs:[];
+  state.dashboard=p.dashboard||state.dashboard||{};
+
+  $('title').value=p.title||'';
+  $('chapter').value=p.chapter||'';
+  $('truth').value=p.truth||'';
+  $('lyrics').value=p.lyrics||'';
+
+  if($('writerTitle'))$('writerTitle').value=p.title||'';
+  if($('writerSeed'))$('writerSeed').value=p.truth||p.lyrics||'';
+
+  renderVibe();
+  renderInfluences();
+  renderArc();
+  renderNostalgiaCategories();
+  renderNostalgiaWall();
+  renderPulseSaved();
+  if(state.lastResult)renderResult(state.lastResult);
+  persist();
+  syncWriterContext();
+  refreshCreativeDashboard();
+  go('producer',document.querySelector('[data-rail-room="producer"]'));
+  toast(`Opened ${p.title||'project'}.`);
+}
+
+function deleteProject(id,event){
+  event?.stopPropagation();
+  if(!confirm('Delete this archived project?'))return;
+  let projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');
+  projects=projects.filter(x=>String(x.id)!==String(id));
+  localStorage.setItem('rnp2_projects',JSON.stringify(projects));
+  if(String(state.activeProjectId)===String(id)){
+    delete state.activeProjectId;
+    persist();
+  }
+  renderArchive();
+  refreshCreativeDashboard();
+  toast('Project removed from Archive.');
+}
+
+function renderArchive(){
+  const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');
+  $('archiveList').innerHTML=projects.length
+    ? projects.map(x=>`
+      <div class="archiveProject" role="button" tabindex="0"
+           onclick="loadProject('${x.id}')"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadProject('${x.id}')}">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+          <div>
+            <b>${escapeHtml(x.title)}</b><br>
+            <small>${new Date(x.updated||x.created).toLocaleString()} // ${escapeHtml(x.vibe||'')}</small>
+          </div>
+          <button class="btn small dark" type="button"
+                  onclick="deleteProject('${x.id}',event)">Delete</button>
+        </div>
+        <div style="margin-top:8px">${escapeHtml((x.truth||x.lyrics||'').slice(0,150))}</div>
+        <div style="margin-top:10px;color:var(--cyan);font:800 10px 'Courier New';letter-spacing:.08em;text-transform:uppercase">Tap to continue session →</div>
+      </div>`).join('')
+    : '<div>No saved projects yet.</div>';
+}
 async function copyLyrics(){await navigator.clipboard.writeText($('lyrics').value);toast('Lyrics copied for BandLab.')}
 function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds){$('beatLength').textContent=formatTime(state.durationSeconds);$('waveDuration').textContent=formatTime(state.durationSeconds)}if(state.beatAnalysis){const a=state.beatAnalysis;$('detectedBpm').textContent=a.bpm||'—';$('detectedKey').textContent=a.key||'—';$('bpmConfidence').textContent=confidenceLabel(a.bpmConfidence||0)+' pulse confidence';$('keyConfidence').textContent=confidenceLabel(a.keyConfidence||0)+' tonal confidence · verify by ear';$('bpm').value=a.bpm||'';$('key').value=a.key||'';renderEnergy(a.energy||[]);renderArrangement(a.arrangement||[]);renderGridMetrics(a);renderTimeline(a);renderMarkers(a);$('analysisState').textContent='Previous analysis restored';$('analysisBar').style.width='100%';$('exportBeatReport').disabled=false;$('snapSections').disabled=false}}
 restore();
@@ -1033,5 +1244,54 @@ $('ambienceToggle').onclick=()=>{document.body.classList.toggle('ambience-off');
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 
 </script>
+
+
+<script>
+(function(){
+  const orb=document.getElementById('utilityOrb');
+  const drawer=document.getElementById('utilityDrawer');
+  const focus=document.getElementById('focusModeBtn');
+  orb?.addEventListener('click',()=>drawer?.classList.toggle('open'));
+  focus?.addEventListener('click',()=>{
+    document.body.classList.toggle('focusMode');
+    focus.textContent=document.body.classList.contains('focusMode')?'Exit Focus':'Focus Mode';
+    drawer?.classList.remove('open');
+  });
+  document.querySelectorAll('[data-wall-ref]').forEach(tile=>{
+    tile.addEventListener('click',()=>{
+      const ref=tile.dataset.wallRef;
+      state.influences=Array.isArray(state.influences)?state.influences:[];
+      const exists=state.influences.includes(ref);
+      state.influences=exists?state.influences.filter(x=>x!==ref):[...state.influences,ref];
+      state.nostalgiaEnabled=true;
+      persist();
+      renderInfluences();
+      tile.classList.toggle('on',!exists);
+      toast(exists?`${ref} removed from this session.`:`${ref} added to the Nostalgia Wall.`);
+    });
+  });
+  const syncTiles=()=>document.querySelectorAll('[data-wall-ref]').forEach(tile=>tile.classList.toggle('on',(state.influences||[]).includes(tile.dataset.wallRef)));
+  syncTiles();
+  document.body.dataset.room=(location.hash||'#lobby').slice(1);
+  window.addEventListener('hashchange',()=>{document.body.dataset.room=(location.hash||'#lobby').slice(1);syncTiles()});
+})();
+</script>
+
+<script>
+window.RNP_BUILD='4.0.0';
+if('serviceWorker' in navigator){
+  window.addEventListener('load',async()=>{
+    try{
+      const regs=await navigator.serviceWorker.getRegistrations();
+      for(const reg of regs){
+        await reg.update();
+      }
+    }catch(e){
+      console.warn('RNP service worker refresh failed',e);
+    }
+  });
+}
+</script>
+
 </body>
 </html>

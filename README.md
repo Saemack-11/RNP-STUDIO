@@ -1,9 +1,12 @@
-# RNP Studio 3.4 — Full Functionality
+# RNP Studio 4.0 — The Sanctuary Interface
 
-- Raw Truth now drives Producer’s Table generation.
-- Removed internal engine rules from the visible interface.
-- Missing creative direction shows a lightweight prompt rather than marking the council offline.
-- Expanded Analog Vibe Deck.
-- Added PlayStation generations, weed, and shrooms to the optional Nostalgia Wall.
-- Writing Generate Track can use Raw Truth or writing direction when no seed bars are entered.
-- Keep only api/rnp.js; delete any old api/rnp.mjs before deployment.
+A full visual makeover built on the working 3.4.3 codebase.
+
+Included:
+- Resume Recent Work restore/update behavior
+- Immersive room-specific backgrounds
+- Interactive nostalgia wall around the workspace
+- Cleaner single-workspace layout
+- Compact top room navigation
+- Focus Mode and utility drawer
+- Existing Producer, Writing, Vocal, Cover, Culture, Memory and Archive functionality preserved
