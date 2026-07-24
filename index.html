@@ -825,7 +825,7 @@ function renderGlossary(){$('glossaryList').innerHTML=[{term:'snaps',meaning:'Do
 function removeGlossary(i){state.glossary.splice(i,1);renderGlossary();persist()}
 function escapeHtml(s=''){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function list(items){return `<ul>${(items||[]).map(x=>`<li>${escapeHtml(typeof x==='string'?x:JSON.stringify(x))}</li>`).join('')}</ul>`}
-function renderResult(r){let html='';html+=`<div class="resultSection"><h3>Creative Center</h3><p>${escapeHtml(r.creative_center||'')}</p></div>`;if(r.emotional_momentum){html+=`<div class="resultSection"><h3>Emotional Momentum</h3><p>${(r.emotional_momentum.arc||[]).map(escapeHtml).join(' → ')}</p><p>${escapeHtml(r.emotional_momentum.transition_notes||'')}</p><p><b>Pressure release:</b> ${escapeHtml(r.emotional_momentum.pressure_release||'')}</p></div>`}html+=`<div class="resultSection"><h3>Culture Lanes</h3>${(r.culture_lanes||[]).map(x=>`<p><b>${escapeHtml(x.reference_lane)}</b> — ${escapeHtml(x.symbolic_value)}<br><small>${escapeHtml(x.usage_rule)}</small></p>`).join('')}</div>`;html+=`<div class="resultSection"><h3>Producer's Table</h3>${(r.council||[]).map(x=>`<p><b>${escapeHtml(x.agent)}:</b> ${escapeHtml(x.direction)}</p>`).join('')}</div>`;html+=`<div class="resultSection"><h3>Hook Directions</h3>${list(r.hook_directions)}</div>`;html+=`<div class="resultSection"><h3>Full-Song Pocket Plan</h3><p>${escapeHtml(r.pocket_plan||'')}</p></div>`;html+=`<div class="resultSection"><h3>Image Bank</h3>${list(r.imagery)}</div>`;html+=`<div class="resultSection"><h3>Starter Material</h3>${list(r.starter_material)}</div>`;html+=`<div class="resultSection"><h3>Recording Notes</h3>${list(r.recording_notes)}</div>`;html+=`<div class="resultSection"><h3>Truth Check</h3>${list(r.authenticity_checks)}</div>`;$('feed').innerHTML=html}
+function renderResult(r){r=(r&&typeof r==='object')?r:{};let html='';html+=`<div class="resultSection"><h3>Creative Center</h3><p>${escapeHtml(r.creative_center||'')}</p></div>`;if(r.emotional_momentum){html+=`<div class="resultSection"><h3>Emotional Momentum</h3><p>${(r.emotional_momentum.arc||[]).map(escapeHtml).join(' → ')}</p><p>${escapeHtml(r.emotional_momentum.transition_notes||'')}</p><p><b>Pressure release:</b> ${escapeHtml(r.emotional_momentum.pressure_release||'')}</p></div>`}html+=`<div class="resultSection"><h3>Culture Lanes</h3>${(r.culture_lanes||[]).map(x=>`<p><b>${escapeHtml(x.reference_lane)}</b> — ${escapeHtml(x.symbolic_value)}<br><small>${escapeHtml(x.usage_rule)}</small></p>`).join('')}</div>`;html+=`<div class="resultSection"><h3>Producer's Table</h3>${(r.council||[]).map(x=>`<p><b>${escapeHtml(x.agent)}:</b> ${escapeHtml(x.direction)}</p>`).join('')}</div>`;html+=`<div class="resultSection"><h3>Hook Directions</h3>${list(r.hook_directions)}</div>`;html+=`<div class="resultSection"><h3>Full-Song Pocket Plan</h3><p>${escapeHtml(r.pocket_plan||'')}</p></div>`;html+=`<div class="resultSection"><h3>Image Bank</h3>${list(r.imagery)}</div>`;html+=`<div class="resultSection"><h3>Starter Material</h3>${list(r.starter_material)}</div>`;html+=`<div class="resultSection"><h3>Recording Notes</h3>${list(r.recording_notes)}</div>`;html+=`<div class="resultSection"><h3>Truth Check</h3>${list(r.authenticity_checks)}</div>`;$('feed').innerHTML=html}
 async function runCouncil(){
   const truth=$('truth').value.trim();
   const chapter=$('chapter').value.trim();
@@ -858,10 +858,38 @@ async function runCouncil(){
   try{
     const res=await fetch('/api/rnp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const data=await res.json();
-    if(!res.ok||!data.ok)throw new Error(data.error||`Council failed (${res.status})`);
-    renderResult(data.result);
+    if(!res.ok||data.ok===false)throw new Error(data.error||`Council failed (${res.status})`);
+
+    // Accept both the structured Producer's Table response and the older
+    // plain-text RNP response so a mismatched deployment cannot crash the UI.
+    const result=data.result||(
+      typeof data.text==='string'||typeof data.output==='string'
+        ? {
+            creative_center:'The writing engine answered successfully.',
+            emotional_momentum:{
+              arc:selectedArc||state.arc||[],
+              transition_notes:'Use the generated material as a starting point and keep the emotional movement natural.',
+              pressure_release:'Let the strongest truthful line become the release.'
+            },
+            culture_lanes:[],
+            council:[{agent:'Writing Engine',direction:String(data.text||data.output||'')}],
+            hook_directions:[],
+            pocket_plan:'Build around the natural pockets of the beat and the strongest repeated phrase.',
+            imagery:[],
+            starter_material:[String(data.text||data.output||'')],
+            recording_notes:['Read the material out loud and keep only what sounds natural in your voice.'],
+            authenticity_checks:['Keep the details truthful and rewrite anything that does not sound like Sae.']
+          }
+        : null
+    );
+
+    if(!result||typeof result!=='object'){
+      throw new Error('Council answered, but the response format was incomplete.');
+    }
+
+    renderResult(result);
     $('engineBadge').textContent='RNP Online';
-    state.lastResult=data.result;persist();saveProject(true);
+    state.lastResult=result;persist();saveProject(true);
   }catch(err){
     $('feed').textContent=`COUNCIL CONNECTION FAILED.\n\n${err.message}\n\nYour lyrics and session were not lost.`;
     $('engineBadge').textContent='Offline';
