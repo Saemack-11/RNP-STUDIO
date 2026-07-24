@@ -81,6 +81,15 @@ WRITING METHOD
 7. Do not explain the song inside generated_track. Output lyrics with clear section labels.
 8. Alternate pockets are short optional continuations, not complete replacement songs.
 
+OPTIONAL CREATIVE ASSISTS
+- Nostalgia Wall is OFF by default. When nostalgia.enabled is false, ignore nostalgia completely.
+- When enabled, use only the selected references and their symbolic meaning. Do not imitate copyrighted lyrics, dialogue, cadence, or a living artist's style.
+- Respect nostalgia.weight: light = at most one subtle flip per section; medium = a few recognizable but natural references; heavy = reference-led concept while still preserving the user's voice.
+- Respect nostalgia.mode: meaning, punchline, story, or humor.
+- Cultural Pulse references are current public moments saved by the user. Use them only when they naturally strengthen meaning or humor. Do not force names into bars.
+- Avoid defamation, unverified allegations, humiliation, or presenting rumors as facts. Prefer public, well-established moments and wordplay based on broadly known facts.
+- A fresh flip should transform the reference rather than repeat a meme everyone already used.
+
 REFERENCE IMPACT
 A line like "I ain't paranoid, I just waved at karma first" works because it is plainspoken, spiritual, slightly funny, quietly dangerous, and reveals a second meaning after it passes. Recreate that level of impact without copying the line or formula repeatedly.
 `.trim();
@@ -91,7 +100,7 @@ export function GET(request) {
     route: "/api/generate-track",
     method: request.method,
     keyConfigured: Boolean(process.env.OPENAI_API_KEY),
-    engineVersion: "rnp-writing-seed-1.0"
+    engineVersion: "rnp-writing-seed-1.1"
   });
 }
 
@@ -113,6 +122,23 @@ export async function POST(request) {
     vibe: clean(body?.vibe, 120),
     emotionalArc: cleanArray(body?.emotionalArc, 12, 80),
     slangNotes: cleanArray(body?.slangNotes, 30, 220),
+    nostalgia: {
+      enabled: Boolean(body?.nostalgia?.enabled),
+      references: cleanArray(body?.nostalgia?.references, 12, 120),
+      weight: clean(body?.nostalgia?.weight, 20),
+      mode: clean(body?.nostalgia?.mode, 30),
+      note: clean(body?.nostalgia?.note, 500)
+    },
+    culturalPulse: Array.isArray(body?.culturalPulse)
+      ? body.culturalPulse.slice(0, 10).map(x => ({
+          title: clean(x?.title, 180),
+          what_happened: clean(x?.what_happened, 500),
+          why_people_get_it: clean(x?.why_people_get_it, 500),
+          fresh_angle: clean(x?.fresh_angle || x?.angle, 500),
+          cliche_to_avoid: clean(x?.cliche_to_avoid, 300),
+          shelf_life: clean(x?.shelf_life, 40)
+        })).filter(x => x.title)
+      : [],
     beat: {
       name: clean(body?.beat?.name, 180),
       bpm: Number.isFinite(Number(body?.beat?.bpm)) ? Number(body.beat.bpm) : null,
@@ -163,7 +189,7 @@ export async function POST(request) {
       return json({ ok: false, error: "The Writing Engine changed or dropped part of your seed. Nothing was accepted—run it again." }, 502);
     }
 
-    return json({ ok: true, model: response.model, engineVersion: "rnp-writing-seed-1.0", result: { ...result, seed_preserved: true } });
+    return json({ ok: true, model: response.model, engineVersion: "rnp-writing-seed-1.1", result: { ...result, seed_preserved: true } });
   } catch (error) {
     console.error("RNP Writing Engine error", { message: error?.message, status: error?.status, code: error?.code });
     const status = Number.isInteger(error?.status) ? error.status : 500;
