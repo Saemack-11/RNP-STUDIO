@@ -28,7 +28,21 @@ export default async function handler(req, res) {
     });
   }
 
-  const { seed, modes = [] } = req.body || {};
+  const body = req.body || {};
+
+const seed = [
+  body.seed,
+  body.direction,
+  body.prompt,
+  body.lyrics,
+  body.seedText,
+  body.songDirection,
+  body.hook
+]
+  .find(value => typeof value === 'string' && value.trim())
+  ?.trim();
+
+const modes = Array.isArray(body.modes) ? body.modes : [];
 
   if (!seed || typeof seed !== 'string' || seed.length > 8000) {
     return res.status(400).json({
