@@ -145,6 +145,43 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 .creativeDashboard{display:grid;gap:12px}.sessionStrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.sessionCell{border:1px solid rgba(215,167,86,.3);background:linear-gradient(145deg,rgba(4,5,7,.78),rgba(29,18,17,.58));padding:12px;min-height:82px}.sessionCell span{display:block;font:800 9px "Courier New";letter-spacing:.14em;text-transform:uppercase;color:#9aa6a0}.sessionCell strong{display:block;margin-top:7px;font-size:13px;line-height:1.35;color:#f5d98f;overflow-wrap:anywhere}.nextMove{border-left:3px solid var(--weed);padding:13px 14px;background:rgba(12,35,25,.28);font-size:13px}.whiteboard{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:9px}.whiteboard label{font:800 9px "Courier New";letter-spacing:.12em;text-transform:uppercase;color:#d5c697}.whiteboard input,.whiteboard select{margin-top:6px}.quickDoors{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.quickDoors button{flex:0 0 auto}.styleBuilder{display:grid;gap:12px}.styleGroup{border:1px solid rgba(255,255,255,.16);padding:12px;background:rgba(0,0,0,.24)}.styleGroup b{display:block;margin-bottom:9px;font:900 10px "Courier New";letter-spacing:.14em;text-transform:uppercase;color:#d5c697}.styleChips{display:flex;flex-wrap:wrap;gap:7px}.styleChip{border:1px solid rgba(255,255,255,.28);background:#08090b;color:#c8c2bb;padding:8px 10px;font-size:11px;font-weight:800}.styleChip.on{border-color:#f2c86d;color:#ffe7a4;background:rgba(185,120,24,.16);box-shadow:inset 0 0 16px rgba(242,200,109,.08)}.styleSummary{font:11px/1.5 "Courier New";color:#baffd6;border-left:3px solid var(--weed);padding:9px 11px;background:rgba(12,35,25,.24)}
 @media(max-width:650px){.sessionStrip{grid-template-columns:1fr 1fr}.whiteboard{grid-template-columns:1fr}.coverOptionGrid{grid-template-columns:1fr}.page:before{background-attachment:scroll}.welcome{min-height:340px}.studioRail{top:0}}
 
+
+/* RNP 3.3 — OPTIONAL NOSTALGIA WALL + CULTURAL PULSE */
+.creativeAssist{border:1px solid rgba(227,194,103,.42);background:linear-gradient(145deg,rgba(22,17,12,.92),rgba(10,11,15,.94))}
+.assistHeader{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.assistSwitch{display:flex;align-items:center;gap:8px;font:800 10px "Courier New",monospace;text-transform:uppercase;letter-spacing:.08em}
+.assistSwitch input{width:auto}
+.assistBody[hidden]{display:none}
+.assistTabs{display:flex;gap:7px;overflow:auto;padding-bottom:4px;margin:10px 0}
+.assistTab{white-space:nowrap;border:1px solid rgba(255,255,255,.24);background:rgba(0,0,0,.3);color:var(--ink);padding:8px 10px;font:800 9px "Courier New",monospace;text-transform:uppercase}
+.assistTab.on{border-color:var(--gold);color:#ffe9a8;background:rgba(227,194,103,.12)}
+.referenceToolbar{display:grid;grid-template-columns:1fr auto;gap:8px;margin:10px 0}
+.referenceToolbar input{margin:0}
+.referenceScroller{max-height:330px;overflow:auto;border:1px solid rgba(255,255,255,.14);padding:8px;background:rgba(0,0,0,.22)}
+.referenceGroup{margin-bottom:12px}.referenceGroup:last-child{margin-bottom:0}
+.referenceGroup h3{font:900 10px "Courier New",monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:3px 0 7px}
+.referenceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.referenceCard{border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.3);padding:9px;text-align:left;color:var(--ink);min-height:62px}
+.referenceCard b{display:block;font-size:12px}.referenceCard small{display:block;color:var(--muted);font-size:10px;line-height:1.35;margin-top:3px}
+.referenceCard.on{border-color:var(--green);box-shadow:inset 0 0 0 1px rgba(112,255,177,.18);background:rgba(112,255,177,.07)}
+.selectedShelf{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;min-height:36px}
+.selectedRef{border:1px solid rgba(112,255,177,.4);background:rgba(112,255,177,.08);padding:7px 8px;font:800 9px "Courier New",monospace;color:#d9ffe9}
+.refControls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.refControls .fieldish{border:1px solid rgba(255,255,255,.18);padding:9px;background:rgba(0,0,0,.24)}
+.refControls label{display:block;color:var(--muted);font:800 9px "Courier New",monospace;text-transform:uppercase;margin-bottom:6px}
+.refControls select,.refControls textarea{width:100%;margin:0;background:#07080a;color:var(--ink);border:1px solid rgba(255,255,255,.28);padding:8px}
+.pulseGrid{display:grid;gap:10px}
+.pulseItem{border:1px solid rgba(255,255,255,.19);background:rgba(0,0,0,.28);padding:11px}
+.pulseItemHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.pulseItem b{display:block}.pulseItem small{display:block;color:var(--muted);line-height:1.4;margin-top:4px}
+.pulseTag{font:800 9px "Courier New",monospace;text-transform:uppercase;border:1px solid rgba(104,216,255,.35);padding:5px 6px;color:#c8f1ff}
+.pulseAngles{font-size:11px;line-height:1.5;margin-top:8px}
+.pulseActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.cultureColumns{display:grid;gap:12px}
+@media(min-width:760px){.referenceGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cultureColumns{grid-template-columns:1.1fr .9fr}.refControls{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.vocalConsole .recordOrbMini{width:112px;height:112px;border-radius:50%;margin:4px auto;display:grid;place-items:center;border:7px solid #1c2027;background:radial-gradient(circle,#c91934 0 30%,#7d091b 31% 52%,#1d070c 53%);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 28px rgba(178,12,35,.25);font:900 10px "Courier New",monospace;letter-spacing:.08em;color:white}
+.vocalConsole.recordingNow .recordOrbMini{animation:recPulse 1s infinite}
+
 </style>
 </head>
 <body>
@@ -249,10 +286,20 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 <p class="sub">Tap a preset, then tap emotion nodes to activate or remove them. The Council will map where the tone rises, softens, gets intimate, turns dangerous, becomes funny, or resolves.</p>
 </div>
 
-<div class="card rack">
-<div class="cardH"><h2>Nostalgia Wall</h2><span class="badge">Influence, not imitation</span></div>
-<div id="influences" class="influenceGrid"></div>
-<p class="sub">Choose only what belongs in this record. RNP uses symbolic meaning—discipline, flight, transformation, loyalty, darkness, precision—not copied style.</p>
+<div class="card rack creativeAssist">
+<div class="assistHeader"><div><div class="cardH" style="margin-bottom:3px"><h2>Nostalgia Wall</h2><span class="badge">Brain-fog assist</span></div><p class="sub" style="margin:0">Optional references for this song only. Leave it off when your natural pen is flowing.</p></div><label class="assistSwitch"><input id="nostalgiaEnabled" type="checkbox"> Use Wall</label></div>
+<div id="nostalgiaBody" class="assistBody" hidden>
+  <div id="nostalgiaTabs" class="assistTabs"></div>
+  <div class="referenceToolbar"><input id="nostalgiaSearch" placeholder="Search movies, music, games, childhood, sports, sayings..."><button id="clearNostalgia" class="btn small dark" type="button">Clear</button></div>
+  <div id="nostalgiaLibrary" class="referenceScroller"></div>
+  <div class="eyebrow" style="margin-top:11px">Selected for this record</div>
+  <div id="selectedNostalgia" class="selectedShelf"></div>
+  <div class="refControls">
+    <div class="fieldish"><label for="nostalgiaWeight">How strongly?</label><select id="nostalgiaWeight"><option value="light" selected>Light touch</option><option value="medium">Noticeable</option><option value="heavy">Reference-driven</option></select></div>
+    <div class="fieldish"><label for="nostalgiaMode">How should RNP use it?</label><select id="nostalgiaMode"><option value="meaning" selected>Meaning + metaphor</option><option value="punchline">Punchlines</option><option value="story">Story angles</option><option value="humor">Humorous flips</option></select></div>
+    <div class="fieldish"><label for="nostalgiaNote">Custom angle</label><textarea id="nostalgiaNote" rows="2" placeholder="Example: family weight, toxic love, childhood peace..."></textarea></div>
+  </div>
+</div>
 </div>
 
 <div class="card rack">
@@ -322,7 +369,7 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
     <div class="cardH"><h2>Vocal Lab</h2><span id="vocalRoomBadge" class="badge"><span class="led"></span>Room wired</span></div>
     <div class="vocalTop"><div><div class="recStatus"><span class="recLamp"></span><span id="vocalStatus">Microphone offline</span></div><div class="sessionBeat" id="vocalBeatStatus">Producer Room beat: none loaded</div></div><div id="vocalTimer" class="vocalTimer">00:00.0</div></div>
     <div class="bleedNote">Use headphones while recording. RNP preserves a dry vocal take; speaker playback can bleed the instrumental into the microphone.</div>
-    <div class="vocalWaveShell"><canvas id="vocalWave" width="900" height="140" aria-label="Live microphone waveform"></canvas></div>
+    <div id="vocalOrbVisual" class="recordOrbMini">MIC BOOTH</div><div class="vocalWaveShell"><canvas id="vocalWave" width="900" height="140" aria-label="Live microphone waveform"></canvas></div>
     <div class="vocalTools">
       <div class="vocalTool"><label class="label" for="vocalCountIn">Count-in</label><select id="vocalCountIn"><option value="0">Off</option><option value="2">2 seconds</option><option value="4" selected>4 seconds</option></select></div>
       <div class="vocalTool"><label class="label" for="vocalMonitor">Monitoring</label><select id="vocalMonitor"><option value="off" selected>Off · recommended</option><option value="on">On · headphones only</option></select></div>
@@ -401,8 +448,26 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 <div class="eyebrow" style="margin-top:16px">Backup and transfer</div><div class="backupActions"><button id="exportBackupBtn" class="btn dark" type="button">Export Studio Backup</button><label class="btn dark" style="text-align:center">Import Backup<input id="importBackupInput" class="hiddenFile" type="file" accept="application/json"/></label><button id="installHintBtn" class="btn dark" type="button">Install Instructions</button></div>
 <p class="sub">Full Session Pack includes studio state and Voice Locker audio. WAV mixes and stems are designed for direct import into BandLab or another DAW.</p></div></section>
 <section id="culture" class="page">
-<div class="card rack"><div class="cardH"><h2>Culture Glossary</h2><span class="badge">Living language</span></div>
-<input id="term" placeholder="Term" /><textarea id="meaning" style="min-height:90px;margin-top:8px" placeholder="What it means in your world"></textarea><input id="context" style="margin-top:8px" placeholder="Context or what RNP must never confuse it with" /><button class="btn primary" style="width:100%;margin-top:9px" onclick="addGlossary()">Add to RNP Language</button><div id="glossaryList" class="truthFlags" style="margin-top:12px"></div></div>
+<div class="cultureColumns">
+  <div class="card rack">
+    <div class="cardH"><h2>Cultural Pulse</h2><span class="badge">Current reference engine</span></div>
+    <p class="sub">Scan recent music, sports, entertainment, memes, gaming, and major cultural moments. RNP explains why people recognize them and helps you flip the meaning without copying internet jokes.</p>
+    <div class="refControls">
+      <div class="fieldish"><label for="pulseLane">Lane</label><select id="pulseLane"><option value="all">All culture</option><option value="music">Music</option><option value="entertainment">Movies + TV</option><option value="sports">Sports</option><option value="internet">Internet + memes</option><option value="gaming">Gaming</option></select></div>
+      <div class="fieldish"><label for="pulseTone">Bar use</label><select id="pulseTone"><option value="clever">Clever / layered</option><option value="humorous">Humorous</option><option value="understanding">Meaningful</option><option value="toxic">Toxic wordplay</option><option value="flex">Confident flex</option></select></div>
+      <div class="fieldish"><label for="pulseWindow">Freshness</label><select id="pulseWindow"><option value="7">Past week</option><option value="30" selected>Past month</option><option value="90">Past 3 months</option><option value="365">Past year</option></select></div>
+    </div>
+    <textarea id="pulseDirection" style="min-height:86px;margin-top:9px" placeholder="Optional: what kind of bar or song meaning are you looking for?"></textarea>
+    <button id="scanCultureBtn" class="btn primary" style="width:100%;margin-top:9px" type="button">Scan Cultural Pulse</button>
+    <div id="pulseStatus" class="analysisNotes" style="margin-top:9px">Nothing scanned yet. This feature requires the deployed OpenAI key and web access through the server route.</div>
+    <div id="pulseResults" class="pulseGrid" style="margin-top:10px"></div>
+  </div>
+  <div>
+    <div class="card rack"><div class="cardH"><h2>Culture Glossary</h2><span class="badge">Living language</span></div>
+    <input id="term" placeholder="Term" /><textarea id="meaning" style="min-height:90px;margin-top:8px" placeholder="What it means in your world"></textarea><input id="context" style="margin-top:8px" placeholder="Context or what RNP must never confuse it with" /><button class="btn primary" style="width:100%;margin-top:9px" onclick="addGlossary()">Add to RNP Language</button><div id="glossaryList" class="truthFlags" style="margin-top:12px"></div></div>
+    <div class="card rack" style="margin-top:12px"><div class="cardH"><h2>Saved Pulse References</h2><span class="badge">Project toolbox</span></div><div id="savedPulseRefs" class="truthFlags"></div></div>
+  </div>
+</div>
 </section>
 
 <section id="archive" class="page"><div class="card rack"><div class="cardH"><h2>Archive</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
@@ -417,7 +482,15 @@ const vibes=[
 ["Street Gospel","TRUTH / CONSEQUENCE / REDEMPTION"],["Midnight Confession","INTIMACY / REGRET / HONESTY"],["Victory Lap","PROOF / ELEVATION / CALM POWER"],["Dark Romance","DESIRE / DANGER / DEVOTION"],["Toxic Gravity","ATTRACTION / CHAOS / SELF-AWARENESS"],["Brother's Keeper","LOYALTY / TIME / PROMISE"],["Anime Ascension","TRAINING / TRANSFORMATION / LIMITS"],["Martial Discipline","PRECISION / RESTRAINT / ADAPTABILITY"],["Cinematic Street","CHARACTER / CONSEQUENCE / ATMOSPHERE"],["Pain into Purpose","LOSS / ACCOUNTABILITY / BUILDING"],["Playful Mackin","CHARM / HUMOR / CONFIDENCE"],["Spiritual Warfare","FAITH / TEMPTATION / PROTECTION"],["Cold Ambition","FOCUS / ISOLATION / EXECUTION"],["Family Legacy","ROOTS / FATHERHOOD / BLUEPRINT"],["Raw Hunger","SURVIVAL / DRIVE / NO EXCUSES"],["Late-Night Route","MILES / SOLITUDE / REFLECTION"]
 ];
 const layerOptions=["Soulful","Gritty","Melodic","Boom Bap","Trap Soul","Cinematic","Spiritual","Dangerous","Romantic","Humorous","Reflective","Aggressive","Nostalgic","Luxury","Minimal","Haunted"];
-const influenceOptions=["Blade","Spawn","Goku","Bruce Lee","Wu-Tang","DMX","Biggie","N.W.A.","Jordan","Kobe","Iverson","Tyson","Ali","Paid in Full","Belly","The Matrix","Tony Stark","Nipsey"];
+const nostalgiaLibrary={
+"Music":[["Michael Jackson","greatness · moonwalk · pressure · transformation"],["James Brown","soul · work ethic · command"],["The Temptations","family · harmony · rolling stone · legacy"],["Marvin Gaye","love · conflict · social truth"],["Prince","individuality · mystery · control"],["Stevie Wonder","vision · soul · optimism"],["Earth Wind & Fire","celebration · memory · timeless joy"],["The Isley Brothers","romance · family · smooth confidence"],["DMX","faith · pain · raw intensity"],["Wu-Tang","brotherhood · grit · strategy"],["Lil Wayne","wordplay · confidence · unexpected flips"],["Future","melody · toxic honesty · atmosphere"],["Tupac","duality · loyalty · social pressure"],["Biggie","storytelling · charisma · command"],["Nipsey","ownership · marathon · legacy"]],
+"Movies + TV":[["Friday","neighborhood humor · Smokey · Deebo · ordinary struggle"],["Next Friday","growth · new environment · family comedy"],["Paid in Full","ambition · loyalty · consequences"],["Belly","dark beauty · street consequence · transformation"],["The Matrix","awakening · illusion · chosen path"],["Blade","hybrid power · darkness · discipline"],["Spawn","betrayal · rebirth · vengeance"],["Training Day","corruption · pressure · moral test"],["The Dark Knight","chaos · sacrifice · double life"],["Martin","relationship humor · confidence · friendship"],["The Fresh Prince","reinvention · family · culture clash"],["The Boondocks","satire · truth · cultural commentary"],["Snowfall","ambition · systems · consequence"],["Power","double life · control · betrayal"],["Everybody Hates Chris","childhood struggle · humor · resilience"]],
+"Games + Anime":[["Dragon Ball Z","training · limits · transformation · family"],["Naruto","rejection · purpose · loyalty · perseverance"],["Afro Samurai","focus · vengeance · solitude"],["Samurai Champloo","style · travel · improvisation"],["Def Jam Fight for NY","music culture · fighting · reputation"],["NBA Street","style · playground confidence · breaking ankles"],["GTA San Andreas","loyalty · neighborhood · betrayal"],["Need for Speed Underground","night driving · speed · customization"],["Midnight Club","late-night routes · racing · city lights"],["Cyberpunk 2077","identity · technology · survival"],["Ghost of Tsushima","honor · adaptation · discipline"],["Pokémon","evolution · collecting · childhood"],["Game Boy","portable childhood · patience · simplicity"],["PlayStation 2","sleepovers · discovery · classic era"]],
+"Sports + Icons":[["Michael Jordan","clutch · competitiveness · flight"],["Kobe Bryant","discipline · obsession · final shot"],["Allen Iverson","authenticity · crossover · resistance"],["Shaq","power · business · dominance"],["LeBron James","longevity · pressure · leadership"],["Mike Tyson","explosive power · fear · comeback"],["Muhammad Ali","wit · belief · movement"],["Floyd Mayweather","defense · precision · money"],["Deion Sanders","confidence · dual talent · prime time"],["Bruce Lee","adaptability · speed · discipline"]],
+"Childhood + Everyday":[["Blockbuster","Friday nights · choice · lost era"],["VHS tapes","rewind · memories · imperfect playback"],["Cassette tapes","side A / side B · patience · mixtapes"],["Walkman","private world · movement · music"],["Saturday cartoons","peace · imagination · childhood ritual"],["Capri Sun","school lunch · simple joy"],["SunnyD","childhood taste · bright energy"],["Fruit Roll-Ups","sweetness · nostalgia · stretching time"],["Pokémon cards","value · collecting · trading"],["Hot Wheels","small dreams · speed · imagination"],["Pagers","waiting · coded communication · old hustle"],["Payphones","distance · urgency · no trace"],["Mall arcades","competition · quarters · teenage freedom"],["Family cookouts","music · food · elders · belonging"],["Church Sundays","faith · clothes · family ritual"]],
+"Sayings + Life":[["Papa Was a Rolling Stone","absence · movement · inherited reputation"],["Ain't no sunshine","absence · love · emotional weather"],["What goes around comes around","karma · consequence · cycles"],["Blood is thicker than water","family · loyalty · complication"],["Heavy is the head","leadership · burden · responsibility"],["It takes a village","community · children · legacy"],["Made from scratch","self-built · patience · authenticity"],["Built different","identity · resilience · design"],["Weather the storm","adversity · endurance · calm"],["Carry the weight","family · responsibility · strength"]]
+};
+const influenceOptions=Object.values(nostalgiaLibrary).flat().map(x=>x[0]);
 const arcPresets={
 "Sae Smooth":["Observation","Appreciation","Trust","Commitment","Confidence","Desire","Intensity","Humor","Resolution"],
 "Pain to Purpose":["Pain","Reflection","Accountability","Discipline","Hope"],
@@ -426,7 +499,7 @@ const arcPresets={
 "Victory":["Hunger","Pressure","Adaptation","Execution","Proof","Elevation"]
 };
 let state=JSON.parse(localStorage.getItem('rnp2_state')||'{}');
-state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;state.beatAnalysis??=null;state.beatReports??=[];
+state.vibeIndex??=0;state.layers??=[];state.influences??=[];state.arc??=arcPresets["Sae Smooth"];state.glossary??=[];state.durationSeconds??=null;state.beatAnalysis??=null;state.beatReports??=[];state.nostalgiaEnabled??=false;state.nostalgiaCategory??='All';state.nostalgiaWeight??='light';state.nostalgiaMode??='meaning';state.nostalgiaNote??='';state.pulseRefs??=[];
 function persist(){localStorage.setItem('rnp2_state',JSON.stringify(state))}
 function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
 const ROOM_COPY={lobby:'come home and create',producer:'dusty drums · vinyl warmth · low lights',vocal:'red light on · truth in the booth',write:'rain outside · notebook open',cover:'mood board · film grain · visual direction',culture:'references · language · nostalgia',memory:'old tapes · unfinished magic',archive:'every session has a shelf',settings:'shape the sanctuary'};
@@ -442,10 +515,31 @@ window.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data
 function renderVibe(){const v=vibes[state.vibeIndex%vibes.length];$('vibeName').textContent=v[0];$('vibeFamily').textContent=v[1];$('turntable').style.transform=`rotate(${state.vibeIndex*22.5}deg)`;renderLayers();persist()}
 function renderLayers(){$('vibeLayers').innerHTML=layerOptions.map(x=>`<button class="chip ${state.layers.includes(x)?'on':''}" onclick="toggleLayer('${x}')">${x}</button>`).join('')}
 function toggleLayer(x){state.layers=state.layers.includes(x)?state.layers.filter(v=>v!==x):[...state.layers,x].slice(-2);renderLayers();persist()}
-function renderInfluences(){$('influences').innerHTML=influenceOptions.map(x=>`<button class="influence ${state.influences.includes(x)?'on':''}" onclick="toggleInfluence('${x}')">${x}</button>`).join('')}
-function toggleInfluence(x){state.influences=state.influences.includes(x)?state.influences.filter(v=>v!==x):[...state.influences,x].slice(-8);renderInfluences();persist()}
+function nostalgiaEntries(){
+  const q=($('nostalgiaSearch')?.value||'').trim().toLowerCase(),cat=state.nostalgiaCategory||'All';
+  return Object.entries(nostalgiaLibrary).filter(([name])=>cat==='All'||name===cat).map(([name,items])=>[name,items.filter(([title,meaning])=>!q||`${title} ${meaning}`.toLowerCase().includes(q))]).filter(([,items])=>items.length);
+}
+function renderInfluences(){
+  if(!$('nostalgiaLibrary'))return;
+  const cats=['All',...Object.keys(nostalgiaLibrary)];
+  $('nostalgiaTabs').innerHTML=cats.map(x=>`<button class="assistTab ${state.nostalgiaCategory===x?'on':''}" data-ncat="${escapeHtml(x)}">${escapeHtml(x)}</button>`).join('');
+  $('nostalgiaLibrary').innerHTML=nostalgiaEntries().map(([group,items])=>`<div class="referenceGroup"><h3>${escapeHtml(group)}</h3><div class="referenceGrid">${items.map(([title,meaning])=>`<button class="referenceCard ${state.influences.includes(title)?'on':''}" type="button" data-nref="${escapeHtml(title)}"><b>${escapeHtml(title)}</b><small>${escapeHtml(meaning)}</small></button>`).join('')}</div></div>`).join('')||'<div class="analysisNotes">No references match that search.</div>';
+  $('selectedNostalgia').innerHTML=state.influences.length?state.influences.map(x=>`<button class="selectedRef" type="button" data-nref="${escapeHtml(x)}">${escapeHtml(x)} ×</button>`).join(''):'<span class="analysisNotes">Nothing selected. RNP will rely only on your seed and truth.</span>';
+  $('nostalgiaEnabled').checked=!!state.nostalgiaEnabled;$('nostalgiaBody').hidden=!state.nostalgiaEnabled;
+  $('nostalgiaWeight').value=state.nostalgiaWeight;$('nostalgiaMode').value=state.nostalgiaMode;$('nostalgiaNote').value=state.nostalgiaNote||'';
+  document.querySelectorAll('[data-ncat]').forEach(b=>b.onclick=()=>{state.nostalgiaCategory=b.dataset.ncat;persist();renderInfluences()});
+  document.querySelectorAll('[data-nref]').forEach(b=>b.onclick=()=>toggleInfluence(b.dataset.nref));
+}
+function toggleInfluence(x){state.influences=state.influences.includes(x)?state.influences.filter(v=>v!==x):[...state.influences,x].slice(-12);renderInfluences();persist()}
 function renderArc(){$('arc').innerHTML=state.arc.map((x,i)=>`${i?'<span class="arrow">→</span>':''}<button class="node on" onclick="removeArc(${i})">${x}</button>`).join('');$('arcPresets').innerHTML=Object.keys(arcPresets).map(x=>`<button class="chip" onclick="setArc('${x}')">${x}</button>`).join('')}
 function setArc(x){state.arc=[...arcPresets[x]];renderArc();persist()}function removeArc(i){if(state.arc.length>3)state.arc.splice(i,1);renderArc();persist()}
+$('nostalgiaEnabled')?.addEventListener('change',e=>{state.nostalgiaEnabled=e.target.checked;persist();renderInfluences()});
+$('nostalgiaSearch')?.addEventListener('input',renderInfluences);
+$('clearNostalgia')?.addEventListener('click',()=>{state.influences=[];state.nostalgiaNote='';persist();renderInfluences()});
+$('nostalgiaWeight')?.addEventListener('change',e=>{state.nostalgiaWeight=e.target.value;persist()});
+$('nostalgiaMode')?.addEventListener('change',e=>{state.nostalgiaMode=e.target.value;persist()});
+$('nostalgiaNote')?.addEventListener('input',e=>{state.nostalgiaNote=e.target.value;persist()});
+
 let drag=false,startX=0,startIndex=0;
 $('turntable').addEventListener('pointerdown',e=>{drag=true;startX=e.clientX;startIndex=state.vibeIndex;$('turntable').setPointerCapture(e.pointerId)});
 $('turntable').addEventListener('pointermove',e=>{if(!drag)return;const steps=Math.round((e.clientX-startX)/28);state.vibeIndex=(startIndex+steps+vibes.length*20)%vibes.length;renderVibe()});
@@ -800,7 +894,7 @@ window.favoriteVocalTake=async id=>{const takes=await vocalDbAll(),t=takes.find(
 window.exportVocalTake=async id=>{const takes=await vocalDbAll(),t=takes.find(x=>x.id===id);if(!t)return;const a=document.createElement('a'),ext=t.type?.includes('mp4')?'m4a':'webm';a.href=URL.createObjectURL(t.blob);a.download=(t.name||'RNP Take').replace(/[^a-z0-9_-]+/gi,'_')+'.'+ext;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1200)}
 window.deleteVocalTake=async id=>{if(!confirm('Delete this take from the Voice Locker?'))return;await vocalDbDelete(id);renderVoiceLocker();toast('Take deleted.')}
 $('enableMicBtn').addEventListener('click',enableVocalMic);$('recordTakeBtn').addEventListener('click',startVocalTake);$('pauseTakeBtn').addEventListener('click',pauseVocalTake);$('stopTakeBtn').addEventListener('click',stopVocalTake);$('dropTakeMarker').addEventListener('click',dropVocalMarker);$('refreshLocker').addEventListener('click',renderVoiceLocker);$('vocalMonitor').addEventListener('change',syncVocalMonitoring);$('playBeatFromVocal').addEventListener('click',()=>{syncVocalBeatStatus();if(!$('player').src)return toast('Load an instrumental in the Producer Room first.');$('player').paused?$('player').play().catch(()=>{}):$('player').pause()});$('jumpWriteFromVocal').addEventListener('click',()=>go('write',document.querySelector('[data-room=write]')));window.addEventListener('resize',resizeVocalCanvas);$('beatInput').addEventListener('change',()=>setTimeout(syncVocalBeatStatus,0));
-renderVoiceLocker().catch(err=>console.warn('Voice Locker unavailable',err));syncVocalBeatStatus();resizeVocalCanvas();
+renderSavedPulse();renderVoiceLocker().catch(err=>console.warn('Voice Locker unavailable',err));syncVocalBeatStatus();resizeVocalCanvas();
 
 
 
@@ -831,7 +925,7 @@ $('writerModes').addEventListener('click',e=>{const b=e.target.closest('[data-wm
 $('writerClear').onclick=()=>{$('writerSeed').value='';localStorage.removeItem('rnp_writerSeed')};
 $('writerMic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Use the iPhone keyboard microphone for voice text.');writerRecognition=new SR();writerRecognition.continuous=true;writerRecognition.interimResults=true;writerRecognition.lang='en-US';let base=$('writerSeed').value.trim();writerRecognition.onresult=e=>{let final='',interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;e.results[i].isFinal?final+=t:interim+=t}$('writerSeed').value=[base,final,interim].filter(Boolean).join(base?'\n':'');if(final)base=[base,final].filter(Boolean).join(base?'\n':'');$('writerSpeechNote').textContent='Listening… speak naturally. Tap Stop when the pocket is down.'};writerRecognition.onend=()=>{$('writerMic').disabled=false;$('writerStopMic').disabled=true;$('writerSpeechNote').textContent='Voice capture stopped. Your seed is ready.'};writerRecognition.start();$('writerMic').disabled=true;$('writerStopMic').disabled=false};
 $('writerStopMic').onclick=()=>writerRecognition?.stop();
-$('generateTrackBtn').onclick=async()=>{const seed=$('writerSeed').value.trim();if(!seed)return toast('Drop at least one seed line first.');const a=state.beatAnalysis||{};$('generateTrackBtn').disabled=true;$('generateTrackBtn').textContent='RNP READING YOUR POCKET…';try{const res=await fetch('/api/generate-track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:writerMode,seed,title:$('writerTitle').value,truth:$('writerTruth').value,existingLyrics:$('lyrics').value,vibe:vibes[state.vibeIndex][0],emotionalArc:state.arc||[],slangNotes:(state.glossary||[]).map(x=>`${x.term}: ${x.meaning}`),beat:{name:$('writerBeatName').textContent,bpm:a.bpm||Number($('bpm').value)||null,key:a.key||$('key').value||'',durationSeconds:a.durationSeconds||state.durationSeconds||null,arrangement:a.arrangement||[]}})});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Generation failed');renderWriterResult(data.result)}catch(err){toast(err.message+' · Deploy with OPENAI_API_KEY to activate generation.')}finally{$('generateTrackBtn').disabled=false;$('generateTrackBtn').textContent='Generate Track'}};
+$('generateTrackBtn').onclick=async()=>{const seed=$('writerSeed').value.trim();if(!seed)return toast('Drop at least one seed line first.');const a=state.beatAnalysis||{};$('generateTrackBtn').disabled=true;$('generateTrackBtn').textContent='RNP READING YOUR POCKET…';try{const res=await fetch('/api/generate-track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:writerMode,seed,title:$('writerTitle').value,truth:$('writerTruth').value,existingLyrics:$('lyrics').value,vibe:vibes[state.vibeIndex][0],emotionalArc:state.arc||[],slangNotes:(state.glossary||[]).map(x=>`${x.term}: ${x.meaning}`),nostalgia:state.nostalgiaEnabled?{enabled:true,references:state.influences,weight:state.nostalgiaWeight,mode:state.nostalgiaMode,note:state.nostalgiaNote}: {enabled:false,references:[]},culturalPulse:(state.pulseRefs||[]),beat:{name:$('writerBeatName').textContent,bpm:a.bpm||Number($('bpm').value)||null,key:a.key||$('key').value||'',durationSeconds:a.durationSeconds||state.durationSeconds||null,arrangement:a.arrangement||[]}})});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Generation failed');renderWriterResult(data.result)}catch(err){toast(err.message+' · Deploy with OPENAI_API_KEY to activate generation.')}finally{$('generateTrackBtn').disabled=false;$('generateTrackBtn').textContent='Generate Track'}};
 function renderWriterResult(r){writerLastTrack=r.generated_track||'';$('writerResult').hidden=false;$('seedPreservedBadge').textContent=r.seed_preserved?'Seed preserved':'Check seed';$('writerReads').innerHTML=`<b>Pocket read:</b> ${escapeHtml(r.pocket_read||'—')}<br><b>Rhyme read:</b> ${escapeHtml(r.rhyme_read||'—')}`;$('writerOutput').textContent=writerLastTrack;$('writerPockets').innerHTML=(r.alternate_pockets||[]).map(x=>`<div class="pocketCard"><b>${escapeHtml(x.name||'Alternate')}</b><p>${escapeHtml(x.direction||'')}</p><pre>${escapeHtml(x.sample||'')}</pre></div>`).join('');$('writerResult').scrollIntoView({behavior:'smooth'})}
 $('acceptTrackBtn').onclick=()=>{$('lyrics').value=writerLastTrack;toast('Generated record loaded into your final pen.')};$('copyGeneratedBtn').onclick=async()=>{await navigator.clipboard.writeText(writerLastTrack);toast('Generated track copied.')};$('exportLyricsBtn').onclick=()=>{const text=$('lyrics').value;if(!text)return toast('Write or generate lyrics first.');downloadText((($('title').value||'RNP_Record').replace(/[^a-z0-9_-]+/gi,'_'))+'.txt',text)};
 function downloadText(name,text,type='text/plain'){const u=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1200)}
@@ -842,6 +936,29 @@ let coverMode='ai',generatedCoverImage=null;
 document.querySelectorAll('[data-cover-mode]').forEach(b=>b.addEventListener('click',()=>{coverMode=b.dataset.coverMode;document.querySelectorAll('[data-cover-mode]').forEach(x=>x.classList.toggle('on',x===b));$('coverModeBadge').textContent=coverMode==='ai'?'AI artwork mode':'Manual composer';}));
 async function generateCoverArtwork(){const concept=$('coverConcept').value.trim(),title=$('coverTitle').value.trim()||$('title').value.trim();if(!concept)return toast('Describe the cover world first.');const btn=$('generateCoverBtn'),status=$('coverGenerationStatus');btn.disabled=true;btn.textContent='DIRECTING ART…';status.textContent='Building an original square cover from your concept…';try{const r=await fetch('/api/generate-cover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title,subtitle:$('coverSubtitle').value.trim(),concept,styles:getCoverStyles(),lyrics:$('lyrics').value.slice(0,3000)})});const data=await r.json();if(!r.ok||!data.ok)throw new Error(data.error||'Artwork generation failed');generatedCoverImage=await loadImg(data.image);coverUserImage=null;await renderCover();status.textContent='Original artwork generated. Add title treatment or export the square master.';toast('Cover artwork generated.')}catch(err){status.textContent=err.message;toast(err.message+' · Confirm OPENAI_API_KEY is set in Vercel.')}finally{btn.disabled=false;btn.textContent='Generate Artwork'}}
 $('coverPhoto').onchange=async e=>{const f=e.target.files[0];if(!f)return;coverUserImage=await loadImg(URL.createObjectURL(f));renderCover()};$('renderCoverBtn').onclick=()=>{generatedCoverImage=null;renderCover()};$('generateCoverBtn').onclick=generateCoverArtwork;$('downloadCoverBtn').onclick=()=>{$('coverCanvas').toBlob(blob=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(($('coverTitle').value||'RNP_Cover').replace(/[^a-z0-9_-]+/gi,'_'))+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1200)},'image/png')};
+
+function renderSavedPulse(){
+  if(!$('savedPulseRefs'))return;
+  const refs=state.pulseRefs||[];
+  $('savedPulseRefs').innerHTML=refs.length?refs.map((x,i)=>`<div><b>${escapeHtml(x.title)}</b><br><small>${escapeHtml(x.angle||x.fresh_angle||x.why_people_get_it||'')}</small><button class="btn small dark" style="margin-top:6px" onclick="removePulseRef(${i})">Remove</button></div>`).join(''):'<div>No current references saved. Saved items will be available to Generate Track.</div>';
+}
+window.removePulseRef=i=>{state.pulseRefs.splice(i,1);persist();renderSavedPulse()};
+window.savePulseRef=(encoded)=>{
+  try{const item=JSON.parse(decodeURIComponent(encoded));if(!(state.pulseRefs||[]).some(x=>x.title===item.title))state.pulseRefs=[...(state.pulseRefs||[]),item].slice(-10);persist();renderSavedPulse();toast('Reference saved for this project.')}catch(e){toast('Could not save that reference.')}
+};
+function renderPulseResults(items=[]){
+  $('pulseResults').innerHTML=items.length?items.map(item=>{const safe=encodeURIComponent(JSON.stringify(item));return `<div class="pulseItem"><div class="pulseItemHead"><div><b>${escapeHtml(item.title||'Cultural moment')}</b><small>${escapeHtml(item.what_happened||'')}</small></div><span class="pulseTag">${escapeHtml(item.shelf_life||'current')}</span></div><div class="pulseAngles"><b>Why it lands:</b> ${escapeHtml(item.why_people_get_it||'')}<br><b>Fresh angle:</b> ${escapeHtml(item.fresh_angle||'')}<br><b>Avoid:</b> ${escapeHtml(item.cliche_to_avoid||'')}</div><div class="pulseActions"><button class="btn small dark" type="button" onclick="savePulseRef('${safe}')">Save Reference</button></div></div>`}).join(''):'<div class="analysisNotes">No usable cultural moments came back. Try a broader lane or longer freshness window.</div>';
+}
+$('scanCultureBtn')?.addEventListener('click',async()=>{
+  const btn=$('scanCultureBtn');btn.disabled=true;btn.textContent='SCANNING CULTURE…';$('pulseStatus').textContent='Checking current public culture and filtering for recognizable, usable references…';$('pulseResults').innerHTML='';
+  try{
+    const res=await fetch('/api/cultural-pulse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lane:$('pulseLane').value,tone:$('pulseTone').value,days:Number($('pulseWindow').value),direction:$('pulseDirection').value,seed:$('writerSeed')?.value||'',truth:$('writerTruth')?.value||''})});
+    const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Pulse scan failed');
+    renderPulseResults(data.items||[]);$('pulseStatus').textContent=`${(data.items||[]).length} current references found · verify context before release.`;
+  }catch(err){$('pulseStatus').textContent=err.message+' · Deploy the included route with OPENAI_API_KEY.';toast('Cultural Pulse could not scan right now.')}
+  finally{btn.disabled=false;btn.textContent='Scan Cultural Pulse'}
+});
+
 async function renderMemoryVault(){const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]'),takes=await vocalDbAll().catch(()=>[]),terms=state.glossary||[],reports=state.beatReports||[];$('memoryProjects').textContent=projects.length;$('memoryTakes').textContent=takes.length;$('memoryTerms').textContent=terms.length+1;$('memoryReports').textContent=reports.length;const worlds={};projects.forEach(p=>{[p.chapter,p.vibe].filter(Boolean).forEach(x=>worlds[x]=(worlds[x]||0)+1)});state.influences.forEach(x=>worlds[x]=(worlds[x]||0)+1);const recurring=Object.entries(worlds).sort((a,b)=>b[1]-a[1]).slice(0,8),recent=projects.slice(0,5);$('memoryList').innerHTML=(recurring.length?`<div class="memoryItem"><b>Recurring worlds</b><small>${recurring.map(([x,n])=>`${escapeHtml(x)} ×${n}`).join(' · ')}</small></div>`:'')+recent.map(p=>`<div class="memoryItem"><b>${escapeHtml(p.title||'Untitled Chapter')}</b><small>${new Date(p.created).toLocaleString()} · ${escapeHtml(p.vibe||'Unclassified')}<br>${escapeHtml((p.truth||p.lyrics||'').slice(0,180))}</small></div>`).join('')+(recent.length?'':'<div class="memoryItem"><b>No saved sessions yet</b><small>Save a project from the Writing Desk and it will appear here.</small></div>')}
 $('exportBackupBtn').onclick=exportFullSessionPack;/* legacy backup replaced */
 function legacyBackup(){const backup={version:'RNP-3.0-95',exportedAt:new Date().toISOString(),state,projects:JSON.parse(localStorage.getItem('rnp2_projects')||'[]'),writer:{title:$('writerTitle').value,seed:$('writerSeed').value,truth:$('writerTruth').value,lyrics:$('lyrics').value}};downloadText('RNP_Studio_Backup.json',JSON.stringify(backup,null,2),'application/json')}
