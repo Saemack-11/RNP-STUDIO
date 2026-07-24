@@ -44,36 +44,19 @@ const seed = [
 
 const modes = Array.isArray(body.modes) ? body.modes : [];
 
-  if (!seed || typeof seed !== 'string' || seed.length > 8000) {
-    return res.status(400).json({
-      error: 'Valid seed required'
-    });
-  }
+  if (!seed) {
+  console.error('RNP seed missing. Received fields:', Object.keys(body));
 
-  try {
-    const response = await fetch('https://api.openai.com/v1/responses', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || 'gpt-5',
-        input: [
-          {
-            role: 'developer',
-            content: SYSTEM
-          },
-          {
-            role: 'user',
-            content:
-              `ACTIVE MODES: ${modes.join(', ') || 'layered, raw, evolution, ninja'}\n\n` +
-              `SEED BARS:\n${seed}`
-          }
-        ]
-      })
-    });
+  return res.status(400).json({
+    error: 'Add song direction, lyrics, a hook, or seed bars before generating.'
+  });
+}
 
+if (seed.length > 8000) {
+  return res.status(400).json({
+    error: 'Seed is too long. Keep it under 8,000 characters.'
+  });
+}
     const data = await response.json();
 
     if (!response.ok) {
