@@ -1,31 +1,17 @@
-# RNP — Real Ninja Poetics v1
+# RNP Studio 3.1 — Sanctuary Man Cave
 
-RNP is Sae's iPhone-first studio, lyrical dojo, Flow Forge and Voice Locker.
+This build preserves the complete RNP workflow while restoring the man-cave atmosphere and making the top room rail functional.
 
-## Working now
-- Instrumental upload and playback
-- Microphone permission, live waveform, count-in, record/pause/resume/stop
-- Take markers
-- Local IndexedDB storage for dry vocals and writing
-- Replay, export and delete takes
-- Seed-bar analysis and offline Dojo coaching
-- Secure server-side AI continuation bridge
-- Complete RNP doctrine
-- Installable PWA and offline shell
+## Added
+- Functional scrollable top room navigation
+- Room-specific active state and deep links
+- Sanctuary-wide backgrounds instead of flat black voids
+- Smoke/haze, amber lamp, purple/green LED atmosphere
+- Late Night and Atmosphere controls
+- AI Cover Generation through `/api/generate-cover`
+- Manual cover composer remains available
 
-## Deploy on Vercel
-1. Upload this folder to GitHub.
-2. Import the repository into Vercel.
-3. Add `OPENAI_API_KEY` under Project Settings → Environment Variables.
-4. Optional: add `OPENAI_MODEL`; fallback is `gpt-5`.
-5. Deploy and open the HTTPS URL in Safari.
-6. Share → Add to Home Screen.
-7. Allow microphone access.
+## Vercel environment
+Set `OPENAI_API_KEY`. Optional: `OPENAI_IMAGE_MODEL` (defaults to `gpt-image-1`).
 
-Never place an API key in `index.html`.
-
-## Honest limits
-- Use headphones to reduce instrumental bleed.
-- The dry vocal is preserved. Beat/vocal bounce, waveform editing, pitch correction and mastering are future production modules.
-- iOS chooses the recording format supported by Safari.
-- Export important takes because browser storage can be cleared.
+Keep only one `/api/rnp` route. This package contains `api/rnp.js`; do not keep an older `api/rnp.mjs` beside it.

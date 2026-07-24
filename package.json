@@ -1,6 +1,5 @@
 {
-  "name": "rnp-complete-project",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module"
+  "name": "rnp-studio-sanctuary-man-cave",
+  "version": "3.1.0",
+  "private": true
 }
