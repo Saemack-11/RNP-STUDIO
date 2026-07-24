@@ -68,6 +68,14 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 .markerJump{border:1px solid rgba(104,216,255,.45);background:rgba(104,216,255,.08);color:var(--cyan);padding:6px 8px;font:800 9px "Courier New",monospace;text-transform:uppercase}
 .analysisActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.analysisActions button{flex:1 1 140px}
 @media (min-width:700px){.gridControls{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* BRICK 3 — FUNCTIONAL VOCAL LAB */
+.vocalGrid{display:grid;gap:14px}.vocalConsole{display:grid;gap:12px}.vocalTop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.recStatus{font:800 10px "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+.vocalWaveShell{border:1px solid rgba(104,216,255,.35);background:#020305;padding:8px}.vocalWaveShell canvas{display:block;width:100%;height:112px}.vocalTimer{font:900 34px "Courier New",monospace;letter-spacing:-.05em;color:#f5d98f}.recLamp{display:inline-block;width:10px;height:10px;border-radius:50%;background:#4b2b31;margin-right:7px}.recordingNow .recLamp{background:#ff405f;box-shadow:0 0 16px #ff405f;animation:recPulse 1s infinite}@keyframes recPulse{50%{opacity:.35}}
+.vocalActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocalActions .btn{width:100%}.vocalTools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocalTool{border:1px solid rgba(255,255,255,.2);padding:10px;background:rgba(0,0,0,.28)}.vocalTool label{display:block;margin-bottom:6px}.vocalTool select{width:100%;border:1px solid rgba(255,255,255,.4);background:#07080a;color:var(--ink);padding:10px}
+.vocalMarkers{font:10px/1.55 "Courier New",monospace;color:var(--muted);border-left:3px solid var(--gold);padding:8px 10px;background:rgba(0,0,0,.3)}.lockerList{display:grid;gap:9px}.takeCard{border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.34);padding:11px}.takeHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.takeHead b{display:block}.takeHead small{display:block;color:var(--muted);margin-top:3px}.takeButtons{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.takeButtons .btn{padding:7px 8px;font-size:9px}.takeEmpty{padding:22px;text-align:center;color:var(--muted);border:1px dashed rgba(255,255,255,.24)}.bleedNote{border-left:4px solid var(--red);padding:9px 10px;background:rgba(178,12,35,.10);font-size:12px;line-height:1.5}.vocalMeterRow .meter b{font-size:15px}.sessionBeat{font:11px/1.5 "Courier New",monospace;color:#d8c9aa}.favoriteStar{color:#f5d98f}
+@media(min-width:900px){.page.on#vocal{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:start}.page.on#vocal>.card{margin:0}.vocalActions{grid-template-columns:repeat(4,minmax(0,1fr))}.vocalTools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 </style>
 </head>
 <body>
@@ -191,7 +199,44 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 <div class="grid2" style="margin-top:10px"><button class="btn small" onclick="saveProject()">Save Project</button><button class="btn small" onclick="copyLyrics()">Copy for BandLab</button></div></div>
 </section>
 
-<section id="vocal" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Room wired</span><h2>Vocal Lab</h2><p class="sub">The room shell is now part of the app. Voice Locker, live EQ, tuning intensity, harmonies, ad-lib creation and hook saving will plug into this rack without changing navigation.</p><div class="meterRow"><div class="meter"><span class="label">Voice DNA</span><b>Awaiting references</b></div><div class="meter"><span class="label">Vocal Chain</span><b>Natural</b></div><div class="meter"><span class="label">Locker</span><b>0 takes</b></div></div></div></div></section>
+
+<section id="vocal" class="page">
+  <div class="card rack vocalConsole" id="vocalRecorderCard">
+    <div class="cardH"><h2>Vocal Lab</h2><span id="vocalRoomBadge" class="badge"><span class="led"></span>Room wired</span></div>
+    <div class="vocalTop"><div><div class="recStatus"><span class="recLamp"></span><span id="vocalStatus">Microphone offline</span></div><div class="sessionBeat" id="vocalBeatStatus">Producer Room beat: none loaded</div></div><div id="vocalTimer" class="vocalTimer">00:00.0</div></div>
+    <div class="bleedNote">Use headphones while recording. RNP preserves a dry vocal take; speaker playback can bleed the instrumental into the microphone.</div>
+    <div class="vocalWaveShell"><canvas id="vocalWave" width="900" height="140" aria-label="Live microphone waveform"></canvas></div>
+    <div class="vocalTools">
+      <div class="vocalTool"><label class="label" for="vocalCountIn">Count-in</label><select id="vocalCountIn"><option value="0">Off</option><option value="2">2 seconds</option><option value="4" selected>4 seconds</option></select></div>
+      <div class="vocalTool"><label class="label" for="vocalMonitor">Monitoring</label><select id="vocalMonitor"><option value="off" selected>Off · recommended</option><option value="on">On · headphones only</option></select></div>
+      <div class="vocalTool"><label class="label">Vocal chain</label><b>Natural dry capture</b></div>
+    </div>
+    <div class="vocalActions">
+      <button id="enableMicBtn" class="btn dark" type="button">Enable Mic</button>
+      <button id="recordTakeBtn" class="btn primary" type="button" disabled>Record Take</button>
+      <button id="pauseTakeBtn" class="btn dark" type="button" disabled>Pause</button>
+      <button id="stopTakeBtn" class="btn dark" type="button" disabled>Stop</button>
+    </div>
+    <div class="vocalActions">
+      <button id="dropTakeMarker" class="btn small dark" type="button" disabled>Drop Marker</button>
+      <button id="playBeatFromVocal" class="btn small dark" type="button">Play / Pause Beat</button>
+      <button id="jumpWriteFromVocal" class="btn small dark" type="button">Open Writing Desk</button>
+      <button id="refreshLocker" class="btn small dark" type="button">Refresh Locker</button>
+    </div>
+    <div id="vocalMarkerReadout" class="vocalMarkers">Take markers: none</div>
+    <div class="meterRow vocalMeterRow">
+      <div class="meter"><span class="label">Voice DNA</span><b>Awaiting references</b></div>
+      <div class="meter"><span class="label">Vocal Chain</span><b>Natural</b></div>
+      <div class="meter"><span class="label">Locker</span><b id="lockerTakeCount">0 takes</b></div>
+    </div>
+  </div>
+  <div class="card rack">
+    <div class="cardH"><h2>Voice Locker</h2><span class="badge">Local first</span></div>
+    <p class="sub">Takes stay on this device until you export or delete them. Export anything important because browser storage can be cleared by iOS.</p>
+    <div id="voiceLockerList" class="lockerList"><div class="takeEmpty">No recorded takes yet.</div></div>
+  </div>
+</section>
+
 <section id="cover" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Art direction bay</span><h2>Cover Art Studio</h2><p class="sub">Single, album and mixtape covers will be built from the song theme, your description and optional photos from your library. The official RNP mark stays available as optional branding.</p><div class="meterRow"><div class="meter"><span class="label">Format</span><b>Single / Album / Mixtape</b></div><div class="meter"><span class="label">References</span><b>Photo + mood board</b></div><div class="meter"><span class="label">Output</span><b>Square cover master</b></div></div></div></div></section>
 <section id="memory" class="page"><div class="card rack placeholder"><div class="core"><span class="badge">Archive bus</span><h2>Memory Vault</h2><p class="sub">This room will connect songs, hooks, voice notes, recurring imagery and emotional themes so RNP can help you evolve without copying yourself.</p></div></div></section>
 <section id="settings" class="page"><div class="card rack"><div class="cardH"><h2>Studio Settings</h2><span class="badge">Local first</span></div><div class="truthFlags"><div>Visual mode: Futuristic sanctuary</div><div>Brand identity: Official metallic-gold RNP icon</div><div>Recording workflow: BandLab remains the final recorder</div><div>Creative rule: Influence without imitation</div></div></div></section>
@@ -528,6 +573,55 @@ function renderArchive(){const p=JSON.parse(localStorage.getItem('rnp2_projects'
 async function copyLyrics(){await navigator.clipboard.writeText($('lyrics').value);toast('Lyrics copied for BandLab.')}
 function restore(){renderVibe();renderInfluences();renderArc();renderGlossary();if(state.durationSeconds){$('beatLength').textContent=formatTime(state.durationSeconds);$('waveDuration').textContent=formatTime(state.durationSeconds)}if(state.beatAnalysis){const a=state.beatAnalysis;$('detectedBpm').textContent=a.bpm||'—';$('detectedKey').textContent=a.key||'—';$('bpmConfidence').textContent=confidenceLabel(a.bpmConfidence||0)+' pulse confidence';$('keyConfidence').textContent=confidenceLabel(a.keyConfidence||0)+' tonal confidence · verify by ear';$('bpm').value=a.bpm||'';$('key').value=a.key||'';renderEnergy(a.energy||[]);renderArrangement(a.arrangement||[]);renderGridMetrics(a);renderTimeline(a);renderMarkers(a);$('analysisState').textContent='Previous analysis restored';$('analysisBar').style.width='100%';$('exportBeatReport').disabled=false;$('snapSections').disabled=false}}
 restore();
+
+
+/* BRICK 3 — FUNCTIONAL VOCAL LAB */
+const VOCAL_DB='rnp_vocal_lab_v1',VOCAL_STORE='takes';
+let vocalDbPromise=null,vocalStream=null,vocalRecorder=null,vocalChunks=[],vocalStartedAt=0,vocalPausedTotal=0,vocalPauseAt=0,vocalTimerHandle=null,vocalMarkers=[],vocalAudioContext=null,vocalAnalyser=null,vocalMonitorNode=null,vocalWaveFrame=null;
+function openVocalDb(){if(vocalDbPromise)return vocalDbPromise;vocalDbPromise=new Promise((resolve,reject)=>{const req=indexedDB.open(VOCAL_DB,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(VOCAL_STORE))db.createObjectStore(VOCAL_STORE,{keyPath:'id'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});return vocalDbPromise}
+async function vocalDbPut(item){const db=await openVocalDb();return new Promise((resolve,reject)=>{const req=db.transaction(VOCAL_STORE,'readwrite').objectStore(VOCAL_STORE).put(item);req.onsuccess=()=>resolve();req.onerror=()=>reject(req.error)})}
+async function vocalDbAll(){const db=await openVocalDb();return new Promise((resolve,reject)=>{const req=db.transaction(VOCAL_STORE).objectStore(VOCAL_STORE).getAll();req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error)})}
+async function vocalDbDelete(id){const db=await openVocalDb();return new Promise((resolve,reject)=>{const req=db.transaction(VOCAL_STORE,'readwrite').objectStore(VOCAL_STORE).delete(id);req.onsuccess=()=>resolve();req.onerror=()=>reject(req.error)})}
+function vocalMime(){return ['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(x=>window.MediaRecorder&&MediaRecorder.isTypeSupported(x))||''}
+function vocalFormat(ms){ms=Math.max(0,ms||0);const sec=ms/1000,min=Math.floor(sec/60),rest=(sec%60).toFixed(1);return `${String(min).padStart(2,'0')}:${rest.padStart(4,'0')}`}
+function setVocalStatus(text){$('vocalStatus').textContent=text}
+function syncVocalBeatStatus(){const name=currentBeatFile?.name||$('beatName')?.textContent;if(name&&name!=='Awaiting instrumental'){$('vocalBeatStatus').textContent=`Producer Room beat: ${name}`}else $('vocalBeatStatus').textContent='Producer Room beat: none loaded'}
+function resizeVocalCanvas(){const c=$('vocalWave');if(!c)return;const dpr=Math.min(window.devicePixelRatio||1,2),r=c.getBoundingClientRect();c.width=Math.max(320,Math.round(r.width*dpr));c.height=Math.round(112*dpr)}
+function drawVocalWave(){if(!vocalAnalyser)return;const c=$('vocalWave'),g=c.getContext('2d'),data=new Uint8Array(vocalAnalyser.fftSize);vocalAnalyser.getByteTimeDomainData(data);g.fillStyle='#020305';g.fillRect(0,0,c.width,c.height);g.strokeStyle='rgba(104,216,255,.18)';g.beginPath();g.moveTo(0,c.height/2);g.lineTo(c.width,c.height/2);g.stroke();g.strokeStyle='#70ffb1';g.lineWidth=Math.max(1,(window.devicePixelRatio||1));g.beginPath();data.forEach((v,i)=>{const x=i/(data.length-1)*c.width,y=v/255*c.height;i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();vocalWaveFrame=requestAnimationFrame(drawVocalWave)}
+async function enableVocalMic(){
+  if(!navigator.mediaDevices?.getUserMedia)return toast('Microphone access requires HTTPS in Safari.');
+  try{
+    vocalStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    vocalAudioContext=new (window.AudioContext||window.webkitAudioContext)();
+    const source=vocalAudioContext.createMediaStreamSource(vocalStream);vocalAnalyser=vocalAudioContext.createAnalyser();vocalAnalyser.fftSize=1024;source.connect(vocalAnalyser);vocalMonitorNode=source;
+    resizeVocalCanvas();drawVocalWave();$('recordTakeBtn').disabled=false;$('enableMicBtn').textContent='Mic Enabled';$('enableMicBtn').disabled=true;$('vocalRoomBadge').innerHTML='<span class="led"></span>Mic ready';setVocalStatus('Microphone ready');toast('Vocal Lab microphone ready.');
+  }catch(err){console.error(err);setVocalStatus('Microphone permission denied');toast('Allow microphone access in Safari settings, then try again.')}
+}
+function syncVocalMonitoring(){if(!vocalMonitorNode||!vocalAudioContext)return;try{vocalMonitorNode.disconnect();vocalMonitorNode.connect(vocalAnalyser);if($('vocalMonitor').value==='on')vocalAnalyser.connect(vocalAudioContext.destination);else try{vocalAnalyser.disconnect(vocalAudioContext.destination)}catch(_){}}catch(err){console.warn(err)}}
+async function vocalCountIn(){const seconds=Number($('vocalCountIn').value)||0;for(let i=seconds;i>0;i--){setVocalStatus(`Recording in ${i}`);toast(`Recording in ${i}`);await new Promise(r=>setTimeout(r,1000))}}
+function updateVocalTimer(){let now=vocalPauseAt||Date.now(),elapsed=now-vocalStartedAt-vocalPausedTotal;$('vocalTimer').textContent=vocalFormat(elapsed)}
+async function startVocalTake(){
+  if(!vocalStream)return toast('Enable the microphone first.');
+  await vocalCountIn();vocalChunks=[];vocalMarkers=[];vocalPausedTotal=0;vocalPauseAt=0;
+  const mime=vocalMime();vocalRecorder=new MediaRecorder(vocalStream,mime?{mimeType:mime}:undefined);vocalRecorder.ondataavailable=e=>{if(e.data?.size)vocalChunks.push(e.data)};vocalRecorder.onstop=saveVocalTake;
+  vocalRecorder.start(250);vocalStartedAt=Date.now();vocalTimerHandle=setInterval(updateVocalTimer,100);$('vocalRecorderCard').classList.add('recordingNow');$('recordTakeBtn').disabled=true;$('pauseTakeBtn').disabled=false;$('stopTakeBtn').disabled=false;$('dropTakeMarker').disabled=false;setVocalStatus('Recording dry vocal');$('vocalMarkerReadout').textContent='Take markers: none';
+  if(currentBeatFile&&$('player').src){$('player').currentTime=0;$('player').play().catch(()=>toast('Tap Play Beat once to allow playback.'))}toast('Take rolling.');
+}
+function pauseVocalTake(){if(!vocalRecorder)return;if(vocalRecorder.state==='recording'){vocalRecorder.pause();vocalPauseAt=Date.now();$('pauseTakeBtn').textContent='Resume';$('player').pause();setVocalStatus('Take paused')}else if(vocalRecorder.state==='paused'){vocalPausedTotal+=Date.now()-vocalPauseAt;vocalPauseAt=0;vocalRecorder.resume();$('pauseTakeBtn').textContent='Pause';if(currentBeatFile)$('player').play().catch(()=>{});setVocalStatus('Recording dry vocal')}}
+function stopVocalTake(){if(!vocalRecorder||vocalRecorder.state==='inactive')return;vocalRecorder.stop();clearInterval(vocalTimerHandle);$('player').pause();$('vocalRecorderCard').classList.remove('recordingNow');$('recordTakeBtn').disabled=false;$('pauseTakeBtn').disabled=true;$('stopTakeBtn').disabled=true;$('dropTakeMarker').disabled=true;$('pauseTakeBtn').textContent='Pause';setVocalStatus('Securing take')}
+function dropVocalMarker(){if(!vocalRecorder||vocalRecorder.state==='inactive')return;const elapsed=(vocalPauseAt||Date.now())-vocalStartedAt-vocalPausedTotal;vocalMarkers.push(elapsed);$('vocalMarkerReadout').textContent='Take markers: '+vocalMarkers.map(vocalFormat).join(' · ');toast('Take marker dropped.')}
+async function saveVocalTake(){const type=vocalRecorder?.mimeType||vocalMime()||'audio/webm',blob=new Blob(vocalChunks,{type}),title=($('title').value||'Untitled Session').trim();await vocalDbPut({id:crypto.randomUUID(),name:`${title} · Take ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}`,created:Date.now(),type,blob,markers:[...vocalMarkers],favorite:false,beatName:currentBeatFile?.name||null});setVocalStatus('Take secured');toast('Take saved to Voice Locker.');await renderVoiceLocker()}
+async function renderVoiceLocker(){
+  const takes=(await vocalDbAll()).sort((a,b)=>(Number(b.favorite)-Number(a.favorite))||(b.created-a.created));$('lockerTakeCount').textContent=`${takes.length} take${takes.length===1?'':'s'}`;
+  $('voiceLockerList').innerHTML=takes.length?takes.map(t=>{const url=URL.createObjectURL(t.blob);return `<div class="takeCard"><div class="takeHead"><div><b>${t.favorite?'<span class="favoriteStar">★</span> ':''}${escapeHtml(t.name)}</b><small>${new Date(t.created).toLocaleString()}${t.beatName?' · '+escapeHtml(t.beatName):''} · ${t.markers?.length||0} marker${t.markers?.length===1?'':'s'}</small></div></div><audio controls src="${url}"></audio><div class="takeButtons"><button class="btn dark" onclick="renameVocalTake('${t.id}')">Rename</button><button class="btn dark" onclick="favoriteVocalTake('${t.id}')">${t.favorite?'Unfavorite':'Favorite'}</button><button class="btn dark" onclick="exportVocalTake('${t.id}')">Export</button><button class="btn dark" onclick="deleteVocalTake('${t.id}')">Delete</button></div></div>`}).join(''):'<div class="takeEmpty">No recorded takes yet. Enable the microphone and create the first one.</div>';
+}
+window.renameVocalTake=async id=>{const takes=await vocalDbAll(),t=takes.find(x=>x.id===id);if(!t)return;const name=prompt('Rename this take:',t.name);if(!name?.trim())return;t.name=name.trim();await vocalDbPut(t);renderVoiceLocker()}
+window.favoriteVocalTake=async id=>{const takes=await vocalDbAll(),t=takes.find(x=>x.id===id);if(!t)return;t.favorite=!t.favorite;await vocalDbPut(t);renderVoiceLocker()}
+window.exportVocalTake=async id=>{const takes=await vocalDbAll(),t=takes.find(x=>x.id===id);if(!t)return;const a=document.createElement('a'),ext=t.type?.includes('mp4')?'m4a':'webm';a.href=URL.createObjectURL(t.blob);a.download=(t.name||'RNP Take').replace(/[^a-z0-9_-]+/gi,'_')+'.'+ext;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1200)}
+window.deleteVocalTake=async id=>{if(!confirm('Delete this take from the Voice Locker?'))return;await vocalDbDelete(id);renderVoiceLocker();toast('Take deleted.')}
+$('enableMicBtn').addEventListener('click',enableVocalMic);$('recordTakeBtn').addEventListener('click',startVocalTake);$('pauseTakeBtn').addEventListener('click',pauseVocalTake);$('stopTakeBtn').addEventListener('click',stopVocalTake);$('dropTakeMarker').addEventListener('click',dropVocalMarker);$('refreshLocker').addEventListener('click',renderVoiceLocker);$('vocalMonitor').addEventListener('change',syncVocalMonitoring);$('playBeatFromVocal').addEventListener('click',()=>{syncVocalBeatStatus();if(!$('player').src)return toast('Load an instrumental in the Producer Room first.');$('player').paused?$('player').play().catch(()=>{}):$('player').pause()});$('jumpWriteFromVocal').addEventListener('click',()=>go('write',document.querySelector('[data-room=write]')));window.addEventListener('resize',resizeVocalCanvas);$('beatInput').addEventListener('change',()=>setTimeout(syncVocalBeatStatus,0));
+renderVoiceLocker().catch(err=>console.warn('Voice Locker unavailable',err));syncVocalBeatStatus();resizeVocalCanvas();
+
 </script>
 </body>
 </html>
