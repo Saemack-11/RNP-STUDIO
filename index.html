@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="RNP Studio" />
-<title>RNP Studio 4.0 — The Sanctuary Interface</title>
+<title>RNP Studio 6.0 — Adaptive Intelligence</title>
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
@@ -188,79 +188,108 @@ main{padding-top:18px;background:linear-gradient(90deg,rgba(39,21,12,.14),transp
 .archiveProject:focus{outline:2px solid var(--cyan);outline-offset:2px}
 
 
-/* RNP 4.0 — THE SANCTUARY INTERFACE */
+/* =========================================================
+   RNP 4.0.1 — iPHONE SANCTUARY
+   Mobile-first shell. One room, one tool, one clear path.
+   ========================================================= */
 :root{
-  --sanctuary-gold:#d2a94f;
-  --sanctuary-amber:#b96f28;
-  --sanctuary-cyan:#68d8ff;
-  --sanctuary-green:#70ffb1;
-  --sanctuary-red:#b20c23;
-  --workspace:rgba(8,9,12,.88);
-  --workspace-strong:rgba(7,8,11,.96);
+  --iphone-bg:#07070a;
+  --iphone-panel:rgba(10,11,15,.92);
+  --iphone-gold:#e0b75f;
+  --iphone-cyan:#68d8ff;
+  --iphone-green:#70ffb1;
+  --iphone-red:#b20c23;
+  --iphone-safe-top:env(safe-area-inset-top);
+  --iphone-safe-bottom:env(safe-area-inset-bottom);
 }
-html{scroll-behavior:smooth}
-body{min-height:100vh;background:#050506}
-.app{max-width:none;overflow:visible;padding-bottom:calc(88px + var(--safe))}
-.wall{background-image:url("assets/rnp-sanctuary-masterpiece.jpg");background-position:center top;background-size:cover;filter:saturate(.92) contrast(1.06)}
-.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.5) 38%,rgba(0,0,0,.9) 86%)}
-.wall:after{background:radial-gradient(circle at 50% 18%,transparent 0 20%,rgba(0,0,0,.28) 48%,rgba(0,0,0,.76) 100%)}
-body[data-room="producer"] .wall{background-image:url("assets/rnp-studio-final.jpg")}
-body[data-room="vocal"] .wall{background-image:url("assets/rnp-vocal-lab.jpg")}
-body[data-room="write"] .wall{background-image:url("assets/rnp-dojo.jpg")}
-body[data-room="cover"] .wall{background-image:url("assets/rnp-futuristic-studio-master.jpg")}
-body[data-room="culture"] .wall{background-image:url("assets/rnp-sanctuary.jpg")}
-body[data-room="memory"] .wall,body[data-room="archive"] .wall{background-image:url("assets/rnp-galaxy-mind.jpg")}
+html,body{width:100%;max-width:100%;overflow-x:hidden;background:var(--iphone-bg)}
+body:before{display:none!important}
+.app{width:100%;max-width:520px;margin:0 auto;overflow:visible;padding-bottom:calc(82px + var(--iphone-safe-bottom));background:#09090c}
+.wall{display:none!important}
+.hero{position:relative!important;top:auto!important;margin:0!important;min-height:0!important;padding:calc(9px + var(--iphone-safe-top)) 12px 9px!important;background:#09090c!important;border-bottom:1px solid rgba(224,183,95,.35)!important;box-shadow:none!important;backdrop-filter:none!important}
+.heroBrand{display:flex!important;align-items:center!important;gap:10px!important}.brandMark{width:42px!important;height:42px!important;border-radius:10px!important}.heroCopy strong{display:block!important;font-size:16px!important;letter-spacing:.04em!important}.heroCopy small{font-size:7px!important;letter-spacing:.1em!important}.heroCopy .tag{font-size:8px!important;margin-top:2px!important}.status{position:absolute;right:10px;bottom:9px;margin:0!important;font-size:7px!important;padding:5px 7px!important;background:rgba(8,30,21,.7)!important}
 
-.hero{position:sticky;top:0;z-index:18;min-height:auto;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(180deg,rgba(4,4,5,.96),rgba(4,4,5,.74));border-bottom:1px solid rgba(210,169,79,.38)}
-.brandMark{width:54px;height:54px;border-radius:12px}.heroCopy strong{font-size:19px}.heroCopy small{font-size:8px}.heroCopy .tag{font-size:9px;margin-top:3px}.status{font-size:8px;padding:6px 8px;white-space:nowrap}
+.mobileScene{position:relative;height:31vh;min-height:220px;max-height:320px;background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.1) 58%,rgba(9,9,12,.93) 100%),url('assets/rnp-sanctuary-masterpiece.jpg');background-size:cover;background-position:center 16%;overflow:hidden}
+.mobileScene:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 28%,transparent 72%,rgba(0,0,0,.12));pointer-events:none}
+.sceneCopy{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;text-shadow:0 3px 14px #000}.sceneCopy small{font:800 8px 'Courier New',monospace;letter-spacing:.15em;color:#f2cc78;text-transform:uppercase}.sceneCopy strong{display:block;font-size:22px;line-height:1.05;margin-top:4px}.sceneCopy span{display:block;font-size:11px;color:#ddd2c4;margin-top:4px;max-width:330px}
 
-.studioRail{position:sticky;top:75px;z-index:17;margin:0;padding:8px 12px;background:rgba(5,5,7,.86);border-bottom:1px solid rgba(210,169,79,.32);backdrop-filter:blur(18px);display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
-.studioRail::-webkit-scrollbar{display:none}.roomChip{border-radius:999px;padding:8px 11px;font-size:10px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);white-space:nowrap}.roomChip.on{background:rgba(178,12,35,.9);border-color:#f2c86d;box-shadow:0 0 24px rgba(178,12,35,.28)}
-.ambienceDock{position:sticky;top:119px;z-index:16;margin:0;padding:6px 12px;background:rgba(5,5,7,.72);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px)}
-.ambienceDock button{border-radius:999px;padding:7px 9px}.ambienceDock span{font-size:9px}
+.roomNavWrap{position:sticky;top:0;z-index:30;background:rgba(8,8,11,.98);border-bottom:1px solid rgba(224,183,95,.3);display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center}
+.roomScrollBtn{height:44px;border:0;background:transparent;color:#f2cc78;font-size:22px}.studioRail{position:static!important;top:auto!important;margin:0!important;padding:7px 3px!important;display:flex!important;gap:7px!important;overflow-x:auto!important;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}.studioRail::-webkit-scrollbar{display:none}.roomChip{scroll-snap-align:center;flex:0 0 auto!important;border-radius:999px!important;padding:8px 12px!important;font-size:9px!important;white-space:nowrap!important;background:#111219!important;border:1px solid rgba(255,255,255,.17)!important;color:#c6c0b8!important}.roomChip.on{background:var(--iphone-red)!important;color:#fff4e0!important;border-color:var(--iphone-gold)!important;box-shadow:0 0 0 1px rgba(224,183,95,.15)!important}
+.ambienceDock{display:none!important}
 
-.sanctuaryHalo{position:relative;z-index:3;margin:12px auto 0;max-width:1180px;padding:0 12px;display:grid;grid-template-columns:repeat(8,minmax(110px,1fr));gap:8px;overflow-x:auto;scrollbar-width:none}
-.sanctuaryHalo::-webkit-scrollbar{display:none}
-.memoryTile{min-height:86px;border:1px solid rgba(210,169,79,.35);background:linear-gradient(180deg,rgba(7,8,11,.88),rgba(7,8,11,.68));color:var(--ink);padding:10px;text-align:left;border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 12px 30px rgba(0,0,0,.24)}
-.memoryTile .icon{display:block;font-size:22px;margin-bottom:5px}.memoryTile b{display:block;font:900 11px "Courier New",monospace;letter-spacing:.06em;text-transform:uppercase;color:#f2c86d}.memoryTile small{display:block;color:#b9b0a7;font-size:10px;line-height:1.3;margin-top:4px}.memoryTile:active{transform:scale(.98)}.memoryTile.on{border-color:var(--sanctuary-green);box-shadow:0 0 0 1px rgba(112,255,177,.18),0 12px 30px rgba(0,0,0,.28)}
+.memoryRibbon{display:flex;gap:8px;overflow-x:auto;padding:10px 12px 9px;background:#09090c;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}.memoryRibbon::-webkit-scrollbar{display:none}.memoryCue{scroll-snap-align:start;flex:0 0 118px;min-height:66px;border-radius:12px;border:1px solid rgba(224,183,95,.28);background:linear-gradient(145deg,#111116,#17120f);color:#f6f0e8;padding:9px;text-align:left}.memoryCue .emoji{font-size:17px}.memoryCue b{display:block;font:900 9px 'Courier New';letter-spacing:.05em;text-transform:uppercase;color:#f2cc78;margin-top:3px}.memoryCue small{display:block;font-size:8px;line-height:1.25;color:#aaa29a;margin-top:3px}.memoryCue.on{border-color:var(--iphone-green);box-shadow:inset 0 0 0 1px rgba(112,255,177,.14)}
 
-main{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:14px 14px 40px}
-.page.on{animation:roomEnter .35s ease both}@keyframes roomEnter{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
-.card{border-radius:18px;border:1px solid rgba(210,169,79,.38);background:linear-gradient(180deg,rgba(7,8,11,.96),rgba(11,12,16,.9));box-shadow:0 24px 60px rgba(0,0,0,.42);padding:17px;margin-bottom:14px;backdrop-filter:blur(18px)}
-.card.rack{background:linear-gradient(180deg,rgba(7,8,11,.97),rgba(13,14,18,.91))}
-.cardH h2{font-size:17px;letter-spacing:.07em}.sub{color:#c0b7ad}.feed{border-radius:12px;background:rgba(1,2,4,.72)}
-input,textarea,select{border-radius:11px;background:rgba(0,0,0,.5)}
-.btn{border-radius:11px}.btn.primary{box-shadow:0 12px 30px rgba(178,12,35,.24)}
+main{width:100%!important;max-width:100%!important;margin:0!important;padding:10px 10px 34px!important;background:linear-gradient(180deg,#09090c,#07070a)!important}
+.page{display:none!important;min-height:0!important;padding:0!important;border-radius:0!important;overflow:visible!important}.page.on{display:block!important;animation:none!important}.page:before,.page:after{display:none!important}
+.roomHeader{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:6px 4px 10px}.roomHeader strong{font:900 13px 'Courier New';letter-spacing:.1em;text-transform:uppercase;color:#f2cc78}.roomHeader span{font-size:9px;color:#a9a19a;text-align:right}
+.sectionPager{display:flex;gap:7px;overflow-x:auto;padding:0 1px 10px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}.sectionPager::-webkit-scrollbar{display:none}.sectionTab{scroll-snap-align:start;flex:0 0 auto;border:1px solid rgba(255,255,255,.16);background:#111219;color:#bdb6ae;padding:8px 10px;border-radius:999px;font:800 9px 'Courier New';letter-spacing:.05em;text-transform:uppercase}.sectionTab.on{background:#f4eee5;color:#111;border-color:#fff}
+.card{display:none!important;width:100%!important;margin:0!important;padding:14px!important;border-radius:16px!important;background:linear-gradient(180deg,rgba(13,14,18,.98),rgba(9,10,13,.98))!important;border:1px solid rgba(224,183,95,.32)!important;box-shadow:0 16px 40px rgba(0,0,0,.36)!important;backdrop-filter:none!important}.card.mobileActive{display:block!important}.card:before,.card:after{display:none!important}.cardH{align-items:flex-start!important}.cardH h2{font-size:16px!important}.sub{font-size:12px!important;line-height:1.45!important}.grid2,.meta,.whiteboard,.sessionStrip,.beatContext,.memoryStats,.engineModes,.coverOptionGrid,.vocalTools,.mixerToolbar,.punchGrid{grid-template-columns:1fr!important}.sessionStrip{display:grid!important;grid-template-columns:1fr 1fr!important}.influenceGrid,.referenceGrid{grid-template-columns:1fr 1fr!important}.turntable{width:210px!important;height:210px!important}.turntable:after{inset:77px!important}.feed{min-height:140px!important}.record{min-height:260px!important}.welcome{min-height:300px!important;background-image:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.9)),url('assets/rnp-sanctuary-masterpiece.jpg')!important;background-size:cover!important;background-position:center!important}.welcome h1{font-size:31px!important}.startSession{display:grid!important;grid-template-columns:1fr!important}.btn{min-height:44px;border-radius:11px!important}.utilityOrb,.utilityDrawer,.wallWhisper{display:none!important}
+.nav{display:none!important}
+.archiveProject{border-radius:12px!important;padding:12px!important}
 
-/* One clear workspace instead of a dashboard wall. */
-.page.on#producer,.page.on#vocal,.page.on#write,.page.on#cover,.page.on#culture,.page.on#memory,.page.on#archive,.page.on#settings{display:block!important;max-width:980px;margin:0 auto}
-.page.on#producer>.card,.page.on#vocal>.card,.page.on#write>.card,.page.on#cover>.card,.page.on#culture>.card,.page.on#memory>.card,.page.on#archive>.card,.page.on#settings>.card{width:100%;margin:0 0 14px!important}
+@media(min-width:521px){body{background:#020203}.app{box-shadow:0 0 0 1px rgba(255,255,255,.06),0 30px 100px rgba(0,0,0,.8)}}
 
-.roomBanner{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;padding:12px 14px;border:1px solid rgba(210,169,79,.3);border-radius:14px;background:rgba(4,5,8,.7)}
-.roomBanner strong{font:900 13px "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:#f2c86d}.roomBanner span{color:#bdb4aa;font-size:11px;text-align:right}
 
-.utilityOrb{position:fixed;right:14px;bottom:calc(18px + var(--safe));z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid rgba(242,200,109,.6);background:#0b0c10;color:#f2c86d;font-size:22px;box-shadow:0 16px 36px rgba(0,0,0,.55)}
-.utilityDrawer{position:fixed;right:14px;bottom:calc(82px + var(--safe));z-index:39;width:min(290px,calc(100vw - 28px));padding:12px;border-radius:16px;border:1px solid rgba(210,169,79,.4);background:rgba(7,8,11,.96);box-shadow:0 24px 60px rgba(0,0,0,.58);display:none}.utilityDrawer.open{display:grid;grid-template-columns:1fr 1fr;gap:8px}.utilityDrawer .btn{font-size:10px;padding:10px}
-
-body.focusMode .hero,body.focusMode .studioRail,body.focusMode .ambienceDock,body.focusMode .sanctuaryHalo{display:none!important}
-body.focusMode main{padding-top:calc(16px + env(safe-area-inset-top));max-width:900px}
-body.focusMode .wall:before{background:linear-gradient(180deg,rgba(0,0,0,.38),rgba(0,0,0,.84))}
-body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
-
-.wallWhisper{position:fixed;left:12px;bottom:calc(22px + var(--safe));z-index:5;writing-mode:vertical-rl;transform:rotate(180deg);font:800 8px "Courier New",monospace;letter-spacing:.18em;color:rgba(242,200,109,.55);text-transform:uppercase;pointer-events:none}
-
-@media(max-width:899px){
-  .wall{background-size:auto 38vh;background-position:center top}.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.18) 17vh,rgba(0,0,0,.9) 39vh,#08080a 67vh)}
-  .hero{margin-top:25vh}.studioRail{top:calc(25vh + 75px)}.ambienceDock{top:calc(25vh + 119px)}
-  .sanctuaryHalo{grid-template-columns:repeat(8,132px);margin-top:8px}
-  .memoryTile{min-height:78px;padding:9px}.memoryTile small{font-size:9px}
-  main{padding-left:10px;padding-right:10px}.card{border-radius:15px;padding:14px}
-  .wallWhisper{display:none}
+/* RNP 5.0 — INTELLIGENCE STUDIO / IPHONE 17 WORKFLOW */
+:root{
+  --rnp-glass:rgba(10,12,16,.88);
+  --rnp-glass-strong:rgba(7,9,13,.97);
+  --rnp-stroke:rgba(255,255,255,.14);
+  --rnp-gold:#e0b75f;
+  --rnp-cyan:#60d9ff;
+  --rnp-green:#75f6b3;
+  --rnp-red:#d11336;
 }
-@media(min-width:900px){
-  .hero{grid-template-columns:1fr auto}.heroBrand{grid-column:1}.status{grid-column:2}.studioRail{top:75px}.ambienceDock{top:119px}
-  .sanctuaryHalo{padding:0 18px}.memoryTile:hover{border-color:#f2c86d;transform:translateY(-2px)}
-}
+html,body{max-width:100%;overflow-x:hidden}
+body{background:#050507}
+.app{width:100%;max-width:520px!important;margin:0 auto;overflow:visible!important;background:#07080a;padding-bottom:calc(34px + var(--safe))}
+.wall{position:absolute!important;inset:0 0 auto!important;height:360px!important;background-image:url("assets/rnp-sanctuary-masterpiece.jpg")!important;background-size:cover!important;background-position:50% 16%!important;filter:saturate(1.14) contrast(1.03) brightness(1)!important}
+.wall:before{background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.08) 45%,rgba(7,8,10,.7) 78%,#07080a 100%)!important}
+.wall:after{background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 22%,transparent 78%,rgba(0,0,0,.12))!important}
+body[data-room] .wall{background-image:url("assets/rnp-sanctuary-masterpiece.jpg")!important}
+
+.hero{position:relative!important;top:auto!important;margin-top:0!important;min-height:234px!important;padding:calc(16px + env(safe-area-inset-top)) 14px 14px!important;background:linear-gradient(180deg,rgba(4,5,7,.18),rgba(4,5,7,.12) 58%,rgba(7,8,10,.82))!important;border:0!important;display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:10px!important;box-shadow:none!important}
+.heroBrand{align-items:center!important;background:rgba(5,7,10,.63);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:9px 10px;max-width:76%}
+.brandMark{width:44px!important;height:44px!important;border-radius:12px!important}.heroCopy strong{font-size:16px!important;letter-spacing:.02em}.heroCopy small{font-size:7px!important}.heroCopy .tag{font-size:7px!important;letter-spacing:.08em!important}
+.status{margin:0!important;padding:8px!important;border-radius:13px!important;background:rgba(5,7,10,.7)!important;backdrop-filter:blur(15px);font-size:0!important}.status .led{margin:0!important;width:9px;height:9px}
+
+.rnpIntelBar{margin:-54px 12px 10px;position:relative;z-index:20;border:1px solid rgba(224,183,95,.4);background:linear-gradient(145deg,rgba(8,10,14,.94),rgba(16,13,16,.91));border-radius:18px;padding:13px;box-shadow:0 18px 48px rgba(0,0,0,.48)}
+.rnpIntelTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.rnpIntelTop b{font:900 12px "Courier New";letter-spacing:.11em;text-transform:uppercase;color:#f5d98f}.rnpIntelTop span{font:800 8px "Courier New";letter-spacing:.08em;color:#baffd6}.rnpIntelGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.rnpIntelMetric{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.28);padding:9px;border-radius:11px}.rnpIntelMetric small{display:block;font:800 8px "Courier New";letter-spacing:.1em;text-transform:uppercase;color:#8e989e}.rnpIntelMetric strong{display:block;margin-top:5px;font-size:11px;color:#f4eee5}.rnpNoCap{margin-top:9px;border-left:3px solid var(--rnp-green);padding:8px 9px;background:rgba(117,246,179,.06);font-size:10px;line-height:1.45;color:#d9ffe9}
+
+.rnpRailShell{position:sticky;top:0;z-index:45;background:rgba(6,7,9,.94);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(224,183,95,.28);display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;padding:8px 6px}
+.rnpRailArrow{height:34px;border:1px solid rgba(255,255,255,.14);background:#0b0d11;color:#f5d98f;border-radius:10px;font-size:17px}
+.studioRail{position:static!important;top:auto!important;margin:0!important;padding:0 5px!important;background:transparent!important;border:0!important;box-shadow:none!important;display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:7px!important}
+.roomChip{scroll-snap-align:center;flex:0 0 auto!important;min-width:74px;border-radius:11px!important;padding:9px 10px!important;font-size:9px!important;background:#0b0d11!important;border:1px solid rgba(255,255,255,.13)!important;color:#aeb6bc!important}
+.roomChip.on{background:linear-gradient(145deg,#bb102d,#7e0a1d)!important;color:#fff!important;border-color:#f2c86d!important;box-shadow:0 10px 25px rgba(178,12,35,.24)!important}
+.ambienceDock{position:static!important;top:auto!important;padding:7px 12px!important;background:#07080a!important;border:0!important;display:flex!important}.ambienceDock button{font-size:8px!important;padding:7px 8px!important}.ambienceDock span{font-size:8px!important;overflow:hidden;text-overflow:ellipsis}
+
+.sanctuaryHalo{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;scroll-snap-type:x mandatory;margin:0!important;padding:7px 12px 12px!important;gap:8px!important;background:#07080a;max-width:none!important}
+.memoryTile{scroll-snap-align:start;flex:0 0 118px!important;min-height:68px!important;padding:8px!important;border-radius:13px!important;background:linear-gradient(145deg,rgba(12,14,18,.95),rgba(20,15,17,.9))!important}.memoryTile .icon{font-size:16px!important;margin:0 0 3px!important}.memoryTile b{font-size:9px!important}.memoryTile small{font-size:8px!important;line-height:1.25!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+main{padding:10px!important;background:#07080a!important;max-width:none!important}
+.page{padding:0!important;min-height:0!important;overflow:visible!important;border-radius:0!important}.page:before,.page:after{display:none!important}
+.card{border-radius:15px!important;padding:0!important;margin:0 0 10px!important;background:linear-gradient(145deg,rgba(12,14,18,.98),rgba(18,15,18,.97))!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:none!important;overflow:hidden!important;backdrop-filter:none!important}
+.card:before,.card:after{display:none!important}.cardH{margin:0!important;padding:13px 13px!important;cursor:pointer;min-height:52px}.cardH h2{font-size:14px!important;letter-spacing:.04em!important}.cardH .badge{margin-left:auto}.rnpPanelToggle{width:30px;height:30px;flex:0 0 30px;border:1px solid rgba(255,255,255,.14);background:#090b0e;color:#f5d98f;border-radius:9px;font-size:18px;line-height:1}.card>.rnpPanelBody{padding:0 13px 14px}.card.rnpCollapsed>.rnpPanelBody{display:none}.card.rnpCollapsed .rnpPanelToggle{transform:rotate(-90deg)}
+.card.rnpCollapsed .cardH{border-bottom:0}.card:not(.rnpCollapsed) .cardH{border-bottom:1px solid rgba(255,255,255,.08)}
+
+.rnpRoomHeader{margin:0 0 10px;padding:13px;border:1px solid rgba(224,183,95,.28);background:linear-gradient(145deg,rgba(8,10,14,.96),rgba(20,15,16,.94));border-radius:15px;display:flex;justify-content:space-between;gap:10px;align-items:center}.rnpRoomHeader b{display:block;font:900 12px "Courier New";letter-spacing:.1em;text-transform:uppercase;color:#f5d98f}.rnpRoomHeader small{display:block;margin-top:4px;color:#98a2a8;font-size:9px}.rnpMinimize{border:1px solid rgba(255,255,255,.15);background:#090b0e;color:#dce3e7;border-radius:10px;padding:8px 9px;font:800 8px "Courier New";text-transform:uppercase}
+
+.rnpHome{display:none}.rnpHome.on{display:block}.rnpWorkflow{display:grid;grid-template-columns:1fr 1fr;gap:9px}.rnpWorkflow button{min-height:92px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(145deg,#10131a,#171115);color:#fff;border-radius:15px;padding:12px;text-align:left}.rnpWorkflow b{display:block;font-size:13px}.rnpWorkflow small{display:block;color:#9aa4aa;font-size:9px;line-height:1.35;margin-top:5px}.rnpWorkflow .step{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;background:rgba(209,19,54,.18);color:#ff9bac;font:900 10px "Courier New";margin-bottom:8px}.rnpHomeBlock{margin-bottom:10px;padding:13px;border:1px solid rgba(255,255,255,.12);background:#0c0e12;border-radius:15px}.rnpHomeBlock h2{font-size:14px;margin:0 0 8px}.rnpHomeBlock p{font-size:11px;line-height:1.55;color:#b8c0c5;margin:0}.rnpNextMove{border-left:3px solid var(--rnp-cyan);padding:9px;background:rgba(96,217,255,.06);font-size:10px;line-height:1.5}
+
+.utilityOrb{width:48px!important;height:48px!important;right:12px!important;bottom:calc(14px + var(--safe))!important}.utilityDrawer{right:10px!important;bottom:calc(70px + var(--safe))!important;width:calc(100vw - 20px)!important;max-width:500px!important}
+.wallWhisper{display:none!important}.nav{display:none!important}
+
+input,textarea,select{font-size:16px!important}.btn{min-height:44px;border-radius:11px!important}.influenceGrid,.referenceGrid{grid-template-columns:1fr 1fr!important}.sessionStrip,.memoryStats,.beatContext{grid-template-columns:1fr 1fr!important}.workspaceGrid,.coverGrid,.vocalGrid{display:block!important}.page.on#producer,.page.on#vocal,.page.on#write,.page.on#cover,.page.on#culture,.page.on#memory,.page.on#archive,.page.on#settings{display:block!important;max-width:none!important}
+.turntable{width:210px!important;height:210px!important}.turntable:after{inset:76px!important}
+
+@media(min-width:521px){body{background:#020204}.app{box-shadow:0 0 70px rgba(0,0,0,.9)}}
+
+
+/* RNP 6.0 — ADAPTIVE INTELLIGENCE BRICKS */
+.adaptiveGrid{display:grid;grid-template-columns:1fr;gap:10px}.adaptiveTop{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.adaptiveMode{border:1px solid rgba(255,255,255,.13);background:#0a0c10;color:#aeb7bd;border-radius:11px;padding:10px 6px;font:900 9px "Courier New";letter-spacing:.07em;text-transform:uppercase}.adaptiveMode.on{color:#fff;border-color:#f0c76b;background:linear-gradient(145deg,#b20e2b,#710919)}
+.memoDrop{border:1px dashed rgba(96,217,255,.45);background:rgba(96,217,255,.045);padding:13px;border-radius:14px;text-align:center}.memoDrop input{display:none}.memoDrop label{display:block;cursor:pointer}.memoDrop b{display:block;font-size:13px}.memoDrop small{display:block;margin-top:5px;color:#99a5ad;font-size:9px;line-height:1.45}.memoMeta{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}.memoMeta div{padding:8px;border-radius:10px;background:#090b0e;border:1px solid rgba(255,255,255,.1)}.memoMeta span{display:block;font:800 7px "Courier New";color:#849098;text-transform:uppercase}.memoMeta b{display:block;margin-top:4px;font-size:10px}.memoWave{width:100%;height:64px;border-radius:10px;background:#07080b;margin-top:9px}.adaptiveStatus{padding:9px;border-left:3px solid var(--rnp-cyan);background:rgba(96,217,255,.055);font-size:10px;line-height:1.5;color:#d9f7ff}.predictActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.suggestionStack{display:grid;gap:9px}.barSuggestion{border:1px solid rgba(255,255,255,.13);background:linear-gradient(145deg,#0d1015,#161014);border-radius:14px;padding:12px}.barSuggestion.selected{border-color:#f0c76b;box-shadow:0 0 0 1px rgba(240,199,107,.2)}.barText{font-size:14px;line-height:1.5;color:#fff}.barMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.barMeta span{font:800 7px "Courier New";letter-spacing:.06em;color:#aab3b9;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:5px 7px}.barScores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}.barScores div{background:rgba(0,0,0,.28);padding:6px;border-radius:8px;text-align:center}.barScores small{display:block;font:700 6px "Courier New";color:#7f8c94;text-transform:uppercase}.barScores b{display:block;margin-top:3px;font-size:9px}.barButtons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}.barButtons button{min-height:35px;border:1px solid rgba(255,255,255,.12);background:#090b0e;color:#dfe5e8;border-radius:9px;font:800 7px "Courier New"}.councilBrief{display:grid;gap:7px}.briefRow{padding:9px;background:#090b0e;border:1px solid rgba(255,255,255,.1);border-radius:10px}.briefRow span{display:block;font:800 7px "Courier New";color:#8f9aa1;text-transform:uppercase}.briefRow b{display:block;margin-top:4px;font-size:10px;line-height:1.4}.influenceModeRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.influenceModeRow button{border:1px solid rgba(255,255,255,.13);background:#090b0e;color:#aeb6bc;border-radius:10px;padding:9px;font:800 8px "Courier New"}.influenceModeRow button.on{border-color:#75f6b3;color:#d9ffeb;background:rgba(117,246,179,.07)}
+.rnpEqualizer{display:grid;gap:9px}.eqPresetRow{display:flex;gap:6px;overflow-x:auto}.eqPreset{flex:0 0 auto;border:1px solid rgba(255,255,255,.12);background:#090b0e;color:#b9c1c6;border-radius:9px;padding:8px 10px;font:800 8px "Courier New"}.eqPreset.on{border-color:#60d9ff;color:#e6faff}.eqBands{height:220px;display:grid;grid-template-columns:repeat(8,1fr);gap:5px;align-items:end;padding:10px 4px;background:linear-gradient(180deg,rgba(96,217,255,.035),rgba(209,19,54,.025));border-radius:13px;border:1px solid rgba(255,255,255,.09)}.eqBand{height:100%;display:flex;flex-direction:column;align-items:center;gap:5px}.eqBand input{writing-mode:vertical-lr;direction:rtl;width:28px;height:158px;accent-color:#d11336}.eqBand b{font:900 7px "Courier New";color:#aeb8be}.eqBand span{font:700 6px "Courier New";color:#69757d}.eqReadout{padding:9px;border-radius:10px;background:#090b0e;border-left:3px solid #d11336;font-size:9px;line-height:1.45}.truthLock{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px;border:1px solid rgba(117,246,179,.25);background:rgba(117,246,179,.045);border-radius:11px}.truthLock b{font-size:10px}.truthLock small{display:block;color:#8fa199;font-size:8px;margin-top:3px}.truthLock input{width:auto}.miniTransport{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}.miniTransport button{min-height:38px;border:1px solid rgba(255,255,255,.12);background:#090b0e;color:#e2e8ea;border-radius:9px;font:800 7px "Courier New"}
+@media(max-width:390px){.barScores{grid-template-columns:1fr 1fr}.adaptiveTop{grid-template-columns:1fr}.eqBands{gap:2px}.eqBand input{height:145px}}
 
 </style>
 </head>
@@ -268,36 +297,55 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
 <div class="app">
 <div class="wall" aria-hidden="true"></div>
 <header class="hero">
-<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 4.0</strong><div class="tag">BANDLAB RECORDS. RNP CREATES.</div></div></div>
-<div class="status"><span class="led"></span>THE SANCTUARY ONLINE // MAN CAVE MODE</div>
+<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 6.0.1</strong><div class="tag">CAPTURE. ANALYZE. CREATE. RECORD. FINISH.</div></div></div>
+<div class="status"><span class="led"></span>RNP INTELLIGENCE ONLINE // TRUTH-FIRST MODE</div>
 </header>
-<div class="studioRail" aria-label="Studio rooms">
-<button class="roomChip on" type="button" data-rail-room="lobby">Lobby</button><button class="roomChip" type="button" data-rail-room="producer">Producer Room</button><button class="roomChip" type="button" data-rail-room="vocal">Vocal Lab</button><button class="roomChip" type="button" data-rail-room="write">Writing Desk</button><button class="roomChip" type="button" data-rail-room="cover">Cover Studio</button><button class="roomChip" type="button" data-rail-room="culture">Culture Vault</button><button class="roomChip" type="button" data-rail-room="memory">Memory Vault</button><button class="roomChip" type="button" data-rail-room="archive">Archive</button><button class="roomChip" type="button" data-rail-room="settings">Settings</button>
-</div>
+
+<section class="rnpIntelBar" aria-label="RNP Intelligence status">
+  <div class="rnpIntelTop"><b>RNP Intelligence</b><span>ADAPTIVE CREATIVE CORE</span></div>
+  <div class="rnpIntelGrid">
+    <div class="rnpIntelMetric"><small>Current Session</small><strong id="rnpIntelSession">Untitled Chapter</strong></div>
+    <div class="rnpIntelMetric"><small>Next Move</small><strong id="rnpIntelNext">Choose a workflow lane</strong></div>
+  </div>
+  <div class="rnpNoCap"><b>No Cap Guard:</b> your truth sets the boundary. RNP can sharpen the delivery, never invent the life.</div>
+</section>
+
+<section class="mobileScene" aria-label="RNP sanctuary wall"><div class="sceneCopy"><small>THE SANCTUARY // IPHONE MODE</small><strong>Your memories surround the work.</strong><span>One room at a time. Swipe the tabs. Tap a memory only when it sparks something.</span></div></section>
+<div class="roomNavWrap"><button id="roomPrev" class="roomScrollBtn" type="button" aria-label="Previous room">‹</button><div class="rnpRailShell"><button id="rnpRailPrev" class="rnpRailArrow" type="button" aria-label="Previous workflow tab">‹</button><div class="studioRail" aria-label="Studio rooms">
+<button class="roomChip on" type="button" data-rail-room="lobby">Home</button><button class="roomChip" type="button" data-rail-room="producer">Create</button><button class="roomChip" type="button" data-rail-room="vocal">Record</button><button class="roomChip" type="button" data-rail-room="write">Write</button><button class="roomChip" type="button" data-rail-room="cover">Finish</button><button class="roomChip" type="button" data-rail-room="culture">Culture</button><button class="roomChip" type="button" data-rail-room="memory">Memory</button><button class="roomChip" type="button" data-rail-room="archive">Recent</button><button class="roomChip" type="button" data-rail-room="settings">Settings</button>
+</div><button id="rnpRailNext" class="rnpRailArrow" type="button" aria-label="Next workflow tab">›</button></div><button id="roomNext" class="roomScrollBtn" type="button" aria-label="Next room">›</button></div>
 <div class="ambienceDock" aria-label="Sanctuary ambience controls"><button id="ambienceToggle" type="button">☁ Atmosphere: On</button><button id="nightModeToggle" type="button">🌙 Late Night</button><span id="roomWhisper">Lobby · come home and create</span></div>
-
-<div class="sanctuaryHalo" aria-label="Interactive nostalgia wall">
-  <button class="memoryTile" type="button" data-wall-ref="Ultra Evolution"><span class="icon">⚡</span><b>Ultra Evolution</b><small>Discipline · training · earned transformation</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Mixtape Smoke Era"><span class="icon">💨</span><b>Mixtape Smoke</b><small>Late-night booth energy · fearless punchlines</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="PlayStation"><span class="icon">🎮</span><b>PlayStation</b><small>Boss levels · memory cards · respawn mentality</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Old Soul Records"><span class="icon">💿</span><b>Old Soul</b><small>Motown pain · harmony · family legacy</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Dark Hero Comics"><span class="icon">🦇</span><b>Dark Heroes</b><small>Blade · Spawn energy · protector in the shadows</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Divine Timing"><span class="icon">♏</span><b>11:11</b><small>Scorpio · Saturn · divine timing · rebirth</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Smoke and Psychedelic Reflection"><span class="icon">🍄</span><b>High Mind</b><small>Weed · shrooms · nature · altered perspective</small></button>
-  <button class="memoryTile" type="button" data-wall-ref="Route Life and Fatherhood"><span class="icon">🛣️</span><b>Real Life</b><small>Routes · fatherhood · pressure · legacy</small></button>
+<div class="memoryRibbon" aria-label="Quick inspiration">
+<button class="memoryCue" type="button" data-wall-ref="Ultra Evolution"><span class="emoji">⚡</span><b>Evolution</b><small>Training · earned growth</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Mixtape Smoke Era"><span class="emoji">💨</span><b>Mixtape Smoke</b><small>Booth energy · punchlines</small></button>
+<button class="memoryCue" type="button" data-wall-ref="PlayStation"><span class="emoji">🎮</span><b>PlayStation</b><small>Boss levels · respawn</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Old Soul Records"><span class="emoji">💿</span><b>Old Soul</b><small>Motown · legacy · pain</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Dark Hero Comics"><span class="emoji">🦇</span><b>Dark Heroes</b><small>Protector in shadows</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Divine Timing"><span class="emoji">♏</span><b>11:11</b><small>Scorpio · rebirth</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Smoke and Psychedelic Reflection"><span class="emoji">🍄</span><b>High Mind</b><small>Weed · shrooms · perspective</small></button>
+<button class="memoryCue" type="button" data-wall-ref="Route Life and Fatherhood"><span class="emoji">🛣️</span><b>Real Life</b><small>Routes · fatherhood · legacy</small></button>
 </div>
-<div class="wallWhisper">Every wall holds a memory. Every memory can become a bar.</div>
-<button id="utilityOrb" class="utilityOrb" type="button" aria-label="Open sanctuary controls">☰</button>
-<div id="utilityDrawer" class="utilityDrawer" aria-label="Sanctuary controls">
-  <button id="focusModeBtn" class="btn dark" type="button">Focus Mode</button>
-  <button class="btn dark" type="button" onclick="saveProject()">Save Project</button>
-  <button class="btn dark" type="button" onclick="go('archive',document.querySelector('[data-rail-room=archive]'))">Recent Work</button>
-  <button class="btn dark" type="button" onclick="go('culture',document.querySelector('[data-rail-room=culture]'))">Culture Vault</button>
-</div>
-
 <main>
+
+<section id="rnpHome" class="rnpHome on">
+  <div class="rnpHomeBlock">
+    <h2>Your Jarvis Studio Workflow</h2>
+    <p>One move at a time. RNP Intelligence keeps the beat, truth, emotion, references, writing, vocals and recent work connected behind the scenes.</p>
+  </div>
+  <div class="rnpWorkflow">
+    <button type="button" data-jump-room="producer"><span class="step">01</span><b>Create</b><small>Load the beat, establish truth, mood and song direction.</small></button>
+    <button type="button" data-jump-room="write"><span class="step">02</span><b>Write</b><small>Develop hooks, verses, pockets and full-track structure.</small></button>
+    <button type="button" data-jump-room="vocal"><span class="step">03</span><b>Record</b><small>Capture dry vocals, manage takes and build the session mix.</small></button>
+    <button type="button" data-jump-room="cover"><span class="step">04</span><b>Finish</b><small>Shape the visual, save the project and export the work.</small></button>
+  </div>
+  <div class="rnpHomeBlock" style="margin-top:10px">
+    <h2>Intelligence Cue</h2>
+    <div id="rnpHomeCue" class="rnpNextMove">Start with what is true. Everything else should strengthen the meaning, not decorate it.</div>
+  </div>
+</section>
+
 <section id="lobby" class="page on">
-<div class="card rack welcome"><span class="badge" style="width:max-content">Private creative sanctuary</span><h1>ENTER THE STUDIO.</h1><p class="sub">Load the world, wake the room, and move from raw truth to beat intelligence, writing, vocals, cover art, and archive without breaking the creative flow.</p><div class="startSession"><button class="btn primary" onclick="delete state.activeProjectId;persist();go('producer',document.querySelector('[data-rail-room=producer]'))">Start New Session</button><button class="btn dark" onclick="go('archive',document.querySelector('[data-rail-room=archive]'))">Open Recent Work</button></div></div>
+<div class="card rack welcome"><span class="badge" style="width:max-content">Private creative sanctuary</span><h1>ENTER THE STUDIO.</h1><p class="sub">Load the world, wake the room, and move from raw truth to beat intelligence, writing, vocals, cover art, and archive without breaking the creative flow.</p><div class="startSession"><button class="btn primary" onclick="delete state.activeProjectId;persist();go('producer',document.querySelector('[data-room=producer]'))">Start New Session</button><button class="btn dark" onclick="go('archive',document.querySelector('[data-room=archive]'))">Open Recent Work</button></div></div>
 <div class="card rack"><div class="cardH"><h2>Creative Dashboard</h2><span class="badge">Session intelligence</span></div><div class="creativeDashboard">
 <div class="sessionStrip">
 <div class="sessionCell"><span>Current Track</span><strong id="dashTrack">Untitled Chapter</strong></div>
@@ -314,7 +362,7 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
 <label>Target<select id="dashTarget"><option>Streaming Single</option><option>Mixtape Cut</option><option>Album Record</option><option>Freestyle</option><option>Demo</option></select></label>
 <label>Deadline<input id="dashDeadline" type="date" /></label>
 </div>
-<div class="quickDoors"><button class="btn small dark" onclick="go('producer',document.querySelector('[data-rail-room=producer]'))">Load Beat</button><button class="btn small dark" onclick="go('write',document.querySelector('[data-room=write]'))">Continue Writing</button><button class="btn small dark" onclick="go('vocal',document.querySelector('[data-room=vocal]'))">Record Take</button><button class="btn small dark" onclick="go('cover',document.querySelector('[data-room=cover]'))">Direct Cover</button></div>
+<div class="quickDoors"><button class="btn small dark" onclick="go('producer',document.querySelector('[data-room=producer]'))">Load Beat</button><button class="btn small dark" onclick="go('write',document.querySelector('[data-room=write]'))">Continue Writing</button><button class="btn small dark" onclick="go('vocal',document.querySelector('[data-room=vocal]'))">Record Take</button><button class="btn small dark" onclick="go('cover',document.querySelector('[data-room=cover]'))">Direct Cover</button></div>
 </div></div>
 </section>
 <section id="producer" class="page">
@@ -394,6 +442,11 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
   <div id="nostalgiaLibrary" class="referenceScroller"></div>
   <div class="eyebrow" style="margin-top:11px">Selected for this record</div>
   <div id="selectedNostalgia" class="selectedShelf"></div>
+  <div class="influenceModeRow" id="nostalgiaUseMode">
+    <button type="button" class="on" data-nuse="reference">Reference Only</button>
+    <button type="button" data-nuse="influence">Influence Adaptive Bars</button>
+  </div>
+
   <div class="refControls">
     <div class="fieldish"><label for="nostalgiaWeight">How strongly?</label><select id="nostalgiaWeight"><option value="light" selected>Light touch</option><option value="medium">Noticeable</option><option value="heavy">Reference-driven</option></select></div>
     <div class="fieldish"><label for="nostalgiaMode">How should RNP use it?</label><select id="nostalgiaMode"><option value="meaning" selected>Meaning + metaphor</option><option value="punchline">Punchlines</option><option value="story">Story angles</option><option value="humor">Humorous flips</option></select></div>
@@ -444,6 +497,50 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
     </div>
     <button id="generateTrackBtn" class="btn primary" style="width:100%;margin-top:11px" type="button">Generate Track</button>
   </div>
+
+  <div class="card rack full" id="adaptiveWriterCard">
+    <div class="cardH"><h2>Adaptive Predictive Bars</h2><span class="badge">Beat-locked</span></div>
+    <div class="adaptiveGrid">
+      <div class="adaptiveTop" id="adaptiveModes">
+        <button class="adaptiveMode on" data-amode="verse" type="button">Verse</button>
+        <button class="adaptiveMode" data-amode="hook" type="button">Hook</button>
+        <button class="adaptiveMode" data-amode="adlib" type="button">Adlib</button>
+      </div>
+      <div class="truthLock"><div><b>No Cap Guard</b><small>Never invent biography, possessions, violence or accomplishments.</small></div><input id="adaptiveTruthLock" type="checkbox" checked></div>
+      <div class="memoDrop">
+        <label for="voiceMemoInput"><b>Upload Voice Memo</b><small>M4A, MP3, WAV, MP4, OGG or WebM · a cappella or freestyle over the beat</small></label>
+        <input id="voiceMemoInput" type="file" accept="audio/*,.m4a,.mp4">
+        <canvas id="memoWave" class="memoWave" width="900" height="120"></canvas>
+        <div class="memoMeta"><div><span>Memo</span><b id="memoName">None</b></div><div><span>Length</span><b id="memoLength">—</b></div><div><span>Alignment</span><b id="memoAlignment">Waiting</b></div></div>
+        <div class="miniTransport"><button id="playMemoBtn" type="button" disabled>Play Memo</button><button id="transcribeMemoBtn" type="button" disabled>Transcribe</button><button id="clearMemoBtn" type="button" disabled>Clear</button></div>
+      </div>
+      <div id="adaptiveStatus" class="adaptiveStatus">Upload a beat and add a seed line or Voice Memo. Adaptive will preserve your rhyme motion, cadence and truth.</div>
+      <div class="predictActions"><button id="predictBarsBtn" class="btn primary" type="button">Predict Next Bars</button><button id="quickCouncilBtn" class="btn dark" type="button">Quick Council Check</button></div>
+      <div id="councilBrief" class="councilBrief" hidden></div>
+      <div id="adaptiveSuggestions" class="suggestionStack"></div>
+    </div>
+  </div>
+
+  <div class="card rack full" id="creativeEqualizerCard">
+    <div class="cardH"><h2>RNP Inspiration Equalizer</h2><span class="badge">Nexus × Omnisphere spirit</span></div>
+    <div class="rnpEqualizer">
+      <div class="eqPresetRow" id="eqPresets">
+        <button class="eqPreset on" data-eqpreset="truth" type="button">Raw Truth</button><button class="eqPreset" data-eqpreset="mixtape" type="button">Mixtape Smoke</button><button class="eqPreset" data-eqpreset="cinematic" type="button">Dark Cinema</button><button class="eqPreset" data-eqpreset="float" type="button">High Mind</button><button class="eqPreset" data-eqpreset="oldSoul" type="button">Old Soul</button>
+      </div>
+      <div class="eqBands" id="eqBands">
+        <label class="eqBand"><b>TRUTH</b><input data-eq="truth" type="range" min="0" max="100" value="90"><span>90</span></label>
+        <label class="eqBand"><b>POCKET</b><input data-eq="pocket" type="range" min="0" max="100" value="85"><span>85</span></label>
+        <label class="eqBand"><b>RHYME</b><input data-eq="rhyme" type="range" min="0" max="100" value="70"><span>70</span></label>
+        <label class="eqBand"><b>MELODY</b><input data-eq="melody" type="range" min="0" max="100" value="45"><span>45</span></label>
+        <label class="eqBand"><b>PUNCH</b><input data-eq="punch" type="range" min="0" max="100" value="65"><span>65</span></label>
+        <label class="eqBand"><b>CULTURE</b><input data-eq="culture" type="range" min="0" max="100" value="30"><span>30</span></label>
+        <label class="eqBand"><b>NOSTALGIA</b><input data-eq="nostalgia" type="range" min="0" max="100" value="25"><span>25</span></label>
+        <label class="eqBand"><b>SPACE</b><input data-eq="space" type="range" min="0" max="100" value="55"><span>55</span></label>
+      </div>
+      <div id="eqReadout" class="eqReadout">Raw Truth preset: grounded details, natural cadence, controlled references and enough space to breathe.</div>
+    </div>
+  </div>
+
   <div id="writerResult" class="card rack full writerResult" hidden>
     <div class="cardH"><h2>Generated Record</h2><span id="seedPreservedBadge" class="badge">Seed preserved</span></div>
     <div id="writerReads" class="analysisNotes"></div>
@@ -461,7 +558,7 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
 
 <section id="vocal" class="page">
   <div class="card rack vocalConsole" id="vocalRecorderCard">
-    <div class="cardH"><h2>Vocal Lab</h2><span id="vocalRoomBadge" class="badge"><span class="led"></span>Room wired</span></div>
+    <div class="cardH"><h2>Record</h2><span id="vocalRoomBadge" class="badge"><span class="led"></span>Room wired</span></div>
     <div class="vocalTop"><div><div class="recStatus"><span class="recLamp"></span><span id="vocalStatus">Microphone offline</span></div><div class="sessionBeat" id="vocalBeatStatus">Producer Room beat: none loaded</div></div><div id="vocalTimer" class="vocalTimer">00:00.0</div></div>
     <div class="bleedNote">Use headphones while recording. RNP preserves a dry vocal take; speaker playback can bleed the instrumental into the microphone.</div>
     <div id="vocalOrbVisual" class="recordOrbMini">MIC BOOTH</div><div class="vocalWaveShell"><canvas id="vocalWave" width="900" height="140" aria-label="Live microphone waveform"></canvas></div>
@@ -535,7 +632,7 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
 </div><p class="sub">AI Generate securely uses the server-side OPENAI_API_KEY. Manual Composer stays local. Generated artwork is placed on the square master for final title treatment and export.</p></div>
 <div class="card rack"><div class="cardH"><h2>Square Master</h2><span class="badge">2048 × 2048</span></div><div class="coverCanvasShell"><canvas id="coverCanvas" width="2048" height="2048"></canvas></div></div>
 </div></section>
-<section id="memory" class="page"><div class="card rack"><div class="cardH"><h2>Memory Vault</h2><span class="badge">Growth map</span></div>
+<section id="memory" class="page"><div class="card rack"><div class="cardH"><h2>Memory</h2><span class="badge">Growth map</span></div>
 <div class="memoryStats"><div class="intelMetric"><span>Projects</span><strong id="memoryProjects">0</strong></div><div class="intelMetric"><span>Vocal Takes</span><strong id="memoryTakes">0</strong></div><div class="intelMetric"><span>Language</span><strong id="memoryTerms">0</strong></div><div class="intelMetric"><span>Beat Reports</span><strong id="memoryReports">0</strong></div></div>
 <div class="eyebrow" style="margin-top:14px">Recurring worlds and recent work</div><div id="memoryList" class="memoryList"></div></div></section>
 <section id="settings" class="page"><div class="card rack"><div class="cardH"><h2>Studio Settings</h2><span class="badge">Complete workflow build</span></div>
@@ -565,7 +662,7 @@ body.focusMode .card{box-shadow:0 30px 80px rgba(0,0,0,.72)}
 </div>
 </section>
 
-<section id="archive" class="page"><div class="card rack"><div class="cardH"><h2>Archive</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
+<section id="archive" class="page"><div class="card rack"><div class="cardH"><h2>Recent</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
 </main>
 
 
@@ -606,7 +703,7 @@ function getCoverStyles(){return [...document.querySelectorAll('.styleChip.on')]
 function updateCoverStyleSummary(){const styles=getCoverStyles();$('coverStyleSummary').textContent='Selected direction: '+(styles.length?styles.join(' + '):'Choose at least one art direction')}
 document.querySelectorAll('.styleChip').forEach(b=>b.addEventListener('click',()=>{const group=b.closest('[data-style-group]');if(group?.dataset.styleGroup==='primary')group.querySelectorAll('.styleChip').forEach(x=>x.classList.toggle('on',x===b));else b.classList.toggle('on');updateCoverStyleSummary()}));
 
-function go(id,btn){const page=document.getElementById(id);if(!page)return toast('That room is not available yet.');document.body.dataset.room=id;document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x===page));document.querySelectorAll('[data-rail-room]').forEach(x=>x.classList.toggle('on',(x.dataset.room||x.dataset.railRoom)===id));const dock=document.getElementById('roomWhisper');if(dock)dock.textContent=id.replace(/(^|-)\w/g,m=>m.toUpperCase())+' · '+(ROOM_COPY[id]||'room online');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();if(id==='memory')renderMemoryVault();if(id==='write')syncWriterContext();if(id==='cover')renderCover();if(id==='lobby')refreshCreativeDashboard();history.replaceState(null,'','#'+id);window.scrollTo({top:document.querySelector('.studioRail').offsetTop,behavior:'smooth'})}
+function go(id,btn){const page=document.getElementById(id);if(!page)return toast('That room is not available yet.');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x===page));document.querySelectorAll('[data-rail-room]').forEach(x=>x.classList.toggle('on',(x.dataset.room||x.dataset.railRoom)===id));const dock=document.getElementById('roomWhisper');if(dock)dock.textContent=id.replace(/(^|-)\w/g,m=>m.toUpperCase())+' · '+(ROOM_COPY[id]||'room online');document.querySelector('.status').innerHTML='<span class="led"></span>'+id.toUpperCase()+' ROOM ONLINE';if(id==='archive')renderArchive();if(id==='memory')renderMemoryVault();if(id==='write')syncWriterContext();if(id==='cover')renderCover();if(id==='lobby')refreshCreativeDashboard();history.replaceState(null,'','#'+id);window.scrollTo({top:document.querySelector('.studioRail').offsetTop,behavior:'smooth'})}
 window.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-rail-room]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.railRoom,b)));const hash=location.hash.slice(1);if(hash&&document.getElementById(hash))go(hash,document.querySelector(`[data-room="${hash}"]`));});
 function renderVibe(){const v=vibes[state.vibeIndex%vibes.length];$('vibeName').textContent=v[0];$('vibeFamily').textContent=v[1];$('turntable').style.transform=`rotate(${state.vibeIndex*22.5}deg)`;renderLayers();persist()}
 function renderLayers(){$('vibeLayers').innerHTML=layerOptions.map(x=>`<button class="chip ${state.layers.includes(x)?'on':''}" onclick="toggleLayer('${x}')">${x}</button>`).join('')}
@@ -1248,37 +1345,58 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
 
 <script>
 (function(){
-  const orb=document.getElementById('utilityOrb');
-  const drawer=document.getElementById('utilityDrawer');
-  const focus=document.getElementById('focusModeBtn');
-  orb?.addEventListener('click',()=>drawer?.classList.toggle('open'));
-  focus?.addEventListener('click',()=>{
-    document.body.classList.toggle('focusMode');
-    focus.textContent=document.body.classList.contains('focusMode')?'Exit Focus':'Focus Mode';
-    drawer?.classList.remove('open');
-  });
+  const rail=document.querySelector('.studioRail');
+  document.getElementById('roomPrev')?.addEventListener('click',()=>rail?.scrollBy({left:-180,behavior:'smooth'}));
+  document.getElementById('roomNext')?.addEventListener('click',()=>rail?.scrollBy({left:180,behavior:'smooth'}));
+
+  const roomNames={lobby:['Lobby','Begin or resume without clutter'],producer:['Producer Room','Beat, truth, council, then creation'],vocal:['Vocal Lab','Record and protect the dry take'],write:['Writing Desk','Shape the song in your own voice'],cover:['Cover Studio','Build the visual world'],culture:['Culture Vault','Timeless and current references'],memory:['Memory Vault','Preserve lessons and creative history'],archive:['Archive','Open recent work and continue'],settings:['Settings','Backup and studio controls']};
+
+  function titleFor(card,index){
+    return card.querySelector('.cardH h2,h2,h1')?.textContent?.trim()||`Section ${index+1}`;
+  }
+  function buildPager(page){
+    if(page.dataset.mobilePaged==='1')return;
+    const cards=[...page.children].filter(el=>el.classList?.contains('card'));
+    if(!cards.length)return;
+    page.dataset.mobilePaged='1';
+    const room=roomNames[page.id]||[page.id,''];
+    const header=document.createElement('div');header.className='roomHeader';header.innerHTML=`<strong>${room[0]}</strong><span>${room[1]}</span>`;
+    const pager=document.createElement('div');pager.className='sectionPager';
+    cards.forEach((card,i)=>{
+      const b=document.createElement('button');b.type='button';b.className='sectionTab'+(i===0?' on':'');b.textContent=titleFor(card,i);
+      b.addEventListener('click',()=>{
+        cards.forEach((c,j)=>c.classList.toggle('mobileActive',j===i));
+        [...pager.children].forEach((x,j)=>x.classList.toggle('on',j===i));
+        window.scrollTo({top:document.querySelector('.roomNavWrap').offsetTop,behavior:'smooth'});
+      });
+      pager.appendChild(b);card.classList.toggle('mobileActive',i===0);
+    });
+    page.prepend(pager);page.prepend(header);
+  }
+  document.querySelectorAll('.page').forEach(buildPager);
+
+  const oldGo=window.go;
+  if(typeof oldGo==='function'){
+    window.go=function(id,btn){oldGo(id,btn);const page=document.getElementById(id);buildPager(page);const chip=document.querySelector(`[data-rail-room="${id}"]`);chip?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});};
+  }
+
   document.querySelectorAll('[data-wall-ref]').forEach(tile=>{
     tile.addEventListener('click',()=>{
       const ref=tile.dataset.wallRef;
       state.influences=Array.isArray(state.influences)?state.influences:[];
-      const exists=state.influences.includes(ref);
-      state.influences=exists?state.influences.filter(x=>x!==ref):[...state.influences,ref];
-      state.nostalgiaEnabled=true;
-      persist();
-      renderInfluences();
-      tile.classList.toggle('on',!exists);
-      toast(exists?`${ref} removed from this session.`:`${ref} added to the Nostalgia Wall.`);
+      const on=state.influences.includes(ref);
+      state.influences=on?state.influences.filter(x=>x!==ref):[...state.influences,ref];
+      state.nostalgiaEnabled=true;persist();renderInfluences?.();
+      document.querySelectorAll(`[data-wall-ref="${CSS.escape(ref)}"]`).forEach(x=>x.classList.toggle('on',!on));
+      toast(on?`${ref} removed.`:`${ref} added to this session.`);
     });
   });
-  const syncTiles=()=>document.querySelectorAll('[data-wall-ref]').forEach(tile=>tile.classList.toggle('on',(state.influences||[]).includes(tile.dataset.wallRef)));
-  syncTiles();
-  document.body.dataset.room=(location.hash||'#lobby').slice(1);
-  window.addEventListener('hashchange',()=>{document.body.dataset.room=(location.hash||'#lobby').slice(1);syncTiles()});
+  document.querySelectorAll('[data-wall-ref]').forEach(tile=>tile.classList.toggle('on',(state.influences||[]).includes(tile.dataset.wallRef)));
 })();
 </script>
 
 <script>
-window.RNP_BUILD='4.0.0';
+window.RNP_BUILD='6.0.0';
 if('serviceWorker' in navigator){
   window.addEventListener('load',async()=>{
     try{
@@ -1291,6 +1409,133 @@ if('serviceWorker' in navigator){
     }
   });
 }
+</script>
+
+
+<script>
+(function(){
+  const rail=document.querySelector('.studioRail');
+  const chips=[...document.querySelectorAll('.roomChip[data-rail-room]')];
+  const pages=[...document.querySelectorAll('main > .page')];
+  const home=document.getElementById('rnpHome');
+  let activeRoom=null;
+
+  function roomLabel(id){
+    return ({lobby:'Home',producer:'Create',write:'Write',vocal:'Record',cover:'Finish',culture:'Culture',memory:'Memory',archive:'Recent',settings:'Settings'})[id]||id;
+  }
+
+  function addRoomHeaders(){
+    pages.forEach(page=>{
+      if(page.querySelector(':scope > .rnpRoomHeader'))return;
+      const header=document.createElement('div');
+      header.className='rnpRoomHeader';
+      header.innerHTML=`<div><b>${roomLabel(page.id)}</b><small>Tap any section to open it. Only one stays open.</small></div><button class="rnpMinimize" type="button">Minimize</button>`;
+      page.prepend(header);
+      header.querySelector('.rnpMinimize').addEventListener('click',minimizeAll);
+    });
+  }
+
+  function makeAccordions(){
+    document.querySelectorAll('.page .card').forEach((card,index)=>{
+      if(card.dataset.rnpAccordion==='1')return;
+      const head=card.querySelector(':scope > .cardH');
+      if(!head)return;
+      card.dataset.rnpAccordion='1';
+      const body=document.createElement('div');
+      body.className='rnpPanelBody';
+      [...card.children].filter(el=>el!==head).forEach(el=>body.appendChild(el));
+      card.appendChild(body);
+      const toggle=document.createElement('button');
+      toggle.type='button';toggle.className='rnpPanelToggle';toggle.setAttribute('aria-label','Open or minimize section');toggle.textContent='⌄';
+      head.appendChild(toggle);
+      card.classList.add('rnpCollapsed');
+      head.addEventListener('click',ev=>{
+        if(ev.target.closest('button:not(.rnpPanelToggle),input,select,textarea,a'))return;
+        const page=card.closest('.page');
+        const opening=card.classList.contains('rnpCollapsed');
+        page.querySelectorAll('.card[data-rnp-accordion="1"]').forEach(c=>c.classList.add('rnpCollapsed'));
+        if(opening){card.classList.remove('rnpCollapsed');setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),40)}
+      });
+    });
+  }
+
+  function showHome(){
+    pages.forEach(p=>p.classList.remove('on'));
+    chips.forEach(c=>c.classList.remove('on'));
+    home?.classList.add('on');
+    activeRoom=null;
+    document.body.dataset.room='home';
+    document.getElementById('rnpIntelNext').textContent='Choose a workflow lane';
+    window.scrollTo({top:210,behavior:'smooth'});
+  }
+
+  function minimizeAll(){showHome()}
+
+  // Capture clicks so tapping the active tab minimizes it instead of reopening it.
+  chips.forEach(chip=>{
+    chip.addEventListener('click',ev=>{
+      const id=chip.dataset.railRoom;
+      if(activeRoom===id && document.getElementById(id)?.classList.contains('on')){
+        ev.preventDefault();ev.stopImmediatePropagation();showHome();return;
+      }
+      activeRoom=id;home?.classList.remove('on');
+      document.getElementById('rnpIntelNext').textContent=`Work inside ${roomLabel(id)}`;
+      setTimeout(()=>{
+        const page=document.getElementById(id);
+        page?.querySelectorAll('.card[data-rnp-accordion="1"]').forEach(c=>c.classList.add('rnpCollapsed'));
+        page?.querySelector('.card[data-rnp-accordion="1"]')?.classList.remove('rnpCollapsed');
+      },30);
+    },true);
+  });
+
+  document.getElementById('rnpRailPrev')?.addEventListener('click',()=>rail?.scrollBy({left:-150,behavior:'smooth'}));
+  document.getElementById('rnpRailNext')?.addEventListener('click',()=>rail?.scrollBy({left:150,behavior:'smooth'}));
+  document.querySelectorAll('[data-jump-room]').forEach(btn=>btn.addEventListener('click',()=>{
+    const chip=document.querySelector(`.roomChip[data-rail-room="${btn.dataset.jumpRoom}"]`);chip?.click();
+  }));
+
+  const updateIntel=()=>{
+    const title=document.getElementById('title')?.value||document.getElementById('writerTitle')?.value||'Untitled Chapter';
+    document.getElementById('rnpIntelSession').textContent=title;
+  };
+  document.addEventListener('input',updateIntel);
+  addRoomHeaders();makeAccordions();updateIntel();showHome();
+})();
+</script>
+
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let adaptiveMode='verse', memoFile=null, memoUrl='', memoAudio=null, memoTranscript='', selectedSuggestion=null;
+  const eqState=JSON.parse(localStorage.getItem('rnpAdaptiveEq')||'null')||{truth:90,pocket:85,rhyme:70,melody:45,punch:65,culture:30,nostalgia:25,space:55};
+  let nostalgiaUse=localStorage.getItem('rnpNostalgiaUse')||'reference';
+  const presets={
+    truth:{truth:92,pocket:86,rhyme:66,melody:42,punch:62,culture:22,nostalgia:18,space:58,note:'Raw Truth preset: grounded details, natural cadence, controlled references and enough space to breathe.'},
+    mixtape:{truth:78,pocket:92,rhyme:82,melody:35,punch:90,culture:58,nostalgia:52,space:28,note:'Mixtape Smoke: loose booth energy, fast punch recovery, denser rhymes and confident transitions.'},
+    cinematic:{truth:82,pocket:73,rhyme:68,melody:62,punch:72,culture:27,nostalgia:66,space:72,note:'Dark Cinema: protector energy, shadows, tension, patient setups and wider dramatic space.'},
+    float:{truth:72,pocket:76,rhyme:60,melody:86,punch:45,culture:42,nostalgia:58,space:88,note:'High Mind: floating cadence, layered perspective, melodic turns and unexpected transitions.'},
+    oldSoul:{truth:94,pocket:70,rhyme:58,melody:72,punch:48,culture:18,nostalgia:78,space:68,note:'Old Soul: family, legacy, restraint, timeless language and emotional weight over internet noise.'}
+  };
+  function syncEq(){document.querySelectorAll('[data-eq]').forEach(r=>{r.value=eqState[r.dataset.eq];r.parentElement.querySelector('span').textContent=r.value});localStorage.setItem('rnpAdaptiveEq',JSON.stringify(eqState))}
+  document.querySelectorAll('[data-eq]').forEach(r=>r.addEventListener('input',()=>{eqState[r.dataset.eq]=Number(r.value);r.parentElement.querySelector('span').textContent=r.value;localStorage.setItem('rnpAdaptiveEq',JSON.stringify(eqState));document.querySelectorAll('.eqPreset').forEach(x=>x.classList.remove('on'))}));syncEq();
+  document.querySelectorAll('.eqPreset').forEach(b=>b.addEventListener('click',()=>{const p=presets[b.dataset.eqpreset];Object.keys(eqState).forEach(k=>eqState[k]=p[k]);syncEq();$('eqReadout').textContent=p.note;document.querySelectorAll('.eqPreset').forEach(x=>x.classList.toggle('on',x===b))}));
+  document.querySelectorAll('[data-amode]').forEach(b=>b.addEventListener('click',()=>{adaptiveMode=b.dataset.amode;document.querySelectorAll('[data-amode]').forEach(x=>x.classList.toggle('on',x===b));$('adaptiveStatus').textContent=`${adaptiveMode.toUpperCase()} mode active · predictions will adapt bar length, repetition and available space.`}));
+  document.querySelectorAll('[data-nuse]').forEach(b=>{b.classList.toggle('on',b.dataset.nuse===nostalgiaUse);b.addEventListener('click',()=>{nostalgiaUse=b.dataset.nuse;localStorage.setItem('rnpNostalgiaUse',nostalgiaUse);document.querySelectorAll('[data-nuse]').forEach(x=>x.classList.toggle('on',x===b));})});
+
+  function fmt(s){if(!Number.isFinite(s))return '—';return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`}
+  async function drawMemo(file){const buf=await file.arrayBuffer(),ctx=new (window.AudioContext||window.webkitAudioContext)(),audio=await ctx.decodeAudioData(buf.slice(0));const data=audio.getChannelData(0),canvas=$('memoWave'),g=canvas.getContext('2d');g.clearRect(0,0,canvas.width,canvas.height);g.fillStyle='#080a0d';g.fillRect(0,0,canvas.width,canvas.height);g.strokeStyle='#60d9ff';g.lineWidth=2;g.beginPath();const step=Math.max(1,Math.floor(data.length/canvas.width));for(let x=0;x<canvas.width;x++){let min=1,max=-1;for(let i=0;i<step;i++){const v=data[x*step+i]||0;min=Math.min(min,v);max=Math.max(max,v)}const y1=(1+min)*canvas.height/2,y2=(1+max)*canvas.height/2;g.moveTo(x,y1);g.lineTo(x,y2)}g.stroke();$('memoLength').textContent=fmt(audio.duration);const beatDur=Number(window.state?.beatAnalysis?.durationSeconds||0);$('memoAlignment').textContent=beatDur?'Beat match ready':'A cappella map';await ctx.close()}
+  $('voiceMemoInput')?.addEventListener('change',async e=>{memoFile=e.target.files?.[0];if(!memoFile)return;if(memoFile.size>25*1024*1024){memoFile=null;return window.toast?.('Voice Memo must be under 25 MB.')}memoUrl=URL.createObjectURL(memoFile);memoAudio=new Audio(memoUrl);$('memoName').textContent=memoFile.name.slice(0,20);$('playMemoBtn').disabled=$('transcribeMemoBtn').disabled=$('clearMemoBtn').disabled=false;$('adaptiveStatus').textContent='Voice Memo loaded. Transcribe it, then Adaptive can continue the cadence and transition.';try{await drawMemo(memoFile)}catch{$('memoLength').textContent='Loaded'} });
+  $('playMemoBtn')?.addEventListener('click',()=>{if(!memoAudio)return;memoAudio.paused?memoAudio.play():memoAudio.pause();$('playMemoBtn').textContent=memoAudio.paused?'Play Memo':'Pause Memo'});
+  $('clearMemoBtn')?.addEventListener('click',()=>{memoAudio?.pause();if(memoUrl)URL.revokeObjectURL(memoUrl);memoFile=null;memoTranscript='';$('voiceMemoInput').value='';$('memoName').textContent='None';$('memoLength').textContent='—';$('memoAlignment').textContent='Waiting';$('playMemoBtn').disabled=$('transcribeMemoBtn').disabled=$('clearMemoBtn').disabled=true;$('writerSpeechNote').textContent='Voice Memo cleared.'});
+  $('transcribeMemoBtn')?.addEventListener('click',async()=>{if(!memoFile)return;const btn=$('transcribeMemoBtn');btn.disabled=true;btn.textContent='Reading Memo…';$('adaptiveStatus').textContent='RNP is transcribing your freestyle and mapping rhyme, pauses and transition energy…';try{const fd=new FormData();fd.append('file',memoFile);fd.append('beatBpm',String(window.state?.beatAnalysis?.bpm||$('bpm')?.value||''));const res=await fetch('/api/transcribe-memo',{method:'POST',body:fd});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Memo transcription failed');memoTranscript=data.text||'';const seed=$('writerSeed');seed.value=[seed.value.trim(),memoTranscript].filter(Boolean).join(seed.value.trim()?'\n':'');$('writerSpeechNote').textContent=`Memo captured · ${data.analysis?.delivery||'cadence mapped'} · review uncertain words before prediction.`;$('adaptiveStatus').textContent='Memo is now part of the seed. Correct any uncertain words, then predict the next bars.';}catch(err){window.toast?.(err.message);$('adaptiveStatus').textContent=err.message+' · The original memo remains safely on this device.'}finally{btn.disabled=false;btn.textContent='Transcribe'}});
+
+  function context(){const a=window.state?.beatAnalysis||{};return {mode:adaptiveMode,seed:$('writerSeed')?.value||'',truth:[$('writerTruth')?.value,$('truth')?.value,$('chapter')?.value].filter(Boolean).join('\n'),existingLyrics:$('lyrics')?.value||'',memoTranscript,truthLock:$('adaptiveTruthLock')?.checked!==false,eq:eqState,nostalgia:{enabled:Boolean(window.state?.nostalgiaEnabled),useMode:nostalgiaUse,references:window.state?.influences||[],weight:window.state?.nostalgiaWeight||'light',mode:window.state?.nostalgiaMode||'meaning',note:window.state?.nostalgiaNote||''},culture:window.state?.pulseRefs||[],beat:{name:$('writerBeatName')?.textContent||'',bpm:a.bpm||Number($('bpm')?.value)||null,key:a.key||$('key')?.value||'',durationSeconds:a.durationSeconds||window.state?.durationSeconds||null,arrangement:a.arrangement||[],currentTime:$('player')?.currentTime||0},vibe:window.vibes?.[window.state?.vibeIndex||0]?.[0]||'',emotionalArc:window.state?.arc||[]}}
+  function renderSuggestions(items=[]){$('adaptiveSuggestions').innerHTML=items.map((x,i)=>`<div class="barSuggestion" data-si="${i}"><div class="barText">${window.escapeHtml?escapeHtml(x.bar):x.bar}</div><div class="barMeta"><span>${x.transition||'continue'}</span><span>${x.rhyme||'rhyme mapped'}</span><span>${x.syllables||'—'} syllables</span><span>${x.timing||'next pocket'}</span></div><div class="barScores"><div><small>Beat Fit</small><b>${x.beat_fit||0}%</b></div><div><small>Authentic</small><b>${x.authenticity||0}%</b></div><div><small>Meaning</small><b>${x.meaning||0}%</b></div><div><small>Original</small><b>${x.originality||0}%</b></div></div><div class="barButtons"><button data-use="${i}">Use Bar</button><button data-preview="${i}">Preview Pocket</button><button data-rewrite="${i}">Rework</button></div></div>`).join('');items.forEach((x,i)=>{document.querySelector(`[data-use="${i}"]`)?.addEventListener('click',()=>{const seed=$('writerSeed');seed.value=[seed.value.trim(),x.bar].filter(Boolean).join('\n');selectedSuggestion=x;document.querySelectorAll('.barSuggestion').forEach((c,j)=>c.classList.toggle('selected',j===i));$('adaptiveStatus').textContent='Bar accepted as the new pattern. Adaptive will read your next move from it.'});document.querySelector(`[data-preview="${i}"]`)?.addEventListener('click',()=>{const p=$('player');if(p?.src){const t=Number(x.start_seconds);if(Number.isFinite(t))p.currentTime=t;p.play().catch(()=>{});$('adaptiveStatus').textContent=`Previewing the beat pocket for: ${x.bar}`}else speechSynthesis?.speak(new SpeechSynthesisUtterance(x.bar))});document.querySelector(`[data-rewrite="${i}"]`)?.addEventListener('click',()=>predict('rewrite',x.bar))})}
+  async function predict(task='predict',bar=''){const payload={task,rewriteBar:bar,...context()};if(!payload.seed.trim()&&!payload.memoTranscript.trim())return window.toast?.('Add a seed line or transcribe a Voice Memo first.');const btn=$('predictBarsBtn');btn.disabled=true;btn.textContent='READING POCKET…';$('adaptiveStatus').textContent='RNP is matching your cadence to the beat grid, current rhyme and selected influence levels…';try{const res=await fetch('/api/predict-bars',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Prediction failed');renderSuggestions(data.suggestions||[]);$('adaptiveStatus').textContent=data.pocket_summary||'Predictions ready. Choose, edit, combine or ignore them.';}catch(err){window.toast?.(err.message);$('adaptiveStatus').textContent=err.message+' · Deploy with OPENAI_API_KEY to activate Adaptive Intelligence.'}finally{btn.disabled=false;btn.textContent='Predict Next Bars'}}
+  $('predictBarsBtn')?.addEventListener('click',()=>predict());
+  $('quickCouncilBtn')?.addEventListener('click',async()=>{const btn=$('quickCouncilBtn');btn.disabled=true;btn.textContent='COUNCIL THINKING…';try{const res=await fetch('/api/predict-bars',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task:'council',...context()})});const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Council failed');const b=data.council||{};$('councilBrief').hidden=false;$('councilBrief').innerHTML=Object.entries(b).map(([k,v])=>`<div class="briefRow"><span>${k.replaceAll('_',' ')}</span><b>${window.escapeHtml?escapeHtml(String(v)):String(v)}</b></div>`).join('');$('adaptiveStatus').textContent='Council direction is active. Adaptive will write inside this strategy without forcing references.';}catch(err){window.toast?.(err.message)}finally{btn.disabled=false;btn.textContent='Quick Council Check'}});
+})();
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-const CACHE='rnp-v4-0-0-sanctuary';
+const CACHE='rnp-v6-adaptive';
 const ASSETS=['./','./index.html','./manifest.webmanifest'];
 
 self.addEventListener('install',event=>{
