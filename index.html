@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- RNP Studio 6.9: Founder Sanctuary home-screen interface. -->
 <!-- RNP 6.7.1: global scan lines and obsolete fullscreen filter overlays removed. -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
@@ -8,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="RNP Studio" />
-<title>RNP Studio 6.7 — Integrity Repair</title>
+<title>RNP Studio 6.9 — Founder Sanctuary</title>
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
@@ -438,13 +439,245 @@ textarea{line-height:1.55}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
+
+/* === RNP 6.8.1 — Permanent Living Sanctuary Mural === */
+.wall{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.06) 0%,rgba(0,0,0,.28) 44%,rgba(0,0,0,.92) 100%),
+    radial-gradient(circle at 50% 22%,transparent 0 24%,rgba(0,0,0,.28) 70%,rgba(0,0,0,.82) 100%),
+    url("assets/rnp-living-sanctuary.webp") center top/cover no-repeat !important;
+  filter:saturate(.94) contrast(1.04);
+  transform:translateZ(0) scale(1.015);
+}
+.wall:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:
+    linear-gradient(100deg,rgba(215,179,90,.06),transparent 24%,transparent 76%,rgba(215,179,90,.045)),
+    linear-gradient(180deg,transparent 0 44%,rgba(2,2,3,.83) 88%,#020203 100%)!important;
+  pointer-events:none;
+}
+body[data-room] .wall{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.32) 46%,rgba(0,0,0,.94) 100%),
+    radial-gradient(circle at 50% 24%,transparent 0 22%,rgba(0,0,0,.30) 72%,rgba(0,0,0,.84) 100%),
+    url("assets/rnp-living-sanctuary.webp") center top/cover no-repeat !important;
+}
+body[data-room="write"] .wall{background-position:52% top!important}
+body[data-room="culture"] .wall{background-position:70% top!important}
+body[data-room="producer"] .wall{background-position:35% top!important}
+body[data-room="vocal"] .wall{background-position:45% top!important}
+body[data-room="cover"] .wall{background-position:62% top!important}
+.hero,.page.on{position:relative;z-index:1}
+.card{backdrop-filter:blur(18px) saturate(1.05)!important;-webkit-backdrop-filter:blur(18px) saturate(1.05)!important}
+@media(max-width:899px){
+  .wall,body[data-room] .wall{
+    background-size:auto 68vh!important;
+    background-position:50% top!important;
+    background-color:#020203!important;
+  }
+  body[data-room="culture"] .wall{background-position:68% top!important}
+  body[data-room="producer"] .wall{background-position:32% top!important}
+}
+
+
+/* === RNP 6.9 FOUNDER SANCTUARY — APPROVED HOME-SCREEN LOOK === */
+:root{
+  --rnp-gold:#d6aa3d;
+  --rnp-gold-hi:#ffe59a;
+  --rnp-gold-deep:#6d4810;
+  --rnp-black:#030303;
+  --rnp-panel:rgba(5,5,6,.91);
+  --rail-w:226px;
+}
+body{
+  background:#020202!important;
+  color:#f4f0e6;
+  overflow-x:hidden;
+}
+.app{
+  max-width:none!important;
+  width:100%!important;
+  min-height:100dvh;
+  padding-left:calc(var(--rail-w) + 18px)!important;
+  padding-right:18px!important;
+}
+.wall,body[data-room] .wall{
+  left:var(--rail-w)!important;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.22) 43%,rgba(0,0,0,.92) 92%),
+    radial-gradient(circle at 54% 22%,transparent 0 24%,rgba(0,0,0,.32) 72%,rgba(0,0,0,.83) 100%),
+    url("assets/rnp-founder-sanctuary.webp") center top/cover no-repeat!important;
+}
+.founderRail{
+  position:fixed;inset:0 auto 0 0;width:var(--rail-w);z-index:100;
+  display:flex;flex-direction:column;align-items:center;
+  background:linear-gradient(180deg,#030303 0%,#080706 48%,#020202 100%);
+  border-right:1px solid rgba(214,170,61,.68);
+  box-shadow:18px 0 45px rgba(0,0,0,.65),inset -1px 0 rgba(255,224,137,.11);
+  padding:calc(15px + env(safe-area-inset-top)) 0 calc(14px + env(safe-area-inset-bottom));
+}
+.founderRail:before,.founderRail:after{
+  content:"";position:absolute;left:0;right:0;height:18px;
+  background:radial-gradient(ellipse at center,transparent 31%,#6d4810 34% 42%,#ffe59a 44% 47%,#c88f23 50% 60%,transparent 63%) 0 0/31px 18px repeat-x;
+  filter:drop-shadow(0 3px 3px #000);
+}
+.founderRail:before{top:0}.founderRail:after{bottom:0}
+.founderCrown{font-size:38px;color:var(--rnp-gold-hi);line-height:1;margin-top:12px;text-shadow:0 0 16px rgba(255,214,107,.42)}
+.founderLabel{color:#f5ca60;letter-spacing:.18em;font:800 10px "Courier New";margin:1px 0 8px}
+.founderPortrait{
+  width:126px;height:126px;border-radius:50%;padding:4px;
+  background:linear-gradient(145deg,#fff2bd,#b47812,#ffe49a);
+  box-shadow:0 0 0 2px #241704,0 0 24px rgba(214,170,61,.34);
+}
+.founderPortrait img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.founderName{font-size:26px;color:#f1c14f;margin-top:8px;letter-spacing:.08em}
+.founderRole{font:800 9px "Courier New";letter-spacing:.12em;color:#bca770}
+.founderPulse{display:flex;align-items:center;gap:8px;margin:9px 0 8px}
+.founderPulse i{width:7px;height:7px;border-radius:50%;background:#ff263d;box-shadow:0 0 12px #ff263d}
+.founderPulse span{width:70px;height:14px;background:linear-gradient(90deg,transparent 0 8%,#9c6c1c 9% 12%,transparent 13% 21%,#9c6c1c 22% 25%,transparent 26% 100%);opacity:.7}
+.founderMenu{width:100%;overflow:auto;border-top:1px solid rgba(214,170,61,.25)}
+.founderMenu button{
+  width:100%;min-height:50px;border:0;border-bottom:1px solid rgba(255,255,255,.08);
+  background:transparent;color:#f3eee4;text-align:left;padding:0 20px;
+  display:flex;align-items:center;gap:15px;font:700 12px Arial;letter-spacing:.04em;
+}
+.founderMenu button:first-letter{color:var(--rnp-gold)}
+.founderMenu button.on{
+  color:#fff5d5;background:linear-gradient(90deg,rgba(214,170,61,.18),rgba(214,170,61,.03));
+  box-shadow:inset 3px 0 var(--rnp-gold-hi),inset 0 0 25px rgba(214,170,61,.07);
+}
+.founderSignature{margin-top:auto;color:#e4b440;font:italic 900 35px Georgia;transform:skew(-8deg);text-shadow:0 3px #392308}
+.founderSignature small{display:block;font:800 8px "Courier New";letter-spacing:.15em;transform:skew(8deg)}
+.hero{
+  margin-top:0!important;
+  min-height:104px;
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  text-align:center;border-bottom:1px solid rgba(214,170,61,.3)!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.83),rgba(0,0,0,.42))!important;
+}
+.heroBrand{justify-content:center!important}
+.heroCopy strong{font-size:38px!important;letter-spacing:.04em!important}
+.heroCopy small{color:#eac55f!important}
+.brandMark{display:none!important}
+.status{position:absolute;right:18px;top:18px;font-size:9px!important}
+.rnpIntelBar{margin-top:12px!important}
+.mobileScene,.memoryRibbon,.ambienceDock,.roomNavWrap{display:none!important}
+.rnpHome{display:none!important}
+main{max-width:1500px;margin:0 auto;padding-bottom:36px}
+.page{padding-top:14px}
+.page.on{display:block!important}
+.card{
+  border:1px solid rgba(214,170,61,.38)!important;
+  background:linear-gradient(145deg,rgba(7,7,8,.94),rgba(2,2,3,.9))!important;
+  border-radius:12px!important;
+  box-shadow:0 15px 45px rgba(0,0,0,.55),inset 0 1px rgba(255,229,154,.055)!important;
+}
+.cardH{border-bottom:1px solid rgba(214,170,61,.22)}
+.cardH h2,.welcome h1,.heroCopy strong{
+  background:linear-gradient(180deg,#fff8d9,#e3b94d 62%,#7f5311)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+}
+.btn.primary{
+  background:linear-gradient(180deg,#ffe69a,#d0a039 58%,#77500f)!important;
+  color:#090704!important;border:1px solid #ffe59a!important;
+}
+.btn.dark{border-color:rgba(214,170,61,.32)!important}
+input,textarea,select{border-color:rgba(214,170,61,.30)!important;background:#070708!important}
+.mobileCommandBar,.mobileMoreSheet{display:none}
+@media(max-width:900px){
+  :root{--rail-w:0px}
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
+  .app{padding:0 10px!important}
+  .wall,body[data-room] .wall{
+    left:0!important;
+    background-size:auto 55vh!important;
+    background-position:54% top!important;
+  }
+  .founderRail{display:none!important}
+  .hero{
+    min-height:94px!important;
+    padding-top:calc(6px + env(safe-area-inset-top))!important;
+    border-radius:0 0 16px 16px!important;
+    position:sticky;top:0;z-index:55;
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  }
+  .heroCopy strong{font-size:25px!important}
+  .heroCopy small{font-size:7px!important}
+  .heroCopy .tag{font-size:7px!important}
+  .status{display:none!important}
+  .rnpIntelBar{
+    margin-top:45vh!important;
+    border:1px solid rgba(214,170,61,.36)!important;
+    border-radius:16px!important;
+    background:rgba(3,3,4,.86)!important;
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  }
+  main{padding-bottom:12px}
+  .page{padding-top:9px}
+  .card{backdrop-filter:blur(17px)!important;-webkit-backdrop-filter:blur(17px)!important}
+  .mobileCommandBar{
+    display:grid;grid-template-columns:repeat(6,1fr);
+    position:fixed;left:0;right:0;bottom:0;z-index:120;
+    padding:8px 4px calc(7px + env(safe-area-inset-bottom));
+    background:rgba(2,2,3,.96);border-top:1px solid rgba(214,170,61,.43);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    box-shadow:0 -14px 40px rgba(0,0,0,.72);
+  }
+  .mobileCommandBar button{
+    border:0;background:transparent;color:#bcb7ad;min-width:0;min-height:55px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  }
+  .mobileCommandBar button span{font-size:20px;color:#d3a83f}
+  .mobileCommandBar button small{font-size:8px;font-weight:800;letter-spacing:.03em}
+  .mobileCommandBar button.on{color:#fff2c5}
+  .mobileCommandBar button.on span{color:#ffe59a;text-shadow:0 0 13px rgba(255,212,88,.48)}
+  .mobileMoreSheet{
+    position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:119;
+    padding:10px;background:rgba(4,4,5,.98);border:1px solid rgba(214,170,61,.45);
+    border-radius:16px;box-shadow:0 18px 50px #000;
+  }
+  .mobileMoreSheet.open{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .mobileMoreSheet button{min-height:48px;border:1px solid rgba(214,170,61,.25);background:#09090b;color:#f2e9d4;border-radius:10px}
+  .finishStatusGrid{grid-template-columns:1fr 1fr!important}
+  .workspaceGrid,.coverGrid,.cultureColumns{grid-template-columns:1fr!important}
+}
+@media(max-width:430px){
+  .heroCopy strong{font-size:22px!important}
+  .rnpIntelGrid{grid-template-columns:1fr!important}
+  .mobileCommandBar button small{font-size:7px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
 <div class="wall" aria-hidden="true"></div>
+
+<aside class="founderRail" aria-label="RNP primary navigation">
+  <div class="founderCrown">♛</div>
+  <small class="founderLabel">FOUNDER</small>
+  <div class="founderPortrait"><img src="assets/founder-sae.webp" alt="Founder portrait"></div>
+  <strong class="founderName">RNP</strong>
+  <span class="founderRole">THE ARCHITECT</span>
+  <div class="founderPulse"><i></i><span></span></div>
+  <nav class="founderMenu">
+    <button type="button" data-founder-room="lobby">⌂ <span>Sanctuary</span></button>
+    <button type="button" data-founder-room="write">✎ <span>Write</span></button>
+    <button type="button" data-founder-room="cover">⚑ <span>Finish</span></button>
+    <button type="button" data-founder-room="culture">⌁ <span>Culture Pulse</span></button>
+    <button type="button" data-founder-room="producer">⚡ <span>Create</span></button>
+    <button type="button" data-founder-room="vocal">● <span>Voice Memo</span></button>
+    <button type="button" data-founder-room="memory">◉ <span>Memory Vault</span></button>
+    <button type="button" data-founder-room="archive">▱ <span>Resume Project</span></button>
+    <button type="button" data-founder-room="settings">⚙ <span>Settings</span></button>
+  </nav>
+  <div class="founderSignature">RNP<small>FOREVER LEGENDARY</small></div>
+</aside>
+
 <header class="hero">
-<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 6.0.1</strong><div class="tag">CAPTURE. ANALYZE. CREATE. RECORD. FINISH.</div></div></div>
+<div class="heroBrand"><img class="brandMark" src="assets/rnp-app-icon.png" alt="RNP metallic gold hieroglyphic logo"><div class="heroCopy"><small>REAL NINJA POETICS // CREATIVE OPERATING SYSTEM</small><strong>RNP STUDIO 6.9</strong><div class="tag">CAPTURE. ANALYZE. CREATE. RECORD. FINISH.</div></div></div>
 <div class="status"><span class="led"></span>RNP INTELLIGENCE ONLINE // TRUTH-FIRST MODE</div>
 </header>
 
@@ -891,6 +1124,22 @@ textarea{line-height:1.55}
 
 <section id="archive" class="page"><div class="card rack"><div class="cardH"><h2>Recent</h2><span class="badge">Local first</span></div><div id="archiveList" class="truthFlags"></div></div></section>
 </main>
+
+<nav class="mobileCommandBar" aria-label="Mobile studio navigation">
+  <button type="button" data-mobile-room="lobby"><span>⌂</span><small>Home</small></button>
+  <button type="button" data-mobile-room="write"><span>✎</span><small>Write</small></button>
+  <button type="button" data-mobile-room="producer"><span>⚡</span><small>Create</small></button>
+  <button type="button" data-mobile-room="vocal"><span>●</span><small>Record</small></button>
+  <button type="button" data-mobile-room="cover"><span>⚑</span><small>Finish</small></button>
+  <button class="mobileMoreBtn" type="button" aria-expanded="false"><span>•••</span><small>More</small></button>
+</nav>
+<div class="mobileMoreSheet" aria-hidden="true">
+  <button type="button" data-mobile-room="culture">Culture Pulse</button>
+  <button type="button" data-mobile-room="memory">Memory Vault</button>
+  <button type="button" data-mobile-room="archive">Resume Project</button>
+  <button type="button" data-mobile-room="settings">Settings</button>
+</div>
+
 
 
 <div id="toast" class="toast"></div>
@@ -2040,6 +2289,50 @@ if('serviceWorker' in navigator){
     setTimeout(()=>window.go(first,document.querySelector(`[data-rail-room="${first}"]`)),60);
   });
   window.addEventListener('pageshow',()=>{const id=document.querySelector('.page.on')?.id||'lobby';ensureRoomVisible(id);});
+})();
+</script>
+
+
+<script>
+/* RNP 6.9 Founder navigation and home-screen behavior */
+(function(){
+  const allNav=()=>[...document.querySelectorAll('[data-founder-room],[data-mobile-room]')];
+  function activate(id){
+    allNav().forEach(b=>b.classList.toggle('on',(b.dataset.founderRoom||b.dataset.mobileRoom)===id));
+  }
+  function move(id){
+    const chip=document.querySelector(`[data-rail-room="${id}"]`);
+    if(typeof window.go==='function') window.go(id,chip);
+    activate(id);
+    document.querySelector('.mobileMoreSheet')?.classList.remove('open');
+    document.querySelector('.mobileMoreSheet')?.setAttribute('aria-hidden','true');
+  }
+  document.querySelectorAll('[data-founder-room]').forEach(b=>b.addEventListener('click',()=>move(b.dataset.founderRoom)));
+  document.querySelectorAll('[data-mobile-room]').forEach(b=>b.addEventListener('click',()=>move(b.dataset.mobileRoom)));
+  const more=document.querySelector('.mobileMoreBtn');
+  const sheet=document.querySelector('.mobileMoreSheet');
+  more?.addEventListener('click',()=>{
+    const open=!sheet.classList.contains('open');
+    sheet.classList.toggle('open',open);
+    sheet.setAttribute('aria-hidden',String(!open));
+    more.setAttribute('aria-expanded',String(open));
+  });
+  const priorGo=window.go;
+  if(typeof priorGo==='function'){
+    window.go=function(id,btn){
+      const result=priorGo(id,btn);
+      activate(id);
+      return result;
+    }
+  }
+  window.addEventListener('DOMContentLoaded',()=>{
+    const id=location.hash.slice(1)||'lobby';
+    activate(document.getElementById(id)?id:'lobby');
+  });
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    window.rnpInstallPrompt=e;
+  });
 })();
 </script>
 

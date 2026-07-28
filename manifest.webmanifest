@@ -1,11 +1,16 @@
 {
-  "name": "RNP Studio 6.8 \u2014 Gold Sanctuary",
-  "short_name": "RNP 6.8",
-  "description": "iPhone-first adaptive songwriting, recording, culture and finish workflow.",
+  "name": "RNP Studio 6.9 \u2014 Founder Sanctuary",
+  "short_name": "RNP Studio",
+  "description": "Founder-grade iPhone songwriting, recording and creative intelligence studio.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#020203",
-  "theme_color": "#0a090b",
-  "orientation": "portrait-primary"
+  "background_color": "#020202",
+  "theme_color": "#050403",
+  "orientation": "portrait-primary",
+  "categories": [
+    "music",
+    "productivity",
+    "entertainment"
+  ]
 }
