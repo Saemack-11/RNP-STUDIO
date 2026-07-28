@@ -325,6 +325,119 @@ body.ambience-off .workshopAtmosphere{display:none}
     linear-gradient(145deg,#12131a,#08080b 58%,#020203) !important;
 }
 
+
+/* === RNP 6.8 — iPhone 17 Gold Sanctuary System === */
+:root{
+  --gold:#d7b35a;--gold-hi:#ffe7a1;--gold-deep:#7d5717;
+  --obsidian:#040405;--onyx:#0a0a0d;--steel:#24252b;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{background:#020203;scroll-behavior:smooth}
+body{
+  min-height:100dvh;
+  padding-top:var(--safe-top);
+  padding-bottom:calc(86px + var(--safe-bottom));
+  background:
+    radial-gradient(circle at 50% -8%,rgba(215,179,90,.19),transparent 28%),
+    radial-gradient(circle at 8% 35%,rgba(104,216,255,.09),transparent 30%),
+    radial-gradient(circle at 92% 52%,rgba(123,22,38,.14),transparent 34%),
+    linear-gradient(155deg,#020203 0%,#0a090b 48%,#020203 100%) !important;
+  background-attachment:fixed !important;
+  -webkit-tap-highlight-color:transparent;
+  overscroll-behavior-y:none;
+}
+body:before{display:none!important}
+.wall{
+  position:fixed!important;inset:0!important;z-index:-2!important;
+  background:
+    radial-gradient(ellipse at 50% 8%,rgba(255,226,145,.16),transparent 22%),
+    radial-gradient(ellipse at 18% 43%,rgba(104,216,255,.08),transparent 30%),
+    radial-gradient(ellipse at 82% 55%,rgba(163,26,48,.13),transparent 32%),
+    linear-gradient(180deg,#08080b 0%,#050507 48%,#010102 100%)!important;
+}
+.wall:before{
+  content:""!important;position:absolute!important;inset:0!important;
+  background:
+    linear-gradient(115deg,transparent 0 45%,rgba(255,226,145,.035) 48%,transparent 52%),
+    radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.72) 100%)!important;
+}
+body[data-room] .wall{background-image:
+  radial-gradient(ellipse at 50% 8%,rgba(255,226,145,.16),transparent 22%),
+  radial-gradient(ellipse at 18% 43%,rgba(104,216,255,.08),transparent 30%),
+  radial-gradient(ellipse at 82% 55%,rgba(163,26,48,.13),transparent 32%),
+  linear-gradient(180deg,#08080b,#010102)!important}
+
+/* Cuban-link identity rail */
+.hero,.rnpIntel,.roomNavWrap,.ambienceDock{position:relative}
+.hero:after,.roomNavWrap:after{
+  content:"";display:block;height:14px;margin:10px 0 0;
+  background:
+    radial-gradient(ellipse at center,transparent 34%,var(--gold-deep) 36% 43%,var(--gold-hi) 45% 49%,var(--gold) 51% 59%,transparent 61%)
+    0 0/27px 14px repeat-x;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.9));
+  opacity:.9;
+}
+.card{
+  border:1px solid rgba(215,179,90,.31)!important;
+  background:linear-gradient(145deg,rgba(12,12,15,.96),rgba(5,5,7,.93))!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.54),inset 0 1px rgba(255,231,161,.06)!important;
+}
+.cardH h2,.heroCopy strong,.welcome h1{
+  background:linear-gradient(180deg,#fff7d7,#d8af4f 65%,#805716);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.btn{min-height:48px;border-radius:12px;touch-action:manipulation;font-size:12px}
+.btn.primary{
+  color:#090806!important;border-color:#f4d67a!important;
+  background:linear-gradient(180deg,#ffe79d,#d3a83f 56%,#8a601a)!important;
+  box-shadow:inset 0 1px #fff3c5,0 8px 25px rgba(151,104,25,.28)!important;
+}
+input,textarea,select{font-size:16px!important;min-height:48px}
+textarea{line-height:1.55}
+.page{display:none!important;min-height:58vh}
+.page.on{display:block!important;animation:roomIn .22s ease}
+#write.page.on .workspaceGrid,#vocal.page.on,#producer.page.on{display:grid!important}
+#cover.page.on{display:block!important}
+#culture.page.on{display:block!important}
+.workspaceGrid,.coverGrid,.cultureColumns{width:100%}
+#write .record{min-height:260px!important;background:rgba(2,3,5,.88)!important;border-color:rgba(215,179,90,.42)!important}
+#adaptiveWriterCard{border-color:rgba(104,216,255,.4)!important}
+.mobileScene{background:
+  linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.88)),
+  radial-gradient(circle at 50% 18%,rgba(215,179,90,.22),transparent 35%),
+  linear-gradient(135deg,#151217,#050507)!important}
+.finishCommand{margin-bottom:14px}
+.finishStatusGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.finishMetric{padding:12px;border:1px solid rgba(215,179,90,.25);background:#070709}
+.finishMetric small{display:block;color:#aaa;font:9px "Courier New";text-transform:uppercase;letter-spacing:.1em}
+.finishMetric strong{display:block;color:#f7dda0;margin-top:6px}
+.finishChecklist{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:14px 0}
+.finishChecklist label{display:flex;align-items:center;gap:9px;padding:11px;border:1px solid rgba(255,255,255,.12);background:#08080a}
+.finishChecklist input{min-height:auto;width:20px;height:20px;accent-color:#d7b35a}
+.finishProgress{height:8px;background:#17171b;border-radius:10px;overflow:hidden;margin:10px 0 14px}
+.finishProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#805716,#ffe79d);transition:.25s}
+.finishActions{display:flex;gap:9px;flex-wrap:wrap}
+.pulseQuickGrid{display:grid;grid-template-columns:1fr minmax(190px,.35fr) auto;gap:9px}
+.pulseQuickFeed{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pulseToken{padding:9px 11px;border:1px solid rgba(215,179,90,.28);background:#08080a;border-radius:999px}
+.pulseToken small{color:#bda76f;margin-left:6px}
+.roomChip{min-height:44px;border-color:rgba(215,179,90,.3)!important}
+.roomChip.on{color:#ffe6a1!important;border-color:#e2bd63!important;background:rgba(125,87,23,.18)!important}
+.nav,.roomNavWrap{position:sticky;top:var(--safe-top);z-index:40;backdrop-filter:blur(18px)}
+@media(max-width:899px){
+  .app{max-width:100%;padding-left:12px;padding-right:12px}
+  .hero{margin-top:18vh!important}
+  .finishStatusGrid{grid-template-columns:repeat(2,1fr)}
+  .finishChecklist{grid-template-columns:1fr}
+  .pulseQuickGrid{grid-template-columns:1fr}
+  .finishActions .btn{width:100%}
+  .workspaceGrid{grid-template-columns:1fr!important}
+  .card{border-radius:16px!important}
+  .studioRail{scroll-snap-type:x mandatory}
+  .roomChip{scroll-snap-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 <body>
@@ -676,7 +789,32 @@ body.ambience-off .workshopAtmosphere{display:none}
   </div>
 </section>
 
-<section id="cover" class="page"><div class="coverGrid">
+<section id="cover" class="page">
+<div class="finishCommand card rack" id="finishCommand">
+  <div class="cardH"><h2>Finish Command</h2><span class="badge">Master the record</span></div>
+  <p class="sub">One final room for lyrics, arrangement, vocal takes, artwork, metadata, backup and export.</p>
+  <div class="finishStatusGrid">
+    <div class="finishMetric"><small>Title</small><strong id="finishTitleStatus">Untitled</strong></div>
+    <div class="finishMetric"><small>Lyrics</small><strong id="finishLyricsStatus">Not started</strong></div>
+    <div class="finishMetric"><small>Vocals</small><strong id="finishVocalStatus">No takes</strong></div>
+    <div class="finishMetric"><small>Cover</small><strong id="finishCoverStatus">Not created</strong></div>
+  </div>
+  <div class="finishChecklist">
+    <label><input id="finishLyricsCheck" type="checkbox"> Lyrics reviewed</label>
+    <label><input id="finishStructureCheck" type="checkbox"> Song structure locked</label>
+    <label><input id="finishVocalsCheck" type="checkbox"> Best vocal takes selected</label>
+    <label><input id="finishCoverCheck" type="checkbox"> Cover and title treatment approved</label>
+    <label><input id="finishBackupCheck" type="checkbox"> Session backup exported</label>
+  </div>
+  <div class="finishProgress"><span id="finishProgressBar"></span></div>
+  <div class="finishActions">
+    <button id="finishReviewBtn" class="btn primary" type="button">Run Final Review</button>
+    <button id="finishExportLyricsBtn" class="btn dark" type="button">Export Lyrics TXT</button>
+    <button id="finishSaveProjectBtn" class="btn dark" type="button">Save Finished Project</button>
+  </div>
+  <div id="finishReviewOutput" class="analysisNotes">Finish Command is standing by.</div>
+</div>
+<div class="coverGrid">
 <div class="card rack"><div class="cardH"><h2>Cover Art Studio</h2><span id="coverModeBadge" class="badge">Art direction bay</span></div><div class="coverControls">
 <div class="coverModeTabs"><button class="coverMode on" type="button" data-cover-mode="ai">AI Generate</button><button class="coverMode" type="button" data-cover-mode="manual">Manual Composer</button></div>
 <input id="coverTitle" placeholder="Cover title"/><input id="coverSubtitle" placeholder="Subtitle / artist line"/>
@@ -701,6 +839,22 @@ body.ambience-off .workshopAtmosphere{display:none}
 <div class="eyebrow" style="margin-top:16px">Backup and transfer</div><div class="backupActions"><button id="exportBackupBtn" class="btn dark" type="button">Export Studio Backup</button><label class="btn dark" style="text-align:center">Import Backup<input id="importBackupInput" class="hiddenFile" type="file" accept="application/json"/></label><button id="installHintBtn" class="btn dark" type="button">Install Instructions</button></div>
 <p class="sub">Full Session Pack includes studio state and Voice Locker audio. WAV mixes and stems are designed for direct import into BandLab or another DAW.</p></div></section>
 <section id="culture" class="page">
+
+<div class="card rack cultureQuickPulse" id="cultureQuickPulse">
+  <div class="cardH"><h2>Culture Pulse Board</h2><span class="badge">Live creative fuel</span></div>
+  <p class="sub">Capture what is moving you right now. Mark whether RNP may use the meaning, keep it reference-only, or avoid imitation entirely.</p>
+  <div class="pulseQuickGrid">
+    <input id="pulseQuickText" placeholder="Phrase, moment, sound, visual, memory, slang, conversation..." />
+    <select id="pulseQuickPolicy">
+      <option value="influence">Meaning may influence writing</option>
+      <option value="reference">Reference only</option>
+      <option value="avoid">Do not imitate</option>
+    </select>
+    <button id="pulseQuickSave" class="btn primary" type="button">Add to Pulse</button>
+  </div>
+  <div id="pulseQuickFeed" class="pulseQuickFeed">Your pulse board is empty.</div>
+</div>
+
 <div class="card rack" id="culturePostCard">
   <div class="cardH"><h2>Culture Post</h2><span class="badge">Capture the moment</span></div>
   <p class="sub">Save a current reference, phrase, meme, movie moment, sports moment or cultural observation in your own words. RNP may use the meaning only when you allow Culture influence.</p>
@@ -1704,5 +1858,190 @@ if('serviceWorker' in navigator){
   }));
 })();
 </script>
+
+<script>
+/* === RNP 6.8 Workflow Completion Layer === */
+(function(){
+  const byId=id=>document.getElementById(id);
+  const storeKey='rnp68_workflow';
+  const load=()=>{try{return JSON.parse(localStorage.getItem(storeKey)||'{}')}catch{return {}}};
+  const save=x=>localStorage.setItem(storeKey,JSON.stringify(x));
+  let workflow=load();
+  workflow.pulse=workflow.pulse||[];
+
+  function ensureRoomVisible(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===id));
+    const page=byId(id);
+    if(page){page.hidden=false;page.style.removeProperty('display');}
+  }
+
+  // Harden navigation against older wrappers and iOS cached state.
+  const originalGo=window.go;
+  window.go=function(id,btn){
+    try{ if(typeof originalGo==='function') originalGo(id,btn); }catch(e){ console.warn('RNP legacy navigation recovered',e); }
+    ensureRoomVisible(id);
+    document.body.dataset.room=id;
+    document.querySelectorAll('[data-rail-room]').forEach(x=>x.classList.toggle('on',x.dataset.railRoom===id));
+    if(id==='write'){
+      requestAnimationFrame(()=>{
+        byId('writerSeed')?.focus({preventScroll:true});
+        byId('writerSeed')?.scrollIntoView({behavior:'smooth',block:'center'});
+      });
+    }
+    if(id==='cover') updateFinish();
+  };
+
+  function currentLyrics(){
+    return (byId('lyrics')?.value||byId('writerSeed')?.value||'').trim();
+  }
+  function currentTitle(){
+    return (byId('writerTitle')?.value||byId('title')?.value||byId('coverTitle')?.value||'Untitled').trim();
+  }
+  async function takeCount(){
+    try{
+      if(typeof window.vocalDbAll==='function') return (await window.vocalDbAll()).length;
+      if(typeof vocalDbAll==='function') return (await vocalDbAll()).length;
+    }catch{}
+    return 0;
+  }
+  async function updateFinish(){
+    const lyrics=currentLyrics();
+    byId('finishTitleStatus') && (byId('finishTitleStatus').textContent=currentTitle());
+    byId('finishLyricsStatus') && (byId('finishLyricsStatus').textContent=lyrics?`${lyrics.split(/\n+/).filter(Boolean).length} lines`:'Not started');
+    const takes=await takeCount();
+    byId('finishVocalStatus') && (byId('finishVocalStatus').textContent=takes?`${takes} take${takes===1?'':'s'}`:'No takes');
+    const canvas=byId('coverCanvas');
+    byId('finishCoverStatus') && (byId('finishCoverStatus').textContent=(canvas&&canvas.dataset.rendered==='true')?'Created':'Ready to direct');
+    const checks=[...document.querySelectorAll('.finishChecklist input')];
+    const pct=checks.length?Math.round(checks.filter(x=>x.checked).length/checks.length*100):0;
+    byId('finishProgressBar') && (byId('finishProgressBar').style.width=pct+'%');
+    workflow.finishChecks=Object.fromEntries(checks.map(x=>[x.id,x.checked]));save(workflow);
+  }
+  document.querySelectorAll('.finishChecklist input').forEach(x=>{
+    x.checked=!!workflow.finishChecks?.[x.id];
+    x.addEventListener('change',updateFinish);
+  });
+  byId('finishReviewBtn')?.addEventListener('click',async()=>{
+    await updateFinish();
+    const lyrics=currentLyrics(), issues=[];
+    if(!currentTitle()||currentTitle()==='Untitled')issues.push('title');
+    if(lyrics.split(/\n+/).filter(Boolean).length<4)issues.push('lyrics');
+    if(!(await takeCount()))issues.push('vocal take');
+    byId('finishReviewOutput').textContent=issues.length
+      ? `Final review: add ${issues.join(', ')} before calling the record complete.`
+      : 'Final review passed: the record has a title, written material and at least one vocal take. Complete the checklist and export the backup.';
+  });
+  byId('finishExportLyricsBtn')?.addEventListener('click',()=>{
+    const body=`${currentTitle()}\n\n${currentLyrics()||'No lyrics entered.'}\n`;
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:'text/plain'}));
+    a.download=(currentTitle().replace(/[^\w-]+/g,'_')||'RNP_Lyrics')+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  });
+  byId('finishSaveProjectBtn')?.addEventListener('click',()=>{
+    const projects=JSON.parse(localStorage.getItem('rnp2_projects')||'[]');
+    projects.unshift({title:currentTitle(),lyrics:currentLyrics(),created:new Date().toISOString(),status:'finished'});
+    localStorage.setItem('rnp2_projects',JSON.stringify(projects.slice(0,50)));
+    window.toast?.('Finished project saved locally.');
+    updateFinish();
+  });
+
+  function renderPulse(){
+    const feed=byId('pulseQuickFeed');if(!feed)return;
+    feed.innerHTML=workflow.pulse.length?workflow.pulse.map((p,i)=>
+      `<button class="pulseToken" type="button" data-pulse-index="${i}">${String(p.text).replace(/[<>&]/g,s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}<small>${p.policy}</small> ×</button>`
+    ).join(''):'Your pulse board is empty.';
+    document.querySelectorAll('[data-pulse-index]').forEach(b=>b.onclick=()=>{
+      workflow.pulse.splice(Number(b.dataset.pulseIndex),1);save(workflow);renderPulse();
+    });
+    try{
+      if(window.state){window.state.pulseRefs=workflow.pulse.filter(x=>x.policy==='influence').map(x=>x.text);window.persist?.();}
+    }catch{}
+  }
+  byId('pulseQuickSave')?.addEventListener('click',()=>{
+    const input=byId('pulseQuickText'),text=(input?.value||'').trim();if(!text)return window.toast?.('Add a pulse first.');
+    workflow.pulse.unshift({text,policy:byId('pulseQuickPolicy')?.value||'reference',created:Date.now()});
+    workflow.pulse=workflow.pulse.slice(0,30);save(workflow);input.value='';renderPulse();window.toast?.('Culture Pulse saved.');
+  });
+  renderPulse();
+
+  // Offline/local predictive fallback so creative flow never dead-ends when API is unavailable.
+  function localBars(seed,mode='verse'){
+    const lines=seed.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+    const last=lines.at(-1)||'I kept my soul above everything';
+    const endings=last.split(/\s+/).slice(-2).join(' ');
+    const banks={
+      hook:[
+        `Stayed down long enough, now the timing feel right`,
+        `Soul above everything, I protected the light`,
+        `Every loss left a lesson, I was built for the climb`,
+        `I ain't chasing the moment, I'm becoming the time`
+      ],
+      adlib:[`(Yeah)`,`(Still solid)`,`(Soul first)`,`(Talk to 'em)`],
+      verse:[
+        `I let the pressure make diamonds, never begged for a lane`,
+        `Had to sleep with the vision while I worked through the rain`,
+        `Every mile on the route put some truth in the page`,
+        `Now the father and the artist both are stepping on stage`
+      ]
+    };
+    return (banks[mode]||banks.verse).map((line,i)=>({text:line,reason:`Local continuity option ${i+1} · built from your current seed without inventing biography.`}));
+  }
+  function renderLocalSuggestions(items){
+    const target=byId('adaptiveSuggestions')||byId('predictionResults')||byId('adaptiveOutput');
+    if(target){
+      target.innerHTML=items.map((x,i)=>`<div class="suggestionCard"><b>Option ${i+1}</b><p>${x.text}</p><button class="btn dark" type="button" data-use-local="${i}">Send to Writing</button></div>`).join('');
+      target.querySelectorAll('[data-use-local]').forEach(b=>b.onclick=()=>{
+        const line=items[Number(b.dataset.useLocal)]?.text;if(!line)return;
+        const seed=byId('writerSeed');seed.value=[seed.value.trim(),line].filter(Boolean).join('\n');seed.dispatchEvent(new Event('input',{bubbles:true}));
+      });
+    }else{
+      const seed=byId('writerSeed');seed.value=[seed.value.trim(),...items.map(x=>x.text)].filter(Boolean).join('\n');
+    }
+  }
+  byId('predictBarsBtn')?.addEventListener('click',()=>{
+    setTimeout(()=>{
+      const status=byId('adaptiveStatus');
+      if(status && /OPENAI_API_KEY|failed|error|activate/i.test(status.textContent)){
+        const mode=document.querySelector('.adaptiveMode.on')?.dataset.amode||'verse';
+        const items=localBars(byId('writerSeed')?.value||'',mode);
+        renderLocalSuggestions(items);
+        status.textContent='Local Adaptive Mode active. These are editable continuity options; your original bars remain untouched.';
+      }
+    },1600);
+  },true);
+  byId('generateTrackBtn')?.addEventListener('click',()=>{
+    setTimeout(()=>{
+      const btn=byId('generateTrackBtn');
+      if(btn && !btn.disabled){
+        const seed=(byId('writerSeed')?.value||'').trim();
+        if(seed && !(byId('writerResult')?.textContent||'').trim()){
+          const items=localBars(seed,'verse');
+          const box=byId('writerSeed');
+          box.value=[box.value.trim(),'','[LOCAL RNP CONTINUATION]',...items.map(x=>x.text)].join('\n');
+          box.dispatchEvent(new Event('input',{bubbles:true}));
+          window.toast?.('Local continuation added. Edit freely; your seed stayed intact.');
+        }
+      }
+    },1800);
+  },true);
+
+  // Autosave writing on iPhone.
+  const seed=byId('writerSeed'), truth=byId('writerTruth'), title=byId('writerTitle');
+  if(seed && !seed.value)seed.value=workflow.seed||'';
+  if(truth && !truth.value)truth.value=workflow.truth||'';
+  if(title && !title.value)title.value=workflow.title||'';
+  [seed,truth,title].filter(Boolean).forEach(el=>el.addEventListener('input',()=>{
+    workflow.seed=seed?.value||'';workflow.truth=truth?.value||'';workflow.title=title?.value||'';save(workflow);
+  }));
+
+  // Reliable startup.
+  window.addEventListener('DOMContentLoaded',()=>{
+    const requested=location.hash.slice(1);
+    const first=document.getElementById(requested)?requested:(workflow.seed?'write':'lobby');
+    setTimeout(()=>window.go(first,document.querySelector(`[data-rail-room="${first}"]`)),60);
+  });
+  window.addEventListener('pageshow',()=>{const id=document.querySelector('.page.on')?.id||'lobby';ensureRoomVisible(id);});
+})();
+</script>
+
 </body>
 </html>

@@ -1,9 +1,11 @@
 {
-  "name": "RNP Studio 6.7 — Integrity Repair",
-  "short_name": "RNP 6.7",
-  "start_url": "./",
+  "name": "RNP Studio 6.8 \u2014 Gold Sanctuary",
+  "short_name": "RNP 6.8",
+  "description": "iPhone-first adaptive songwriting, recording, culture and finish workflow.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#07070b",
-  "theme_color": "#09090d",
-  "description": "Sae's local-first recording studio, lyrical dojo, Performance DNA engine and Culture workspace."
+  "background_color": "#020203",
+  "theme_color": "#0a090b",
+  "orientation": "portrait-primary"
 }
