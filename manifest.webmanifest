@@ -1,9 +1,9 @@
 {
-  "name": "RNP Studio 6.0 \u2014 Adaptive Intelligence",
-  "short_name": "RNP 6",
+  "name": "RNP Studio 6.7 — Integrity Repair",
+  "short_name": "RNP 6.7",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#07070b",
   "theme_color": "#09090d",
-  "description": "Sae's local-first recording studio, lyrical dojo and voice locker."
+  "description": "Sae's local-first recording studio, lyrical dojo, Performance DNA engine and Culture workspace."
 }
