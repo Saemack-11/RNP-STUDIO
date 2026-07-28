@@ -1,4 +1,4 @@
-const CACHE='rnp-v6-7-integrity-repair';
+const CACHE='rnp-v6-7-visual-cleanup-1';
 const ASSETS=['./','./index.html','./manifest.webmanifest'];
 
 self.addEventListener('install',event=>{
