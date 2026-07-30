@@ -1,16 +1,22 @@
 {
-  "name": "RNP Studio 6.9 \u2014 Founder Sanctuary",
+  "name": "RNP Studio 8.0.3 \u2014 Transparent Mural Lock",
   "short_name": "RNP Studio",
-  "description": "Founder-grade iPhone songwriting, recording and creative intelligence studio.",
+  "description": "Real Ninja Poetics creative operating system with the final transparent Sanctuary mural Home screen.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#020202",
-  "theme_color": "#050403",
+  "background_color": "#060608",
+  "theme_color": "#07070a",
   "orientation": "portrait-primary",
-  "categories": [
-    "music",
-    "productivity",
-    "entertainment"
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
