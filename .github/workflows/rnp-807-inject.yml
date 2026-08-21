@@ -1,0 +1,39 @@
+name: RNP 8.0.7 visual context injector
+on:
+  push:
+    branches: [rnp-807-visual-context]
+permissions:
+  contents: write
+jobs:
+  inject:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rnp-807-visual-context
+          fetch-depth: 0
+      - name: Inject visual context loader
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          tag='<script src="/rnp-context.js?v=807"></script>'
+          if tag not in s:
+              if '</body>' not in s:
+                  raise SystemExit('index.html missing </body>')
+              s=s.replace('</body>', tag+'\n</body>', 1)
+          s=s.replace('RNP Studio 8.0.5', 'RNP Studio 8.0.7')
+          s=s.replace('RNP 8.0.4 calculates waveform energy locally.', 'RNP 8.0.7 calculates waveform energy locally.')
+          s=s.replace('icons/apple-touch-icon.png?v=806', 'icons/apple-touch-icon.png?v=807')
+          p.write_text(s)
+          PY
+      - name: Commit injected loader
+        run: |
+          if git diff --quiet -- index.html; then exit 0; fi
+          git config user.name "Saemack-11"
+          git config user.email "Saemack@yahoo.com"
+          git add -- index.html
+          git commit -m "Wire screenshot visual context into RNP Studio"
+          git push origin HEAD:rnp-807-visual-context
