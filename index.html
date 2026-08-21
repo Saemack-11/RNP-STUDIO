@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- RNP Studio 8.0.5: exact user-supplied Egyptian VVS Home Screen icon locked; Council and Adaptive retained. -->
+<!-- RNP Studio 8.0.7: exact user-supplied Egyptian VVS Home Screen icon locked; Council and Adaptive retained. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,9 +8,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="RNP Studio">
-<title>RNP Studio 8.0.5 — Exact Egyptian VVS Icon Lock</title>
+<title>RNP Studio 8.0.7 — Exact Egyptian VVS Icon Lock</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=806">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=807">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png?v=805">
 <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png?v=805">
 <style>
@@ -202,7 +202,7 @@ input,textarea,select{width:100%;border:1px solid rgba(255,255,255,.18);border-r
 
 <section id="view-build" class="view" data-view="build">
   <div class="roomTitle"><div><small>BUILD</small><h1>How do you shape it?</h1></div><span>Honest beat analysis, structure and session decisions—without fabricated precision.</span></div>
-  <article id="beatAnalysisCard" class="card"><div class="cardHeader"><div><div class="eyebrow">BEAT INTELLIGENCE</div><h2>Waveform & Energy</h2></div><span id="analysisBadge" class="badge">Awaiting audio</span></div><canvas id="waveCanvas" width="1200" height="250"></canvas><div id="energyBars" class="energyBars" style="margin-top:9px"></div><div class="grid3" style="margin-top:9px"><div class="field"><label>Working BPM</label><input id="bpmInput" inputmode="decimal" type="number" min="40" max="240" placeholder="Manual"></div><div class="field"><label>Working Key</label><input id="keyInput" placeholder="Example: F# minor"></div><div class="field"><label>Beat Feel</label><select id="beatFeelInput"><option>Normal time</option><option>Half-time</option><option>Double-time</option><option>Swing</option><option>Free / ambient</option></select></div></div><div class="truthNotice" style="margin-top:10px">RNP 8.0.4 calculates waveform energy locally. It does not claim a BPM or key until you confirm one.</div><div class="btnRow" style="margin-top:10px"><button id="wakeCouncilInlineBtn" class="btn gold">Wake the Council</button><button class="btn ghost" data-route="write" data-target="#adaptiveLyricsCard">Open Adaptive Lyrics</button></div></article>
+  <article id="beatAnalysisCard" class="card"><div class="cardHeader"><div><div class="eyebrow">BEAT INTELLIGENCE</div><h2>Waveform & Energy</h2></div><span id="analysisBadge" class="badge">Awaiting audio</span></div><canvas id="waveCanvas" width="1200" height="250"></canvas><div id="energyBars" class="energyBars" style="margin-top:9px"></div><div class="grid3" style="margin-top:9px"><div class="field"><label>Working BPM</label><input id="bpmInput" inputmode="decimal" type="number" min="40" max="240" placeholder="Manual"></div><div class="field"><label>Working Key</label><input id="keyInput" placeholder="Example: F# minor"></div><div class="field"><label>Beat Feel</label><select id="beatFeelInput"><option>Normal time</option><option>Half-time</option><option>Double-time</option><option>Swing</option><option>Free / ambient</option></select></div></div><div class="truthNotice" style="margin-top:10px">RNP 8.0.7 calculates waveform energy locally. It does not claim a BPM or key until you confirm one.</div><div class="btnRow" style="margin-top:10px"><button id="wakeCouncilInlineBtn" class="btn gold">Wake the Council</button><button class="btn ghost" data-route="write" data-target="#adaptiveLyricsCard">Open Adaptive Lyrics</button></div></article>
   <article id="councilCard" class="card"><div class="cardHeader"><div><div class="eyebrow">PRODUCER'S TABLE</div><h2>Wake the Council</h2></div><span id="councilBadge" class="badge">Awaiting beat</span></div>
     <p class="sub">After the local waveform scan, the Council combines the beat context with your seed, truth boundary, emotional movement, cultural lanes and arrangement. It returns direction—not a fake finished song.</p>
     <div class="btnRow" style="margin-top:10px"><button id="wakeCouncilBtn" class="btn primary">Wake the Council</button><button class="btn ghost" data-route="write" data-target="#adaptiveLyricsCard">Carry Brief to Adaptive</button></div>
@@ -387,5 +387,6 @@ load();if(localStorage.getItem(STORE.migrated)!=='1')migrateLegacy(false);bind()
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
 </script>
+<script src="/rnp-context.js?v=807"></script>
 </body>
 </html>
