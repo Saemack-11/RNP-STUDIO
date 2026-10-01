@@ -167,6 +167,18 @@ input,textarea,select{width:100%;border:1px solid rgba(255,255,255,.18);border-r
   <div class="roomTitle"><div><small>WRITE</small><h1>What are you saying?</h1></div><span>One writing desk. Your original bars remain untouched unless you change them.</span></div>
   <div class="workGrid">
     <article class="card full"><div class="cardHeader"><div><div class="eyebrow">WRITING DESK</div><h2>Seed → Truth → Track</h2></div><span class="badge">Original preserved</span></div><div class="stack"><div class="field"><label>Song Title</label><input id="titleInput" placeholder="Untitled Chapter"></div><div class="field"><label>Seed Lines / Voice Text</label><textarea id="seedInput" rows="5" placeholder="Drop the first honest bars, hook idea, or loose thought..."></textarea></div><div class="field"><label>Truth Boundary</label><textarea id="truthInput" rows="3" placeholder="What must RNP understand so it never exaggerates or invents your story?"></textarea></div><div class="segmented" id="writingModes"><button data-mode="verse" class="on">Verse</button><button data-mode="hook">Hook</button><button data-mode="bridge">Bridge</button><button data-mode="freestyle">Freestyle</button><button data-mode="full-track">Full Track</button></div><div class="field"><label>Master Lyrics</label><textarea id="lyricsInput" class="writeCanvas" placeholder="Build the song here..."></textarea></div><div class="btnRow"><button id="scanWritingBtn" class="btn gold">Scan My Writing</button><button id="copyLyricsBtn" class="btn ghost">Copy Lyrics</button><button class="btn primary" data-route="record">Move to Record</button></div></div></article>
+    <article id="creativeCoreCard" class="card full">
+  <div class="cardHeader"><div><div class="eyebrow">RNP CREATIVE CORE · FINAL</div><h2>Truth × Scene × Duality × Pocket</h2></div><span id="creativeCoreBadge" class="badge">Artist first</span></div>
+  <p class="sub">Upload the vibe, pick the energy, tell RNP what is actually on your mind. It gives you three doors—not a fake identity.</p>
+  <div class="stack" style="margin-top:10px">
+    <div class="segmented" id="creativeCoreModes"><button data-core-mode="freestyle" class="on">Freestyle</button><button data-core-mode="hook_ideas">Hook Ideas</button><button data-core-mode="full_song">Full Song</button></div>
+    <div class="segmented" id="creativeCoreEnergies"><button data-core-energy="rugged_reflection" class="on">Rugged Reflection</button><button data-core-energy="motivational_pressure">Motivational Pressure</button><button data-core-energy="grown_woman_vibe">Grown-Woman Vibe</button><button data-core-energy="scorpio_shadow">Scorpio Shadow</button></div>
+    <div class="field"><label>What is on your mind?</label><textarea id="creativeCoreThought" rows="3" placeholder="One honest sentence. RNP finds the scene, tension and pocket without making shit up."></textarea></div>
+    <div class="btnRow"><button id="creativeCoreCookBtn" class="btn gold">Cook</button><button id="creativeCoreBuildBtn" class="btn ghost" disabled>Build From This</button></div>
+    <div id="creativeCoreStatus" class="aiStatus">Ready. Your Truth Boundary below stays the factual lock.</div>
+    <div id="creativeCoreResult" class="councilResult"></div>
+  </div>
+</article>
     <article id="adaptiveLyricsCard" class="card full">
   <div class="cardHeader"><div><div class="eyebrow">ADAPTIVE PREDICTIVE LYRICS</div><h2>Predict, Enhance & Protect the Voice</h2></div><span id="adaptiveBadge" class="badge">Backend ready</span></div>
   <p class="sub">RNP studies your seed, truth boundary, existing lyrics, reference lanes and verified beat context. Suggestions never overwrite your work automatically.</p>
@@ -387,6 +399,55 @@ load();if(localStorage.getItem(STORE.migrated)!=='1')migrateLegacy(false);bind()
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
 </script>
-<script src="/rnp-context.js?v=807"></script>
+<script src="/rnp-context.js?v=807">
+/* RNP Creative Core 2.0 — final artist-first workflow */
+(()=>{
+  let coreMode='freestyle', coreEnergy='rugged_reflection', lastCore=null;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const list=a=>(Array.isArray(a)&&a.length)?'<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'<p class="sub">No forced material.</p>';
+  function choose(group,attr,setter){
+    document.querySelectorAll(group+' button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll(group+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');setter(b.getAttribute(attr));}));
+  }
+  function adaptivePacket(build=false){
+    const kept=[],recorded=[],rewrites=[];
+    if(build&&lastCore?.result?.three_doors){
+      const d=lastCore.result.three_doors;
+      kept.push(...(d.sparks||[]).slice(0,4),...(d.scene||[]).slice(0,2));
+    }
+    return {kept,rejected:[],rewrites,recorded,vocabulary:[],avoid:[],humorNotes:[],rhymeNotes:[],beatWins:[]};
+  }
+  async function cook(build=false){
+    const thought=document.querySelector('#creativeCoreThought')?.value?.trim();
+    if(!thought){toast('Give RNP one honest sentence first.');return;}
+    const btn=document.querySelector('#creativeCoreCookBtn'), buildBtn=document.querySelector('#creativeCoreBuildBtn'), badge=document.querySelector('#creativeCoreBadge'), status=document.querySelector('#creativeCoreStatus');
+    btn.disabled=true;if(buildBtn)buildBtn.disabled=true;badge.textContent='Reading the room';status.textContent=build?'Building from the material you kept…':'Finding truth, scene, duality and pocket…';
+    const beat=active?.beat||{};
+    const payload={mode:coreMode,energy:coreEnergy,thought,truth:document.querySelector('#truthInput')?.value?.trim()||'',beat:{name:beat.name||'',bpm:beat.bpm??null,key:beat.key||'',durationSeconds:beat.duration||beat.durationSeconds||null,sections:beat.sections||[]},adaptive:adaptivePacket(build)};
+    try{
+      const data=await postRnp('/api/creative-core',payload);lastCore=data;
+      if(active?.writing){active.writing.creativeCore=data.result;active.writing.creativeCoreMode=coreMode;active.writing.creativeCoreEnergy=coreEnergy;markDirty();}
+      render(data.result);badge.textContent='Core locked';status.textContent='Three doors ready. Take what feels like you; leave the rest.';buildBtn.disabled=false;
+    }catch(e){badge.textContent='Core paused';status.textContent=e?.message||'Creative Core could not finish this pass.';}
+    finally{btn.disabled=false;}
+  }
+  function render(r){
+    const out=document.querySelector('#creativeCoreResult');if(!out||!r)return;
+    const cc=r.creative_core||{},d=r.three_doors||{};
+    out.innerHTML='<div class="councilGrid">'+
+      '<section class="councilSection fullWidth"><h3>What Version of Sae Lives Here?</h3><p>'+esc(cc.version_of_sae||'')+'</p></section>'+
+      '<section class="councilSection"><h3>Light</h3><p>'+esc(cc.light||'')+'</p></section>'+
+      '<section class="councilSection"><h3>Shadow</h3><p>'+esc(cc.shadow||'')+'</p></section>'+
+      '<section class="councilSection fullWidth"><h3>Duality</h3><p>'+esc(cc.duality||'')+'</p></section>'+
+      '<section class="councilSection"><h3>POCKET</h3>'+list(d.pocket)+'</section>'+
+      '<section class="councilSection"><h3>SCENE</h3>'+list(d.scene)+'</section>'+
+      '<section class="councilSection fullWidth"><h3>SPARKS</h3>'+list(d.sparks)+'</section>'+
+      '</div>';
+  }
+  choose('#creativeCoreModes','data-core-mode',v=>coreMode=v);
+  choose('#creativeCoreEnergies','data-core-energy',v=>coreEnergy=v);
+  document.querySelector('#creativeCoreCookBtn')?.addEventListener('click',()=>cook(false));
+  document.querySelector('#creativeCoreBuildBtn')?.addEventListener('click',()=>cook(true));
+})();
+</script>
 </body>
 </html>
